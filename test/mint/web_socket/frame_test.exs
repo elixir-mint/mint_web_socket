@@ -7,13 +7,13 @@ defmodule Mint.WebSocket.FrameTest do
     test "masked text frames can be decoded and encoded" do
       masked = masked_frame()
 
-      assert decoded =
-               text(
+      assert {:ok, [decoded]} =
+               {:ok, [text(
                  fin?: true,
                  reserved: <<0::size(3)>>,
                  mask: <<33, 29, 36, 227>>,
                  data: ~s(["1","1","rooms:lobby","phx_join",{}])
-               ) = decode(masked)
+               )]} = decode(masked)
 
       assert {:ok, ^masked} = encode(decoded)
     end
@@ -21,13 +21,13 @@ defmodule Mint.WebSocket.FrameTest do
     test "unmasked text frames can be decoded and encoded" do
       masked = unmasked_frame()
 
-      assert decoded =
-               text(
+      assert {:ok, [decoded]} =
+               {:ok, [text(
                  fin?: true,
                  reserved: <<0::size(3)>>,
                  mask: nil,
                  data: ~s(["1","1","rooms:lobby","phx_reply",{"response":{},"status":"ok"}])
-               ) = decode(masked)
+               )]} = decode(masked)
 
       assert {:ok, ^masked} = encode(decoded)
     end

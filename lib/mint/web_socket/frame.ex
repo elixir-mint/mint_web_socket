@@ -4,7 +4,7 @@ defmodule Mint.WebSocket.Frame do
   # Functions and data structures for describing websocket frames.
   # https://tools.ietf.org/html/rfc6455#section-5.2
 
-  shared = [:reserved, :mask, :data]
+  shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
 
   import Record
 
@@ -101,69 +101,77 @@ defmodule Mint.WebSocket.Frame do
     end)
   end
 
-  @spec decode(binary()) :: {:ok, tuple()} | any()
+  @spec decode(binary()) :: {:ok, [tuple()]} | any()
   def decode(
         <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
           payload_and_mask::bitstring>>
       ) do
-    {payload, mask} = decode_payload_and_mask(payload_and_mask, masked == 0b1)
-
-    decode(
-      @reverse_opcodes[opcode],
-      fin == 0b1,
-      reserved,
-      mask,
-      payload
-    )
+    with {:ok, payload, mask} <-
+           decode_payload_and_mask(payload_and_mask, masked == 0b1) do
+      {:ok,
+       [
+         decode(
+           @reverse_opcodes[opcode],
+           fin == 0b1,
+           reserved,
+           mask,
+           payload
+         )
+       ]}
+    end
   end
 
   defp decode_payload_and_mask(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length)>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = true
        ) do
-    {apply_mask(masked_payload, mask), mask}
+    {:ok, apply_mask(masked_payload, mask), mask}
   end
 
   defp decode_payload_and_mask(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length)>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = true
        ) do
-    {apply_mask(masked_payload, mask), mask}
+    {:ok, apply_mask(masked_payload, mask), mask}
   end
 
   defp decode_payload_and_mask(
          <<payload_length::integer-size(7), mask::binary-size(8)-unit(4),
-           masked_payload::bytes-size(payload_length)>>,
+           masked_payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = true
        )
        when payload_length in 0..125 do
-    {apply_mask(masked_payload, mask), mask}
+    {:ok, apply_mask(masked_payload, mask), mask}
   end
 
   defp decode_payload_and_mask(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           payload::bytes-size(payload_length)>>,
+           payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = false
        ) do
-    {payload, nil}
+    {:ok, payload, nil}
   end
 
   defp decode_payload_and_mask(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           payload::bytes-size(payload_length)>>,
+           payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = false
        ) do
-    {payload, nil}
+    {:ok, payload, nil}
   end
 
   defp decode_payload_and_mask(
-         <<payload_length::integer-size(7), payload::bytes-size(payload_length)>>,
+         <<payload_length::integer-size(7), payload::bytes-size(payload_length), _rest::bitstring>>,
          _masked? = false
        )
        when payload_length in 0..125 do
-    {payload, nil}
+    {:ok, payload, nil}
+  end
+
+  defp decode_payload_and_mask(payload_and_mask, _masked?) do
+    {:error, {:malformed_payload, payload_and_mask}}
   end
 
   def rops, do: @reverse_opcodes
@@ -195,5 +203,55 @@ defmodule Mint.WebSocket.Frame do
 
   def decode(:pong, _fin?, reserved, mask, payload) do
     pong(reserved: reserved, mask: mask, data: payload)
+  end
+
+  # translate from user-friendly tuple into record defined in this module
+  # and the reverse
+  @spec translate(Mint.WebSocket.frame()) :: tuple()
+  @spec translate(tuple) :: Mint.WebSocket.frame()
+  def translate({:text, text}) do
+    text(fin?: true, mask: new_mask(), data: text)
+  end
+
+  def translate(text(fin?: true, data: data)), do: {:text, data}
+
+  def translate({:binary, binary}) do
+    binary(fin?: true, mask: new_mask(), data: binary)
+  end
+
+  def translate(binary(fin?: true, data: data)), do: {:binary, data}
+
+  def translate(:ping), do: translate({:ping, <<>>})
+
+  def translate({:ping, body}) when byte_size(body) in 0..125 do
+    ping(mask: new_mask(), data: body)
+  end
+
+  def translate(ping(data: <<>>)), do: :ping
+
+  def translate(ping(data: data)), do: {:ping, data}
+
+  def translate(:pong), do: translate({:pong, <<>>})
+
+  def translate({:pong, body}) when byte_size(body) in 0..125 do
+    pong(mask: new_mask(), data: body)
+  end
+
+  def translate(pong(data: <<>>)), do: :pong
+
+  def translate(pong(data: data)), do: {:pong, data}
+
+  def translate(:close) do
+    close(mask: new_mask(), data: <<>>)
+  end
+
+  def translate({:close, code, reason}) when is_integer(code) and is_binary(reason) and byte_size(reason) in 0..123 do
+    close(mask: new_mask(), data: encode_close(code, reason))
+  end
+
+  # TODO reverse translate for close frames
+
+  defp encode_close(code, reason) do
+    <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 end

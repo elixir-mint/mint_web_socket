@@ -17,6 +17,26 @@ defmodule Mint.WebSocket.Utils do
     ]
   end
 
+  @spec check_accept_nonce(Mint.Types.headers(), Mint.Types.headers()) ::
+          :ok | {:error, :invalid_nonce}
+  def check_accept_nonce(request_headers, response_headers) do
+    with {:ok, request_nonce} <- fetch_header(request_headers, "sec-websocket-key"),
+         {:ok, response_nonce} <- fetch_header(response_headers, "sec-websocket-accept"),
+         true <- valid_accept_nonce?(request_nonce, response_nonce) do
+      :ok
+    else
+      _header_not_found_or_not_valid_nonce ->
+        {:error, :invalid_nonce}
+    end
+  end
+
+  defp fetch_header(headers, key) do
+    Enum.find_value(headers, :error, fn
+      {^key, value} -> {:ok, value}
+      _ -> false
+    end)
+  end
+
   def valid_accept_nonce?(request_nonce, response_nonce) do
     expected_nonce = :crypto.hash(:sha, request_nonce <> @websocket_guid) |> Base.encode64()
 
