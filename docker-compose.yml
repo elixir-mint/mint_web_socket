@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    image: elixir:1.12.0-rc.1
+    environment:
+    - 'ERL_AFLAGS=-kernel shell_history enabled'
+    volumes:
+    - ./:/app
+    working_dir: /app
+    command: tail -f /dev/null
