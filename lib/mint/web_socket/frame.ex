@@ -200,6 +200,16 @@ defmodule Mint.WebSocket.Frame do
     close(reserved: reserved, mask: mask, code: code, reason: reason)
   end
 
+  def decode(
+        :close,
+        _fin?,
+        reserved,
+        mask,
+        _payload
+      ) do
+    close(reserved: reserved, mask: mask)
+  end
+
   def decode(:ping, _fin?, reserved, mask, payload) do
     ping(reserved: reserved, mask: mask, data: payload)
   end
@@ -209,7 +219,7 @@ defmodule Mint.WebSocket.Frame do
   end
 
   # translate from user-friendly tuple into record defined in this module
-  # and the reverse
+  # (and the reverse)
   @spec translate(Mint.WebSocket.frame()) :: tuple()
   @spec translate(tuple) :: Mint.WebSocket.frame()
   def translate({:text, text}) do
@@ -251,6 +261,12 @@ defmodule Mint.WebSocket.Frame do
   def translate({:close, code, reason})
       when is_integer(code) and is_binary(reason) and byte_size(reason) in 0..123 do
     close(mask: new_mask(), data: encode_close(code, reason))
+  end
+
+  def translate(close(code: nil, reason: nil)), do: :close
+
+  def translate(close(code: code, reason: reason)) do
+    {:close, code, reason}
   end
 
   # TODO reverse translate for close frames
