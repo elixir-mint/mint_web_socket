@@ -24,18 +24,4 @@ defmodule Mint.WebSocket.Utils do
     # a constant-time equality check
     response_nonce == expected_nonce
   end
-
-  def create_mask, do: :crypto.strong_rand_bytes(4)
-
-  def mask_payload(<<a, b, c, d>>, payload) do
-    [a, b, c, d]
-    |> Stream.cycle()
-    |> Enum.reduce_while({payload, _acc = <<>>}, fn
-      _mask_key, {<<>>, acc} ->
-        {:halt, acc}
-
-      mask_key, {<<part_key::integer, payload_rest::binary>>, acc} ->
-        {:cont, {payload_rest, <<acc::binary, Bitwise.bxor(mask_key, part_key)::integer>>}}
-    end)
-  end
 end
