@@ -3,19 +3,18 @@ defmodule Mint.WebSocket.Frame do
 
   # functions and data structures for describing websocket frames
 
-  shared_extensions = [:extensions]
-  shared_data = [:mask, :data]
+  shared = [:reserved, :mask, :data]
 
   import Record
 
-  defrecord :continuation, shared_extensions ++ shared_data ++ [:fin?]
-  defrecord :text, shared_extensions ++ shared_data ++ [:fin?]
-  defrecord :binary, shared_extensions ++ shared_data ++ [:fin?]
+  defrecord :continuation, shared ++ [:fin?]
+  defrecord :text, shared ++ [:fin?]
+  defrecord :binary, shared ++ [:fin?]
   # > All control frames MUST have a payload length of 125 bytes or less
   # > and MUST NOT be fragmented.
-  defrecord :close, shared_extensions ++ shared_data ++ [:code, :reason]
-  defrecord :ping, shared_extensions ++ shared_data
-  defrecord :pong, shared_extensions ++ shared_data
+  defrecord :close, shared ++ [:code, :reason]
+  defrecord :ping, shared
+  defrecord :pong, shared
 
   @opcodes %{
     # non-control opcodes:
@@ -34,34 +33,37 @@ defmodule Mint.WebSocket.Frame do
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
   # https://tools.ietf.org/html/rfc6455#section-5.2
-  @spec encode(tuple(), binary()) :: {:ok, iodata()} | {:error, :payload_too_large}
-  def encode(frame, mask \\ new_mask()) do
+  @spec encode(tuple()) :: {:ok, binary()} | {:error, :payload_too_large}
+  def encode(frame) do
     payload = payload(frame)
+    mask = mask(frame)
+    masked? = if mask == nil, do: 0, else: 1
 
     with {:ok, encoded_payload_length} <-
-           payload |> IO.iodata_length() |> encode_payload_length() do
-      [
-        encode_fin(frame),
-        encode_extensions(frame),
-        encode_opcode(frame),
-        _masked? = <<0b1::size(1)>>,
-        encoded_payload_length,
-        mask,
-        apply_mask(payload, mask)
-      ]
+           payload |> byte_size() |> encode_payload_length() do
+      {:ok,
+       <<
+         encode_fin(frame)::bitstring,
+         reserved(frame)::bitstring,
+         encode_opcode(frame)::bitstring,
+         masked?::size(1),
+         encoded_payload_length::bitstring,
+         mask || <<>>::binary,
+         apply_mask(payload, mask)::bitstring
+       >>}
     end
   end
 
   for type <- Map.keys(@opcodes) do
     defp payload(unquote(type)(data: data)), do: data
+    defp mask(unquote(type)(mask: mask)), do: mask
+    defp reserved(unquote(type)(reserved: reserved)), do: reserved
   end
 
   defp encode_fin(text(fin?: false)), do: <<0b0::size(1)>>
   defp encode_fin(binary(fin?: false)), do: <<0b0::size(1)>>
   defp encode_fin(continuation(fin?: false)), do: <<0b0::size(1)>>
   defp encode_fin(_), do: <<0b1::size(1)>>
-
-  defp encode_extensions(_), do: <<0b000::size(3)>>
 
   defp encode_opcode(frame), do: @opcodes[elem(frame, 0)]
 
@@ -85,8 +87,8 @@ defmodule Mint.WebSocket.Frame do
   # bytes (where the mask bytes repeat).
   # This is an "involution" function: applying the mask will mask
   # the data and applying the mask again will unmask it.
-  #
-  # YARD refactor to work on iodata?
+  def apply_mask(payload, nil), do: payload
+
   def apply_mask(payload, _mask = <<a, b, c, d>>) do
     [a, b, c, d]
     |> Stream.cycle()
@@ -101,7 +103,7 @@ defmodule Mint.WebSocket.Frame do
 
   @spec decode(binary()) :: {:ok, tuple()} | any()
   def decode(
-        <<fin::size(1), extensions::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
+        <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
           payload_and_mask::bitstring>>
       ) do
     {payload, mask} = decode_payload_and_mask(payload_and_mask, masked == 0b1)
@@ -109,7 +111,7 @@ defmodule Mint.WebSocket.Frame do
     decode(
       @reverse_opcodes[opcode],
       fin == 0b1,
-      extensions,
+      reserved,
       mask,
       payload
     )
@@ -167,25 +169,25 @@ defmodule Mint.WebSocket.Frame do
   def rops, do: @reverse_opcodes
 
   for data_type <- [:continuation, :text, :binary] do
-    def decode(unquote(data_type), fin?, extensions, mask, payload) do
+    def decode(unquote(data_type), fin?, reserved, mask, payload) do
       unquote(data_type)(
         fin?: fin?,
-        extensions: extensions,
+        reserved: reserved,
         mask: mask,
         data: payload
       )
     end
   end
 
-  def decode(:close, _fin?, extensions, mask, payload) do
-    close(extensions: extensions, mask: mask, data: payload)
+  def decode(:close, _fin?, reserved, mask, payload) do
+    close(reserved: reserved, mask: mask, data: payload)
   end
 
-  def decode(:ping, _fin?, extensions, mask, payload) do
-    ping(extensions: extensions, mask: mask, data: payload)
+  def decode(:ping, _fin?, reserved, mask, payload) do
+    ping(reserved: reserved, mask: mask, data: payload)
   end
 
-  def decode(:pong, _fin?, extensions, mask, payload) do
-    pong(extensions: extensions, mask: mask, data: payload)
+  def decode(:pong, _fin?, reserved, mask, payload) do
+    pong(reserved: reserved, mask: mask, data: payload)
   end
 end
