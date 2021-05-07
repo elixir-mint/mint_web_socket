@@ -1,3 +1,3 @@
 %{
-  "mint": {:hex, :mint, "1.2.1", "369cc8fecc54afd170e11740aa7efd066709e5ef3b5a2c63f0a47d1542cbd56a", [:mix], [{:castore, "~> 0.1.0", [hex: :castore, repo: "hexpm", optional: true]}], "hexpm", "053fe2f48c965f31878a16272478d9299fa412bc4df86dee2678986f2e40e018"},
+  "mint": {:git, "https://github.com/the-mikedavis/mint.git", "d9e2e5172f6953f03d33f7755f53680b9cf66ac5", [branch: "keep-http1-conn-open-on-upgrade-header"]},
 }
