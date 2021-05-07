@@ -8,4 +8,4 @@ services:
     volumes:
     - ./:/app
     working_dir: /app
-    command: tail -f /dev/null
+    command: bash -c "mix local.hex --force && mix local.rebar --force && tail -f /dev/null"
