@@ -1,21 +1,6 @@
-# MintWebSocket
+# Mint.WebSocket
 
-**TODO: Add description**
+WebSocket support for Mint 🌱
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `mint_web_socket` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:mint_web_socket, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/mint_web_socket](https://hexdocs.pm/mint_web_socket).
-
+> This repo is not complete: it only supports the basics for WebSocket over
+> HTTP/1 at the moment. Issues and PRs are welcome :slightly_smiling_face:
