@@ -179,8 +179,14 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  def decode(:close, _fin?, reserved, mask, payload) do
-    close(reserved: reserved, mask: mask, data: payload)
+  def decode(
+        :close,
+        _fin?,
+        reserved,
+        mask,
+        <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
+      ) do
+    close(reserved: reserved, mask: mask, code: code, reason: reason)
   end
 
   def decode(:ping, _fin?, reserved, mask, payload) do
