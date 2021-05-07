@@ -6,7 +6,7 @@ defmodule Mint.WebSocket do
   alias __MODULE__.{Utils, Frame}
 
   @type t :: %__MODULE__{}
-  defstruct extensions: [],
+  defstruct extensions: MapSet.new(),
             private: %{}
 
   defguardp is_frame(frame)
@@ -40,7 +40,7 @@ defmodule Mint.WebSocket do
 
   def new(conn, request_ref, _status, request_headers, response_headers) do
     with :ok <- Utils.check_accept_nonce(request_headers, response_headers) do
-      {:ok, re_open_request(conn, request_ref), %__MODULE__{}}
+      {:ok, re_open_request(conn, request_ref), %__MODULE__{extensions: Utils.common_extensions(request_headers, response_headers)}}
     end
   end
 

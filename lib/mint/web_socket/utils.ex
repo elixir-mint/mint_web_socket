@@ -30,6 +30,31 @@ defmodule Mint.WebSocket.Utils do
     end
   end
 
+  def valid_accept_nonce?(request_nonce, response_nonce) do
+    expected_nonce = :crypto.hash(:sha, request_nonce <> @websocket_guid) |> Base.encode64()
+
+    # note that this is not a security measure so we do not need to make this
+    # a constant-time equality check
+    response_nonce == expected_nonce
+  end
+
+  # Websocket extensions are agreed upon by the client & server.
+  # The connection uses only those that both the client and server declared.
+  # To put it another way, the intersection of what the client declared and
+  # what the server declared.
+  def common_extensions(request_headers, response_headers) do
+    request_extensions = extensions(request_headers)
+    response_extensions = extensions(response_headers)
+
+    MapSet.intersection(request_extensions, response_extensions)
+  end
+
+  defp extensions(headers) do
+    get_header(headers, "sec-websocket-extensions", "")
+    |> String.split(", ")
+    |> MapSet.new()
+  end
+
   defp fetch_header(headers, key) do
     Enum.find_value(headers, :error, fn
       {^key, value} -> {:ok, value}
@@ -37,11 +62,10 @@ defmodule Mint.WebSocket.Utils do
     end)
   end
 
-  def valid_accept_nonce?(request_nonce, response_nonce) do
-    expected_nonce = :crypto.hash(:sha, request_nonce <> @websocket_guid) |> Base.encode64()
-
-    # note that this is not a security measure so we do not need to make this
-    # a constant-time equality check
-    response_nonce == expected_nonce
+  defp get_header(headers, key, default) do
+    case fetch_header(headers, key) do
+      {:ok, value} -> value
+      :error -> default
+    end
   end
 end
