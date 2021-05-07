@@ -1,6 +1,9 @@
 version: '3.8'
 
 services:
+  echo:
+    image: jmalloc/echo-server
+
   app:
     image: elixir:1.12.0-rc.1
     environment:
