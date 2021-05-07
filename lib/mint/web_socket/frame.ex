@@ -119,7 +119,7 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           mask::binary-size(8)-unit(4), masked_payload::binary-size(payload_length)>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length)>>,
          _masked? = true
        ) do
     {apply_mask(masked_payload, mask), mask}
@@ -127,7 +127,7 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           mask::binary-size(8)-unit(4), masked_payload::binary-size(payload_length)>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length)>>,
          _masked? = true
        ) do
     {apply_mask(masked_payload, mask), mask}
@@ -135,7 +135,7 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<payload_length::integer-size(7), mask::binary-size(8)-unit(4),
-           masked_payload::binary-size(payload_length)>>,
+           masked_payload::bytes-size(payload_length)>>,
          _masked? = true
        )
        when payload_length in 0..125 do
@@ -144,7 +144,7 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           payload::binary-size(payload_length)>>,
+           payload::bytes-size(payload_length)>>,
          _masked? = false
        ) do
     {payload, nil}
@@ -152,14 +152,14 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           payload::binary-size(payload_length)>>,
+           payload::bytes-size(payload_length)>>,
          _masked? = false
        ) do
     {payload, nil}
   end
 
   defp decode_payload_and_mask(
-         <<payload_length::integer-size(7), payload::binary-size(payload_length)>>,
+         <<payload_length::integer-size(7), payload::bytes-size(payload_length)>>,
          _masked? = false
        )
        when payload_length in 0..125 do
