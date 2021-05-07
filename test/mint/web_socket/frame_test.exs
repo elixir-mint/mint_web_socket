@@ -8,12 +8,15 @@ defmodule Mint.WebSocket.FrameTest do
       masked = masked_frame()
 
       assert {:ok, [decoded]} =
-               {:ok, [text(
-                 fin?: true,
-                 reserved: <<0::size(3)>>,
-                 mask: <<33, 29, 36, 227>>,
-                 data: ~s(["1","1","rooms:lobby","phx_join",{}])
-               )]} = decode(masked)
+               {:ok,
+                [
+                  text(
+                    fin?: true,
+                    reserved: <<0::size(3)>>,
+                    mask: <<33, 29, 36, 227>>,
+                    data: ~s(["1","1","rooms:lobby","phx_join",{}])
+                  )
+                ]} = decode(masked)
 
       assert {:ok, ^masked} = encode(decoded)
     end
@@ -22,12 +25,15 @@ defmodule Mint.WebSocket.FrameTest do
       masked = unmasked_frame()
 
       assert {:ok, [decoded]} =
-               {:ok, [text(
-                 fin?: true,
-                 reserved: <<0::size(3)>>,
-                 mask: nil,
-                 data: ~s(["1","1","rooms:lobby","phx_reply",{"response":{},"status":"ok"}])
-               )]} = decode(masked)
+               {:ok,
+                [
+                  text(
+                    fin?: true,
+                    reserved: <<0::size(3)>>,
+                    mask: nil,
+                    data: ~s(["1","1","rooms:lobby","phx_reply",{"response":{},"status":"ok"}])
+                  )
+                ]} = decode(masked)
 
       assert {:ok, ^masked} = encode(decoded)
     end

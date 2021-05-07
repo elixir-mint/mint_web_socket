@@ -11,8 +11,10 @@ defmodule Mint.WebSocket do
 
   defguardp is_frame(frame)
             when frame in [:ping, :pong, :close] or
-                   (is_tuple(frame) and elem(frame, 0) in [:text, :binary, :ping, :pong] and is_binary(elem(frame, 1))) or
-                   (is_tuple(frame) and elem(frame, 0) == :close and is_integer(elem(frame, 1)) and is_binary(elem(frame, 2)))
+                   (is_tuple(frame) and elem(frame, 0) in [:text, :binary, :ping, :pong] and
+                      is_binary(elem(frame, 1))) or
+                   (is_tuple(frame) and elem(frame, 0) == :close and is_integer(elem(frame, 1)) and
+                      is_binary(elem(frame, 2)))
 
   @type frame ::
           {:text, binary()}

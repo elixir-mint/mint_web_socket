@@ -123,7 +123,8 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length), _rest::bitstring>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length),
+           _rest::bitstring>>,
          _masked? = true
        ) do
     {:ok, apply_mask(masked_payload, mask), mask}
@@ -131,7 +132,8 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_payload_and_mask(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length), _rest::bitstring>>,
+           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length),
+           _rest::bitstring>>,
          _masked? = true
        ) do
     {:ok, apply_mask(masked_payload, mask), mask}
@@ -163,7 +165,8 @@ defmodule Mint.WebSocket.Frame do
   end
 
   defp decode_payload_and_mask(
-         <<payload_length::integer-size(7), payload::bytes-size(payload_length), _rest::bitstring>>,
+         <<payload_length::integer-size(7), payload::bytes-size(payload_length),
+           _rest::bitstring>>,
          _masked? = false
        )
        when payload_length in 0..125 do
@@ -245,7 +248,8 @@ defmodule Mint.WebSocket.Frame do
     close(mask: new_mask(), data: <<>>)
   end
 
-  def translate({:close, code, reason}) when is_integer(code) and is_binary(reason) and byte_size(reason) in 0..123 do
+  def translate({:close, code, reason})
+      when is_integer(code) and is_binary(reason) and byte_size(reason) in 0..123 do
     close(mask: new_mask(), data: encode_close(code, reason))
   end
 
