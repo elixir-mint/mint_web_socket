@@ -8,7 +8,7 @@ WebSocket support for Mint 🌱
 ## Usage
 
 `Mint.WebSocket` piggybacks much of the existing `Mint.HTTP` API. For example,
-here's sending and receiving a hello world frame:
+here's sending and receiving a text frame of "hello world":
 
 ```elixir
 {:ok, conn} = Mint.HTTP.connect(:http, "echo", 8080)
