@@ -1,7 +1,8 @@
 defmodule Mint.WebSocket.Frame do
   @moduledoc false
 
-  # functions and data structures for describing websocket frames
+  # Functions and data structures for describing websocket frames.
+  # https://tools.ietf.org/html/rfc6455#section-5.2
 
   shared = [:reserved, :mask, :data]
 
@@ -32,7 +33,6 @@ defmodule Mint.WebSocket.Frame do
 
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
-  # https://tools.ietf.org/html/rfc6455#section-5.2
   @spec encode(tuple()) :: {:ok, binary()} | {:error, :payload_too_large}
   def encode(frame) do
     payload = payload(frame)
