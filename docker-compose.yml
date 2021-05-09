@@ -2,7 +2,13 @@ version: '3.8'
 
 services:
   echo:
-    image: jmalloc/echo-server
+    image: jmalloc/echo-server:latest
+
+  fuzzingserver:
+    image: crossbario/autobahn-testsuite:latest
+    volumes:
+    - ./autobahn/config:/config
+    - ./autobahn/reports:/reports
 
   app:
     image: elixir:1.12.0-rc.1
