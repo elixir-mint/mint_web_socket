@@ -7,7 +7,8 @@ defmodule Mint.WebSocket do
 
   @type t :: %__MODULE__{}
   defstruct extensions: MapSet.new(),
-            private: %{}
+            private: %{},
+            buffer: <<>>
 
   defguardp is_frame(frame)
             when frame in [:ping, :pong, :close] or
@@ -33,14 +34,24 @@ defmodule Mint.WebSocket do
   end
 
   @spec new(Mint.HTTP.t(), reference(), pos_integer(), Mint.Types.headers(), Mint.Types.headers()) ::
-          {:ok, Mint.HTTP.t(), t()} | {:error, any()}
-  def new(_conn, _request_ref, status, _request_headers, _response_headers) when status != 101 do
-    {:error, :connection_not_upgraded}
+          {:ok, Mint.HTTP.t(), t(), [Mint.Types.response()]} | {:error, Mint.HTTP.t(), any()}
+  def new(conn, _request_ref, status, _request_headers, _response_headers) when status != 101 do
+    {:error, conn, :connection_not_upgraded}
   end
 
   def new(conn, request_ref, _status, request_headers, response_headers) do
     with :ok <- Utils.check_accept_nonce(request_headers, response_headers) do
-      {:ok, re_open_request(conn, request_ref), %__MODULE__{extensions: Utils.common_extensions(request_headers, response_headers)}}
+      conn = re_open_request(conn, request_ref)
+
+      websocket = %__MODULE__{
+        extensions: Utils.common_extensions(request_headers, response_headers)
+      }
+
+      {conn, websocket, messages} = messages(conn, websocket)
+
+      {:ok, conn, websocket, messages}
+    else
+      {:error, reason} -> {:error, conn, reason}
     end
   end
 
@@ -57,9 +68,15 @@ defmodule Mint.WebSocket do
   @spec decode(t(), data :: binary()) :: {:ok, t(), [tuple()]} | {:error, t(), any()}
   def decode(%__MODULE__{} = websocket, data) do
     # pass websocket to the frame module, translate extensions
-    case Frame.decode(data) do
-      {:ok, decoded} -> {:ok, websocket, Enum.map(decoded, &Frame.translate/1)}
-      {:error, reason} -> {:error, websocket, reason}
+    case Frame.decode(websocket.buffer <> data) do
+      {:ok, decoded} ->
+        {:ok, put_in(websocket.buffer, <<>>), Enum.map(decoded, &Frame.translate/1)}
+
+      :buffer ->
+        {:ok, update_in(websocket.buffer, &(&1 <> data)), []}
+
+      {:error, reason} ->
+        {:error, websocket, reason}
     end
   end
 
@@ -91,5 +108,18 @@ defmodule Mint.WebSocket do
       transfer_encoding: [],
       body: nil
     }
+  end
+
+  defp messages(%{buffer: <<>>} = conn, websocket), do: {conn, websocket, []}
+
+  defp messages(%{buffer: buffer} = conn, websocket) when is_binary(buffer) do
+    case decode(websocket, buffer) do
+      {:ok, websocket, messages} ->
+        {put_in(conn.buffer, <<>>), websocket, messages}
+
+      error ->
+        IO.inspect(error, label: "error in new/5 parse")
+        {conn.buffer, websocket, []}
+    end
   end
 end

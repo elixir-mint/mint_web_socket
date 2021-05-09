@@ -101,83 +101,82 @@ defmodule Mint.WebSocket.Frame do
     end)
   end
 
-  @spec decode(binary()) :: {:ok, [tuple()]} | any()
-  def decode(
-        <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
-          payload_and_mask::bitstring>>
-      ) do
-    with {:ok, payload, mask} <-
-           decode_payload_and_mask(payload_and_mask, masked == 0b1) do
-      {:ok,
-       [
-         decode(
-           @reverse_opcodes[opcode],
-           fin == 0b1,
-           reserved,
-           mask,
-           payload
-         )
-       ]}
+  @spec decode(binary()) :: {:ok, [tuple()]} | {:error, atom()} | :buffer
+  def decode(data) do
+    decode_raw(data, [])
+  catch
+    :throw, {:mint, reason} -> {:error, reason}
+  end
+
+  defp decode_raw(
+         <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
+           payload_and_mask::bitstring>>,
+         acc
+       ) do
+    case decode_payload_and_mask(payload_and_mask, masked == 0b1) do
+      {:ok, payload, mask, rest} ->
+        decode_raw(rest, [
+          decode(
+            @reverse_opcodes[opcode],
+            fin == 0b1,
+            reserved,
+            mask,
+            apply_mask(payload, mask)
+          )
+          | acc
+        ])
+
+      :buffer ->
+        :buffer
     end
   end
 
-  defp decode_payload_and_mask(
+  defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
+
+  defp decode_payload_and_mask(payload, masked?) do
+    {payload_length, rest} = decode_payload_length(payload)
+    {mask, rest} = decode_mask(rest, masked?)
+
+    case rest do
+      <<payload::binary-size(payload_length), more::bitstring>> ->
+        {:ok, payload, mask, more}
+
+      partial when is_binary(partial) ->
+        :buffer
+    end
+  end
+
+  defp decode_payload_length(
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length),
-           _rest::bitstring>>,
-         _masked? = true
-       ) do
-    {:ok, apply_mask(masked_payload, mask), mask}
-  end
+           rest::bitstring>>
+       ),
+       do: {payload_length, rest}
 
-  defp decode_payload_and_mask(
+  defp decode_payload_length(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           mask::binary-size(8)-unit(4), masked_payload::bytes-size(payload_length),
-           _rest::bitstring>>,
-         _masked? = true
-       ) do
-    {:ok, apply_mask(masked_payload, mask), mask}
+           rest::bitstring>>
+       ),
+       do: {payload_length, rest}
+
+  defp decode_payload_length(<<payload_length::integer-size(7), rest::bitstring>>)
+       when payload_length in 0..125,
+       do: {payload_length, rest}
+
+  defp decode_payload_length(malformed) do
+    throw({:mint, {:malformed_payload_length, malformed}})
   end
 
-  defp decode_payload_and_mask(
-         <<payload_length::integer-size(7), mask::binary-size(8)-unit(4),
-           masked_payload::bytes-size(payload_length), _rest::bitstring>>,
-         _masked? = true
-       )
-       when payload_length in 0..125 do
-    {:ok, apply_mask(masked_payload, mask), mask}
+  defp decode_mask(<<mask::binary-size(8)-unit(4), rest::bitstring>>, _masked? = true) do
+    {mask, rest}
   end
 
-  defp decode_payload_and_mask(
-         <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
-           payload::bytes-size(payload_length), _rest::bitstring>>,
-         _masked? = false
-       ) do
-    {:ok, payload, nil}
+  defp decode_mask(payload, _masked? = false) do
+    {nil, payload}
   end
 
-  defp decode_payload_and_mask(
-         <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
-           payload::bytes-size(payload_length), _rest::bitstring>>,
-         _masked? = false
-       ) do
-    {:ok, payload, nil}
+  defp decode_mask(payload, _masked?) do
+    throw({:mint, {:missing_mask, payload}})
   end
-
-  defp decode_payload_and_mask(
-         <<payload_length::integer-size(7), payload::bytes-size(payload_length),
-           _rest::bitstring>>,
-         _masked? = false
-       )
-       when payload_length in 0..125 do
-    {:ok, payload, nil}
-  end
-
-  defp decode_payload_and_mask(payload_and_mask, _masked?) do
-    {:error, {:malformed_payload, payload_and_mask}}
-  end
-
-  def rops, do: @reverse_opcodes
 
   for data_type <- [:continuation, :text, :binary] do
     def decode(unquote(data_type), fin?, reserved, mask, payload) do
