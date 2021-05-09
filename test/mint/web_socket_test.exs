@@ -16,14 +16,24 @@ defmodule Mint.WebSocketTest do
       {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
         Mint.HTTP.stream(conn, http_get_message)
 
-      {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+      {:ok, conn, websocket, messages} =
+        Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
 
-      # receive one message about the request being served
-      assert_receive request_served_by_message, 1_000
-      {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, request_served_by_message)
+      {conn, websocket} =
+        case messages do
+          [] ->
+            # receive one message about the request being served
+            assert_receive request_served_by_message, 1_000
+            {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, request_served_by_message)
 
-      assert {:ok, websocket, [{:text, "Request served by " <> _}]} =
-               Mint.WebSocket.decode(websocket, data)
+            assert {:ok, websocket, [{:text, "Request served by " <> _}]} =
+                     Mint.WebSocket.decode(websocket, data)
+
+            {conn, websocket}
+
+          [{:text, "Request served by " <> _}] ->
+            {conn, websocket}
+        end
 
       # send the hello world frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, c.frame)
