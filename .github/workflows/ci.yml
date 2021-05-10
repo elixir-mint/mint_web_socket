@@ -71,7 +71,7 @@ jobs:
       run: mix format --check-formatted
 
     - name: Publish autobahn report to DO Spaces
-      if: github.ref == 'main'
+      if: github.branch == 'main'
       uses: docker://schoenwaldnils/s3-sync-action:0.5.1
       with:
         args: --acl public-read --follow-symlinks
