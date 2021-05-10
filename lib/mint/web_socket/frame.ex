@@ -117,7 +117,7 @@ defmodule Mint.WebSocket.Frame do
           {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame()]}
           | {:error, Mint.WebSocket.t(), any()}
   def decode(websocket, data) do
-    case Utils.maybe_concat(websocket.buffer, data) |> decode_raw([]) do
+    case websocket.buffer |> Utils.maybe_concat(data) |> decode_raw(websocket, []) do
       {:ok, frames} ->
         {websocket, frames} = Fragment.resolve(websocket, frames)
         {:ok, put_in(websocket.buffer, <<>>), frames}
@@ -133,15 +133,16 @@ defmodule Mint.WebSocket.Frame do
   defp decode_raw(
          <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
            payload_and_mask::bitstring>> = data,
+         websocket,
          acc
        ) do
     case decode_payload_and_mask(payload_and_mask, masked == 0b1) do
       {:ok, payload, mask, rest} ->
-        decode_raw(rest, [
+        decode_raw(rest, websocket, [
           decode(
             decode_opcode(opcode),
             fin == 0b1,
-            reserved,
+            decode_reserved(reserved, websocket.extensions),
             mask,
             apply_mask(payload, mask)
           )
@@ -153,9 +154,9 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
+  defp decode_raw(<<>>, _websocket, acc), do: {:ok, :lists.reverse(acc)}
 
-  defp decode_raw(partial, acc) when is_binary(partial) do
+  defp decode_raw(partial, _websocket, acc) when is_binary(partial) do
     {:buffer, partial, :lists.reverse(acc)}
   end
 
@@ -167,6 +168,15 @@ defmodule Mint.WebSocket.Frame do
       :error ->
         throw({:mint, {:unsupported_opcode, opcode}})
     end
+  end
+
+  # this will need to be updated to support extensions
+  defp decode_reserved(<<0::size(3)>> = reserved, _extensions) do
+    reserved
+  end
+
+  defp decode_reserved(malformed_reserved, _extensions) do
+    throw({:mint, {:malformed_reserved, malformed_reserved}})
   end
 
   defp decode_payload_and_mask(payload, masked?) do
