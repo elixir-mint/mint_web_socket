@@ -49,9 +49,7 @@ defmodule Mint.WebSocket do
         extensions: Utils.common_extensions(request_headers, response_headers)
       }
 
-      {conn, websocket, messages} = messages(conn, websocket)
-
-      {:ok, conn, websocket, messages}
+      {:ok, conn, websocket}
     else
       {:error, reason} -> {:error, conn, reason}
     end
@@ -97,18 +95,5 @@ defmodule Mint.WebSocket do
       transfer_encoding: [],
       body: nil
     }
-  end
-
-  defp messages(%{buffer: <<>>} = conn, websocket), do: {conn, websocket, []}
-
-  defp messages(%{buffer: buffer} = conn, websocket) when is_binary(buffer) do
-    case decode(websocket, buffer) do
-      {:ok, websocket, messages} ->
-        {put_in(conn.buffer, <<>>), websocket, messages}
-
-      error ->
-        IO.inspect(error, label: "error in new/5 parse")
-        {conn.buffer, websocket, []}
-    end
   end
 end

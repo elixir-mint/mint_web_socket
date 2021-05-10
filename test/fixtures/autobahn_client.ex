@@ -8,7 +8,7 @@ defmodule AutobahnClient do
 
   require Logger
 
-  defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false]
+  defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false, buffer: <<>>]
 
   defguardp is_close_frame(frame)
             when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
@@ -27,7 +27,7 @@ defmodule AutobahnClient do
 
   def get_case_status(case_number) do
     %{messages: [{:text, status} | _]} =
-      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> loop()
+      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> decode_buffer()
 
     Jason.decode!(status)["behavior"]
   end
@@ -47,33 +47,44 @@ defmodule AutobahnClient do
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
       Mint.HTTP.stream(conn, http_get_message)
 
-    {:ok, conn, websocket, messages} =
+    {:ok, conn, websocket} =
       Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
 
     %__MODULE__{
       next: :cont,
-      conn: conn,
+      conn: %{conn | buffer: <<>>},
       ref: ref,
       websocket: websocket,
-      messages: messages
+      buffer: conn.buffer
     }
   end
 
   def recv(%{ref: ref} = state) do
     case Mint.HTTP.stream(state.conn, receive(do: (message -> message))) do
       {:ok, conn, [{:done, ^ref}]} ->
-        %__MODULE__{state | conn: conn, messages: [], next: :stop}
+        %__MODULE__{state | conn: conn, buffer: <<>>, next: :stop}
 
       {:ok, conn, messages} ->
-        {:ok, websocket, messages} =
-          Mint.WebSocket.decode(state.websocket, join_data_frames(messages, ref))
+        %__MODULE__{state | conn: conn, buffer: join_data_frames(messages, ref), next: :cont}
+    end
+  end
 
-        %__MODULE__{state | conn: conn, messages: messages, next: :cont, websocket: websocket}
+  def decode_buffer(state) do
+    case Mint.WebSocket.decode(state.websocket, state.buffer) do
+      {:ok, websocket, messages} ->
+        %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
+
+      {:error, websocket, reason} ->
+        Logger.debug("Could not parse buffer #{inspect(state.buffer, printable_limit: 30)}" <>
+          " because #{inspect(reason)}, sending close 1002")
+
+        %__MODULE__{state | websocket: websocket}
+        |> send({:close, 1002, "Malformed payload"})
     end
   end
 
   def loop(state) do
-    case handle_messages(state) do
+    case state |> decode_buffer |> handle_messages do
       %{next: :cont} = state ->
         loop(recv(state))
 
@@ -87,6 +98,7 @@ defmodule AutobahnClient do
       Logger.debug("Handling #{inspect(message, printable_limit: 30)}")
       handle_message(message, state)
     end)
+    |> Map.put(:messages, [])
   end
 
   defp handle_message(:close, state) do
