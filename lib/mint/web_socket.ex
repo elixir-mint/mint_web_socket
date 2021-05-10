@@ -60,7 +60,6 @@ defmodule Mint.WebSocket do
   # translate frame to something more user-friendly
   @spec encode(t(), frame :: tuple()) :: {:ok, t(), binary()} | {:error, t(), any()}
   def encode(%__MODULE__{} = websocket, frame) when is_frame(frame) do
-    # pass websocket to the frame module, translate extensions
     case frame |> Frame.translate() |> Frame.encode() do
       {:ok, encoded} -> {:ok, websocket, encoded}
       {:error, reason} -> {:error, websocket, reason}
@@ -69,15 +68,14 @@ defmodule Mint.WebSocket do
 
   @spec decode(t(), data :: binary()) :: {:ok, t(), [frame()]} | {:error, t(), any()}
   def decode(%__MODULE__{} = websocket, data) do
-    # pass websocket to the frame module, translate extensions
-    case Frame.decode(websocket.buffer <> data) do
+    case websocket.buffer |> Utils.maybe_concat(data) |> Frame.decode() do
       {:ok, frames} ->
         # {websocket, frames} = resolve_fragments(websocket, frames)
         {:ok, put_in(websocket.buffer, <<>>), Enum.map(frames, &Frame.translate/1)}
 
-      {:buffer, data, frames} ->
+      {:buffer, partial, frames} ->
         # {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, update_in(websocket.buffer, &(&1 <> data)), frames |> Enum.map(&Frame.translate/1)}
+        {:ok, put_in(websocket.buffer, partial), Enum.map(frames, &Frame.translate/1)}
 
       {:error, reason} ->
         {:error, websocket, reason}
