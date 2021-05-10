@@ -7,6 +7,7 @@ defmodule Mint.WebSocket.Frame do
   shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
 
   import Record
+  alias Mint.WebSocket.{Utils, Frame.Fragment}
 
   defrecord :continuation, shared ++ [:fin?]
   defrecord :text, shared ++ [:fin?]
@@ -17,7 +18,9 @@ defmodule Mint.WebSocket.Frame do
   defrecord :ping, shared
   defrecord :pong, shared
 
-  defguard is_control(frame) when elem(frame, 0) in [:close, :ping, :pong]
+  defguard is_control(frame)
+           when is_tuple(frame) and
+                  (elem(frame, 0) == :close or elem(frame, 0) == :ping or elem(frame, 0) == :pong)
 
   defguard is_fin(frame)
            when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 4) == true) or
@@ -110,9 +113,19 @@ defmodule Mint.WebSocket.Frame do
     end)
   end
 
-  @spec decode(binary()) :: {:ok, [tuple()]} | {:error, atom()} | :buffer
-  def decode(data) do
-    decode_raw(data, [])
+  @spec decode(Mint.WebSocket.t(), binary()) ::
+          {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame()]}
+          | {:error, Mint.WebSocket.t(), any()}
+  def decode(websocket, data) do
+    case Utils.maybe_concat(websocket.buffer, data) |> decode_raw([]) do
+      {:ok, frames} ->
+        {websocket, frames} = Fragment.resolve(websocket, frames)
+        {:ok, put_in(websocket.buffer, <<>>), frames}
+
+      {:buffer, partial, frames} ->
+        {websocket, frames} = Fragment.resolve(websocket, frames)
+        {:ok, put_in(websocket.buffer, partial), frames}
+    end
   catch
     :throw, {:mint, reason} -> {:error, reason}
   end
@@ -143,7 +156,7 @@ defmodule Mint.WebSocket.Frame do
   defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
 
   defp decode_raw(partial, acc) when is_binary(partial) do
-   {:buffer, partial, :lists.reverse(acc)}
+    {:buffer, partial, :lists.reverse(acc)}
   end
 
   defp decode_opcode(opcode) do

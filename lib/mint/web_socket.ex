@@ -67,50 +67,7 @@ defmodule Mint.WebSocket do
   end
 
   @spec decode(t(), data :: binary()) :: {:ok, t(), [frame()]} | {:error, t(), any()}
-  def decode(%__MODULE__{} = websocket, data) do
-    case websocket.buffer |> Utils.maybe_concat(data) |> Frame.decode() do
-      {:ok, frames} ->
-        {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, <<>>), frames}
-
-      {:buffer, partial, frames} ->
-        {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, partial), frames}
-
-      {:error, reason} ->
-        {:error, websocket, reason}
-    end
-  end
-
-  defp resolve_fragments(websocket, frames, acc \\ [])
-
-  defp resolve_fragments(websocket, [], acc) do
-    {websocket, :lists.reverse(acc)}
-  end
-
-  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.is_control(frame) do
-    resolve_fragments(websocket, rest, [Frame.translate(frame) | acc])
-  end
-
-  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.is_fin(frame) do
-    frame = combine_frames([frame | websocket.fragments])
-
-    put_in(websocket.fragments, [])
-    |> resolve_fragments(rest, [frame | acc])
-  end
-
-  defp resolve_fragments(websocket, [frame | rest], acc) do
-    update_in(websocket.fragments, &[frame | &1])
-    |> resolve_fragments(rest, acc)
-  end
-
-  defp combine_frames([full_frame]) do
-    Frame.translate(full_frame)
-  end
-
-  defp combine_frames([Frame.continuation() = continuation, prior_fragment | rest]) do
-    combine_frames([Frame.combine(prior_fragment, continuation) | rest])
-  end
+  defdelegate decode(websocket, data), to: Frame
 
   # we re-open the request in the conn for HTTP1 connections because a :done
   # will complete the request
