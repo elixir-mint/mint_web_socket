@@ -59,13 +59,9 @@ defmodule AutobahnClient do
   end
 
   def recv(%{ref: ref} = state) do
-    case Mint.HTTP.stream(state.conn, receive(do: (message -> message))) do
-      {:ok, conn, [{:done, ^ref}]} ->
-        %__MODULE__{state | conn: conn, buffer: <<>>, next: :stop}
+    {:ok, conn, messages} = Mint.HTTP.stream(state.conn, receive(do: (message -> message)))
 
-      {:ok, conn, messages} ->
-        %__MODULE__{state | conn: conn, buffer: join_data_frames(messages, ref), next: :cont}
-    end
+    %__MODULE__{state | conn: conn, buffer: join_data_frames(messages, ref), next: :cont}
   end
 
   def decode_buffer(state) do
@@ -100,10 +96,6 @@ defmodule AutobahnClient do
       handle_message(message, state)
     end)
     |> Map.put(:messages, [])
-  end
-
-  defp handle_message(:close, state) do
-    handle_message({:close, 1000, ""}, state)
   end
 
   defp handle_message({:close, _code, _reason}, state) do
