@@ -42,4 +42,8 @@ defmodule Mint.WebSocket.Frame.Fragment do
   defp combine_frames([Frame.continuation() = continuation, prior_fragment | rest]) do
     combine_frames([Frame.combine(prior_fragment, continuation) | rest])
   end
+
+  defp combine_frames(_out_of_order_fragments) do
+    throw({:mint, :out_of_order_fragments})
+  end
 end
