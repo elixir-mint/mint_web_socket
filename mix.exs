@@ -8,7 +8,13 @@ defmodule MintWebSocket.MixProject do
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.github": :test
+      ]
     ]
   end
 
@@ -22,7 +28,8 @@ defmodule MintWebSocket.MixProject do
     [
       {:mint, "~> 1.0"},
       {:castore, ">= 0.0.0", only: [:dev]},
-      {:jason, ">= 0.0.0", only: [:dev, :test]}
+      {:jason, ">= 0.0.0", only: [:dev, :test]},
+      {:excoveralls, "~> 0.14", only: [:test]}
     ]
   end
 
