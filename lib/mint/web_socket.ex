@@ -55,8 +55,7 @@ defmodule Mint.WebSocket do
     end
   end
 
-  # translate frame to something more user-friendly
-  @spec encode(t(), frame :: tuple()) :: {:ok, t(), binary()} | {:error, t(), any()}
+  @spec encode(t(), frame()) :: {:ok, t(), binary()} | {:error, t(), any()}
   def encode(%__MODULE__{} = websocket, frame) when is_frame(frame) do
     case frame |> Frame.translate() |> Frame.encode() do
       {:ok, encoded} -> {:ok, websocket, encoded}
