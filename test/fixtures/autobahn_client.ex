@@ -80,7 +80,7 @@ defmodule AutobahnClient do
         )
 
         %__MODULE__{state | websocket: websocket}
-        |> send({:close, 1002, "Malformed payload"})
+        |> close(1002, "Malformed payload")
     end
   end
 
@@ -107,9 +107,7 @@ defmodule AutobahnClient do
   end
 
   defp handle_message({:close, _code, _reason}, state) do
-    state = send(state, :close)
-    {:ok, conn} = Mint.HTTP.close(state.conn)
-    %__MODULE__{state | conn: conn, next: :stop}
+    close(state, 1000, "")
   end
 
   defp handle_message(:ping, state), do: handle_message({:ping, ""}, state)
@@ -146,6 +144,12 @@ defmodule AutobahnClient do
 
         send(put_in(state.websocket, websocket), {:close, 1002, ""})
     end
+  end
+
+  defp close(state, code, reason) do
+    state = send(state, {:close, code, reason})
+    {:ok, conn} = Mint.HTTP.close(state.conn)
+    %__MODULE__{state | conn: conn, next: :stop}
   end
 
   defp join_data_frames(messages, ref) do
