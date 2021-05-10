@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-16.04
     env:
       MIX_ENV: test
+      ECHO_HOST: localhost
+      FUZZINGSERVER_HOST: localhost
 
     steps:
     - name: Checkout

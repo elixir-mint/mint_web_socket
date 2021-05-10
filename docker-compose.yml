@@ -4,17 +4,23 @@ services:
   echo:
     image: crossbario/autobahn-testsuite:latest
     command: wstest -m echoserver -w ws://0.0.0.0:9000
+    ports:
+    - 9000:9000
 
   fuzzingserver:
     image: crossbario/autobahn-testsuite:latest
     volumes:
     - ./autobahn/config:/config
     - ./autobahn/reports:/reports
+    ports:
+    - 9001:9001
 
   app:
     image: elixir:1.12.0-rc.1
     environment:
     - 'ERL_AFLAGS=-kernel shell_history enabled'
+    - ECHO_HOST=echo
+    - FUZZINGSERVER_HOST=fuzzingserver
     volumes:
     - ./:/app
     working_dir: /app
