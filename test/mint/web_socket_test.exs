@@ -4,7 +4,8 @@ defmodule Mint.WebSocketTest do
   describe "given a 'hello world' text frame" do
     test "we can send it and receive an echo reply" do
       # bootstrap
-      {:ok, conn} = Mint.HTTP.connect(:http, "echo", 9000)
+      host = System.get_env("ECHO_HOST") || "localhost"
+      {:ok, conn} = Mint.HTTP.connect(:http, host, 9000)
       req_headers = Mint.WebSocket.build_request_headers()
       {:ok, conn, ref} = Mint.HTTP.request(conn, "GET", "/", req_headers, nil)
       assert_receive http_get_message

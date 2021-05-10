@@ -14,7 +14,7 @@ defmodule AutobahnClient do
             when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
 
   def get_case_count do
-    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> decode_buffer()
+    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> get_once()
 
     String.to_integer(count)
   end
@@ -27,14 +27,14 @@ defmodule AutobahnClient do
 
   def get_case_status(case_number) do
     %{messages: [{:text, status} | _]} =
-      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> decode_buffer()
+      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> get_once()
 
     Jason.decode!(status)["behavior"]
   end
 
   def get_case_info(case_number) do
     %{messages: [{:text, status} | _]} =
-      connect("/getCaseInfo?case=#{case_number}&agent=Mint") |> decode_buffer()
+      connect("/getCaseInfo?case=#{case_number}&agent=Mint") |> get_once()
 
     Jason.decode!(status, keys: :atoms)
   end
@@ -45,8 +45,16 @@ defmodule AutobahnClient do
     :ok
   end
 
+  defp get_once(state) do
+    case decode_buffer(state) do
+      %{messages: []} = state -> state |> recv() |> get_once()
+      state -> state
+    end
+  end
+
   def connect(resource) do
-    {:ok, conn} = Mint.HTTP.connect(:http, "fuzzingserver", 9001)
+    host = System.get_env("FUZZINGSERVER_HOST") || "localhost"
+    {:ok, conn} = Mint.HTTP.connect(:http, host, 9001)
     req_headers = Mint.WebSocket.build_request_headers()
     {:ok, conn, ref} = Mint.HTTP.request(conn, "GET", resource, req_headers, nil)
     http_get_message = receive(do: (message -> message))
