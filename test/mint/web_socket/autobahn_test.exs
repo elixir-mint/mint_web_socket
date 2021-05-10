@@ -14,6 +14,7 @@ defmodule Mint.WebSocket.AutobahnTest do
     test "Autobahn|Testsuite case number #{case_number}" do
       assert AutobahnClient.run_case(unquote(case_number)) == :ok
       :ok = flush()
+
       assert AutobahnClient.get_case_status(unquote(case_number)) in ~w[OK NON-STRICT INFORMATIONAL]
     end
   end

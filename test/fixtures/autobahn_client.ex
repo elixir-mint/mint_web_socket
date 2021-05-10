@@ -131,25 +131,26 @@ defmodule AutobahnClient do
   def send(state, frame) do
     Logger.debug("Sending #{inspect(frame, printable_limit: 30)}")
 
-   with {:ok, %Mint.WebSocket{} = websocket, data} <- Mint.WebSocket.encode(state.websocket, frame),
-        {:ok, conn} <- Mint.HTTP.stream_request_body(state.conn, state.ref, data) do
-     Logger.debug("Sent.")
-     %__MODULE__{state | conn: conn, websocket: websocket, sent_close?: is_close_frame(frame)}
-   else
-     {:error, %Mint.WebSocket{} = websocket, reason} ->
-       Logger.debug(
-         "Could not send frame #{inspect(frame, printable_limit: 30)} because #{inspect(reason)}, sending close..."
-       )
+    with {:ok, %Mint.WebSocket{} = websocket, data} <-
+           Mint.WebSocket.encode(state.websocket, frame),
+         {:ok, conn} <- Mint.HTTP.stream_request_body(state.conn, state.ref, data) do
+      Logger.debug("Sent.")
+      %__MODULE__{state | conn: conn, websocket: websocket, sent_close?: is_close_frame(frame)}
+    else
+      {:error, %Mint.WebSocket{} = websocket, reason} ->
+        Logger.debug(
+          "Could not send frame #{inspect(frame, printable_limit: 30)} because #{inspect(reason)}, sending close..."
+        )
 
-       send(put_in(state.websocket, websocket), {:close, 1002, ""})
+        send(put_in(state.websocket, websocket), {:close, 1002, ""})
 
-     {:error, conn, %Mint.TransportError{reason: :closed}} ->
-       Logger.debug(
-         "Could not send frame #{inspect(frame, printable_limit: 30)} because the connection is closed"
-       )
+      {:error, conn, %Mint.TransportError{reason: :closed}} ->
+        Logger.debug(
+          "Could not send frame #{inspect(frame, printable_limit: 30)} because the connection is closed"
+        )
 
-       {:ok, conn} = Mint.HTTP.close(conn)
-       %__MODULE__{state | conn: conn, next: :stop}
+        {:ok, conn} = Mint.HTTP.close(conn)
+        %__MODULE__{state | conn: conn, next: :stop}
     end
   end
 
