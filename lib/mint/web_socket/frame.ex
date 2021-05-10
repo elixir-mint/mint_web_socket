@@ -127,7 +127,7 @@ defmodule Mint.WebSocket.Frame do
         {:ok, put_in(websocket.buffer, partial), frames}
     end
   catch
-    :throw, {:mint, reason} -> {:error, reason}
+    :throw, {:mint, reason} -> {:error, websocket, reason}
   end
 
   defp decode_raw(
