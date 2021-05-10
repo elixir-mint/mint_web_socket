@@ -70,12 +70,12 @@ defmodule Mint.WebSocket do
   def decode(%__MODULE__{} = websocket, data) do
     case websocket.buffer |> Utils.maybe_concat(data) |> Frame.decode() do
       {:ok, frames} ->
-        # {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, <<>>), Enum.map(frames, &Frame.translate/1)}
+        {websocket, frames} = resolve_fragments(websocket, frames)
+        {:ok, put_in(websocket.buffer, <<>>), frames}
 
       {:buffer, partial, frames} ->
-        # {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, partial), Enum.map(frames, &Frame.translate/1)}
+        {websocket, frames} = resolve_fragments(websocket, frames)
+        {:ok, put_in(websocket.buffer, partial), frames}
 
       {:error, reason} ->
         {:error, websocket, reason}
@@ -88,11 +88,11 @@ defmodule Mint.WebSocket do
     {websocket, :lists.reverse(acc)}
   end
 
-  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.control?(frame) do
+  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.is_control(frame) do
     resolve_fragments(websocket, rest, [Frame.translate(frame) | acc])
   end
 
-  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.fin?(frame) do
+  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.is_fin(frame) do
     frame = combine_frames([frame | websocket.fragments])
 
     put_in(websocket.fragments, [])

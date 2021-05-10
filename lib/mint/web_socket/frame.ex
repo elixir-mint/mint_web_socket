@@ -17,11 +17,11 @@ defmodule Mint.WebSocket.Frame do
   defrecord :ping, shared
   defrecord :pong, shared
 
-  defguard control?(frame) when elem(frame, 0) in [:close, :ping, :pong]
+  defguard is_control(frame) when elem(frame, 0) in [:close, :ping, :pong]
 
-  defguard fin?(frame)
-           when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 5) == true) or
-                  control?(frame)
+  defguard is_fin(frame)
+           when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 4) == true) or
+                  is_control(frame)
 
   @opcodes %{
     # non-control opcodes:

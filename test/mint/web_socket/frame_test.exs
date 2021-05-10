@@ -39,6 +39,13 @@ defmodule Mint.WebSocket.FrameTest do
     end
   end
 
+  test "the fin? guard correctly detects the fin bit in frames" do
+    assert text(fin?: true, data: "hello") |> is_fin()
+    refute text(fin?: false, data: "hello") |> is_fin()
+
+    assert ping() |> is_fin()
+  end
+
   defp masked_frame do
     # client->server text frame
     "81a5211d24e37a3f15c10d3f15c10d3f568c4e7057d94d724681583f08c151755cbc4b724d8d03315f9e7c"
