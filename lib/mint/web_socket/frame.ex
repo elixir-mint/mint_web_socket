@@ -142,9 +142,9 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
 
-  # defp decode_raw(partial, acc) when is_binary(partial) do
-  #  {:buffer, partial, :lists.reverse(acc)}
-  # end
+  defp decode_raw(partial, acc) when is_binary(partial) do
+   {:buffer, partial, :lists.reverse(acc)}
+  end
 
   defp decode_opcode(opcode) do
     case Map.fetch(@reverse_opcodes, opcode) do
