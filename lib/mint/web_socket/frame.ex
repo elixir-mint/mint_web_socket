@@ -271,7 +271,13 @@ defmodule Mint.WebSocket.Frame do
     text(fin?: true, mask: new_mask(), data: text)
   end
 
-  def translate(text(fin?: true, data: data)), do: {:text, data}
+  def translate(text(fin?: true, data: data)) do
+    if String.valid?(data) do
+      {:text, data}
+    else
+      throw({:mint, {:invalid_utf8, data}})
+    end
+  end
 
   def translate({:binary, binary}) do
     binary(fin?: true, mask: new_mask(), data: binary)
@@ -319,7 +325,10 @@ defmodule Mint.WebSocket.Frame do
   end
 
   for type <- [:continuation, :text, :binary] do
-    def combine(unquote(type)(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
+    def combine(
+          unquote(type)(data: frame_data) = frame,
+          continuation(data: continuation_data, fin?: fin?)
+        ) do
       unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
     end
   end

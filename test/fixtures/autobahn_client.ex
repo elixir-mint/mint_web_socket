@@ -76,11 +76,11 @@ defmodule AutobahnClient do
       {:error, websocket, reason} ->
         Logger.debug(
           "Could not parse buffer #{inspect(state.buffer, printable_limit: 30)}" <>
-            " because #{inspect(reason)}, sending close 1002"
+            " because #{inspect(reason)}, sending close"
         )
 
         %__MODULE__{state | websocket: websocket}
-        |> close(1002, "Malformed payload")
+        |> close(close_code_for_reason(reason), "Malformed payload")
     end
   end
 
@@ -151,6 +151,9 @@ defmodule AutobahnClient do
     {:ok, conn} = Mint.HTTP.close(state.conn)
     %__MODULE__{state | conn: conn, next: :stop}
   end
+
+  defp close_code_for_reason({:invalid_utf8, _data}), do: 1007
+  defp close_code_for_reason(_), do: 1002
 
   defp join_data_frames(messages, ref) do
     messages
