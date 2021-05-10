@@ -21,7 +21,8 @@ defmodule MintWebSocket.MixProject do
   defp deps do
     [
       {:mint, "~> 1.0"},
-      {:castore, ">= 0.0.0", only: [:dev]}
+      {:castore, ">= 0.0.0", only: [:dev]},
+      {:jason, ">= 0.0.0", only: [:dev, :test]}
     ]
   end
 
