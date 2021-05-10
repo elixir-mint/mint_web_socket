@@ -26,8 +26,10 @@ defmodule Mint.WebSocket.Frame do
            when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 4) == true) or
                   is_control(frame)
 
+  # https://tools.ietf.org/html/rfc6455#section-7.4.1
+  @invalid_status_codes [1_004, 1_005, 1_006, 1_016, 1_100, 2_000, 2_999]
   # https://tools.ietf.org/html/rfc6455#section-7.4.2
-  defguardp is_valid_close_code(code) when code in 1_000..4_999
+  defguardp is_valid_close_code(code) when code in 1_000..4_999 and code not in @invalid_status_codes
 
   @opcodes %{
     # non-control opcodes:
