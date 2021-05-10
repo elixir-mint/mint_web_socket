@@ -26,6 +26,9 @@ defmodule Mint.WebSocket.Frame do
            when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 4) == true) or
                   is_control(frame)
 
+  # https://tools.ietf.org/html/rfc6455#section-7.4.2
+  defguardp is_valid_close_code(code) when code in 1_000..4_999
+
   @opcodes %{
     # non-control opcodes:
     continuation: <<0x0::size(4)>>,
@@ -240,9 +243,13 @@ defmodule Mint.WebSocket.Frame do
         _fin?,
         reserved,
         mask,
-        <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
-      ) when byte_size(reason) in 0..123 do
-    close(reserved: reserved, mask: mask, code: code, reason: reason)
+        <<code::unsigned-integer-size(8)-unit(2), reason::binary>> = payload
+      ) when byte_size(reason) in 0..123 and is_valid_close_code(code) do
+    if String.valid?(reason) do
+      close(reserved: reserved, mask: mask, code: code, reason: reason)
+    else
+      throw({:mint, {:invalid_close_payload, payload}})
+    end
   end
 
   def decode(
