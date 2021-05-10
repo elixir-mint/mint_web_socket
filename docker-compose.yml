@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   echo:
-    image: jmalloc/echo-server:latest
+    image: crossbario/autobahn-testsuite:latest
+    command: wstest -m echoserver -w ws://0.0.0.0:9000
 
   fuzzingserver:
     image: crossbario/autobahn-testsuite:latest
