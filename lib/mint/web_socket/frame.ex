@@ -318,9 +318,9 @@ defmodule Mint.WebSocket.Frame do
     <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 
-  for type <- Map.keys(@opcodes) do
-    def combine(unquote(type)(data: frame_data), continuation(data: continuation_data)) do
-      unquote(type)(data: frame_data <> continuation_data)
+  for type <- [:continuation, :text, :binary] do
+    def combine(unquote(type)(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
+      unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
     end
   end
 end
