@@ -18,7 +18,10 @@ defmodule Mint.WebSocket.Frame do
   defrecord :pong, shared
 
   defguard control?(frame) when elem(frame, 0) in [:close, :ping, :pong]
-  defguard fin?(frame) when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 5) == true) or control?(frame)
+
+  defguard fin?(frame)
+           when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 5) == true) or
+                  control?(frame)
 
   @opcodes %{
     # non-control opcodes:
@@ -75,11 +78,13 @@ defmodule Mint.WebSocket.Frame do
     {:ok, <<length::integer-size(7)>>}
   end
 
-  def encode_payload_length(opcode, length) when length in 126..65_535 and opcode in @non_control_opcodes do
+  def encode_payload_length(opcode, length)
+      when length in 126..65_535 and opcode in @non_control_opcodes do
     {:ok, <<126::integer-size(7), length::unsigned-integer-size(8)-unit(2)>>}
   end
 
-  def encode_payload_length(opcode, length) when length in 65_535..9_223_372_036_854_775_807 and opcode in @non_control_opcodes do
+  def encode_payload_length(opcode, length)
+      when length in 65_535..9_223_372_036_854_775_807 and opcode in @non_control_opcodes do
     {:ok, <<127::integer-size(7), length::unsigned-integer-size(8)-unit(8)>>}
   end
 
@@ -137,9 +142,9 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
 
-  #defp decode_raw(partial, acc) when is_binary(partial) do
+  # defp decode_raw(partial, acc) when is_binary(partial) do
   #  {:buffer, partial, :lists.reverse(acc)}
-  #end
+  # end
 
   defp decode_opcode(opcode) do
     case Map.fetch(@reverse_opcodes, opcode) do

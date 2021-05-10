@@ -10,7 +10,8 @@ defmodule AutobahnClient do
 
   defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false]
 
-  defguardp is_close_frame(frame) when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
+  defguardp is_close_frame(frame)
+            when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
 
   def get_case_count do
     %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> loop()
@@ -126,7 +127,9 @@ defmodule AutobahnClient do
         %__MODULE__{state | conn: conn, websocket: websocket, sent_close?: is_close_frame(frame)}
 
       {:error, websocket, reason} ->
-        Logger.debug("Could not send frame #{inspect(frame, printable_limit: 30)} because #{inspect(reason)}, sending close...")
+        Logger.debug(
+          "Could not send frame #{inspect(frame, printable_limit: 30)} because #{inspect(reason)}, sending close..."
+        )
 
         send(put_in(state.websocket, websocket), {:close, 1002, ""})
     end
