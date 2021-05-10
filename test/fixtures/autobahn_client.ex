@@ -47,8 +47,7 @@ defmodule AutobahnClient do
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
       Mint.HTTP.stream(conn, http_get_message)
 
-    {:ok, conn, websocket} =
-      Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+    {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
 
     %__MODULE__{
       next: :cont,
@@ -75,8 +74,10 @@ defmodule AutobahnClient do
         %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
 
       {:error, websocket, reason} ->
-        Logger.debug("Could not parse buffer #{inspect(state.buffer, printable_limit: 30)}" <>
-          " because #{inspect(reason)}, sending close 1002")
+        Logger.debug(
+          "Could not parse buffer #{inspect(state.buffer, printable_limit: 30)}" <>
+            " because #{inspect(reason)}, sending close 1002"
+        )
 
         %__MODULE__{state | websocket: websocket}
         |> send({:close, 1002, "Malformed payload"})

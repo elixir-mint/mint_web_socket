@@ -16,11 +16,9 @@ defmodule Mint.WebSocketTest do
       {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
         Mint.HTTP.stream(conn, http_get_message)
 
-      {:ok, conn, websocket} =
-        Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+      {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
 
-      {:ok, websocket, messages} =
-        Mint.WebSocket.decode(websocket, conn.buffer)
+      {:ok, websocket, messages} = Mint.WebSocket.decode(websocket, conn.buffer)
 
       {conn, websocket} =
         case messages do
