@@ -30,7 +30,9 @@ defmodule AutobahnClient do
   end
 
   def update_reports do
-    connect("/updateReports?agent=Mint") |> loop()
+    _state = connect("/updateReports?agent=Mint") |> loop()
+
+    :ok
   end
 
   def connect(resource) do
@@ -93,9 +95,16 @@ defmodule AutobahnClient do
     %__MODULE__{state | conn: conn, next: :stop}
   end
 
+  defp handle_message(:ping, state), do: handle_message({:ping, ""}, state)
+
   defp handle_message({:ping, data}, state) do
     send(state, {:pong, data})
   end
+
+  # no-op on unsolicited pongs
+  defp handle_message(:pong, state), do: handle_message({:pong, ""}, state)
+
+  defp handle_message({:pong, _body}, state), do: state
 
   defp handle_message(frame, state), do: send(state, frame)
 

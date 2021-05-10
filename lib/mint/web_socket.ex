@@ -3,10 +3,12 @@ defmodule Mint.WebSocket do
   WebSocket
   """
 
-  alias __MODULE__.{Utils, Frame}
+  require __MODULE__.Frame, as: Frame
+  alias __MODULE__.Utils
 
   @type t :: %__MODULE__{}
   defstruct extensions: MapSet.new(),
+            fragments: [],
             private: %{},
             buffer: <<>>
 
@@ -65,19 +67,51 @@ defmodule Mint.WebSocket do
     end
   end
 
-  @spec decode(t(), data :: binary()) :: {:ok, t(), [tuple()]} | {:error, t(), any()}
+  @spec decode(t(), data :: binary()) :: {:ok, t(), [frame()]} | {:error, t(), any()}
   def decode(%__MODULE__{} = websocket, data) do
     # pass websocket to the frame module, translate extensions
     case Frame.decode(websocket.buffer <> data) do
-      {:ok, decoded} ->
-        {:ok, put_in(websocket.buffer, <<>>), Enum.map(decoded, &Frame.translate/1)}
+      {:ok, frames} ->
+        # {websocket, frames} = resolve_fragments(websocket, frames)
+        {:ok, put_in(websocket.buffer, <<>>), Enum.map(frames, &Frame.translate/1)}
 
-      :buffer ->
-        {:ok, update_in(websocket.buffer, &(&1 <> data)), []}
+      {:buffer, data, frames} ->
+        # {websocket, frames} = resolve_fragments(websocket, frames)
+        {:ok, update_in(websocket.buffer, &(&1 <> data)), frames |> Enum.map(&Frame.translate/1)}
 
       {:error, reason} ->
         {:error, websocket, reason}
     end
+  end
+
+  defp resolve_fragments(websocket, frames, acc \\ [])
+
+  defp resolve_fragments(websocket, [], acc) do
+    {websocket, :lists.reverse(acc)}
+  end
+
+  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.control?(frame) do
+    resolve_fragments(websocket, rest, [Frame.translate(frame) | acc])
+  end
+
+  defp resolve_fragments(websocket, [frame | rest], acc) when Frame.fin?(frame) do
+    frame = combine_frames([frame | websocket.fragments])
+
+    put_in(websocket.fragments, [])
+    |> resolve_fragments(rest, [frame | acc])
+  end
+
+  defp resolve_fragments(websocket, [frame | rest], acc) do
+    update_in(websocket.fragments, &[frame | &1])
+    |> resolve_fragments(rest, acc)
+  end
+
+  defp combine_frames([full_frame]) do
+    Frame.translate(full_frame)
+  end
+
+  defp combine_frames([Frame.continuation() = continuation, prior_fragment | rest]) do
+    combine_frames([Frame.combine(prior_fragment, continuation) | rest])
   end
 
   # we re-open the request in the conn for HTTP1 connections because a :done

@@ -17,6 +17,9 @@ defmodule Mint.WebSocket.Frame do
   defrecord :ping, shared
   defrecord :pong, shared
 
+  defguard control?(frame) when elem(frame, 0) in [:close, :ping, :pong]
+  defguard fin?(frame) when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 5) == true) or control?(frame)
+
   @opcodes %{
     # non-control opcodes:
     continuation: <<0x0::size(4)>>,
@@ -30,7 +33,6 @@ defmodule Mint.WebSocket.Frame do
     # 0xB-F reserved for future control frames
   }
   @reverse_opcodes Map.new(@opcodes, fn {k, v} -> {v, k} end)
-
   @non_control_opcodes [:continuation, :text, :binary]
 
   def new_mask, do: :crypto.strong_rand_bytes(4)
@@ -112,14 +114,14 @@ defmodule Mint.WebSocket.Frame do
 
   defp decode_raw(
          <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
-           payload_and_mask::bitstring>>,
+           payload_and_mask::bitstring>> = data,
          acc
        ) do
     case decode_payload_and_mask(payload_and_mask, masked == 0b1) do
       {:ok, payload, mask, rest} ->
         decode_raw(rest, [
           decode(
-            @reverse_opcodes[opcode],
+            decode_opcode(opcode),
             fin == 0b1,
             reserved,
             mask,
@@ -129,11 +131,25 @@ defmodule Mint.WebSocket.Frame do
         ])
 
       :buffer ->
-        :buffer
+        {:buffer, data, :lists.reverse(acc)}
     end
   end
 
   defp decode_raw(<<>>, acc), do: {:ok, :lists.reverse(acc)}
+
+  #defp decode_raw(partial, acc) when is_binary(partial) do
+  #  {:buffer, partial, :lists.reverse(acc)}
+  #end
+
+  defp decode_opcode(opcode) do
+    case Map.fetch(@reverse_opcodes, opcode) do
+      {:ok, opcode_atom} ->
+        opcode_atom
+
+      :error ->
+        throw({:mint, {:unsupported_opcode, opcode}})
+    end
+  end
 
   defp decode_payload_and_mask(payload, masked?) do
     {payload_length, rest} = decode_payload_length(payload)
@@ -270,9 +286,13 @@ defmodule Mint.WebSocket.Frame do
     {:close, code, reason}
   end
 
-  # TODO reverse translate for close frames
-
   defp encode_close(code, reason) do
     <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
+  end
+
+  for type <- Map.keys(@opcodes) do
+    def combine(unquote(type)(data: frame_data), continuation(data: continuation_data)) do
+      unquote(type)(data: frame_data <> continuation_data)
+    end
   end
 end
