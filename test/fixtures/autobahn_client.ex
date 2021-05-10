@@ -98,6 +98,8 @@ defmodule AutobahnClient do
     |> Map.put(:messages, [])
   end
 
+  defp handle_message(:close, state), do: handle_message({:close, 1000, ""}, state)
+
   defp handle_message({:close, _code, _reason}, state) do
     close(state, 1000, "")
   end

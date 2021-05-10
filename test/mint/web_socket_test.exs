@@ -18,10 +18,30 @@ defmodule Mint.WebSocketTest do
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
       {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
 
-      # receive another message which is the echo reply to our hello world
+      # receive the hello world reply frame
       assert_receive hello_world_echo_message
-      {:ok, _conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, hello_world_echo_message)
-      assert {:ok, _websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, hello_world_echo_message)
+      assert {:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
+
+      # send a ping frame
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :ping)
+      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+
+      # receive a pong frame
+      assert_receive pong_message
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, pong_message)
+      assert {:ok, websocket, [:pong]} = Mint.WebSocket.decode(websocket, data)
+
+      # send a close frame
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
+      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+
+      # receive a close frame
+      assert_receive close_message
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, close_message)
+      assert {:ok, _websocket, [:close]} = Mint.WebSocket.decode(websocket, data)
+
+      {:ok, _conn} = Mint.HTTP.close(conn)
     end
   end
 end
