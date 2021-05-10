@@ -14,7 +14,7 @@ defmodule AutobahnClient do
             when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
 
   def get_case_count do
-    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> loop()
+    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> decode_buffer()
 
     String.to_integer(count)
   end
