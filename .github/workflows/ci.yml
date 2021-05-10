@@ -70,6 +70,9 @@ jobs:
     - name: Check formatting
       run: mix format --check-formatted
 
+    - name: Add seedling favicon to autobahn report
+      run: ./autobahn/favicon.sh ./autobahn/reports/index.html
+
     - name: Publish autobahn report to DO Spaces
       if: github.ref == 'refs/heads/main'
       uses: docker://schoenwaldnils/s3-sync-action:0.5.1
