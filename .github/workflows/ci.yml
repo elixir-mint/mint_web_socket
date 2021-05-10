@@ -70,9 +70,6 @@ jobs:
     - name: Check formatting
       run: mix format --check-formatted
 
-    - name: Prepare reports for upload
-      run: mkdir -p
-
     - name: Publish autobahn report to DO Spaces
       if: github.ref == 'main'
       uses: docker://schoenwaldnils/s3-sync-action:0.5.1
