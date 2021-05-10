@@ -68,4 +68,7 @@ defmodule Mint.WebSocket.Utils do
       :error -> default
     end
   end
+
+  def maybe_concat(<<>>, data), do: data
+  def maybe_concat(a, b), do: a <> b
 end
