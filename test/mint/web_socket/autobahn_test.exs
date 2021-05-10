@@ -9,6 +9,10 @@ defmodule Mint.WebSocket.AutobahnTest do
   @moduletag :autobahn
   @moduletag :capture_log
 
+  setup_all do
+    on_exit(&AutobahnClient.update_reports/0)
+  end
+
   describe "Autobahn|Testsuite" do
     for case_number <- Range.new(1, AutobahnClient.get_case_count()) do
       info = AutobahnClient.get_case_info(case_number)
