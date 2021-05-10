@@ -46,7 +46,7 @@ hello_world_echo_message = receive(do: (message -> message))
 
 ## Development workflow
 
-Interesting in developing `Mint.WebSocket`? The `docker-compose.yml` sets up
+Interested in developing `Mint.WebSocket`? The `docker-compose.yml` sets up
 an Elixir container, a simple websocket echo server, and the Autobahn|Testsuite
 fuzzing server.
 
