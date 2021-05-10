@@ -29,7 +29,8 @@ defmodule Mint.WebSocket.Frame do
   # https://tools.ietf.org/html/rfc6455#section-7.4.1
   @invalid_status_codes [1_004, 1_005, 1_006, 1_016, 1_100, 2_000, 2_999]
   # https://tools.ietf.org/html/rfc6455#section-7.4.2
-  defguardp is_valid_close_code(code) when code in 1_000..4_999 and code not in @invalid_status_codes
+  defguardp is_valid_close_code(code)
+            when code in 1_000..4_999 and code not in @invalid_status_codes
 
   @opcodes %{
     # non-control opcodes:
@@ -246,7 +247,8 @@ defmodule Mint.WebSocket.Frame do
         reserved,
         mask,
         <<code::unsigned-integer-size(8)-unit(2), reason::binary>> = payload
-      ) when byte_size(reason) in 0..123 and is_valid_close_code(code) do
+      )
+      when byte_size(reason) in 0..123 and is_valid_close_code(code) do
     if String.valid?(reason) do
       close(reserved: reserved, mask: mask, code: code, reason: reason)
     else
