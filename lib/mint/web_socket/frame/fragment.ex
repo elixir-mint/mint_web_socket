@@ -31,6 +31,10 @@ defmodule Mint.WebSocket.Frame.Fragment do
     |> resolve(rest, acc)
   end
 
+  defp combine_frames([Frame.continuation()]) do
+    throw({:mint, :uninitiated_continuation})
+  end
+
   defp combine_frames([full_frame]) do
     Frame.translate(full_frame)
   end
