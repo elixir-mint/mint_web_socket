@@ -32,6 +32,13 @@ defmodule AutobahnClient do
     Jason.decode!(status)["behavior"]
   end
 
+  def get_case_info(case_number) do
+    %{messages: [{:text, status} | _]} =
+      connect("/getCaseInfo?case=#{case_number}&agent=Mint") |> decode_buffer()
+
+    Jason.decode!(status, keys: :atoms)
+  end
+
   def update_reports do
     _state = connect("/updateReports?agent=Mint") |> loop()
 
