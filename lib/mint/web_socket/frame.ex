@@ -31,6 +31,8 @@ defmodule Mint.WebSocket.Frame do
   }
   @reverse_opcodes Map.new(@opcodes, fn {k, v} -> {v, k} end)
 
+  @non_control_opcodes [:continuation, :text, :binary]
+
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
   @spec encode(tuple()) :: {:ok, binary()} | {:error, :payload_too_large}
@@ -40,7 +42,7 @@ defmodule Mint.WebSocket.Frame do
     masked? = if mask == nil, do: 0, else: 1
 
     with {:ok, encoded_payload_length} <-
-           payload |> byte_size() |> encode_payload_length() do
+           encode_payload_length(elem(frame, 0), byte_size(payload)) do
       {:ok,
        <<
          encode_fin(frame)::bitstring,
@@ -67,19 +69,19 @@ defmodule Mint.WebSocket.Frame do
 
   defp encode_opcode(frame), do: @opcodes[elem(frame, 0)]
 
-  def encode_payload_length(length) when length in 0..125 do
+  def encode_payload_length(_opcode, length) when length in 0..125 do
     {:ok, <<length::integer-size(7)>>}
   end
 
-  def encode_payload_length(length) when length in 126..65_535 do
+  def encode_payload_length(opcode, length) when length in 126..65_535 and opcode in @non_control_opcodes do
     {:ok, <<126::integer-size(7), length::unsigned-integer-size(8)-unit(2)>>}
   end
 
-  def encode_payload_length(length) when length in 65_535..9_223_372_036_854_775_807 do
+  def encode_payload_length(opcode, length) when length in 65_535..9_223_372_036_854_775_807 and opcode in @non_control_opcodes do
     {:ok, <<127::integer-size(7), length::unsigned-integer-size(8)-unit(8)>>}
   end
 
-  def encode_payload_length(_length) do
+  def encode_payload_length(_opcode, _length) do
     {:error, :payload_too_large}
   end
 
@@ -235,7 +237,7 @@ defmodule Mint.WebSocket.Frame do
 
   def translate(:ping), do: translate({:ping, <<>>})
 
-  def translate({:ping, body}) when byte_size(body) in 0..125 do
+  def translate({:ping, body}) do
     ping(mask: new_mask(), data: body)
   end
 
@@ -245,7 +247,7 @@ defmodule Mint.WebSocket.Frame do
 
   def translate(:pong), do: translate({:pong, <<>>})
 
-  def translate({:pong, body}) when byte_size(body) in 0..125 do
+  def translate({:pong, body}) do
     pong(mask: new_mask(), data: body)
   end
 
@@ -258,7 +260,7 @@ defmodule Mint.WebSocket.Frame do
   end
 
   def translate({:close, code, reason})
-      when is_integer(code) and is_binary(reason) and byte_size(reason) in 0..123 do
+      when is_integer(code) and is_binary(reason) do
     close(mask: new_mask(), data: encode_close(code, reason))
   end
 
