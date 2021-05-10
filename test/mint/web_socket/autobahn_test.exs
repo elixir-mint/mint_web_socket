@@ -10,11 +10,11 @@ defmodule Mint.WebSocket.AutobahnTest do
   @moduletag :capture_log
 
   # for case_number <- Range.new(1, AutobahnClient.get_case_count()) do
-  for case_number <- 1..209 do
+  for case_number <- 1..215 do
     test "Autobahn|Testsuite case number #{case_number}" do
       assert AutobahnClient.run_case(unquote(case_number)) == :ok
       :ok = flush()
-      assert AutobahnClient.get_case_status(unquote(case_number)) in ["OK", "NON-STRICT"]
+      assert AutobahnClient.get_case_status(unquote(case_number)) in ~w[OK NON-STRICT INFORMATIONAL]
     end
   end
 
