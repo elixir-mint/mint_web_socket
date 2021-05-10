@@ -241,7 +241,7 @@ defmodule Mint.WebSocket.Frame do
         reserved,
         mask,
         <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
-      ) do
+      ) when byte_size(reason) in 0..123 do
     close(reserved: reserved, mask: mask, code: code, reason: reason)
   end
 
@@ -250,9 +250,19 @@ defmodule Mint.WebSocket.Frame do
         _fin?,
         reserved,
         mask,
-        _payload
+        <<>>
       ) do
-    close(reserved: reserved, mask: mask)
+    close(reserved: reserved, mask: mask, code: 1_000, reason: "")
+  end
+
+  def decode(
+        :close,
+        _fin?,
+        _reserved,
+        _mask,
+        payload
+      ) do
+    throw({:mint, {:invalid_close_payload, payload}})
   end
 
   def decode(:ping, _fin?, reserved, mask, payload) do
