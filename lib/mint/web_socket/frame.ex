@@ -337,6 +337,8 @@ defmodule Mint.WebSocket.Frame do
 
   def translate(close(code: nil, reason: nil)), do: :close
 
+  def translate(close(code: 1_000, reason: "")), do: :close
+
   def translate(close(code: code, reason: reason)) do
     {:close, code, reason}
   end
