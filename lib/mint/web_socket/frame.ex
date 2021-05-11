@@ -7,7 +7,7 @@ defmodule Mint.WebSocket.Frame do
   shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
 
   import Record
-  alias Mint.WebSocket.{Utils, Frame.Fragment}
+  alias Mint.WebSocket.Utils
 
   defrecord :continuation, shared ++ [:fin?]
   defrecord :text, shared ++ [:fin?]
@@ -125,11 +125,11 @@ defmodule Mint.WebSocket.Frame do
   def decode(websocket, data) do
     case websocket.buffer |> Utils.maybe_concat(data) |> decode_raw(websocket, []) do
       {:ok, frames} ->
-        {websocket, frames} = Fragment.resolve(websocket, frames)
+        {websocket, frames} = resolve_fragments(websocket, frames)
         {:ok, put_in(websocket.buffer, <<>>), frames}
 
       {:buffer, partial, frames} ->
-        {websocket, frames} = Fragment.resolve(websocket, frames)
+        {websocket, frames} = resolve_fragments(websocket, frames)
         {:ok, put_in(websocket.buffer, partial), frames}
     end
   catch
@@ -354,5 +354,47 @@ defmodule Mint.WebSocket.Frame do
         ) do
       unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
     end
+  end
+
+  @doc """
+  Emits frames for any finalized fragments and stores any unfinalized fragments
+  in the `:fragments` key in the websocket
+  """
+  def resolve_fragments(websocket, frames, acc \\ [])
+
+  def resolve_fragments(websocket, [], acc) do
+    {websocket, :lists.reverse(acc)}
+  end
+
+  def resolve_fragments(websocket, [frame | rest], acc) when is_control(frame) do
+    resolve_fragments(websocket, rest, [translate(frame) | acc])
+  end
+
+  def resolve_fragments(websocket, [frame | rest], acc) when is_fin(frame) do
+    frame = combine_frames([frame | websocket.fragments])
+
+    put_in(websocket.fragments, [])
+    |> resolve_fragments(rest, [frame | acc])
+  end
+
+  def resolve_fragments(websocket, [frame | rest], acc) do
+    update_in(websocket.fragments, &[frame | &1])
+    |> resolve_fragments(rest, acc)
+  end
+
+  defp combine_frames([continuation()]) do
+    throw({:mint, :uninitiated_continuation})
+  end
+
+  defp combine_frames([full_frame]) do
+    translate(full_frame)
+  end
+
+  defp combine_frames([continuation() = continuation, prior_fragment | rest]) do
+    combine_frames([combine(prior_fragment, continuation) | rest])
+  end
+
+  defp combine_frames(_out_of_order_fragments) do
+    throw({:mint, :out_of_order_fragments})
   end
 end
