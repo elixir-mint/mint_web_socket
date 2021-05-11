@@ -1,0 +1,9 @@
+{
+  "name": "h2server",
+  "version": "0.0.1",
+  "description": "An HTTP/2 WebSocket echo server",
+  "main": "index.js",
+  "dependencies": {
+    "ws": "^6.1.0"
+  }
+}
