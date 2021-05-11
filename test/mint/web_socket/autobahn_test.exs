@@ -17,6 +17,10 @@ defmodule Mint.WebSocket.AutobahnTest do
     for case_number <- Range.new(1, AutobahnClient.get_case_count()) do
       info = AutobahnClient.get_case_info(case_number)
 
+      if String.starts_with?(info.id, "9.") do
+        @tag :performance
+      end
+
       test inspect("case #{info.id} (##{case_number}): #{info.description}", printable_limit: 200) do
         assert AutobahnClient.run_case(unquote(case_number)) == :ok
         :ok = flush()
