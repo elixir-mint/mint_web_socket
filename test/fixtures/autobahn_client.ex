@@ -61,6 +61,7 @@ defmodule AutobahnClient do
   end
 
   def connect(resource) do
+    :ok = flush()
     host = System.get_env("FUZZINGSERVER_HOST") || "localhost"
     {:ok, conn} = Mint.HTTP.connect(:http, host, 9001)
     req_headers = Mint.WebSocket.build_request_headers()
