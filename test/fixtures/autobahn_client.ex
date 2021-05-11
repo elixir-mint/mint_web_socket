@@ -45,6 +45,14 @@ defmodule AutobahnClient do
     :ok
   end
 
+  def flush do
+    receive do
+      _message -> flush()
+    after
+      0 -> :ok
+    end
+  end
+
   defp get_once(state) do
     case decode_buffer(state) do
       %{messages: []} = state -> state |> recv() |> get_once()
