@@ -186,15 +186,13 @@ defmodule Mint.WebSocket.Frame do
   end
 
   defp decode_payload_and_mask(payload, masked?) do
-    {payload_length, rest} = decode_payload_length(payload)
-    {mask, rest} = decode_mask(rest, masked?)
-
-    case rest do
-      <<payload::binary-size(payload_length), more::bitstring>> ->
-        {:ok, payload, mask, more}
-
-      partial when is_binary(partial) ->
-        :buffer
+    with {payload_length, rest} <- decode_payload_length(payload),
+         {mask, rest} <- decode_mask(rest, masked?),
+         <<payload::binary-size(payload_length), more::bitstring>> <- rest do
+      {:ok, payload, mask, more}
+    else
+      partial when is_binary(partial) -> :buffer
+      :buffer -> :buffer
     end
   end
 
@@ -204,11 +202,15 @@ defmodule Mint.WebSocket.Frame do
        ),
        do: {payload_length, rest}
 
+  defp decode_payload_length(<<127::integer-size(7)>>), do: :buffer
+
   defp decode_payload_length(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
            rest::bitstring>>
        ),
        do: {payload_length, rest}
+
+  defp decode_payload_length(<<126::integer-size(7)>>), do: :buffer
 
   defp decode_payload_length(<<payload_length::integer-size(7), rest::bitstring>>)
        when payload_length in 0..125,
