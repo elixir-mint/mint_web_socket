@@ -15,7 +15,7 @@ defmodule Mint.WebSocket.AutobahnTest do
 
   describe "Autobahn|Testsuite" do
     for case_number <- Range.new(1, AutobahnClient.get_case_count()) do
-      info = AutobahnClient.get_case_info(case_number)
+      info = Task.await(Task.async(fn -> AutobahnClient.get_case_info(case_number) end))
 
       if String.starts_with?(info.id, "9.") do
         @tag :performance
