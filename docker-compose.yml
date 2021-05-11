@@ -15,6 +15,13 @@ services:
     ports:
     - 9001:9001
 
+  h2server:
+    image: ruby:2.7.3-slim-buster
+    volumes:
+    - ./priv/h2server:/app
+    working_dir: /app
+    command: bash -c "apt update && apt install -y g++ make && gem install falcon async-websocket && ./config.ru"
+
   app:
     image: elixir:1.12.0-rc.1
     environment:
