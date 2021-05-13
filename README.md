@@ -1,13 +1,11 @@
 # Mint.WebSocket
 
-WebSocket support for Mint 🌱
-
-> This repo is not complete: it only tests WebSockets over HTTP/1.
-> Issues and PRs are welcome :slightly_smiling_face:
+HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
 ## Spec conformance
 
-This library aims to follow [RFC6455](https://tools.ietf.org/html/rfc6455)
+This library aims to follow [rfc6455](https://tools.ietf.org/html/rfc6455)
+and [rfc8441](https://datatracker.ietf.org/doc/html/rfc8441)
 as closely as possible and uses
 [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
 to check conformance with every run of tests/CI. The auto-generated report
@@ -17,6 +15,8 @@ See the report here:
 https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
 
 ## Usage
+
+<!-- TODO might need to refactor the bootstrap to be more HTTP1/2 agnostic -->
 
 `Mint.WebSocket` piggybacks much of the existing `Mint.HTTP` API. For example,
 this snippet shows sending and receiving a text frame of "hello world" to a
