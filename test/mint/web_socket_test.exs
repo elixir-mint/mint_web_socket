@@ -65,6 +65,7 @@ defmodule Mint.WebSocketTest do
           {:ok, conn, []} ->
             assert_receive http_connect_message
             Mint.HTTP.stream(conn, http_connect_message)
+
           other ->
             other
         end

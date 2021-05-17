@@ -66,12 +66,13 @@ defmodule Mint.WebSocket do
         headers,
         _opts
       ) do
-    headers = [
-      {":scheme", conn.scheme},
-      {":path", path},
-      {":protocol", "websocket"}
-      | headers
-    ] ++ Utils.headers(:http2)
+    headers =
+      [
+        {":scheme", conn.scheme},
+        {":path", path},
+        {":protocol", "websocket"}
+        | headers
+      ] ++ Utils.headers(:http2)
 
     Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
   end
