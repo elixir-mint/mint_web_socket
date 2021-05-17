@@ -26,7 +26,9 @@ defmodule MintWebSocket.MixProject do
 
   defp deps do
     [
-      {:mint, path: "./mint"},
+      {:mint,
+       git: "https://github.com/the-mikedavis/mint.git",
+       ref: "46a5d290e728277068c389456ec3c235f5ece31e"},
       {:castore, ">= 0.0.0", only: [:dev]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},
       {:excoveralls, "~> 0.14", only: [:test]}
