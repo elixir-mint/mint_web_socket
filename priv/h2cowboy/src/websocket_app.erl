@@ -11,7 +11,7 @@ start(_Type, _Args) ->
       {"/", ws_h, []}
     ]}
   ]),
-  {ok, _} = cowboy:start_clear(http, [{port, 10000}], #{
+  {ok, _} = cowboy:start_clear(http, [{port, 7070}], #{
     env => #{dispatch => Dispatch},
     enable_connect_protocol => true
   }),

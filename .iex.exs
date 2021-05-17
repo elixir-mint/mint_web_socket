@@ -1,6 +1,6 @@
 # TODO move into test file, delete .iex.exs
 do_it = fn ->
-    host = System.get_env("H2SERVER_HOST") || "h2server"
+  host = System.get_env("H2COWBOY_HOST") || "h2cowboy"
 
   {:ok, conn} =
     Mint.HTTP.connect(
@@ -10,7 +10,7 @@ do_it = fn ->
       protocols: [:http2]
     )
 
-  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [{"sec-websocket-version", "13"}])
 
   {:ok, conn, []} = Mint.HTTP.stream(conn, receive(do: (message -> message)))
 
