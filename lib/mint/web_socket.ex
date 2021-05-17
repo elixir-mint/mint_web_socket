@@ -37,11 +37,11 @@ defmodule Mint.WebSocket do
 
   @spec new(Mint.HTTP.t(), reference(), pos_integer(), Mint.Types.headers(), Mint.Types.headers()) ::
           {:ok, Mint.HTTP.t(), t(), [Mint.Types.response()]} | {:error, Mint.HTTP.t(), any()}
-  def new(conn, _request_ref, status, _request_headers, _response_headers) when status != 101 do
+  def new(%Mint.HTTP1{} = conn, _request_ref, status, _request_headers, _response_headers) when status != 101 do
     {:error, conn, :connection_not_upgraded}
   end
 
-  def new(conn, request_ref, _status, request_headers, response_headers) do
+  def new(%Mint.HTTP1{} = conn, request_ref, _status, request_headers, response_headers) do
     with :ok <- Utils.check_accept_nonce(request_headers, response_headers) do
       conn = re_open_request(conn, request_ref)
 
@@ -53,6 +53,14 @@ defmodule Mint.WebSocket do
     else
       {:error, reason} -> {:error, conn, reason}
     end
+  end
+
+  def new(%Mint.HTTP2{} = conn, _request_ref, _status, request_headers, response_headers) do
+    websocket = %__MODULE__{
+      extensions: Utils.common_extensions(request_headers, response_headers)
+    }
+
+    {:ok, conn, websocket}
   end
 
   @spec encode(t(), frame()) :: {:ok, t(), binary()} | {:error, t(), any()}
