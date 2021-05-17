@@ -32,6 +32,7 @@ services:
     - 'ERL_AFLAGS=-kernel shell_history enabled'
     - ECHO_HOST=echo
     - FUZZINGSERVER_HOST=fuzzingserver
+    - H2COWBOY_HOST=h2cowboy
     volumes:
     - ./:/app
     working_dir: /app
