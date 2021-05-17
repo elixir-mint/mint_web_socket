@@ -51,8 +51,7 @@ defmodule Mint.WebSocketTest do
 
   describe "given an HTTP/2 connection to an echo server" do
     setup do
-      host = System.get_env("H2COWBOY_HOST") || "localhost"
-      {:ok, conn} = Mint.HTTP.connect(:http, host, 7070, protocols: [:http2])
+      {:ok, conn} = Mint.HTTP.connect(:http, "localhost", 7070, protocols: [:http2])
 
       [conn: conn]
     end
