@@ -7,6 +7,7 @@ defmodule MintWebSocket.MixProject do
       version: "0.1.0",
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
+      erlc_paths: erlc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
@@ -38,4 +39,7 @@ defmodule MintWebSocket.MixProject do
 
   defp elixirc_paths(:test), do: ["lib", "test/fixtures"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp erlc_paths(:test), do: ["src", "test/fixtures"]
+  defp erlc_paths(_), do: ["src"]
 end
