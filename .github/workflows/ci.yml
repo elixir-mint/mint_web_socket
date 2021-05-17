@@ -10,6 +10,7 @@ jobs:
       MIX_ENV: test
       ECHO_HOST: localhost
       FUZZINGSERVER_HOST: localhost
+      H2COWBOY_HOST: localhost
 
     steps:
     - name: Checkout
