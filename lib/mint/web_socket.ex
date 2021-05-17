@@ -54,7 +54,7 @@ defmodule Mint.WebSocket do
 
   def upgrade(%Mint.HTTP1{} = conn, path, headers, _opts) do
     nonce = Utils.random_nonce()
-    headers = Utils.headers(nonce) ++ headers
+    headers = Utils.headers({:http1, nonce}) ++ headers
     conn = put_in(conn.private[:sec_websocket_key], nonce)
 
     Mint.HTTP.request(conn, "GET", path, headers, nil)
@@ -71,7 +71,7 @@ defmodule Mint.WebSocket do
       {":path", path},
       {":protocol", "websocket"}
       | headers
-    ]
+    ] ++ Utils.headers(:http2)
 
     Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
   end

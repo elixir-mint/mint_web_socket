@@ -10,7 +10,7 @@ do_it = fn ->
       protocols: [:http2]
     )
 
-  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [{"sec-websocket-version", "13"}])
+  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
 
   {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}]} =
     case Mint.HTTP.stream(conn, receive(do: (message -> message))) do

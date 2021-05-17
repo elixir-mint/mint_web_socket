@@ -7,13 +7,18 @@ defmodule Mint.WebSocket.Utils do
     :crypto.strong_rand_bytes(16) |> Base.encode64()
   end
 
-  def headers(nonce) when is_binary(nonce) do
+  def headers({:http1, nonce}) when is_binary(nonce) do
     [
       {"upgrade", "websocket"},
       {"connection", "upgrade"},
       {"sec-websocket-version", "13"},
       {"sec-websocket-key", nonce}
-      # {"sec-websocket-extensions", "permessage-deflate"}
+    ]
+  end
+
+  def headers(:http2) do
+    [
+      {"sec-websocket-version", "13"}
     ]
   end
 
