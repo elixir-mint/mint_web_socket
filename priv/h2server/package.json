@@ -4,6 +4,7 @@
   "description": "An HTTP/2 WebSocket echo server",
   "main": "index.js",
   "dependencies": {
+    "websocket-stream": "^5.5.2",
     "ws": "^6.1.0"
   }
 }
