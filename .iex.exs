@@ -10,9 +10,7 @@ do_it = fn ->
       protocols: [:http2]
     )
 
-  req_headers = [{":protocol", "websocket"}, {":scheme", "http"}, {":path", "/"}]# | Mint.WebSocket.build_request_headers()]
-  #req_headers = []
-  {:ok, conn, ref} = Mint.HTTP.request(conn, "CONNECT", "/", req_headers, :stream)
+  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
 
   {:ok, conn, []} = Mint.HTTP.stream(conn, receive(do: (message -> message)))
 
@@ -21,7 +19,7 @@ do_it = fn ->
   {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}]} =
     Mint.HTTP.stream(conn, http_get_message)
 
-  {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+  {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
   {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
   {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
