@@ -4,10 +4,10 @@ HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
 ## Spec conformance
 
-This library aims to follow [rfc6455](https://tools.ietf.org/html/rfc6455)
-and [rfc8441](https://datatracker.ietf.org/doc/html/rfc8441)
-as closely as possible and uses
-[Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
+This library aims to follow
+[rfc6455](https://datatracker.ietf.org/doc/html/rfc6455) and
+[rfc8441](https://datatracker.ietf.org/doc/html/rfc8441) as closely as possible
+and uses [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
 to check conformance with every run of tests/CI. The auto-generated report
 produced by the Autobahn|Testsuite is uploaded on each push to main.
 
