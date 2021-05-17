@@ -12,12 +12,13 @@ do_it = fn ->
 
   {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [{"sec-websocket-version", "13"}])
 
-  {:ok, conn, []} = Mint.HTTP.stream(conn, receive(do: (message -> message)))
-
-  http_get_message = receive(do: (message -> message))
-
   {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}]} =
-    Mint.HTTP.stream(conn, http_get_message)
+    case Mint.HTTP.stream(conn, receive(do: (message -> message))) do
+      {:ok, conn, []} ->
+        Mint.HTTP.stream(conn, receive(do: (message -> message)))
+      other ->
+        other
+    end
 
   {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
