@@ -31,6 +31,7 @@ defmodule MintWebSocket.MixProject do
        ref: "46a5d290e728277068c389456ec3c235f5ece31e"},
       {:castore, ">= 0.0.0", only: [:dev]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},
+      {:cowboy, "~> 2.9", only: [:test]},
       {:excoveralls, "~> 0.14", only: [:test]}
     ]
   end
