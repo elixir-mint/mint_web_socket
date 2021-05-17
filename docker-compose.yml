@@ -16,17 +16,15 @@ services:
     - 9001:9001
 
   h2cowboy:
-    image: erlang:24.0
-    volumes:
-    - ./priv/h2cowboy:/app
-    working_dir: /app
+    build: ./priv/h2cowboy/
+    ports:
+    - 7070:7070
     healthcheck:
       test: nc -z localhost 7070 || exit -1
       timeout: 5s
       interval: 10s
       retries: 3
       start_period: 15s
-    command: make run
 
   app:
     image: elixir:1.12.0-rc.1
