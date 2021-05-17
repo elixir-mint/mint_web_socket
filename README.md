@@ -16,8 +16,6 @@ https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
 
 ## Usage
 
-<!-- TODO might need to refactor the bootstrap to be more HTTP1/2 agnostic -->
-
 `Mint.WebSocket` piggybacks much of the existing `Mint.HTTP` API. For example,
 this snippet shows sending and receiving a text frame of "hello world" to a
 WebSocket server which echos our frames:
@@ -25,10 +23,10 @@ WebSocket server which echos our frames:
 ```elixir
 # bootstrap
 {:ok, conn} = Mint.HTTP.connect(:http, "echo", 9000)
-req_headers = Mint.WebSocket.build_request_headers()
-{:ok, conn, ref} = Mint.HTTP.request(conn, "GET", "/", req_headers, nil)
-http_get_message = receive(do: (message -> message))
 
+{:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+
+http_get_message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, http_get_message)
 
