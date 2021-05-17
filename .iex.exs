@@ -1,5 +1,6 @@
+# TODO move into test file, delete .iex.exs
 do_it = fn ->
-  host = System.get_env("H2SERVER_HOST") || "h2server"
+    host = System.get_env("H2SERVER_HOST") || "h2server"
 
   {:ok, conn} =
     Mint.HTTP.connect(
