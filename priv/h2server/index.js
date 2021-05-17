@@ -1,6 +1,7 @@
 // see https://github.com/jasnell/http2ws/blob/master/http2ws.js
 
 const http2 = require('http2')
+const websocket = require('websocket-stream')
 const WebSocket = require('ws')
 
 function createWebSocket(stream, headers) {
@@ -14,8 +15,11 @@ function createWebSocket(stream, headers) {
   return websocket(ws)
 }
 
-http2.createServer({ settings: { enableConnectProtocol: true } })
+const settings = { enableConnectProtocol: true }
+http2.createServer({ settings })
   .on('stream', (stream, headers) => {
+    console.log("request with headers", headers)
+
     if (headers[':method'] == 'CONNECT') {
       stream.respond({ 'sec-websocket-protocol': headers['sec-websocket-protocol'] })
 
