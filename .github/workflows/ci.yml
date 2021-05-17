@@ -10,14 +10,10 @@ jobs:
       MIX_ENV: test
       ECHO_HOST: localhost
       FUZZINGSERVER_HOST: localhost
-      H2COWBOY_HOST: localhost
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Build docker-compose containers
-      run: docker-compose build
 
     - name: Bring up the docker-compose containers
       run: docker-compose up --detach
