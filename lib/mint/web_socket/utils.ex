@@ -17,11 +17,14 @@ defmodule Mint.WebSocket.Utils do
     ]
   end
 
-  @spec check_accept_nonce(Mint.Types.headers(), Mint.Types.headers()) ::
+  @spec check_accept_nonce(binary() | nil, Mint.Types.headers()) ::
           :ok | {:error, :invalid_nonce}
-  def check_accept_nonce(request_headers, response_headers) do
-    with {:ok, request_nonce} <- fetch_header(request_headers, "sec-websocket-key"),
-         {:ok, response_nonce} <- fetch_header(response_headers, "sec-websocket-accept"),
+  def check_accept_nonce(nil, _response_headers) do
+    {:error, :invalid_nonce}
+  end
+
+  def check_accept_nonce(request_nonce, response_headers) do
+    with {:ok, response_nonce} <- fetch_header(response_headers, "sec-websocket-accept"),
          true <- valid_accept_nonce?(request_nonce, response_nonce) do
       :ok
     else

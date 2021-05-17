@@ -64,14 +64,14 @@ defmodule AutobahnClient do
     :ok = flush()
     host = System.get_env("FUZZINGSERVER_HOST") || "localhost"
     {:ok, conn} = Mint.HTTP.connect(:http, host, 9001)
-    req_headers = Mint.WebSocket.build_request_headers()
-    {:ok, conn, ref} = Mint.HTTP.request(conn, "GET", resource, req_headers, nil)
+
+    {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, resource, [])
     http_get_message = receive(do: (message -> message))
 
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
       Mint.HTTP.stream(conn, http_get_message)
 
-    {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+    {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
     %__MODULE__{
       next: :cont,
