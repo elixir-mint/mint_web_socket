@@ -12,7 +12,8 @@ start(_Type, _Args) ->
     ]}
   ]),
   {ok, _} = cowboy:start_clear(http, [{port, 10000}], #{
-    env => #{dispatch => Dispatch}
+    env => #{dispatch => Dispatch},
+    enable_connect_protocol => true
   }),
   websocket_sup:start_link().
 
