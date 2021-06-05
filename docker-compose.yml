@@ -16,7 +16,7 @@ services:
     - 9001:9001
 
   app:
-    image: elixir:1.12.0
+    image: elixir:1.12.1
     environment:
     - 'ERL_AFLAGS=-kernel shell_history enabled'
     - ECHO_HOST=echo
