@@ -5,12 +5,15 @@ defmodule Mint.WebSocket do
 
   require __MODULE__.Frame, as: Frame
   alias __MODULE__.Utils
+  alias Mint.WebSocketError
 
   @type t :: %__MODULE__{}
   defstruct extensions: MapSet.new(),
             fragments: [],
             private: %{},
             buffer: <<>>
+
+  @type error :: Mint.Types.error() | WebSocketError.t()
 
   defguardp is_frame(frame)
             when frame in [:ping, :pong, :close] or
@@ -29,30 +32,79 @@ defmodule Mint.WebSocket do
           | :close
           | {:close, code :: non_neg_integer(), reason :: binary()}
 
-  @spec build_request_headers(Keyword.t()) :: Mint.Types.headers()
-  def build_request_headers(_opts \\ []) do
-    Utils.random_nonce()
-    |> Utils.headers()
+  @doc """
+  Requests that a connection be upgraded to the WebSocket protocol
+
+  This function wraps `Mint.HTTP.request/5` to provide a single interface
+  for bootstrapping an upgrade for HTTP/1 and HTTP/2 connections.
+
+  For HTTP/1 connections, this function performs a GET request with
+  WebSocket-specific headers. For HTTP/2 connections, this function performs
+  an extended CONNECT request which opens a stream to be used for the WebSocket
+  connection.
+  """
+  @spec upgrade(
+          conn :: Mint.HTTP.t(),
+          path :: String.t(),
+          headers :: Mint.Types.headers(),
+          # maybe t:Keyword.t/0, will hold extensions in the future
+          opts :: list()
+        ) :: {:ok, Mint.HTTP.t(), Mint.Types.request_ref()} | {:error, Mint.HTTP.t(), error()}
+  def upgrade(conn, path, headers, opts \\ [])
+
+  def upgrade(%Mint.HTTP1{} = conn, path, headers, _opts) do
+    nonce = Utils.random_nonce()
+    headers = Utils.headers({:http1, nonce}) ++ headers
+    conn = put_in(conn.private[:sec_websocket_key], nonce)
+
+    Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
 
-  @spec new(Mint.HTTP.t(), reference(), pos_integer(), Mint.Types.headers(), Mint.Types.headers()) ::
-          {:ok, Mint.HTTP.t(), t(), [Mint.Types.response()]} | {:error, Mint.HTTP.t(), any()}
-  def new(conn, _request_ref, status, _request_headers, _response_headers) when status != 101 do
-    {:error, conn, :connection_not_upgraded}
+  def upgrade(
+        %Mint.HTTP2{server_settings: %{enable_connect_protocol: true}} = conn,
+        path,
+        headers,
+        _opts
+      ) do
+    headers =
+      [
+        {":scheme", conn.scheme},
+        {":path", path},
+        {":protocol", "websocket"}
+        | headers
+      ] ++ Utils.headers(:http2)
+
+    Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
   end
 
-  def new(conn, request_ref, _status, request_headers, response_headers) do
-    with :ok <- Utils.check_accept_nonce(request_headers, response_headers) do
+  def upgrade(%Mint.HTTP2{} = conn, _path, _headers, _opts) do
+    {:error, conn, %WebSocketError{reason: :extended_connect_disabled}}
+  end
+
+  @spec new(Mint.HTTP.t(), reference(), pos_integer(), Mint.Types.headers()) ::
+          {:ok, Mint.HTTP.t(), t(), [Mint.Types.response()]} | {:error, Mint.HTTP.t(), error()}
+  def new(%Mint.HTTP1{} = conn, _request_ref, status, _response_headers)
+      when status != 101 do
+    {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
+  end
+
+  def new(%Mint.HTTP1{} = conn, request_ref, _status, response_headers) do
+    with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers) do
       conn = re_open_request(conn, request_ref)
 
-      websocket = %__MODULE__{
-        extensions: Utils.common_extensions(request_headers, response_headers)
-      }
-
-      {:ok, conn, websocket}
+      {:ok, conn, %__MODULE__{}}
     else
       {:error, reason} -> {:error, conn, reason}
     end
+  end
+
+  def new(%Mint.HTTP2{} = conn, _request_ref, status, _response_headers)
+      when status in 200..299 do
+    {:ok, conn, %__MODULE__{}}
+  end
+
+  def new(%Mint.HTTP2{} = conn, _request_ref, _status, _response_headers) do
+    {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
   end
 
   @spec encode(t(), frame()) :: {:ok, t(), binary()} | {:error, t(), any()}

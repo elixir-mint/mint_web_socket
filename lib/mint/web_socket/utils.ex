@@ -7,21 +7,29 @@ defmodule Mint.WebSocket.Utils do
     :crypto.strong_rand_bytes(16) |> Base.encode64()
   end
 
-  def headers(nonce) when is_binary(nonce) do
+  def headers({:http1, nonce}) when is_binary(nonce) do
     [
       {"upgrade", "websocket"},
       {"connection", "upgrade"},
       {"sec-websocket-version", "13"},
       {"sec-websocket-key", nonce}
-      # {"sec-websocket-extensions", "permessage-deflate"}
     ]
   end
 
-  @spec check_accept_nonce(Mint.Types.headers(), Mint.Types.headers()) ::
+  def headers(:http2) do
+    [
+      {"sec-websocket-version", "13"}
+    ]
+  end
+
+  @spec check_accept_nonce(binary() | nil, Mint.Types.headers()) ::
           :ok | {:error, :invalid_nonce}
-  def check_accept_nonce(request_headers, response_headers) do
-    with {:ok, request_nonce} <- fetch_header(request_headers, "sec-websocket-key"),
-         {:ok, response_nonce} <- fetch_header(response_headers, "sec-websocket-accept"),
+  def check_accept_nonce(nil, _response_headers) do
+    {:error, :invalid_nonce}
+  end
+
+  def check_accept_nonce(request_nonce, response_headers) do
+    with {:ok, response_nonce} <- fetch_header(response_headers, "sec-websocket-accept"),
          true <- valid_accept_nonce?(request_nonce, response_nonce) do
       :ok
     else

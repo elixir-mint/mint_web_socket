@@ -1,15 +1,13 @@
 # Mint.WebSocket
 
-WebSocket support for Mint 🌱
-
-> This repo is not complete: it only tests WebSockets over HTTP/1.
-> Issues and PRs are welcome :slightly_smiling_face:
+HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
 ## Spec conformance
 
-This library aims to follow [RFC6455](https://tools.ietf.org/html/rfc6455)
-as closely as possible and uses
-[Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
+This library aims to follow
+[rfc6455](https://datatracker.ietf.org/doc/html/rfc6455) and
+[rfc8441](https://datatracker.ietf.org/doc/html/rfc8441) as closely as possible
+and uses [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
 to check conformance with every run of tests/CI. The auto-generated report
 produced by the Autobahn|Testsuite is uploaded on each push to main.
 
@@ -25,10 +23,10 @@ WebSocket server which echos our frames:
 ```elixir
 # bootstrap
 {:ok, conn} = Mint.HTTP.connect(:http, "echo", 9000)
-req_headers = Mint.WebSocket.build_request_headers()
-{:ok, conn, ref} = Mint.HTTP.request(conn, "GET", "/", req_headers, nil)
-http_get_message = receive(do: (message -> message))
 
+{:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+
+http_get_message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, http_get_message)
 

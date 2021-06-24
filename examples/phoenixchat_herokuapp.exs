@@ -1,8 +1,9 @@
 # N.B. this is a phoenix v1.3 server that sends pings periodically
 # see https://phoenixchat.herokuapp.com for the in-browser version
 {:ok, conn} = Mint.HTTP.connect(:https, "phoenixchat.herokuapp.com", 443)
-req_headers = Mint.WebSocket.build_request_headers()
-{:ok, conn, ref} = Mint.HTTP.request(conn, "GET", "/ws", req_headers, nil)
+
+{:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/ws", [])
+
 http_get_message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, http_get_message)
