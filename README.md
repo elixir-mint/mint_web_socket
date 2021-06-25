@@ -1,6 +1,28 @@
 # Mint.WebSocket
 
-HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
+(Unofficial) HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
+
+## What is Mint?
+
+Mint is a _functional_ HTTP/1 and HTTP/2 client library written in Elixir.
+
+Why does it matter that it's functional? Isn't Elixir functional?
+
+Well, Existing WebSocket implementations like
+[`:gun`](https://github.com/ninenines/gun),
+[`:websocket_client`](https://github.com/jeremyong/websocket_client),
+or [`WebSockex`](https://github.com/Azolo/websockex) work by spawning and
+passing messages among processes. This is a very convenient interface in
+Elixir and Erlang, but it does not allow the author much control over
+the WebSocket connection.
+
+Instead `Mint.WebSocket` is process-less: the entire HTTP and WebSocket
+states are kept in immutable datastructures. This enables authors of
+WebSocket clients a more fine-grained control over the connections:
+`Mint.WebSocket` does not prescribe a process archicture.
+
+For more information, check out
+[Mint#Usage](https://github.com/elixir-mint/mint#usage).
 
 ## Spec conformance
 
@@ -13,6 +35,22 @@ produced by the Autobahn|Testsuite is uploaded on each push to main.
 
 See the report here:
 https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
+
+## A Quick Note About HTTP/2
+
+HTTP/2 WebSockets are not a built-in feature of HTTP/2. rfc8441 is an extension
+to the HTTP/2 protocol and server libraries are not obliged to implement it.
+In the current landscape, very few server libraries support the HTTP/2
+extended CONNECT method which bootstraps WebSockets.
+
+If `Mint.WebSocket.upgrade/4` returns
+
+```elixir
+{:error, conn, %Mint.WebSocketError{reason: :extended_connect_disabled}}
+```
+
+Then the server does not support HTTP/2 WebSockets or does not have them
+enabled.
 
 ## Usage
 
