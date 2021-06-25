@@ -33,8 +33,8 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   @doc false
   @impl Extension
   def init(%Extension{params: params, opts: opts} = this_extension, _other_extensions) do
-    inflate_window_bits = get_window_bits(params, "client_max_window_bits", 15)
-    deflate_window_bits = get_window_bits(params, "server_max_window_bits", 15)
+    inflate_window_bits = get_window_bits(params, "server_max_window_bits", 15)
+    deflate_window_bits = get_window_bits(params, "client_max_window_bits", 15)
     inflate_zstream = :zlib.open()
     deflate_zstream = :zlib.open()
 
@@ -53,8 +53,8 @@ defmodule Mint.WebSocket.PerMessageDeflate do
     state = %__MODULE__{
       inflate: inflate_zstream,
       deflate: deflate_zstream,
-      inflate_takeover?: get_takeover(params, "server_no_context_takeover", false),
-      deflate_takeover?: get_takeover(params, "client_no_context_takeover", false)
+      inflate_takeover?: get_takeover(params, "server_no_context_takeover", true),
+      deflate_takeover?: get_takeover(params, "client_no_context_takeover", true)
     }
 
     {:ok, put_in(this_extension.state, state)}
@@ -148,7 +148,7 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   end
 
   defp get_window_bits(params, param_name, default) do
-    with value when is_binary(value) <- List.keyfind(params, param_name, 0, to_string(default)),
+    with {:ok, value} <- fetch_param(params, param_name),
          {bits, _} <- Integer.parse(value) do
       bits
     else
@@ -157,11 +157,17 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   end
 
   defp get_takeover(params, param_name, default) when is_boolean(default) do
-    with value when is_binary(value) <- List.keyfind(params, param_name, 0, to_string(default)),
+    with {:ok, value} <- fetch_param(params, param_name),
          {:ok, no_takeover?} <- parse_boolean(value) do
       not no_takeover?
     else
       _ -> default
+    end
+  end
+
+  defp fetch_param(params, param_name) do
+    with {^param_name, value} <- List.keyfind(params, param_name, 0, :error) do
+      {:ok, value}
     end
   end
 
