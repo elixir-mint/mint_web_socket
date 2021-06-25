@@ -64,6 +64,8 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   @impl Extension
   def decode(frame, state)
 
+  # rfc section 6: "[Per-Message Compression Extensions]s operate only on data
+  # messages"
   for opcode <- [:text, :binary, :continuation] do
     def decode(
           Frame.unquote(opcode)(
