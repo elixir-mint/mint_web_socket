@@ -389,6 +389,8 @@ defmodule Mint.WebSocket.Frame do
   end
 
   defp encode_close(code, reason) do
+    code = code || 1_000
+    reason = reason || ""
     <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 
