@@ -4,23 +4,16 @@ defmodule Mint.WebSocket do
   """
 
   require __MODULE__.Frame, as: Frame
-  alias __MODULE__.Utils
+  alias __MODULE__.{Utils, Extension}
   alias Mint.WebSocketError
 
   @type t :: %__MODULE__{}
-  defstruct extensions: MapSet.new(),
+  defstruct extensions: [],
             fragments: [],
             private: %{},
             buffer: <<>>
 
   @type error :: Mint.Types.error() | WebSocketError.t()
-
-  defguardp is_frame(frame)
-            when frame in [:ping, :pong, :close] or
-                   (is_tuple(frame) and elem(frame, 0) in [:text, :binary, :ping, :pong] and
-                      is_binary(elem(frame, 1))) or
-                   (is_tuple(frame) and elem(frame, 0) == :close and is_integer(elem(frame, 1)) and
-                      is_binary(elem(frame, 2)))
 
   @type frame ::
           {:text, binary()}
@@ -52,10 +45,16 @@ defmodule Mint.WebSocket do
         ) :: {:ok, Mint.HTTP.t(), Mint.Types.request_ref()} | {:error, Mint.HTTP.t(), error()}
   def upgrade(conn, path, headers, opts \\ [])
 
-  def upgrade(%Mint.HTTP1{} = conn, path, headers, _opts) do
+  def upgrade(%Mint.HTTP1{} = conn, path, headers, opts) do
     nonce = Utils.random_nonce()
-    headers = Utils.headers({:http1, nonce}) ++ headers
-    conn = put_in(conn.private[:sec_websocket_key], nonce)
+    extensions = get_extensions(opts)
+
+    conn =
+      conn
+      |> put_in([Access.key(:private), :sec_websocket_key], nonce)
+      |> put_in([Access.key(:private), :extensions], extensions)
+
+    headers = Utils.headers({:http1, nonce}, extensions) ++ headers
 
     Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
@@ -64,15 +63,18 @@ defmodule Mint.WebSocket do
         %Mint.HTTP2{server_settings: %{enable_connect_protocol: true}} = conn,
         path,
         headers,
-        _opts
+        opts
       ) do
+    extensions = get_extensions(opts)
+    conn = put_in(conn.private[:extensions], extensions)
+
     headers =
       [
         {":scheme", conn.scheme},
         {":path", path},
         {":protocol", "websocket"}
         | headers
-      ] ++ Utils.headers(:http2)
+      ] ++ Utils.headers(:http2, extensions)
 
     Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
   end
@@ -89,18 +91,23 @@ defmodule Mint.WebSocket do
   end
 
   def new(%Mint.HTTP1{} = conn, request_ref, _status, response_headers) do
-    with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers) do
+    with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers),
+         {:ok, extensions} <-
+           Extension.accept_extensions(conn.private.extensions, response_headers) do
       conn = re_open_request(conn, request_ref)
 
-      {:ok, conn, %__MODULE__{}}
+      {:ok, conn, %__MODULE__{extensions: extensions}}
     else
       {:error, reason} -> {:error, conn, reason}
     end
   end
 
-  def new(%Mint.HTTP2{} = conn, _request_ref, status, _response_headers)
+  def new(%Mint.HTTP2{} = conn, _request_ref, status, response_headers)
       when status in 200..299 do
-    {:ok, conn, %__MODULE__{}}
+    with {:ok, extensions} <-
+           Extension.accept_extensions(conn.private.extensions, response_headers) do
+      {:ok, conn, %__MODULE__{extensions: extensions}}
+    end
   end
 
   def new(%Mint.HTTP2{} = conn, _request_ref, _status, _response_headers) do
@@ -108,12 +115,7 @@ defmodule Mint.WebSocket do
   end
 
   @spec encode(t(), frame()) :: {:ok, t(), binary()} | {:error, t(), any()}
-  def encode(%__MODULE__{} = websocket, frame) when is_frame(frame) do
-    case frame |> Frame.translate() |> Frame.encode() do
-      {:ok, encoded} -> {:ok, websocket, encoded}
-      {:error, reason} -> {:error, websocket, reason}
-    end
-  end
+  defdelegate encode(websocket, data), to: Frame
 
   @spec decode(t(), data :: binary()) :: {:ok, t(), [frame()]} | {:error, t(), any()}
   defdelegate decode(websocket, data), to: Frame
@@ -146,5 +148,38 @@ defmodule Mint.WebSocket do
       transfer_encoding: [],
       body: nil
     }
+  end
+
+  defp get_extensions(opts) do
+    opts
+    |> Keyword.get(:extensions, [])
+    |> Enum.map(fn
+      module when is_atom(module) ->
+        %Extension{module: module, name: module.name()}
+
+      {module, params} ->
+        %Extension{module: module, name: module.name(), params: normalize_params(params)}
+
+      {module, params, opts} ->
+        %Extension{
+          module: module,
+          name: module.name(),
+          params: normalize_params(params),
+          opts: opts
+        }
+
+      %Extension{} = extension ->
+        update_in(extension.params, &normalize_params/1)
+    end)
+  end
+
+  defp normalize_params(params) do
+    params
+    |> Enum.map(fn
+      {_key, false} -> nil
+      {key, value} -> {to_string(key), to_string(value)}
+      key -> {to_string(key), "true"}
+    end)
+    |> Enum.reject(&is_nil/1)
   end
 end
