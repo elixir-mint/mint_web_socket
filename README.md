@@ -39,7 +39,7 @@ https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
 ## A Quick Note About HTTP/2
 
 HTTP/2 WebSockets are not a built-in feature of HTTP/2. rfc8441 is an extension
-to the HTTP/2 protocol and server libraries are not obliged to implement it.
+to the HTTP/2 protocol and server libraries are not obligated to implement it.
 In the current landscape, very few server libraries support the HTTP/2
 extended CONNECT method which bootstraps WebSockets.
 
