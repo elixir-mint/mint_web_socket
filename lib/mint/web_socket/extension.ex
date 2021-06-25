@@ -158,37 +158,32 @@ defmodule Mint.WebSocket.Extension do
   @doc false
   @spec encode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
   def encode(frame, extensions) do
-    encoded_or_error =
-      Enum.reduce_while(extensions, {:ok, frame, []}, fn extension, {:ok, frame, acc} ->
-        case extension.module.encode(frame, extension.state) do
-          {:ok, frame, state} ->
-            {:cont, {:ok, frame, [put_in(extension.state, state) | acc]}}
-
-          {:error, reason} ->
-            {:halt, {:error, reason}}
-        end
-      end)
-
-    with {:ok, frame, extensions} <- encoded_or_error do
-      {:ok, frame, :lists.reverse(extensions)}
-    end
+    apply_all_extensions(frame, extensions, [], :encode)
   end
 
   @doc false
   @spec decode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
   def decode(frame, extensions) do
-    {frame, extensions} =
-      Enum.reduce(extensions, {frame, []}, fn extension, {frame, acc} ->
-        case extension.module.decode(frame, extension.state) do
-          {:ok, frame, state} ->
-            {frame, [put_in(extension.state, state) | acc]}
+    apply_all_extensions(frame, extensions, [], :decode)
+  end
 
-          {:error, reason} ->
-            throw({:mint, reason})
-        end
-      end)
+  defp apply_all_extensions(frame, extensions, acc, function_name)
 
-    {frame, :lists.reverse(extensions)}
+  defp apply_all_extensions(frame, [], acc, _), do: {frame, :lists.reverse(acc)}
+
+  defp apply_all_extensions(frame, [extension | extensions], acc, function_name) do
+    case apply(extension.module, function_name, [frame, extension.state]) do
+      {:ok, frame, new_state} ->
+        apply_all_extensions(
+          frame,
+          extensions,
+          [put_in(extension.state, new_state) | acc],
+          function_name
+        )
+
+      {:error, reason} ->
+        throw({:mint, reason})
+    end
   end
 
   @doc false
@@ -196,20 +191,20 @@ defmodule Mint.WebSocket.Extension do
     server_extensions = parse_accepted_extensions(response_headers)
     client_extension_mapping = Enum.into(client_extensions, %{}, &{&1.name, &1})
 
-    _accept_extensions(server_extensions, [], client_extension_mapping)
+    accept_extensions(server_extensions, [], client_extension_mapping)
   end
 
-  defp _accept_extensions(server_extension, acc, client_extension_mapping)
+  defp accept_extensions(server_extension, acc, client_extension_mapping)
 
-  defp _accept_extensions([], acc, _), do: {:ok, :lists.reverse(acc)}
+  defp accept_extensions([], acc, _), do: {:ok, :lists.reverse(acc)}
 
-  defp _accept_extensions([server_extension | server_extensions], acc, client_extension_mapping) do
+  defp accept_extensions([server_extension | server_extensions], acc, client_extension_mapping) do
     with {:ok, client_extension} <-
            Map.fetch(client_extension_mapping, server_extension.name),
          extension = %__MODULE__{client_extension | params: server_extension.params},
          all_extensions = acc ++ [extension | server_extensions],
          {:ok, extension} <- client_extension.module.init(extension, all_extensions) do
-      _accept_extensions(
+      accept_extensions(
         server_extensions,
         acc ++ [extension],
         client_extension_mapping
