@@ -57,7 +57,9 @@ defmodule Mint.WebSocketTest do
     end
 
     test "we can send and hello-world frame and receive an echo reply", %{conn: conn} do
-      {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+      {:ok, conn, ref} =
+        Mint.WebSocket.upgrade(conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
+
       assert_receive http_connect_message
 
       {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}]} =

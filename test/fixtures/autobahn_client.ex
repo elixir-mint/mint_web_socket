@@ -5,7 +5,6 @@ defmodule AutobahnClient do
   """
 
   import Kernel, except: [send: 2]
-
   require Logger
 
   defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false, buffer: <<>>]
@@ -19,8 +18,8 @@ defmodule AutobahnClient do
     String.to_integer(count)
   end
 
-  def run_case(case_number) do
-    _state = connect("/runCase?case=#{case_number}&agent=Mint") |> loop()
+  def run_case(case_number, extensions \\ []) do
+    _state = connect("/runCase?case=#{case_number}&agent=Mint", extensions) |> loop()
 
     :ok
   end
@@ -60,12 +59,13 @@ defmodule AutobahnClient do
     end
   end
 
-  def connect(resource) do
+  def connect(resource, extensions \\ []) do
     :ok = flush()
     host = System.get_env("FUZZINGSERVER_HOST") || "localhost"
     {:ok, conn} = Mint.HTTP.connect(:http, host, 9001)
 
-    {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, resource, [])
+    {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, resource, [], extensions: extensions)
+
     http_get_message = receive(do: (message -> message))
 
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
@@ -85,7 +85,12 @@ defmodule AutobahnClient do
   def recv(%{ref: ref} = state) do
     {:ok, conn, messages} = Mint.HTTP.stream(state.conn, receive(do: (message -> message)))
 
-    %__MODULE__{state | conn: conn, buffer: join_data_frames(messages, ref), next: :cont}
+    %__MODULE__{
+      state
+      | conn: conn,
+        buffer: join_data_frames(messages, ref),
+        next: stop_if_done(messages, ref)
+    }
   end
 
   def decode_buffer(state) do
@@ -189,5 +194,9 @@ defmodule AutobahnClient do
     end)
     |> Enum.map(fn {:data, ^ref, data} -> data end)
     |> Enum.join(<<>>)
+  end
+
+  defp stop_if_done(messages, ref) do
+    if Enum.any?(messages, &match?({:done, ^ref}, &1)), do: :stop, else: :cont
   end
 end

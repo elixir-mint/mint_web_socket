@@ -1,25 +1,31 @@
 defmodule Mint.WebSocket.Utils do
   @moduledoc false
 
+  alias Mint.WebSocket.Extension
+
   @websocket_guid "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
   def random_nonce do
     :crypto.strong_rand_bytes(16) |> Base.encode64()
   end
 
-  def headers({:http1, nonce}) when is_binary(nonce) do
+  def headers({:http1, nonce}, extensions) when is_binary(nonce) do
     [
       {"upgrade", "websocket"},
       {"connection", "upgrade"},
       {"sec-websocket-version", "13"},
-      {"sec-websocket-key", nonce}
+      {"sec-websocket-key", nonce},
+      {"sec-websocket-extensions", extension_string(extensions)}
     ]
+    |> Enum.reject(fn {_k, v} -> v == "" end)
   end
 
-  def headers(:http2) do
+  def headers(:http2, extensions) do
     [
-      {"sec-websocket-version", "13"}
+      {"sec-websocket-version", "13"},
+      {"sec-websocket-extensions", extension_string(extensions)}
     ]
+    |> Enum.reject(fn {_k, v} -> v == "" end)
   end
 
   @spec check_accept_nonce(binary() | nil, Mint.Types.headers()) ::
@@ -46,23 +52,6 @@ defmodule Mint.WebSocket.Utils do
     response_nonce == expected_nonce
   end
 
-  # Websocket extensions are agreed upon by the client & server.
-  # The connection uses only those that both the client and server declared.
-  # To put it another way, the intersection of what the client declared and
-  # what the server declared.
-  def common_extensions(request_headers, response_headers) do
-    request_extensions = extensions(request_headers)
-    response_extensions = extensions(response_headers)
-
-    MapSet.intersection(request_extensions, response_extensions)
-  end
-
-  defp extensions(headers) do
-    get_header(headers, "sec-websocket-extensions", "")
-    |> String.split(", ")
-    |> MapSet.new()
-  end
-
   defp fetch_header(headers, key) do
     Enum.find_value(headers, :error, fn
       {^key, value} -> {:ok, value}
@@ -70,13 +59,24 @@ defmodule Mint.WebSocket.Utils do
     end)
   end
 
-  defp get_header(headers, key, default) do
-    case fetch_header(headers, key) do
-      {:ok, value} -> value
-      :error -> default
-    end
-  end
-
   def maybe_concat(<<>>, data), do: data
   def maybe_concat(a, b), do: a <> b
+
+  defp extension_string(extensions) when is_list(extensions) do
+    extensions
+    |> Enum.map(&extension_string/1)
+    |> Enum.join(", ")
+  end
+
+  defp extension_string(%Extension{name: name, params: []}), do: name
+
+  defp extension_string(%Extension{name: name, params: params}) do
+    params =
+      params
+      |> Enum.map(fn {key, value} ->
+        if value == "true", do: key, else: "#{key}=#{value}"
+      end)
+
+    Enum.join([name | params], "; ")
+  end
 end
