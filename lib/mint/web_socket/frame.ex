@@ -61,36 +61,35 @@ defmodule Mint.WebSocket.Frame do
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
   def encode(websocket, frame) when is_friendly_frame(frame) do
-    with {:ok, frame, extensions} <-
-           frame |> translate() |> Extension.encode(websocket.extensions),
-         {:ok, encoded} <- _encode(frame) do
-      websocket = put_in(websocket.extensions, extensions)
+    {frame, extensions} =
+      frame
+      |> translate()
+      |> Extension.encode(websocket.extensions)
 
-      {:ok, websocket, encoded}
-    else
-      {:error, reason} -> {:error, websocket, reason}
-    end
+    websocket = put_in(websocket.extensions, extensions)
+    frame = encode_to_binary(frame)
+
+    {:ok, websocket, frame}
+  catch
+    :throw, {:mint, reason} -> {:error, websocket, reason}
   end
 
-  @spec _encode(tuple()) :: {:ok, binary()} | {:error, WebSocketError.t()}
-  defp _encode(frame) do
+  @spec encode_to_binary(tuple()) :: binary()
+  defp encode_to_binary(frame) do
     payload = payload(frame)
     mask = mask(frame)
     masked? = if mask == nil, do: 0, else: 1
+    encoded_payload_length = encode_payload_length(elem(frame, 0), byte_size(payload))
 
-    with {:ok, encoded_payload_length} <-
-           encode_payload_length(elem(frame, 0), byte_size(payload)) do
-      {:ok,
-       <<
-         encode_fin(frame)::bitstring,
-         reserved(frame)::bitstring,
-         encode_opcode(frame)::bitstring,
-         masked?::size(1),
-         encoded_payload_length::bitstring,
-         mask || <<>>::binary,
-         encode_data(frame, payload, mask)::bitstring
-       >>}
-    end
+    <<
+      encode_fin(frame)::bitstring,
+      reserved(frame)::bitstring,
+      encode_opcode(frame)::bitstring,
+      masked?::size(1),
+      encoded_payload_length::bitstring,
+      mask || <<>>::binary,
+      encode_data(frame, payload, mask)::bitstring
+    >>
   end
 
   defp encode_data(close(code: code, reason: reason), _payload, mask) do
@@ -100,6 +99,12 @@ defmodule Mint.WebSocket.Frame do
 
   defp encode_data(_frame, payload, mask) do
     apply_mask(payload, mask)
+  end
+
+  defp encode_close(code, reason) do
+    code = code || 1_000
+    reason = reason || ""
+    <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 
   for type <- Map.keys(@opcodes) do
@@ -116,21 +121,21 @@ defmodule Mint.WebSocket.Frame do
   defp encode_opcode(frame), do: @opcodes[elem(frame, 0)]
 
   def encode_payload_length(_opcode, length) when length in 0..125 do
-    {:ok, <<length::integer-size(7)>>}
+    <<length::integer-size(7)>>
   end
 
   def encode_payload_length(opcode, length)
       when length in 126..65_535 and opcode in @non_control_opcodes do
-    {:ok, <<126::integer-size(7), length::unsigned-integer-size(8)-unit(2)>>}
+    <<126::integer-size(7), length::unsigned-integer-size(8)-unit(2)>>
   end
 
   def encode_payload_length(opcode, length)
       when length in 65_535..9_223_372_036_854_775_807 and opcode in @non_control_opcodes do
-    {:ok, <<127::integer-size(7), length::unsigned-integer-size(8)-unit(8)>>}
+    <<127::integer-size(7), length::unsigned-integer-size(8)-unit(8)>>
   end
 
   def encode_payload_length(_opcode, _length) do
-    {:error, %WebSocketError{reason: :payload_too_large}}
+    throw({:mint, %WebSocketError{reason: :payload_too_large}})
   end
 
   # Mask the payload by bytewise XOR-ing the payload bytes against the mask
@@ -155,7 +160,7 @@ defmodule Mint.WebSocket.Frame do
           {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame()]}
           | {:error, Mint.WebSocket.t(), any()}
   def decode(websocket, data) do
-    {:ok, websocket, frames} = _decode(websocket, data)
+    {websocket, frames} = _decode(websocket, data)
 
     {websocket, frames} =
       Enum.reduce(frames, {websocket, []}, fn frame, {websocket, acc} ->
@@ -173,11 +178,11 @@ defmodule Mint.WebSocket.Frame do
     case websocket.buffer |> Utils.maybe_concat(data) |> decode_raw(websocket, []) do
       {:ok, frames} ->
         {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, <<>>), frames}
+        {put_in(websocket.buffer, <<>>), frames}
 
       {:buffer, partial, frames} ->
         {websocket, frames} = resolve_fragments(websocket, frames)
-        {:ok, put_in(websocket.buffer, partial), frames}
+        {put_in(websocket.buffer, partial), frames}
     end
   end
 
@@ -386,12 +391,6 @@ defmodule Mint.WebSocket.Frame do
 
   def translate(close(code: code, reason: reason)) do
     {:close, code, reason}
-  end
-
-  defp encode_close(code, reason) do
-    code = code || 1_000
-    reason = reason || ""
-    <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 
   for type <- [:continuation, :text, :binary] do
