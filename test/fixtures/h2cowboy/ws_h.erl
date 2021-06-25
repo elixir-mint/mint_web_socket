@@ -4,8 +4,8 @@
 -export([websocket_init/1]).
 -export([websocket_handle/2]).
 
-init(Req, Opts) ->
-  {cowboy_websocket, Req, Opts}.
+init(Req, State) ->
+  {cowboy_websocket, Req, State, #{compress => true}}.
 
 websocket_init(State) ->
   {[], State}.
