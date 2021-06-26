@@ -76,8 +76,8 @@ http_get_message = receive(do: (message -> message))
 
 # receive the hello world reply frame
 hello_world_echo_message = receive(do: (message -> message))
-{:ok, _conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, hello_world_echo_message)
-{:ok, _websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
+{:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, hello_world_echo_message)
+{:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
 ```
 
 ## Development workflow
