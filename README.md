@@ -68,7 +68,7 @@ http_get_message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, http_get_message)
 
-{:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, req_headers, resp_headers)
+{:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
 # send the hello world frame
 {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
