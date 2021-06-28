@@ -17,7 +17,7 @@ Elixir and Erlang, but it does not allow the author much control over
 the WebSocket connection.
 
 Instead `Mint.WebSocket` is process-less: the entire HTTP and WebSocket
-states are kept in immutable datastructures. This enables authors of
+states are kept in immutable data structures. This enables authors of
 WebSocket clients a more fine-grained control over the connections:
 `Mint.WebSocket` does not prescribe a process archicture.
 
