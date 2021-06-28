@@ -8,11 +8,11 @@ defmodule Mint.WebSocket.Frame do
   alias Mint.WebSocket.{Utils, Extension}
   alias Mint.WebSocketError
 
-  shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
+  shared = [{:reserved, <<0::size(3)>>}, :mask, :data, :fin?]
 
-  defrecord :continuation, shared ++ [:fin?]
-  defrecord :text, shared ++ [:fin?]
-  defrecord :binary, shared ++ [:fin?]
+  defrecord :continuation, shared
+  defrecord :text, shared
+  defrecord :binary, shared
   # > All control frames MUST have a payload length of 125 bytes or less
   # > and MUST NOT be fragmented.
   defrecord :close, shared ++ [:code, :reason]
@@ -23,9 +23,7 @@ defmodule Mint.WebSocket.Frame do
            when is_tuple(frame) and
                   (elem(frame, 0) == :close or elem(frame, 0) == :ping or elem(frame, 0) == :pong)
 
-  defguard is_fin(frame)
-           when (elem(frame, 0) in [:continuation, :text, :binary] and elem(frame, 4) == true) or
-                  is_control(frame)
+  defguard is_fin(frame) when elem(frame, 4) == true
 
   # guards frames dealt with in the user-space (not records)
   defguardp is_friendly_frame(frame)
@@ -276,7 +274,7 @@ defmodule Mint.WebSocket.Frame do
     {:error, {:missing_mask, payload}}
   end
 
-  for data_type <- [:continuation, :text, :binary] do
+  for data_type <- [:continuation, :text, :binary, :ping, :pong] do
     def into_frame(unquote(data_type), fin?, reserved, mask, payload) do
       unquote(data_type)(
         fin?: fin?,
@@ -289,14 +287,14 @@ defmodule Mint.WebSocket.Frame do
 
   def into_frame(
         :close,
-        _fin?,
+        fin?,
         reserved,
         mask,
         <<code::unsigned-integer-size(8)-unit(2), reason::binary>> = payload
       )
       when byte_size(reason) in 0..123 and is_valid_close_code(code) do
     if String.valid?(reason) do
-      close(reserved: reserved, mask: mask, code: code, reason: reason)
+      close(reserved: reserved, mask: mask, code: code, reason: reason, fin?: fin?)
     else
       {:error, {:invalid_close_payload, payload}}
     end
@@ -304,12 +302,12 @@ defmodule Mint.WebSocket.Frame do
 
   def into_frame(
         :close,
-        _fin?,
+        fin?,
         reserved,
         mask,
         <<>>
       ) do
-    close(reserved: reserved, mask: mask, code: 1_000, reason: "")
+    close(reserved: reserved, mask: mask, code: 1_000, reason: "", fin?: fin?)
   end
 
   def into_frame(
@@ -320,14 +318,6 @@ defmodule Mint.WebSocket.Frame do
         payload
       ) do
     {:error, {:invalid_close_payload, payload}}
-  end
-
-  def into_frame(:ping, _fin?, reserved, mask, payload) do
-    ping(reserved: reserved, mask: mask, data: payload)
-  end
-
-  def into_frame(:pong, _fin?, reserved, mask, payload) do
-    pong(reserved: reserved, mask: mask, data: payload)
   end
 
   # translate from user-friendly tuple into record defined in this module
@@ -406,7 +396,7 @@ defmodule Mint.WebSocket.Frame do
     resolve_fragments(websocket, rest, [{:error, reason} | acc])
   end
 
-  def resolve_fragments(websocket, [frame | rest], acc) when is_control(frame) do
+  def resolve_fragments(websocket, [frame | rest], acc) when is_control(frame) and is_fin(frame) do
     resolve_fragments(websocket, rest, [frame | acc])
   end
 
@@ -429,28 +419,16 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  defp combine(text(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
-    combined_text_data = Utils.maybe_concat(frame_data, continuation_data)
-
-    case String.valid?(combined_text_data) do
-      true ->
-        text(frame, data: combined_text_data, fin?: fin?)
-
-      false ->
-        {:error, {:invalid_utf8, combined_text_data}}
-    end
-  end
-
   defp combine(nil, continuation(fin?: true)), do: {:error, :insular_continuation}
 
   defp combine(nil, frame), do: frame
 
-  for type <- [:continuation, :binary] do
+  for type <- [:continuation, :text, :binary] do
     defp combine(
           unquote(type)(data: frame_data) = frame,
           continuation(data: continuation_data, fin?: fin?)
         ) do
-      unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
+      unquote(type)(frame, data: Utils.maybe_concat(frame_data, continuation_data), fin?: fin?)
     end
   end
 
