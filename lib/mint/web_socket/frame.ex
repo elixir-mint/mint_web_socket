@@ -332,7 +332,7 @@ defmodule Mint.WebSocket.Frame do
 
   # translate from user-friendly tuple into record defined in this module
   # (and the reverse)
-  @spec translate(Mint.WebSocket.frame()) :: tuple()
+  @spec translate(Mint.WebSocket.frame() | Mint.WebSocket.shorthand_frame()) :: tuple()
   @spec translate(tuple) :: Mint.WebSocket.frame()
   for opcode <- Map.keys(@opcodes) do
     def translate(unquote(opcode)(reserved: <<reserved::bitstring>>))
@@ -429,22 +429,6 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  defp combine_frames(nil, _frame) do
-    throw({:mint, :uninitiated_continuation})
-  end
-
-  defp combine_frames([full_frame]) do
-    full_frame
-  end
-
-  defp combine_frames([continuation() = continuation, prior_fragment | rest]) do
-    combine_frames([combine(prior_fragment, continuation) | rest])
-  end
-
-  defp combine_frames(_out_of_order_fragments) do
-    {:error, :out_of_order_fragments}
-  end
-
   defp combine(text(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
     combined_text_data = Utils.maybe_concat(frame_data, continuation_data)
 
@@ -456,6 +440,8 @@ defmodule Mint.WebSocket.Frame do
         {:error, {:invalid_utf8, combined_text_data}}
     end
   end
+
+  defp combine(nil, continuation(fin?: true)), do: {:error, :insular_continuation}
 
   defp combine(nil, frame), do: frame
 
