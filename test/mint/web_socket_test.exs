@@ -34,7 +34,7 @@ defmodule Mint.WebSocketTest do
       # receive a pong frame
       assert_receive pong_message
       {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, pong_message)
-      assert {:ok, websocket, [:pong]} = Mint.WebSocket.decode(websocket, data)
+      assert {:ok, websocket, [{:pong, ""}]} = Mint.WebSocket.decode(websocket, data)
 
       # send a close frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
@@ -43,7 +43,7 @@ defmodule Mint.WebSocketTest do
       # receive a close frame
       assert_receive close_message
       {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, close_message)
-      assert {:ok, _websocket, [:close]} = Mint.WebSocket.decode(websocket, data)
+      assert {:ok, _websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
 
       {:ok, _conn} = Mint.HTTP.close(conn)
     end
@@ -90,7 +90,7 @@ defmodule Mint.WebSocketTest do
       # receive a pong frame
       assert_receive pong_message
       {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, pong_message)
-      assert {:ok, websocket, [:pong]} = Mint.WebSocket.decode(websocket, data)
+      assert {:ok, websocket, [{:pong, ""}]} = Mint.WebSocket.decode(websocket, data)
 
       # send a close frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
@@ -99,7 +99,7 @@ defmodule Mint.WebSocketTest do
       # receive a close frame
       assert_receive close_message
       {:ok, conn, [{:data, ^ref, data}, {:done, ^ref}]} = Mint.HTTP.stream(conn, close_message)
-      assert {:ok, _websocket, [:close]} = Mint.WebSocket.decode(websocket, data)
+      assert {:ok, _websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
 
       {:ok, _conn} = Mint.HTTP.close(conn)
     end
