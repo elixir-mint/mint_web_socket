@@ -94,7 +94,6 @@ defmodule AutobahnClient do
   end
 
   def decode_buffer(state) do
-    IO.inspect(state.buffer)
     case Mint.WebSocket.decode(state.websocket, state.buffer) do
       {:ok, websocket, messages} ->
         %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}

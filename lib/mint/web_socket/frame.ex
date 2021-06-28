@@ -418,8 +418,15 @@ defmodule Mint.WebSocket.Frame do
   end
 
   def resolve_fragments(websocket, [frame | rest], acc) do
-    put_in(websocket.fragment, frame)
-    |> resolve_fragments(rest, acc)
+    case combine(websocket.fragment, frame) do
+      {:error, reason} ->
+        put_in(websocket.fragment, nil)
+        |> resolve_fragments(rest, [{:error, reason} | acc])
+
+      frame ->
+        put_in(websocket.fragment, frame)
+        |> resolve_fragments(rest, acc)
+    end
   end
 
   defp combine_frames(nil, _frame) do
@@ -438,7 +445,7 @@ defmodule Mint.WebSocket.Frame do
     {:error, :out_of_order_fragments}
   end
 
-  defp combine_frames(text(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
+  defp combine(text(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
     combined_text_data = Utils.maybe_concat(frame_data, continuation_data)
 
     case String.valid?(combined_text_data) do
