@@ -371,7 +371,8 @@ defmodule Mint.WebSocket do
   {:ok, websocket, frames} = Mint.WebSocket.decode(websocket, data)
   ```
   """
-  @spec decode(t(), data :: binary()) :: {:ok, t(), [frame() | {:error, term()}]} | {:error, t(), any()}
+  @spec decode(t(), data :: binary()) ::
+          {:ok, t(), [frame() | {:error, term()}]} | {:error, t(), any()}
   defdelegate decode(websocket, data), to: Frame
 
   # we re-open the request in the conn for HTTP1 connections because a :done

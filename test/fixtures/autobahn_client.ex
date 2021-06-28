@@ -141,7 +141,7 @@ defmodule AutobahnClient do
   defp handle_message({:error, reason}, state) do
     Logger.debug("Closing the connection because of a protocol error: #{inspect(reason)}")
 
-    code=
+    code =
       case reason do
         {:invalid_utf8, _data} -> 1_007
         _ -> 1_002

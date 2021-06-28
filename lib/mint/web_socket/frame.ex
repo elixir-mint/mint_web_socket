@@ -396,7 +396,8 @@ defmodule Mint.WebSocket.Frame do
     resolve_fragments(websocket, rest, [{:error, reason} | acc])
   end
 
-  def resolve_fragments(websocket, [frame | rest], acc) when is_control(frame) and is_fin(frame) do
+  def resolve_fragments(websocket, [frame | rest], acc)
+      when is_control(frame) and is_fin(frame) do
     resolve_fragments(websocket, rest, [frame | acc])
   end
 
@@ -425,9 +426,9 @@ defmodule Mint.WebSocket.Frame do
 
   for type <- [:continuation, :text, :binary] do
     defp combine(
-          unquote(type)(data: frame_data) = frame,
-          continuation(data: continuation_data, fin?: fin?)
-        ) do
+           unquote(type)(data: frame_data) = frame,
+           continuation(data: continuation_data, fin?: fin?)
+         ) do
       unquote(type)(frame, data: Utils.maybe_concat(frame_data, continuation_data), fin?: fin?)
     end
   end
