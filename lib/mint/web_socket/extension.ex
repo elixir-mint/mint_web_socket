@@ -158,31 +158,48 @@ defmodule Mint.WebSocket.Extension do
   @doc false
   @spec encode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
   def encode(frame, extensions) do
-    apply_all_extensions(frame, extensions, [], :encode)
+    encode_all_extensions(frame, extensions, [])
+  end
+
+  defp encode_all_extensions(frame, extensions, acc)
+
+  defp encode_all_extensions(frame, [], acc), do: {frame, :lists.reverse(acc)}
+
+  defp encode_all_extensions(frame, [extension | extensions], acc) do
+    case extension.module.encode(frame, extension.state) do
+      {:ok, frame, new_state} ->
+        encode_all_extensions(
+          frame,
+          extensions,
+          [put_in(extension.state, new_state) | acc]
+        )
+
+      {:error, reason} ->
+        throw({:mint, reason})
+    end
   end
 
   @doc false
   @spec decode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
   def decode(frame, extensions) do
-    apply_all_extensions(frame, extensions, [], :decode)
+    decode_all_extensions(frame, extensions, [])
   end
 
-  defp apply_all_extensions(frame, extensions, acc, function_name)
+  defp decode_all_extensions(frame, extensions, acc)
 
-  defp apply_all_extensions(frame, [], acc, _), do: {frame, :lists.reverse(acc)}
+  defp decode_all_extensions(frame, [], acc), do: {frame, :lists.reverse(acc)}
 
-  defp apply_all_extensions(frame, [extension | extensions], acc, function_name) do
-    case apply(extension.module, function_name, [frame, extension.state]) do
+  defp decode_all_extensions(frame, [extension | extensions], acc) do
+    case extension.module.decode(frame, extension.state) do
       {:ok, frame, new_state} ->
-        apply_all_extensions(
+        decode_all_extensions(
           frame,
           extensions,
-          [put_in(extension.state, new_state) | acc],
-          function_name
+          [put_in(extension.state, new_state) | acc]
         )
 
       {:error, reason} ->
-        throw({:mint, reason})
+        {{:error, reason}, :lists.reverse(acc)}
     end
   end
 

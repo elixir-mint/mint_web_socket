@@ -4,11 +4,11 @@ defmodule Mint.WebSocket.Frame do
   # Functions and data structures for describing websocket frames.
   # https://tools.ietf.org/html/rfc6455#section-5.2
 
-  shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
-
   import Record
   alias Mint.WebSocket.{Utils, Extension}
   alias Mint.WebSocketError
+
+  shared = [{:reserved, <<0::size(3)>>}, :mask, :data]
 
   defrecord :continuation, shared ++ [:fin?]
   defrecord :text, shared ++ [:fin?]
@@ -88,27 +88,21 @@ defmodule Mint.WebSocket.Frame do
       masked?::size(1),
       encoded_payload_length::bitstring,
       mask || <<>>::binary,
-      encode_data(frame, payload, mask)::bitstring
+      apply_mask(payload, mask)::bitstring
     >>
   end
 
-  defp encode_data(close(code: code, reason: reason), _payload, mask) do
-    encode_close(code, reason)
-    |> apply_mask(mask)
-  end
-
-  defp encode_data(_frame, payload, mask) do
-    apply_mask(payload, mask)
-  end
-
-  defp encode_close(code, reason) do
+  defp payload(close(code: code, reason: reason)) do
     code = code || 1_000
     reason = reason || ""
     <<code::unsigned-integer-size(8)-unit(2), reason::binary>>
   end
 
-  for type <- Map.keys(@opcodes) do
+  for type <- Map.keys(@opcodes) -- [:close] do
     defp payload(unquote(type)(data: data)), do: data
+  end
+
+  for type <- Map.keys(@opcodes) do
     defp mask(unquote(type)(mask: mask)), do: mask
     defp reserved(unquote(type)(reserved: reserved)), do: reserved
   end
@@ -157,24 +151,28 @@ defmodule Mint.WebSocket.Frame do
   end
 
   @spec decode(Mint.WebSocket.t(), binary()) ::
-          {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame()]}
+          {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame() | {:error, term()}]}
           | {:error, Mint.WebSocket.t(), any()}
   def decode(websocket, data) do
-    {websocket, frames} = _decode(websocket, data)
+    {websocket, frames} = binary_to_frames(websocket, data)
 
     {websocket, frames} =
-      Enum.reduce(frames, {websocket, []}, fn frame, {websocket, acc} ->
-        {frame, extensions} = Extension.decode(frame, websocket.extensions)
+      Enum.reduce(frames, {websocket, []}, fn
+        {:error, reason}, {websocket, acc} ->
+          {websocket, [{:error, reason} | acc]}
 
-        {put_in(websocket.extensions, extensions), [frame | acc]}
+        frame, {websocket, acc} ->
+          {frame, extensions} = Extension.decode(frame, websocket.extensions)
+
+          {put_in(websocket.extensions, extensions), [translate(frame) | acc]}
       end)
 
-    {:ok, websocket, frames |> :lists.reverse() |> Enum.map(&translate/1)}
+    {:ok, websocket, :lists.reverse(frames)}
   catch
-    :throw, {:mint, reason} -> {:error, websocket, reason}
+    {:mint, reason} -> {:error, websocket, reason}
   end
 
-  defp _decode(websocket, data) do
+  defp binary_to_frames(websocket, data) do
     case websocket.buffer |> Utils.maybe_concat(data) |> decode_raw(websocket, []) do
       {:ok, frames} ->
         {websocket, frames} = resolve_fragments(websocket, frames)
@@ -194,16 +192,12 @@ defmodule Mint.WebSocket.Frame do
        ) do
     case decode_payload_and_mask(payload_and_mask, masked == 0b1) do
       {:ok, payload, mask, rest} ->
-        decode_raw(rest, websocket, [
-          decode(
-            decode_opcode(opcode),
-            fin == 0b1,
-            reserved,
-            mask,
-            apply_mask(payload, mask)
-          )
-          | acc
-        ])
+        frame = decode_full_frame_binary(opcode, fin, reserved, mask, payload)
+
+        decode_raw(rest, websocket, [frame | acc])
+
+      {:error, reason} ->
+        {:ok, :lists.reverse([{:error, reason} | acc])}
 
       :buffer ->
         {:buffer, data, :lists.reverse(acc)}
@@ -216,24 +210,33 @@ defmodule Mint.WebSocket.Frame do
     {:buffer, partial, :lists.reverse(acc)}
   end
 
-  defp decode_opcode(opcode) do
-    case Map.fetch(@reverse_opcodes, opcode) do
-      {:ok, opcode_atom} ->
-        opcode_atom
-
-      :error ->
-        throw({:mint, {:unsupported_opcode, opcode}})
-    end
-  end
-
   defp decode_payload_and_mask(payload, masked?) do
-    with {payload_length, rest} <- decode_payload_length(payload),
-         {mask, rest} <- decode_mask(rest, masked?),
+    with {:ok, payload_length, rest} <- decode_payload_length(payload),
+         {:ok, mask, rest} <- decode_mask(rest, masked?),
          <<payload::binary-size(payload_length), more::bitstring>> <- rest do
       {:ok, payload, mask, more}
     else
       partial when is_binary(partial) -> :buffer
       :buffer -> :buffer
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  defp decode_full_frame_binary(opcode, fin, reserved, mask, payload) do
+    with {:ok, opcode} <- decode_opcode(opcode) do
+      into_frame(
+        opcode,
+        _fin? = fin == 0b1,
+        reserved,
+        mask,
+        apply_mask(payload, mask)
+      )
+    end
+  end
+
+  defp decode_opcode(opcode) do
+    with :error <- Map.fetch(@reverse_opcodes, opcode) do
+      {:error, {:unsupported_opcode, opcode}}
     end
   end
 
@@ -241,7 +244,7 @@ defmodule Mint.WebSocket.Frame do
          <<127::integer-size(7), payload_length::unsigned-integer-size(8)-unit(8),
            rest::bitstring>>
        ),
-       do: {payload_length, rest}
+       do: {:ok, payload_length, rest}
 
   defp decode_payload_length(<<127::integer-size(7)>>), do: :buffer
 
@@ -249,32 +252,32 @@ defmodule Mint.WebSocket.Frame do
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
            rest::bitstring>>
        ),
-       do: {payload_length, rest}
+       do: {:ok, payload_length, rest}
 
   defp decode_payload_length(<<126::integer-size(7)>>), do: :buffer
 
   defp decode_payload_length(<<payload_length::integer-size(7), rest::bitstring>>)
        when payload_length in 0..125,
-       do: {payload_length, rest}
+       do: {:ok, payload_length, rest}
 
   defp decode_payload_length(malformed) do
-    throw({:mint, {:malformed_payload_length, malformed}})
+    {:error, {:malformed_payload_length, malformed}}
   end
 
   defp decode_mask(<<mask::binary-size(8)-unit(4), rest::bitstring>>, _masked? = true) do
-    {mask, rest}
+    {:ok, mask, rest}
   end
 
   defp decode_mask(payload, _masked? = false) do
-    {nil, payload}
+    {:ok, nil, payload}
   end
 
   defp decode_mask(payload, _masked?) do
-    throw({:mint, {:missing_mask, payload}})
+    {:error, {:missing_mask, payload}}
   end
 
   for data_type <- [:continuation, :text, :binary] do
-    def decode(unquote(data_type), fin?, reserved, mask, payload) do
+    def into_frame(unquote(data_type), fin?, reserved, mask, payload) do
       unquote(data_type)(
         fin?: fin?,
         reserved: reserved,
@@ -284,7 +287,7 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  def decode(
+  def into_frame(
         :close,
         _fin?,
         reserved,
@@ -295,11 +298,11 @@ defmodule Mint.WebSocket.Frame do
     if String.valid?(reason) do
       close(reserved: reserved, mask: mask, code: code, reason: reason)
     else
-      throw({:mint, {:invalid_close_payload, payload}})
+      {:error, {:invalid_close_payload, payload}}
     end
   end
 
-  def decode(
+  def into_frame(
         :close,
         _fin?,
         reserved,
@@ -309,21 +312,21 @@ defmodule Mint.WebSocket.Frame do
     close(reserved: reserved, mask: mask, code: 1_000, reason: "")
   end
 
-  def decode(
+  def into_frame(
         :close,
         _fin?,
         _reserved,
         _mask,
         payload
       ) do
-    throw({:mint, {:invalid_close_payload, payload}})
+    {:error, {:invalid_close_payload, payload}}
   end
 
-  def decode(:ping, _fin?, reserved, mask, payload) do
+  def into_frame(:ping, _fin?, reserved, mask, payload) do
     ping(reserved: reserved, mask: mask, data: payload)
   end
 
-  def decode(:pong, _fin?, reserved, mask, payload) do
+  def into_frame(:pong, _fin?, reserved, mask, payload) do
     pong(reserved: reserved, mask: mask, data: payload)
   end
 
@@ -334,9 +337,11 @@ defmodule Mint.WebSocket.Frame do
   for opcode <- Map.keys(@opcodes) do
     def translate(unquote(opcode)(reserved: <<reserved::bitstring>>))
         when reserved != <<0::size(3)>> do
-      throw({:mint, :malformed_reserved})
+      {:error, {:malformed_reserved, reserved}}
     end
   end
+
+  def translate({:error, reason}), do: {:error, reason}
 
   def translate({:text, text}) do
     text(fin?: true, mask: new_mask(), data: text)
@@ -346,7 +351,7 @@ defmodule Mint.WebSocket.Frame do
     if String.valid?(data) do
       {:text, data}
     else
-      throw({:mint, {:invalid_utf8, data}})
+      {:error, {:invalid_utf8, data}}
     end
   end
 
@@ -362,8 +367,6 @@ defmodule Mint.WebSocket.Frame do
     ping(mask: new_mask(), data: body)
   end
 
-  def translate(ping(data: <<>>)), do: :ping
-
   def translate(ping(data: data)), do: {:ping, data}
 
   def translate(:pong), do: translate({:pong, <<>>})
@@ -372,12 +375,10 @@ defmodule Mint.WebSocket.Frame do
     pong(mask: new_mask(), data: body)
   end
 
-  def translate(pong(data: <<>>)), do: :pong
-
   def translate(pong(data: data)), do: {:pong, data}
 
   def translate(:close) do
-    close(mask: new_mask(), data: <<>>)
+    translate({:close, 1_000, ""})
   end
 
   def translate({:close, code, reason})
@@ -385,26 +386,15 @@ defmodule Mint.WebSocket.Frame do
     close(mask: new_mask(), code: code, reason: reason, data: <<>>)
   end
 
-  def translate(close(code: nil, reason: nil)), do: :close
-
-  def translate(close(code: 1_000, reason: "")), do: :close
-
   def translate(close(code: code, reason: reason)) do
+    code = code || 1_000
+    reason = reason || ""
     {:close, code, reason}
-  end
-
-  for type <- [:continuation, :text, :binary] do
-    def combine(
-          unquote(type)(data: frame_data) = frame,
-          continuation(data: continuation_data, fin?: fin?)
-        ) do
-      unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
-    end
   end
 
   @doc """
   Emits frames for any finalized fragments and stores any unfinalized fragments
-  in the `:fragments` key in the websocket
+  in the `:fragment` key in the websocket data structure
   """
   def resolve_fragments(websocket, frames, acc \\ [])
 
@@ -412,23 +402,27 @@ defmodule Mint.WebSocket.Frame do
     {websocket, :lists.reverse(acc)}
   end
 
+  def resolve_fragments(websocket, [{:error, reason} | rest], acc) do
+    resolve_fragments(websocket, rest, [{:error, reason} | acc])
+  end
+
   def resolve_fragments(websocket, [frame | rest], acc) when is_control(frame) do
     resolve_fragments(websocket, rest, [frame | acc])
   end
 
   def resolve_fragments(websocket, [frame | rest], acc) when is_fin(frame) do
-    frame = combine_frames([frame | websocket.fragments])
+    frame = combine(websocket.fragment, frame)
 
-    put_in(websocket.fragments, [])
+    put_in(websocket.fragment, nil)
     |> resolve_fragments(rest, [frame | acc])
   end
 
   def resolve_fragments(websocket, [frame | rest], acc) do
-    update_in(websocket.fragments, &[frame | &1])
+    put_in(websocket.fragment, frame)
     |> resolve_fragments(rest, acc)
   end
 
-  defp combine_frames([continuation()]) do
+  defp combine_frames(nil, _frame) do
     throw({:mint, :uninitiated_continuation})
   end
 
@@ -441,6 +435,31 @@ defmodule Mint.WebSocket.Frame do
   end
 
   defp combine_frames(_out_of_order_fragments) do
-    throw({:mint, :out_of_order_fragments})
+    {:error, :out_of_order_fragments}
   end
+
+  defp combine_frames(text(data: frame_data) = frame, continuation(data: continuation_data, fin?: fin?)) do
+    combined_text_data = Utils.maybe_concat(frame_data, continuation_data)
+
+    case String.valid?(combined_text_data) do
+      true ->
+        text(frame, data: combined_text_data, fin?: fin?)
+
+      false ->
+        {:error, {:invalid_utf8, combined_text_data}}
+    end
+  end
+
+  defp combine(nil, frame), do: frame
+
+  for type <- [:continuation, :binary] do
+    defp combine(
+          unquote(type)(data: frame_data) = frame,
+          continuation(data: continuation_data, fin?: fin?)
+        ) do
+      unquote(type)(frame, data: frame_data <> continuation_data, fin?: fin?)
+    end
+  end
+
+  defp combine(a, b), do: {:error, {:cannot_combine_frames, a, b}}
 end

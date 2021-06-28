@@ -119,12 +119,12 @@ defmodule Mint.WebSocket do
   """
   @opaque t :: %__MODULE__{
             extensions: [Extension.t()],
-            fragments: [tuple()],
+            fragment: tuple(),
             private: map(),
             buffer: binary()
           }
   defstruct extensions: [],
-            fragments: [],
+            fragment: nil,
             private: %{},
             buffer: <<>>
 

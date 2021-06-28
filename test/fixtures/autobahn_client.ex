@@ -94,6 +94,7 @@ defmodule AutobahnClient do
   end
 
   def decode_buffer(state) do
+    IO.inspect(state.buffer)
     case Mint.WebSocket.decode(state.websocket, state.buffer) do
       {:ok, websocket, messages} ->
         %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
@@ -127,22 +128,28 @@ defmodule AutobahnClient do
     |> Map.put(:messages, [])
   end
 
-  defp handle_message(:close, state), do: handle_message({:close, 1000, ""}, state)
-
   defp handle_message({:close, _code, _reason}, state) do
     close(state, 1000, "")
   end
-
-  defp handle_message(:ping, state), do: handle_message({:ping, ""}, state)
 
   defp handle_message({:ping, data}, state) do
     send(state, {:pong, data})
   end
 
   # no-op on unsolicited pongs
-  defp handle_message(:pong, state), do: handle_message({:pong, ""}, state)
-
   defp handle_message({:pong, _body}, state), do: state
+
+  defp handle_message({:error, reason}, state) do
+    Logger.debug("Closing the connection because of a protocol error: #{inspect(reason)}")
+
+    code=
+      case reason do
+        {:invalid_utf8, _data} -> 1_007
+        _ -> 1_002
+      end
+
+    close(state, code, "")
+  end
 
   defp handle_message(frame, state), do: send(state, frame)
 
