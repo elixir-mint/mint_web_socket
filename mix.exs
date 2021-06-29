@@ -1,10 +1,18 @@
 defmodule MintWebSocket.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/NFIBrokerage/mint_web_socket"
+  @version_file Path.join(__DIR__, ".version")
+  @external_resource @version_file
+  @version (case Regex.run(~r/^v([\d\.\w-]+)/, File.read!(@version_file), capture: :all_but_first) do
+              [version] -> version
+              nil -> "0.0.0"
+            end)
+
   def project do
     [
       app: :mint_web_socket,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
       erlc_paths: erlc_paths(Mix.env()),
@@ -18,7 +26,12 @@ defmodule MintWebSocket.MixProject do
         docs: :dev,
         bless: :test,
         credo: :test
-      ]
+      ],
+      package: package(),
+      description: description(),
+      source_url: @source_url,
+      name: "MintWebSocket",
+      docs: docs()
     ]
   end
 
@@ -46,4 +59,35 @@ defmodule MintWebSocket.MixProject do
 
   defp erlc_paths(:test), do: ["src", "test/fixtures"]
   defp erlc_paths(_), do: ["src"]
+
+  defp package do
+    [
+      name: "mint_web_socket",
+      files: ~w(lib .formatter.exs mix.exs README.md .version),
+      licenses: ["Apache-2.0"],
+      links: %{
+        "GitHub" => @source_url,
+        "Changelog" => @source_url <> "/blob/main/CHANGELOG.md"
+      }
+    ]
+  end
+
+  defp description do
+    "(Unofficial) WebSocket support for Mint"
+  end
+
+  defp docs do
+    [
+      deps: [],
+      language: "en",
+      formatters: ["html"],
+      main: Mint.WebSocket,
+      extras: [
+        "CHANGELOG.md"
+      ],
+      skip_undefined_reference_warnings_on: [
+        "CHANGELOG.md"
+      ]
+    ]
+  end
 end
