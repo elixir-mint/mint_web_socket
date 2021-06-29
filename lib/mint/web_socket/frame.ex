@@ -8,6 +8,8 @@ defmodule Mint.WebSocket.Frame do
   alias Mint.WebSocket.{Utils, Extension}
   alias Mint.WebSocketError
 
+  @compile {:inline, apply_mask: 2, apply_mask: 3}
+
   shared = [{:reserved, <<0::size(3)>>}, :mask, :data, :fin?]
 
   defrecord :continuation, shared
