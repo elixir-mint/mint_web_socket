@@ -3,7 +3,8 @@
     "minimum_coverage": 85,
     "treat_no_relevant_lines_as_covered": true
   },
-  "skip_files": [
-    "^deps"
-  ]
+  "terminal_options": {
+    "file_column_width": 60
+  },
+  "skip_files": ["^deps"]
 }

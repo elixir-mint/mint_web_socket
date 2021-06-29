@@ -15,7 +15,9 @@ defmodule MintWebSocket.MixProject do
         coveralls: :test,
         "coveralls.html": :test,
         "coveralls.github": :test,
-        docs: :dev
+        docs: :dev,
+        bless: :test,
+        credo: :test
       ]
     ]
   end
@@ -29,14 +31,13 @@ defmodule MintWebSocket.MixProject do
   defp deps do
     [
       {:mint, "~> 1.0"},
-      # {:mint,
-      #  git: "https://github.com/elixir-mint/mint.git",
-      #  ref: "488a6ba5fd418a52f697a8d5f377c629ea96af92"},
       {:ex_doc, "~> 0.24", only: [:dev], runtime: false},
       {:castore, ">= 0.0.0", only: [:dev]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},
       {:cowboy, "~> 2.9", only: [:test]},
-      {:excoveralls, "~> 0.14", only: [:test]}
+      {:credo, "~> 1.0", only: [:test], runtime: false},
+      {:excoveralls, "~> 0.14", only: [:test]},
+      {:bless, "~> 1.0", only: [:test]}
     ]
   end
 

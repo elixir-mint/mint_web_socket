@@ -273,11 +273,13 @@ defmodule Mint.WebSocket.Frame do
     {:error, {:malformed_payload_length, malformed}}
   end
 
-  defp decode_mask(<<mask::binary-size(8)-unit(4), rest::bitstring>>, _masked? = true) do
+  defp decode_mask(payload, masked?)
+
+  defp decode_mask(<<mask::binary-size(8)-unit(4), rest::bitstring>>, true) do
     {:ok, mask, rest}
   end
 
-  defp decode_mask(payload, _masked? = false) do
+  defp decode_mask(payload, false) do
     {:ok, nil, payload}
   end
 
