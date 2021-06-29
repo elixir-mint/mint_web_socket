@@ -56,6 +56,7 @@ defmodule Mint.WebSocketTest do
       [conn: conn]
     end
 
+    @tag :http2
     test "we can send and hello-world frame and receive an echo reply", %{conn: conn} do
       {:ok, conn, ref} =
         Mint.WebSocket.upgrade(conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
