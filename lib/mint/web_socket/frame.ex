@@ -8,6 +8,8 @@ defmodule Mint.WebSocket.Frame do
   alias Mint.WebSocket.{Utils, Extension}
   alias Mint.WebSocketError
 
+  @compile {:inline, apply_mask: 2, apply_mask: 3}
+
   shared = [{:reserved, <<0::size(3)>>}, :mask, :data, :fin?]
 
   defrecord :continuation, shared
@@ -134,19 +136,28 @@ defmodule Mint.WebSocket.Frame do
   # bytes (where the mask bytes repeat).
   # This is an "involution" function: applying the mask will mask
   # the data and applying the mask again will unmask it.
-  def apply_mask(payload, nil), do: payload
+  def apply_mask(payload, mask, acc \\ <<>>)
 
-  def apply_mask(payload, _mask = <<a, b, c, d>>) do
-    [a, b, c, d]
-    |> Stream.cycle()
-    |> Enum.reduce_while({payload, _acc = <<>>}, fn
-      _mask_key, {<<>>, acc} ->
-        {:halt, acc}
+  def apply_mask(payload, nil, _acc), do: payload
 
-      mask_key, {<<part_key::integer, payload_rest::binary>>, acc} ->
-        {:cont, {payload_rest, <<acc::binary, Bitwise.bxor(mask_key, part_key)::integer>>}}
-    end)
+  # n=4 is the happy path
+  # n=3..1 catches cases where the remaining byte_size/1 of the payload is shorter
+  # than the mask
+  for n <- 4..1 do
+    def apply_mask(
+          <<part_key::integer-size(8)-unit(unquote(n)), payload_rest::binary>>,
+          <<mask_key::integer-size(8)-unit(unquote(n)), _::binary>> = mask,
+          acc
+        ) do
+      apply_mask(
+        payload_rest,
+        mask,
+        <<acc::binary, Bitwise.bxor(mask_key, part_key)::integer-size(8)-unit(unquote(n))>>
+      )
+    end
   end
+
+  def apply_mask(<<>>, _mask, acc), do: acc
 
   @spec decode(Mint.WebSocket.t(), binary()) ::
           {:ok, Mint.WebSocket.t(), [Mint.WebSocket.frame() | {:error, term()}]}
