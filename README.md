@@ -52,6 +52,23 @@ If `Mint.WebSocket.upgrade/4` returns
 Then the server does not support HTTP/2 WebSockets or does not have them
 enabled.
 
+HTTP/2 support for extended CONNECT has been merged into Mint's main branch
+but is not yet published. If you need HTTP/2 support, use an override:
+
+```elixir
+# mix.exs
+def deps do
+  [
+    {:mint_web_socket, "~> 0.1"},
+    {:mint,
+     git: "https://github.com/elixir-mint/mint.git",
+     ref: "488a6ba5fd418a52f697a8d5f377c629ea96af92",
+     override: true},
+    # ..
+  ]
+end
+```
+
 ## Usage
 
 `Mint.WebSocket` piggybacks much of the existing `Mint.HTTP` API. For example,
