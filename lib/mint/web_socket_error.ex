@@ -10,6 +10,8 @@ defmodule Mint.WebSocketError do
     quote do
       :extended_connect_disabled
       | :connection_not_upgraded
+      | :payload_too_large
+      | {:extension_not_negotiated, Mint.WebSocket.Extension.t()}
     end
 
   @type t :: %__MODULE__{reason: unquote(reason_type) | term()}
@@ -27,5 +29,13 @@ defmodule Mint.WebSocketError do
 
   defp format_reason(:connection_not_upgraded) do
     "connection not upgraded by remote"
+  end
+
+  defp format_reason(:payload_too_large) do
+    "frame payload cannot exceed 9,223,372,036,854,775,807 bytes"
+  end
+
+  defp format_reason({:extension_not_negotiated, extension}) do
+    "the remote server accepted an extension the client did not offer: #{inspect(extension)}"
   end
 end
