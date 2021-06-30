@@ -27,8 +27,8 @@ For more information, check out
 ## Spec conformance
 
 This library aims to follow
-[rfc6455](https://datatracker.ietf.org/doc/html/rfc6455) and
-[rfc8441](https://datatracker.ietf.org/doc/html/rfc8441) as closely as possible
+[RFC6455](https://datatracker.ietf.org/doc/html/rfc6455) and
+[RFC8441](https://datatracker.ietf.org/doc/html/rfc8441) as closely as possible
 and uses [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
 to check conformance with every run of tests/CI. The auto-generated report
 produced by the Autobahn|Testsuite is uploaded on each push to main.
@@ -38,7 +38,7 @@ https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
 
 ## A Quick Note About HTTP/2
 
-HTTP/2 WebSockets are not a built-in feature of HTTP/2. rfc8441 is an extension
+HTTP/2 WebSockets are not a built-in feature of HTTP/2. RFC8441 is an extension
 to the HTTP/2 protocol and server libraries are not obligated to implement it.
 In the current landscape, very few server libraries support the HTTP/2
 extended CONNECT method which bootstraps WebSockets.
