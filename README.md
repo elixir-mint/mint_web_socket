@@ -8,7 +8,7 @@ Mint is a _functional_ HTTP/1 and HTTP/2 client library written in Elixir.
 
 Why does it matter that it's functional? Isn't Elixir functional?
 
-Well, Existing WebSocket implementations like
+Existing WebSocket implementations like
 [`:gun`](https://github.com/ninenines/gun),
 [`:websocket_client`](https://github.com/jeremyong/websocket_client),
 or [`WebSockex`](https://github.com/Azolo/websockex) work by spawning and
