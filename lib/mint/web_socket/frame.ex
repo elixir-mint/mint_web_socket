@@ -92,6 +92,10 @@ defmodule Mint.WebSocket.Frame do
     >>
   end
 
+  defp payload(close(code: nil, reason: nil)) do
+    <<>>
+  end
+
   defp payload(close(code: code, reason: reason)) do
     code = code || 1_000
     reason = reason || ""
@@ -381,17 +385,14 @@ defmodule Mint.WebSocket.Frame do
   def translate(pong(data: data)), do: {:pong, data}
 
   def translate(:close) do
-    translate({:close, 1_000, ""})
+    translate({:close, nil, nil})
   end
 
-  def translate({:close, code, reason})
-      when is_integer(code) and is_binary(reason) do
+  def translate({:close, code, reason}) do
     close(mask: new_mask(), code: code, reason: reason, data: <<>>)
   end
 
   def translate(close(code: code, reason: reason)) do
-    code = code || 1_000
-    reason = reason || ""
     {:close, code, reason}
   end
 

@@ -135,7 +135,7 @@ defmodule Mint.WebSocket do
 
   * `:ping` - shorthand for `{:ping, ""}`
   * `:pong` - shorthand for `{:pong, ""}`
-  * `:close` - shorthand for `{:close, 1_000, ""}`
+  * `:close` - shorthand for `{:close, nil, nil}`
 
   These may be passed to `encode/2`.
 
@@ -192,7 +192,7 @@ defmodule Mint.WebSocket do
           | {:binary, binary()}
           | {:ping, binary()}
           | {:pong, binary()}
-          | {:close, code :: non_neg_integer(), reason :: binary()}
+          | {:close, code :: non_neg_integer() | nil, reason :: binary() | nil}
 
   @doc """
   Requests that a connection be upgraded to the WebSocket protocol
