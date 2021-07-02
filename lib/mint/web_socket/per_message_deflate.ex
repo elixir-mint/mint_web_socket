@@ -122,7 +122,7 @@ defmodule Mint.WebSocket.PerMessageDeflate do
 
       frame =
         Frame.unquote(opcode)(frame,
-          reserved: <<Bitwise.bor(reserved, 0b100)::size(3)>>,
+          reserved: <<:erlang.bor(reserved, 0b100)::size(3)>>,
           data: data
         )
 
