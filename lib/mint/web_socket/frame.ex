@@ -156,7 +156,7 @@ defmodule Mint.WebSocket.Frame do
       apply_mask(
         payload_rest,
         mask,
-        <<acc::binary, Bitwise.bxor(mask_key, part_key)::integer-size(8)-unit(unquote(n))>>
+        <<acc::binary, :erlang.bxor(mask_key, part_key)::integer-size(8)-unit(unquote(n))>>
       )
     end
   end
