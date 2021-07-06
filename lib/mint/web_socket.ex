@@ -306,8 +306,8 @@ defmodule Mint.WebSocket do
     Mint.WebSocket.new(conn, ref, status, resp_headers)
   ```
   """
-  @spec new(Mint.HTTP.t(), reference(), pos_integer(), Mint.Types.headers()) ::
-          {:ok, Mint.HTTP.t(), t(), [Mint.Types.response()]} | {:error, Mint.HTTP.t(), error()}
+  @spec new(Mint.HTTP.t(), reference(), Mint.Types.status(), Mint.Types.headers()) ::
+          {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
   def new(%Mint.HTTP1{} = conn, _request_ref, status, _response_headers)
       when status != 101 do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
