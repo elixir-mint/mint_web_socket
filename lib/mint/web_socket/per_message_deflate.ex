@@ -19,8 +19,13 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   require Mint.WebSocket.Frame, as: Frame
   alias Mint.WebSocket.Extension
 
-  @doc false
-  @type t :: %__MODULE__{inflate: :zlib.zstream(), deflate: :zlib.zstream()}
+  @typedoc false
+  @type t :: %__MODULE__{
+          inflate: :zlib.zstream(),
+          deflate: :zlib.zstream(),
+          inflate_takeover?: boolean(),
+          deflate_takeover?: boolean()
+        }
 
   defstruct [:inflate, :deflate, :inflate_takeover?, :deflate_takeover?]
 
