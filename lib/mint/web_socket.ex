@@ -378,26 +378,52 @@ defmodule Mint.WebSocket do
   # we have taken over the transport
   defp stream_http1(conn, message) do
     socket = HTTP1.get_socket(conn)
-    scheme = get_private(conn, :scheme)
+    tag = if get_private(conn, :scheme) == :ws, do: :tcp, else: :ssl
     # HTTP/1 only allows one WebSocket per connection
     with [request_ref] <- get_private(conn, :websockets),
-         tag = if(scheme == :ws, do: :tcp, else: :ssl),
          {^tag, ^socket, data} <- message do
-      reset_mode(conn, tag, [{:data, request_ref, data}])
+      reset_mode(conn, [{:data, request_ref, data}])
     else
       _ ->
         HTTP1.stream(conn, message)
     end
   end
 
-  defp reset_mode(conn, tag, responses) do
-    module = if tag == :tcp, do: :inet, else: :ssl
+  defp reset_mode(conn, responses) do
+    module = if get_private(conn, :scheme) == :ws, do: :inet, else: :ssl
 
     with :active <- get_private(conn, :mode),
          {:error, reason} <- module.setopts(HTTP1.get_socket(conn), active: :once) do
       {:error, conn, %Mint.TransportError{reason: reason}, responses}
     else
       _ -> {:ok, conn, responses}
+    end
+  end
+
+  @doc """
+  Streams data to the remote endpoint on the connection identified by `request_ref`
+  """
+  @spec stream_request_body(
+          Mint.HTTP.t(),
+          Mint.Types.request_ref(),
+          iodata() | :eof | {:eof, trailing_headers :: Mint.Types.headers()}
+        ) :: {:ok, Mint.HTTP.t()} | {:error, Mint.HTTP.t(), error()}
+  def stream_request_body(conn, request_ref, data) do
+    with :http1 <- protocol(conn),
+         [^request_ref] <- get_private(conn, :websockets),
+         data when is_binary(data) or is_list(data) <- data do
+      stream_request_body_http1(conn, data)
+    else
+      _ -> Mint.HTTP.stream_request_body(conn, request_ref, data)
+    end
+  end
+
+  defp stream_request_body_http1(conn, data) do
+    transport = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
+
+    case transport.send(Mint.HTTP1.get_socket(conn), data) do
+      :ok -> {:ok, conn}
+      {:error, reason} -> {:error, conn, %Mint.TransportError{reason: reason}}
     end
   end
 

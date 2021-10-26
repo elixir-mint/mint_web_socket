@@ -20,7 +20,7 @@ defmodule Mint.WebSocketTest do
 
       # send the hello world frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive the hello world reply frame
       assert_receive hello_world_echo_message
@@ -29,7 +29,7 @@ defmodule Mint.WebSocketTest do
 
       # send a ping frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :ping)
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive a pong frame
       assert_receive pong_message
@@ -38,7 +38,7 @@ defmodule Mint.WebSocketTest do
 
       # send a close frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive a close frame
       assert_receive close_message
@@ -79,7 +79,7 @@ defmodule Mint.WebSocketTest do
 
       # send the hello world frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive the hello world reply frame
       assert_receive hello_world_echo_message
@@ -88,7 +88,7 @@ defmodule Mint.WebSocketTest do
 
       # send a ping frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :ping)
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive a pong frame
       assert_receive pong_message
@@ -97,7 +97,7 @@ defmodule Mint.WebSocketTest do
 
       # send a close frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
-      {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
       # receive a close frame
       assert_receive close_message

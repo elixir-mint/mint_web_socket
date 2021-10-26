@@ -162,7 +162,7 @@ defmodule AutobahnClient do
 
     with {:ok, %Mint.WebSocket{} = websocket, data} <-
            Mint.WebSocket.encode(state.websocket, frame),
-         {:ok, conn} <- Mint.HTTP.stream_request_body(state.conn, state.ref, data) do
+         {:ok, conn} <- Mint.WebSocket.stream_request_body(state.conn, state.ref, data) do
       Logger.debug("Sent.")
       %__MODULE__{state | conn: conn, websocket: websocket, sent_close?: is_close_frame(frame)}
     else
