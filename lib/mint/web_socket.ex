@@ -114,6 +114,8 @@ defmodule Mint.WebSocket do
 
   alias __MODULE__.{Utils, Extension, Frame}
   alias Mint.WebSocketError
+  alias Mint.{HTTP1, HTTP2}
+  import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
   @typedoc """
   An immutable data structure representing a WebSocket connection
@@ -268,7 +270,7 @@ defmodule Mint.WebSocket do
   end
 
   defp do_upgrade(:http2, conn, path, headers, opts) do
-    if Mint.HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
+    if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
       extensions = get_extensions(opts)
       conn = put_in(conn.private[:extensions], extensions)
 
@@ -312,12 +314,16 @@ defmodule Mint.WebSocket do
           Mint.Types.headers()
         ) ::
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
-  def new(scheme, conn, request_ref, status, response_headers) when scheme in ~w[ws wss]a do
-    websockets = Map.put(Mint.HTTP.get_private(conn, :websockets) || %{}, request_ref, scheme)
+  def new(scheme, conn, request_ref, status, response_headers, opts \\ [])
+      when scheme in ~w[ws wss]a do
+    websockets = [{request_ref, scheme} | get_private(conn, :websockets) || []]
 
-    conn = Mint.HTTP.put_private(conn, :websockets, websockets)
+    conn =
+      conn
+      |> put_private(:websockets, websockets)
+      |> put_private(:mode, Keyword.get(opts, :mode, :active))
 
-    do_new(Mint.HTTP.protocol(conn), conn, request_ref, status, response_headers)
+    do_new(protocol(conn), conn, request_ref, status, response_headers)
   end
 
   defp do_new(:http1, conn, _request_ref, status, _response_headers) when status != 101 do
@@ -346,6 +352,51 @@ defmodule Mint.WebSocket do
 
   defp do_new(:http2, conn, _request_ref, _status, _response_headers) do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
+  end
+
+  @doc """
+  A wrapper around `Mint.HTTP.stream/2` for streaming HTTP and WebSocket
+  messages
+
+  This function does not decode WebSocket frames. Instead, once a WebSocket
+  connection has been established, decode any
+  `{:data, websocket_request_ref, data}` frames with `decode/2`.
+
+  This function is a drop-in replacement for `Mint.HTTP.stream/2` which
+  enables streaming WebSocket data after the bootstrapping HTTP/1 connection
+  has concluded. It decodes both WebSocket and regular HTTP messages.
+  """
+  def stream(conn, message) do
+    case protocol(conn) do
+      :http2 -> HTTP2.stream(conn, message)
+      :http1 -> stream_http1(conn, message)
+    end
+  end
+
+  # we take manual control of the :gen_tcp and :ssl messages in HTTP/1 because
+  # we have taken over the transport
+  defp stream_http1(conn, message) do
+    socket = HTTP1.get_socket(conn)
+    # HTTP/1 only allows one WebSocket per connection
+    with [{request_ref, scheme}] <- get_private(conn, :websockets),
+         tag = if(scheme == :ws, do: :tcp, else: :ssl),
+         {^tag, ^socket, data} <- message do
+      reset_mode(conn, tag, [{:data, request_ref, data}])
+    else
+      _ ->
+        HTTP1.stream(conn, message)
+    end
+  end
+
+  defp reset_mode(conn, tag, responses) do
+    module = if tag == :tcp, do: :inet, else: :ssl
+
+    with :active <- get_private(conn, :mode),
+         {:error, reason} <- module.setopts(HTTP1.get_socket(conn), active: :once) do
+      {:error, conn, %Mint.TransportError{reason: reason}, responses}
+    else
+      _ -> {:ok, conn, responses}
+    end
   end
 
   @doc """
@@ -390,7 +441,7 @@ defmodule Mint.WebSocket do
   # will complete the request
   defp re_open_request(%Mint.HTTP1{} = conn, request_ref) do
     request = new_request(request_ref, nil, :stream, :identity)
-    %{conn | request: %{request | state: :body}, streaming_request: request}
+    %{conn | streaming_request: request}
   end
 
   defp new_request(ref, method, body, encoding) do

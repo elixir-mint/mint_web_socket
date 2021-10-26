@@ -69,7 +69,7 @@ defmodule AutobahnClient do
     http_get_message = receive(do: (message -> message))
 
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
-      Mint.HTTP.stream(conn, http_get_message)
+      Mint.WebSocket.stream(conn, http_get_message)
 
     {:ok, conn, websocket} = Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
 
@@ -83,7 +83,7 @@ defmodule AutobahnClient do
   end
 
   def recv(%{ref: ref} = state) do
-    {:ok, conn, messages} = Mint.HTTP.stream(state.conn, receive(do: (message -> message)))
+    {:ok, conn, messages} = Mint.WebSocket.stream(state.conn, receive(do: (message -> message)))
 
     %__MODULE__{
       state
