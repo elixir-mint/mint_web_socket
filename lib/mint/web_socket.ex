@@ -246,16 +246,19 @@ defmodule Mint.WebSocket do
   ```
   """
   @spec upgrade(
+          scheme :: :ws | :wss,
           conn :: Mint.HTTP.t(),
           path :: String.t(),
           headers :: Mint.Types.headers(),
           opts :: Keyword.t()
         ) :: {:ok, Mint.HTTP.t(), Mint.Types.request_ref()} | {:error, Mint.HTTP.t(), error()}
-  def upgrade(conn, path, headers, opts \\ []) do
-    do_upgrade(Mint.HTTP.protocol(conn), conn, path, headers, opts)
+  def upgrade(scheme, conn, path, headers, opts \\ []) when scheme in ~w[ws wss]a do
+    conn = put_private(conn, :scheme, scheme)
+
+    do_upgrade(scheme, Mint.HTTP.protocol(conn), conn, path, headers, opts)
   end
 
-  defp do_upgrade(:http1, conn, path, headers, opts) do
+  defp do_upgrade(_scheme, :http1, conn, path, headers, opts) do
     nonce = Utils.random_nonce()
     extensions = get_extensions(opts)
 
@@ -269,14 +272,14 @@ defmodule Mint.WebSocket do
     Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
 
-  defp do_upgrade(:http2, conn, path, headers, opts) do
+  defp do_upgrade(scheme, :http2, conn, path, headers, opts) do
     if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
       extensions = get_extensions(opts)
       conn = put_private(conn, :extensions, extensions)
 
       headers =
         [
-          {":scheme", conn.scheme},
+          {":scheme", if(scheme == :ws, do: "http", else: "https")},
           {":path", path},
           {":protocol", "websocket"}
           | headers
@@ -307,16 +310,14 @@ defmodule Mint.WebSocket do
   ```
   """
   @spec new(
-          scheme :: :ws | :wss,
           Mint.HTTP.t(),
           reference(),
           Mint.Types.status(),
           Mint.Types.headers()
         ) ::
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
-  def new(scheme, conn, request_ref, status, response_headers, opts \\ [])
-      when scheme in ~w[ws wss]a do
-    websockets = [{request_ref, scheme} | get_private(conn, :websockets) || []]
+  def new(conn, request_ref, status, response_headers, opts \\ []) do
+    websockets = [request_ref | get_private(conn, :websockets) || []]
 
     conn =
       conn
@@ -368,8 +369,8 @@ defmodule Mint.WebSocket do
   """
   def stream(conn, message) do
     case protocol(conn) do
-      :http2 -> HTTP2.stream(conn, message)
       :http1 -> stream_http1(conn, message)
+      _ -> Mint.HTTP.stream(conn, message)
     end
   end
 
@@ -377,8 +378,9 @@ defmodule Mint.WebSocket do
   # we have taken over the transport
   defp stream_http1(conn, message) do
     socket = HTTP1.get_socket(conn)
+    scheme = get_private(conn, :scheme)
     # HTTP/1 only allows one WebSocket per connection
-    with [{request_ref, scheme}] <- get_private(conn, :websockets),
+    with [request_ref] <- get_private(conn, :websockets),
          tag = if(scheme == :ws, do: :tcp, else: :ssl),
          {^tag, ^socket, data} <- message do
       reset_mode(conn, tag, [{:data, request_ref, data}])

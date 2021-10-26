@@ -10,13 +10,13 @@ defmodule Mint.WebSocketTest do
     end
 
     test "we can send and hello-world frame and receive an echo reply", %{conn: conn} do
-      {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+      {:ok, conn, ref} = Mint.WebSocket.upgrade(:ws, conn, "/", [])
       assert_receive http_get_message
 
       {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
         Mint.WebSocket.stream(conn, http_get_message)
 
-      {:ok, conn, websocket} = Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
+      {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
       # send the hello world frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
@@ -61,7 +61,7 @@ defmodule Mint.WebSocketTest do
     @tag :http2
     test "we can send and hello-world frame and receive an echo reply", %{conn: conn} do
       {:ok, conn, ref} =
-        Mint.WebSocket.upgrade(conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
+        Mint.WebSocket.upgrade(:ws, conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
 
       assert_receive http_connect_message
 
@@ -75,7 +75,7 @@ defmodule Mint.WebSocketTest do
             other
         end
 
-      {:ok, conn, websocket} = Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
+      {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
       # send the hello world frame
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
