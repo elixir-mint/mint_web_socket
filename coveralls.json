@@ -6,5 +6,5 @@
   "terminal_options": {
     "file_column_width": 60
   },
-  "skip_files": ["^deps", "^test/compare/"]
+  "skip_files": ["^deps", "^test/compare/", "^test/fixtures/websocket_"]
 }
