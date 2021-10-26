@@ -67,8 +67,9 @@ defmodule Mint.WebSocket do
   `Mint.HTTP.connect/4`.
 
   ```elixir
-  {:ok, %Mint.HTTP2{} = conn} =
+  {:ok, conn} =
     Mint.HTTP.connect(:http, "websocket.example", 80, protocols: [:http2])
+  :http2 = Mint.HTTP.protocol(conn)
   {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
   ```
 
@@ -248,9 +249,11 @@ defmodule Mint.WebSocket do
           headers :: Mint.Types.headers(),
           opts :: Keyword.t()
         ) :: {:ok, Mint.HTTP.t(), Mint.Types.request_ref()} | {:error, Mint.HTTP.t(), error()}
-  def upgrade(conn, path, headers, opts \\ [])
+  def upgrade(conn, path, headers, opts \\ []) do
+    do_upgrade(Mint.HTTP.protocol(conn), conn, path, headers, opts)
+  end
 
-  def upgrade(%Mint.HTTP1{} = conn, path, headers, opts) do
+  defp do_upgrade(:http1, conn, path, headers, opts) do
     nonce = Utils.random_nonce()
     extensions = get_extensions(opts)
 
@@ -264,28 +267,23 @@ defmodule Mint.WebSocket do
     Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
 
-  def upgrade(
-        %Mint.HTTP2{server_settings: %{enable_connect_protocol: true}} = conn,
-        path,
-        headers,
-        opts
-      ) do
-    extensions = get_extensions(opts)
-    conn = put_in(conn.private[:extensions], extensions)
+  defp do_upgrade(:http2, conn, path, headers, opts) do
+    if Mint.HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
+      extensions = get_extensions(opts)
+      conn = put_in(conn.private[:extensions], extensions)
 
-    headers =
-      [
-        {":scheme", conn.scheme},
-        {":path", path},
-        {":protocol", "websocket"}
-        | headers
-      ] ++ Utils.headers(:http2, extensions)
+      headers =
+        [
+          {":scheme", conn.scheme},
+          {":path", path},
+          {":protocol", "websocket"}
+          | headers
+        ] ++ Utils.headers(:http2, extensions)
 
-    Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
-  end
-
-  def upgrade(%Mint.HTTP2{} = conn, _path, _headers, _opts) do
-    {:error, conn, %WebSocketError{reason: :extended_connect_disabled}}
+      Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
+    else
+      {:error, conn, %WebSocketError{reason: :extended_connect_disabled}}
+    end
   end
 
   @doc """
@@ -308,12 +306,15 @@ defmodule Mint.WebSocket do
   """
   @spec new(Mint.HTTP.t(), reference(), Mint.Types.status(), Mint.Types.headers()) ::
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
-  def new(%Mint.HTTP1{} = conn, _request_ref, status, _response_headers)
-      when status != 101 do
+  def new(conn, request_ref, status, response_headers) do
+    do_new(Mint.HTTP.protocol(conn), conn, request_ref, status, response_headers)
+  end
+
+  defp do_new(:http1, conn, _request_ref, status, _response_headers) when status != 101 do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
   end
 
-  def new(%Mint.HTTP1{} = conn, request_ref, _status, response_headers) do
+  defp do_new(:http1, conn, request_ref, _status, response_headers) do
     with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers),
          {:ok, extensions} <-
            Extension.accept_extensions(conn.private.extensions, response_headers) do
@@ -325,15 +326,15 @@ defmodule Mint.WebSocket do
     end
   end
 
-  def new(%Mint.HTTP2{} = conn, _request_ref, status, response_headers)
-      when status in 200..299 do
+  defp do_new(:http2, conn, _request_ref, status, response_headers)
+       when status in 200..299 do
     with {:ok, extensions} <-
            Extension.accept_extensions(conn.private.extensions, response_headers) do
       {:ok, conn, %__MODULE__{extensions: extensions}}
     end
   end
 
-  def new(%Mint.HTTP2{} = conn, _request_ref, _status, _response_headers) do
+  defp do_new(:http2, conn, _request_ref, _status, _response_headers) do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
   end
 
