@@ -301,12 +301,22 @@ defmodule Mint.WebSocket do
     Mint.HTTP.stream(conn, http_reply)
 
   {:ok, conn, websocket} =
-    Mint.WebSocket.new(conn, ref, status, resp_headers)
+    Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
   ```
   """
-  @spec new(Mint.HTTP.t(), reference(), Mint.Types.status(), Mint.Types.headers()) ::
+  @spec new(
+          scheme :: :ws | :wss,
+          Mint.HTTP.t(),
+          reference(),
+          Mint.Types.status(),
+          Mint.Types.headers()
+        ) ::
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
-  def new(conn, request_ref, status, response_headers) do
+  def new(scheme, conn, request_ref, status, response_headers) when scheme in ~w[ws wss]a do
+    websockets = Map.put(Mint.HTTP.get_private(conn, :websockets) || %{}, request_ref, scheme)
+
+    conn = Mint.HTTP.put_private(conn, :websockets, websockets)
+
     do_new(Mint.HTTP.protocol(conn), conn, request_ref, status, response_headers)
   end
 

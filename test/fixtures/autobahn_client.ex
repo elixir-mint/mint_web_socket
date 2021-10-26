@@ -71,7 +71,7 @@ defmodule AutobahnClient do
     {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
       Mint.HTTP.stream(conn, http_get_message)
 
-    {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
+    {:ok, conn, websocket} = Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
 
     %__MODULE__{
       next: :cont,

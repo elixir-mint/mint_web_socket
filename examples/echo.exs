@@ -11,7 +11,7 @@ Logger.debug("Upgrading to WebSocket protocol on /")
 message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, message)
-{:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
+{:ok, conn, websocket} = Mint.WebSocket.new(:wss, conn, ref, status, resp_headers)
 Logger.debug("WebSocket established")
 
 frame = {:text, "Rock it with Mint.WebSocket"}
