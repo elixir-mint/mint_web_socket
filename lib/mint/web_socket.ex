@@ -261,8 +261,8 @@ defmodule Mint.WebSocket do
 
     conn =
       conn
-      |> put_in([Access.key(:private), :sec_websocket_key], nonce)
-      |> put_in([Access.key(:private), :extensions], extensions)
+      |> put_private(:sec_websocket_key, nonce)
+      |> put_private(:extensions, extensions)
 
     headers = Utils.headers({:http1, nonce}, extensions) ++ headers
 
@@ -272,7 +272,7 @@ defmodule Mint.WebSocket do
   defp do_upgrade(:http2, conn, path, headers, opts) do
     if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
       extensions = get_extensions(opts)
-      conn = put_in(conn.private[:extensions], extensions)
+      conn = put_private(conn, :extensions, extensions)
 
       headers =
         [
@@ -331,9 +331,9 @@ defmodule Mint.WebSocket do
   end
 
   defp do_new(:http1, conn, request_ref, _status, response_headers) do
-    with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers),
+    with :ok <- Utils.check_accept_nonce(get_private(conn, :sec_websocket_key), response_headers),
          {:ok, extensions} <-
-           Extension.accept_extensions(conn.private.extensions, response_headers) do
+           Extension.accept_extensions(get_private(conn, :extensions), response_headers) do
       conn = re_open_request(conn, request_ref)
 
       {:ok, conn, %__MODULE__{extensions: extensions}}
@@ -345,7 +345,7 @@ defmodule Mint.WebSocket do
   defp do_new(:http2, conn, _request_ref, status, response_headers)
        when status in 200..299 do
     with {:ok, extensions} <-
-           Extension.accept_extensions(conn.private.extensions, response_headers) do
+           Extension.accept_extensions(get_private(conn, :extensions), response_headers) do
       {:ok, conn, %__MODULE__{extensions: extensions}}
     end
   end
