@@ -6,12 +6,12 @@ require Logger
 Logger.debug("Connected to https://echo.websocket.org:443")
 
 Logger.debug("Upgrading to WebSocket protocol on /")
-{:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+{:ok, conn, ref} = Mint.WebSocket.upgrade(:wss, conn, "/", [])
 
 message = receive(do: (message -> message))
 {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
   Mint.HTTP.stream(conn, message)
-{:ok, conn, websocket} = Mint.WebSocket.new(:wss, conn, ref, status, resp_headers)
+{:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 Logger.debug("WebSocket established")
 
 frame = {:text, "Rock it with Mint.WebSocket"}
