@@ -13,7 +13,7 @@ defmodule AutobahnClient do
             when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
 
   def get_case_count do
-    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> get_once()
+    %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> decode_buffer()
 
     String.to_integer(count)
   end
@@ -26,14 +26,14 @@ defmodule AutobahnClient do
 
   def get_case_status(case_number) do
     %{messages: [{:text, status} | _]} =
-      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> get_once()
+      connect("/getCaseStatus?case=#{case_number}&agent=Mint") |> decode_buffer()
 
     Jason.decode!(status)["behavior"]
   end
 
   def get_case_info(case_number) do
     %{messages: [{:text, status} | _]} =
-      connect("/getCaseInfo?case=#{case_number}&agent=Mint") |> get_once()
+      connect("/getCaseInfo?case=#{case_number}&agent=Mint") |> decode_buffer()
 
     Jason.decode!(status, keys: :atoms)
   end
@@ -52,13 +52,6 @@ defmodule AutobahnClient do
     end
   end
 
-  defp get_once(state) do
-    case decode_buffer(state) do
-      %{messages: []} = state -> state |> recv() |> get_once()
-      state -> state
-    end
-  end
-
   def connect(resource, extensions \\ []) do
     :ok = flush()
     host = System.get_env("FUZZINGSERVER_HOST") || "localhost"
@@ -68,14 +61,9 @@ defmodule AutobahnClient do
 
     http_get_message = receive(do: (message -> message))
 
-    {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers} | rest]} =
+    {:ok, conn,
+     [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:data, ^ref, data}, {:done, ^ref}]} =
       Mint.WebSocket.stream(conn, http_get_message)
-
-    buffer =
-      case rest do
-        [{:data, ^ref, data}, {:done, ^ref}] -> data
-        [{:done, ^ref}] -> <<>>
-      end
 
     {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
 
@@ -84,7 +72,7 @@ defmodule AutobahnClient do
       conn: conn,
       ref: ref,
       websocket: websocket,
-      buffer: buffer
+      buffer: data
     }
   end
 
@@ -100,19 +88,9 @@ defmodule AutobahnClient do
   end
 
   def decode_buffer(state) do
-    case Mint.WebSocket.decode(state.websocket, state.buffer) do
-      {:ok, websocket, messages} ->
-        %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
+    {:ok, websocket, messages} = Mint.WebSocket.decode(state.websocket, state.buffer)
 
-      {:error, websocket, reason} ->
-        Logger.debug(
-          "Could not parse buffer #{inspect(state.buffer, printable_limit: 30)}" <>
-            " because #{inspect(reason)}, sending close"
-        )
-
-        %__MODULE__{state | websocket: websocket}
-        |> close(close_code_for_reason(reason), "Malformed payload")
-    end
+    %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
   end
 
   def loop(state) do
@@ -194,9 +172,6 @@ defmodule AutobahnClient do
     {:ok, conn} = Mint.HTTP.close(state.conn)
     %__MODULE__{state | conn: conn, next: :stop}
   end
-
-  defp close_code_for_reason({:invalid_utf8, _data}), do: 1007
-  defp close_code_for_reason(_), do: 1002
 
   defp join_data_frames(messages, ref) do
     messages
