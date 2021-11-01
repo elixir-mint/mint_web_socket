@@ -8,6 +8,34 @@
 
 (Unofficial) HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
+## Usage
+
+`Mint.WebSocket` works together with `Mint.HTTP` API. For example,
+this snippet shows sending and receiving a text frame of "hello world" to a
+WebSocket server which echos our frames:
+
+```elixir
+# bootstrap
+{:ok, conn} = Mint.HTTP.connect(:http, "echo", 9000)
+
+{:ok, conn, ref} = Mint.WebSocket.upgrade(:ws, conn, "/", [])
+
+http_get_message = receive(do: (message -> message))
+{:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
+  Mint.WebSocket.stream(conn, http_get_message)
+
+{:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
+
+# send the hello world frame
+{:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
+{:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
+
+# receive the hello world reply frame
+hello_world_echo_message = receive(do: (message -> message))
+{:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, hello_world_echo_message)
+{:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
+```
+
 ## What is Mint?
 
 Mint is a _functional_ HTTP/1 and HTTP/2 client library written in Elixir.
@@ -15,9 +43,10 @@ Mint is a _functional_ HTTP/1 and HTTP/2 client library written in Elixir.
 Why does it matter that it's functional? Isn't Elixir functional?
 
 Existing WebSocket implementations like
-[`:gun`](https://github.com/ninenines/gun),
-[`:websocket_client`](https://github.com/jeremyong/websocket_client),
-or [`WebSockex`](https://github.com/Azolo/websockex) work by spawning and
+[`:gun`](https://github.com/ninenines/gun) /
+[`:websocket_client`](https://github.com/jeremyong/websocket_client) /
+[`Socket`](https://github.com/meh/elixir-socket) /
+[`WebSockex`](https://github.com/Azolo/websockex) work by spawning and
 passing messages among processes. This is a very convenient interface in
 Elixir and Erlang, but it does not allow the author much control over
 the WebSocket connection.
@@ -58,48 +87,6 @@ If `Mint.WebSocket.upgrade/4` returns
 Then the server does not support HTTP/2 WebSockets or does not have them
 enabled.
 
-Support for HTTP/2 extended CONNECT was added to Mint in version `1.4.0`.
-If you need HTTP/2 support, make sure you require that version as a minimum.
-
-```elixir
-# mix.exs
-def deps do
-  [
-    {:mint_web_socket, "~> 0.1"},
-    {:mint, "~> 1.4"},
-    # ..
-  ]
-end
-```
-
-## Usage
-
-`Mint.WebSocket` piggybacks much of the existing `Mint.HTTP` API. For example,
-this snippet shows sending and receiving a text frame of "hello world" to a
-WebSocket server which echos our frames:
-
-```elixir
-# bootstrap
-{:ok, conn} = Mint.HTTP.connect(:http, "echo", 9000)
-
-{:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
-
-http_get_message = receive(do: (message -> message))
-{:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
-  Mint.HTTP.stream(conn, http_get_message)
-
-{:ok, conn, websocket} = Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
-
-# send the hello world frame
-{:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-{:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
-
-# receive the hello world reply frame
-hello_world_echo_message = receive(do: (message -> message))
-{:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, hello_world_echo_message)
-{:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
-```
-
 ## Development workflow
 
 Interested in developing `Mint.WebSocket`? The `docker-compose.yml` sets up
@@ -108,7 +95,7 @@ fuzzing server.
 
 ```
 (host)$ docker-compose up -d
-(host)$ docker-compose exec app /bin/bash
+(host)$ docker-compose exec app bash
 (app)$ mix deps.get
 (app)$ mix test
 (app)$ iex -S mix
