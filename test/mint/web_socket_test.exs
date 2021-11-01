@@ -1,10 +1,10 @@
 defmodule Mint.WebSocketTest do
   use ExUnit.Case, async: true
 
-  describe "given an HTTP/1 connection to an echo server" do
+  describe "given an active HTTP/1 connection to an echo server" do
     setup do
       host = System.get_env("ECHO_HOST") || "localhost"
-      {:ok, conn} = Mint.HTTP.connect(:http, host, 9000)
+      {:ok, conn} = Mint.HTTP.connect(:http, host, 9000, protocols: [:http1])
 
       [conn: conn]
     end
@@ -43,6 +43,42 @@ defmodule Mint.WebSocketTest do
       # receive a close frame
       assert_receive close_message
       {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, close_message)
+      assert {:ok, _websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
+
+      {:ok, _conn} = Mint.HTTP.close(conn)
+    end
+  end
+
+  describe "given a passive HTTP/1 connection to an echo server" do
+    setup do
+      host = System.get_env("ECHO_HOST") || "localhost"
+      {:ok, conn} = Mint.HTTP.connect(:http, host, 9000, mode: :passive, protocols: [:http1])
+
+      [conn: conn]
+    end
+
+    test "we can send and receive frames (with recv/3)", %{conn: conn} do
+      {:ok, conn, ref} = Mint.WebSocket.upgrade(:ws, conn, "/", [])
+
+      {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
+        Mint.WebSocket.recv(conn, 0, 5_000)
+
+      {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers, mode: :passive)
+
+      # send the hello world frame
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
+
+      # receive the hello world reply frame
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.recv(conn, 0, 5_000)
+      assert {:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
+
+      # send a close frame
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
+
+      # receive a close frame
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.recv(conn, 0, 5_000)
       assert {:ok, _websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
 
       {:ok, _conn} = Mint.HTTP.close(conn)
