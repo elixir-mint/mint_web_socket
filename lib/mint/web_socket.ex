@@ -381,22 +381,25 @@ defmodule Mint.WebSocket do
           | {:error, Mint.HTTP.t(), Mint.Types.error(), [Mint.Types.response()]}
           | :unknown
   def stream(conn, message) do
-    case protocol(conn) do
-      :http1 -> stream_http1(conn, message)
-      _ -> Mint.HTTP2.stream(conn, message)
+    with :http1 <- protocol(conn),
+         # HTTP/1 only allows one WebSocket per connection
+         [request_ref] <- get_private(conn, :websockets) do
+      stream_http1(conn, request_ref, message)
+    else
+      _ -> Mint.HTTP.stream(conn, message)
     end
   end
 
   # we take manual control of the :gen_tcp and :ssl messages in HTTP/1 because
   # we have taken over the transport
-  defp stream_http1(conn, message) do
+  defp stream_http1(conn, request_ref, message) do
     socket = HTTP1.get_socket(conn)
     tag = if get_private(conn, :scheme) == :ws, do: :tcp, else: :ssl
-    # HTTP/1 only allows one WebSocket per connection
-    with [request_ref] <- get_private(conn, :websockets),
-         {^tag, ^socket, data} <- message do
-      reset_mode(conn, [{:data, request_ref, data}])
-    else
+
+    case message do
+      {^tag, ^socket, data} ->
+        reset_mode(conn, [{:data, request_ref, data}])
+
       _ ->
         HTTP1.stream(conn, message)
     end
@@ -410,6 +413,47 @@ defmodule Mint.WebSocket do
       {:error, conn, %Mint.TransportError{reason: reason}, responses}
     else
       _ -> {:ok, conn, responses}
+    end
+  end
+
+  @doc """
+  Receives data from the socket
+
+  This function is used instead of `stream/2` when the connection is
+  in `:passive` mode. You must pass the `mode: :passive` option to
+  `new/5` in order to use `recv/3`.
+
+  This function wraps `Mint.HTTP.recv/3`. See the `Mint.HTTP.recv/3`
+  documentation for more information.
+
+  ## Examples
+
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.recv(conn, 0, 5_000)
+      {:ok, websocket, [{:text, "hello world!"}]} =
+        Mint.WebSocket.decode(websocket, data)
+  """
+  @spec recv(Mint.HTTP.t(), non_neg_integer(), timeout()) ::
+          {:ok, Mint.HTTP.t(), [Mint.Types.response()]}
+          | {:error, t(), Mint.Types.error(), [Mint.Types.response()]}
+  def recv(conn, byte_count, timeout) do
+    with :http1 <- protocol(conn),
+         [request_ref] <- get_private(conn, :websockets) do
+      recv_http1(conn, request_ref, byte_count, timeout)
+    else
+      _ -> Mint.HTTP.recv(conn, byte_count, timeout)
+    end
+  end
+
+  defp recv_http1(conn, request_ref, byte_count, timeout) do
+    module = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
+    socket = HTTP1.get_socket(conn)
+
+    case module.recv(socket, byte_count, timeout) do
+      {:ok, data} ->
+        {:ok, conn, [{:data, request_ref, data}]}
+
+      {:error, error} ->
+        {:error, conn, error, []}
     end
   end
 
