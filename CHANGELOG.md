@@ -6,7 +6,7 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## UNRELEASED
+## 0.2.0 - 2022-02-17
 
 This release is a breaking change from the 0.1.0 series. This update removes
 all instances where Mint.WebSocket would access opaque `t:Mint.HTTP.t/0` fields
