@@ -1,4 +1,4 @@
-defmodule WebsocketSupervisor do
+defmodule TestServer do
   @moduledoc """
   A supervisor for the WebsocketHandler
   """
@@ -10,7 +10,8 @@ defmodule WebsocketSupervisor do
       :cowboy_router.compile([
         {:_,
          [
-           {'/', WebsocketHandler, []}
+           {'/', WebsocketHandler, []},
+           {'/http_get', HttpHandler, []}
          ]}
       ])
 

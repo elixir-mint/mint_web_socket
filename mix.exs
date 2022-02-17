@@ -43,12 +43,7 @@ defmodule MintWebSocket.MixProject do
 
   defp deps do
     [
-      {:mint, "~> 1.0"},
-      # for running the :http2 tests (mix test --include http2)
-      # {:mint,
-      #  git: "https://github.com/elixir-mint/mint.git",
-      #  ref: "488a6ba5fd418a52f697a8d5f377c629ea96af92",
-      #  override: true},
+      {:mint, "~> 1.4 and >= 1.4.1"},
       {:ex_doc, "~> 0.24", only: [:dev], runtime: false},
       {:castore, ">= 0.0.0", only: [:dev]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},

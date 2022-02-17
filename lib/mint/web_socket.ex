@@ -3,10 +3,8 @@ defmodule Mint.WebSocket do
   (Unofficial) WebSocket support for the Mint functional HTTP client
 
   Like Mint, `Mint.WebSocket` provides a functional, process-less interface
-  for operating a WebSocket connection. `Mint.WebSocket` is an extension
-  to Mint: the sending and receiving of messages is done with Mint functions.
-  Prospective Mint.WebSocket users should first familiarize themselves with
-  `Mint.HTTP`.
+  for operating a WebSocket connection. Prospective Mint.WebSocket users
+  may wish to first familiarize themselves with `Mint.HTTP`.
 
   Mint.WebSocket is not fully spec-conformant on its own. Runtime behaviors
   such as responding to pings with pongs must be implemented by the user of
@@ -15,43 +13,43 @@ defmodule Mint.WebSocket do
   ## Usage
 
   A connection formed with `Mint.HTTP.connect/4` can be upgraded to a WebSocket
-  connection with `upgrade/4`.
+  connection with `upgrade/5`.
 
   ```elixir
   {:ok, conn} = Mint.HTTP.connect(:http, "localhost", 9_000)
-  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+  {:ok, conn, ref} = Mint.WebSocket.upgrade(:ws, conn, "/", [])
   ```
 
-  `upgrade/4` sends an upgrade request to the remote server. The WebSocket
+  `upgrade/5` sends an upgrade request to the remote server. The WebSocket
   connection is then built by awaiting the HTTP response from the server.
 
   ```elixir
   http_reply_message = receive(do: (message -> message))
   {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, resp_headers}, {:done, ^ref}]} =
-    Mint.HTTP.stream(conn, http_reply_message)
+    Mint.WebSocket.stream(conn, http_reply_message)
 
   {:ok, conn, websocket} =
     Mint.WebSocket.new(conn, ref, status, resp_headers)
   ```
 
-  Now that the WebSocket connection has been formed, we use the `websocket`
-  data structure to encode and decode frames, and the
-  `Mint.HTTP.stream_request_body/3` and `Mint.HTTP.stream/2` functions from
-  Mint to perform sending and receiving of encoded frames.
+  Once the WebSocket connection has been established, use the `websocket`
+  data structure to encode and decode frames with `encode/2` and `decode/2`,
+  and send and stream messages with `stream_request_body/3` and `stream/2`.
 
-  For example, we'll send a "hello world" text frame across our connection.
+  For example, one may send a "hello world" text frame across a connection
+  like so:
 
   ```elixir
   {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-  {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+  {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
   ```
 
-  And let's say that the server is echoing our messages; let's receive our
-  echoed "hello world" text frame.
+  Say that the remote is echoing messages. Use `stream/2` and `decode/2` to
+  decode a received WebSocket frame:
 
   ```elixir
   echo_message = receive(do: (message -> message))
-  {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, echo_message)
+  {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, echo_message)
   {:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
   ```
 
@@ -62,14 +60,15 @@ defmodule Mint.WebSocket do
   writing, very few HTTP/2 server libraries support or enable HTTP/2
   WebSockets by default.
 
-  `upgrade/4` works on both HTTP/1 and HTTP/2 connections. In order to select
+  `upgrade/5` works on both HTTP/1 and HTTP/2 connections. In order to select
   HTTP/2, the `:http2` protocol should be explicitly selected in
   `Mint.HTTP.connect/4`.
 
   ```elixir
-  {:ok, %Mint.HTTP2{} = conn} =
+  {:ok, conn} =
     Mint.HTTP.connect(:http, "websocket.example", 80, protocols: [:http2])
-  {:ok, conn, ref} = Mint.WebSocket.upgrade(conn, "/", [])
+  :http2 = Mint.HTTP.protocol(conn)
+  {:ok, conn, ref} = Mint.WebSocket.upgrade(:ws, conn, "/", [])
   ```
 
   If the server does not support the extended CONNECT method needed to bootstrap
@@ -96,8 +95,8 @@ defmodule Mint.WebSocket do
   {:ok, conn} = Mint.HTTP.connect(:https, "websocket.example", 443)
   ```
 
-  And use `upgrade/4` to upgrade the connection to WebSocket. See the
-  Mint documentation on SSL for more information.
+  And pass the `:wss` scheme to `upgrade/5`. See the Mint documentation
+  on SSL for more information.
 
   ## Extensions
 
@@ -113,6 +112,8 @@ defmodule Mint.WebSocket do
 
   alias __MODULE__.{Utils, Extension, Frame}
   alias Mint.WebSocketError
+  alias Mint.{HTTP1, HTTP2}
+  import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
   @typedoc """
   An immutable data structure representing a WebSocket connection
@@ -137,13 +138,8 @@ defmodule Mint.WebSocket do
   * `:pong` - shorthand for `{:pong, ""}`
   * `:close` - shorthand for `{:close, nil, nil}`
 
-  These may be passed to `encode/2`.
-
-  <!--
-  Note that the shorthand notations may be passed to `encode/2`
-  but frames returned from `decode/2` will never be in
-  shorthand format.
-  -->
+  These may be passed to `encode/2`. Frames decoded with `decode/2` are always
+  in `t:frame/0` format.
   """
   @type shorthand_frame :: :ping | :pong | :close
 
@@ -174,10 +170,10 @@ defmodule Mint.WebSocket do
 
   ```elixir
   {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
-  {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+  {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
   close_response = receive(do: (message -> message))
-  {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, close_response)
+  {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, close_response)
   {:ok, websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
 
   Mint.HTTP.close(conn)
@@ -205,6 +201,10 @@ defmodule Mint.WebSocket do
   an extended CONNECT request which opens a stream to be used for the WebSocket
   connection.
 
+  The `scheme` argument should be either `:ws` or `:wss`, using `:ws` for
+  connections established by passing `:http` to `Mint.HTTP.connect/4` and
+  `:wss` corresponding to `:https`.
+
   ## Options
 
   * `:extensions` - a list of extensions to negotiate. See the extensions
@@ -231,10 +231,11 @@ defmodule Mint.WebSocket do
   ```elixir
   {:ok, conn} = Mint.HTTP.connect(:http, "localhost", 9_000)
   {:ok, conn, ref} =
-    Mint.WebSocket.upgrade(conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
+    Mint.WebSocket.upgrade(:ws, conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
   # or provide params:
   {:ok, conn, ref} =
     Mint.WebSocket.upgrade(
+      :ws,
       conn,
       "/",
       [],
@@ -243,49 +244,49 @@ defmodule Mint.WebSocket do
   ```
   """
   @spec upgrade(
+          scheme :: :ws | :wss,
           conn :: Mint.HTTP.t(),
           path :: String.t(),
           headers :: Mint.Types.headers(),
           opts :: Keyword.t()
         ) :: {:ok, Mint.HTTP.t(), Mint.Types.request_ref()} | {:error, Mint.HTTP.t(), error()}
-  def upgrade(conn, path, headers, opts \\ [])
+  def upgrade(scheme, conn, path, headers, opts \\ []) when scheme in ~w[ws wss]a do
+    conn = put_private(conn, :scheme, scheme)
 
-  def upgrade(%Mint.HTTP1{} = conn, path, headers, opts) do
+    do_upgrade(scheme, Mint.HTTP.protocol(conn), conn, path, headers, opts)
+  end
+
+  defp do_upgrade(_scheme, :http1, conn, path, headers, opts) do
     nonce = Utils.random_nonce()
     extensions = get_extensions(opts)
 
     conn =
       conn
-      |> put_in([Access.key(:private), :sec_websocket_key], nonce)
-      |> put_in([Access.key(:private), :extensions], extensions)
+      |> put_private(:sec_websocket_key, nonce)
+      |> put_private(:extensions, extensions)
 
     headers = Utils.headers({:http1, nonce}, extensions) ++ headers
 
-    Mint.HTTP.request(conn, "GET", path, headers, nil)
+    Mint.HTTP1.request(conn, "GET", path, headers, nil)
   end
 
-  def upgrade(
-        %Mint.HTTP2{server_settings: %{enable_connect_protocol: true}} = conn,
-        path,
-        headers,
-        opts
-      ) do
-    extensions = get_extensions(opts)
-    conn = put_in(conn.private[:extensions], extensions)
+  defp do_upgrade(scheme, :http2, conn, path, headers, opts) do
+    if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
+      extensions = get_extensions(opts)
+      conn = put_private(conn, :extensions, extensions)
 
-    headers =
-      [
-        {":scheme", conn.scheme},
-        {":path", path},
-        {":protocol", "websocket"}
-        | headers
-      ] ++ Utils.headers(:http2, extensions)
+      headers =
+        [
+          {":scheme", if(scheme == :ws, do: "http", else: "https")},
+          {":path", path},
+          {":protocol", "websocket"}
+          | headers
+        ] ++ Utils.headers(:http2, extensions)
 
-    Mint.HTTP.request(conn, "CONNECT", path, headers, :stream)
-  end
-
-  def upgrade(%Mint.HTTP2{} = conn, _path, _headers, _opts) do
-    {:error, conn, %WebSocketError{reason: :extended_connect_disabled}}
+      Mint.HTTP2.request(conn, "CONNECT", path, headers, :stream)
+    else
+      {:error, conn, %WebSocketError{reason: :extended_connect_disabled}}
+    end
   end
 
   @doc """
@@ -295,52 +296,216 @@ defmodule Mint.WebSocket do
   This function will setup any extensions accepted by the server using
   the `c:Mint.WebSocket.Extension.init/2` callback.
 
+  ## Options
+
+  * `:mode` - (default: `:active`) either `:active` or `:passive`. This
+    corresponds to the same option in `Mint.HTTP.connect/4`.
+
   ## Examples
 
   ```elixir
   http_reply = receive(do: (message -> message))
   {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, headers}, {:done, ^ref}]} =
-    Mint.HTTP.stream(conn, http_reply)
+    Mint.WebSocket.stream(conn, http_reply)
 
   {:ok, conn, websocket} =
-    Mint.WebSocket.new(conn, ref, status, resp_headers)
+    Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
   ```
   """
-  @spec new(Mint.HTTP.t(), reference(), Mint.Types.status(), Mint.Types.headers()) ::
+  @spec new(
+          Mint.HTTP.t(),
+          reference(),
+          Mint.Types.status(),
+          Mint.Types.headers()
+        ) ::
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
-  def new(%Mint.HTTP1{} = conn, _request_ref, status, _response_headers)
-      when status != 101 do
+  def new(conn, request_ref, status, response_headers, opts \\ []) do
+    websockets = [request_ref | get_private(conn, :websockets) || []]
+
+    conn =
+      conn
+      |> put_private(:websockets, websockets)
+      |> put_private(:mode, Keyword.get(opts, :mode, :active))
+
+    do_new(protocol(conn), conn, status, response_headers)
+  end
+
+  defp do_new(:http1, conn, status, _response_headers) when status != 101 do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
   end
 
-  def new(%Mint.HTTP1{} = conn, request_ref, _status, response_headers) do
-    with :ok <- Utils.check_accept_nonce(conn.private[:sec_websocket_key], response_headers),
+  defp do_new(:http1, conn, _status, response_headers) do
+    with :ok <- Utils.check_accept_nonce(get_private(conn, :sec_websocket_key), response_headers),
          {:ok, extensions} <-
-           Extension.accept_extensions(conn.private.extensions, response_headers) do
-      conn = re_open_request(conn, request_ref)
-
+           Extension.accept_extensions(get_private(conn, :extensions), response_headers) do
       {:ok, conn, %__MODULE__{extensions: extensions}}
     else
       {:error, reason} -> {:error, conn, reason}
     end
   end
 
-  def new(%Mint.HTTP2{} = conn, _request_ref, status, response_headers)
-      when status in 200..299 do
+  defp do_new(:http2, conn, status, response_headers)
+       when status in 200..299 do
     with {:ok, extensions} <-
-           Extension.accept_extensions(conn.private.extensions, response_headers) do
+           Extension.accept_extensions(get_private(conn, :extensions), response_headers) do
       {:ok, conn, %__MODULE__{extensions: extensions}}
     end
   end
 
-  def new(%Mint.HTTP2{} = conn, _request_ref, _status, _response_headers) do
+  defp do_new(:http2, conn, _status, _response_headers) do
     {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
+  end
+
+  @doc """
+  A wrapper around `Mint.HTTP.stream/2` for streaming HTTP and WebSocket
+  messages
+
+  This function does not decode WebSocket frames. Instead, once a WebSocket
+  connection has been established, decode any `{:data, request_ref, data}`
+  frames with `decode/2`.
+
+  This function is a drop-in replacement for `Mint.HTTP.stream/2` which
+  enables streaming WebSocket data after the bootstrapping HTTP/1 connection
+  has concluded. It decodes both WebSocket and regular HTTP messages.
+
+  ## Examples
+
+      message = receive(do: (message -> message))
+      {:ok, conn, [{:data, ^websocket_ref, data}]} =
+        Mint.WebSocket.stream(conn, message)
+      {:ok, websocket, [{:text, "hello world!"}]} =
+        Mint.WebSocket.decode(websocket, data)
+  """
+  @spec stream(Mint.HTTP.t(), term()) ::
+          {:ok, Mint.HTTP.t(), [Mint.Types.response()]}
+          | {:error, Mint.HTTP.t(), Mint.Types.error(), [Mint.Types.response()]}
+          | :unknown
+  def stream(conn, message) do
+    with :http1 <- protocol(conn),
+         # HTTP/1 only allows one WebSocket per connection
+         [request_ref] <- get_private(conn, :websockets) do
+      stream_http1(conn, request_ref, message)
+    else
+      _ -> Mint.HTTP.stream(conn, message)
+    end
+  end
+
+  # we take manual control of the :gen_tcp and :ssl messages in HTTP/1 because
+  # we have taken over the transport
+  defp stream_http1(conn, request_ref, message) do
+    socket = HTTP1.get_socket(conn)
+    tag = if get_private(conn, :scheme) == :ws, do: :tcp, else: :ssl
+
+    case message do
+      {^tag, ^socket, data} ->
+        reset_mode(conn, [{:data, request_ref, data}])
+
+      _ ->
+        HTTP1.stream(conn, message)
+    end
+  end
+
+  defp reset_mode(conn, responses) do
+    module = if get_private(conn, :scheme) == :ws, do: :inet, else: :ssl
+
+    with :active <- get_private(conn, :mode),
+         {:error, reason} <- module.setopts(HTTP1.get_socket(conn), active: :once) do
+      {:error, conn, %Mint.TransportError{reason: reason}, responses}
+    else
+      _ -> {:ok, conn, responses}
+    end
+  end
+
+  @doc """
+  Receives data from the socket
+
+  This function is used instead of `stream/2` when the connection is
+  in `:passive` mode. You must pass the `mode: :passive` option to
+  `new/5` in order to use `recv/3`.
+
+  This function wraps `Mint.HTTP.recv/3`. See the `Mint.HTTP.recv/3`
+  documentation for more information.
+
+  ## Examples
+
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.recv(conn, 0, 5_000)
+      {:ok, websocket, [{:text, "hello world!"}]} =
+        Mint.WebSocket.decode(websocket, data)
+  """
+  @spec recv(Mint.HTTP.t(), non_neg_integer(), timeout()) ::
+          {:ok, Mint.HTTP.t(), [Mint.Types.response()]}
+          | {:error, t(), Mint.Types.error(), [Mint.Types.response()]}
+  def recv(conn, byte_count, timeout) do
+    with :http1 <- protocol(conn),
+         [request_ref] <- get_private(conn, :websockets) do
+      recv_http1(conn, request_ref, byte_count, timeout)
+    else
+      _ -> Mint.HTTP.recv(conn, byte_count, timeout)
+    end
+  end
+
+  defp recv_http1(conn, request_ref, byte_count, timeout) do
+    module = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
+    socket = HTTP1.get_socket(conn)
+
+    case module.recv(socket, byte_count, timeout) do
+      {:ok, data} ->
+        {:ok, conn, [{:data, request_ref, data}]}
+
+      {:error, error} ->
+        {:error, conn, error, []}
+    end
+  end
+
+  @doc """
+  Streams chunks of data on the connection
+
+  `stream_request_body/3` should be used to send encoded data on an
+  established WebSocket connection that has already been upgraded with
+  `upgrade/5`.
+
+  This function is a wrapper around `Mint.HTTP.stream_request_body/3`. It
+  delegates to that function unless the `request_ref` belongs to an HTTP/1
+  WebSocket connection. When the request is an HTTP/1 WebSocket, this
+  function allows sending data on a request which Mint considers to be
+  closed, but is actually a valid WebSocket connection.
+
+  See the `Mint.HTTP.stream_request_body/3` documentation for more
+  information.
+
+  ## Examples
+
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world!"})
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, websocket_ref, data)
+  """
+  @spec stream_request_body(
+          Mint.HTTP.t(),
+          Mint.Types.request_ref(),
+          iodata() | :eof | {:eof, trailing_headers :: Mint.Types.headers()}
+        ) :: {:ok, Mint.HTTP.t()} | {:error, Mint.HTTP.t(), error()}
+  def stream_request_body(conn, request_ref, data) do
+    with :http1 <- protocol(conn),
+         [^request_ref] <- get_private(conn, :websockets),
+         data when is_binary(data) or is_list(data) <- data do
+      stream_request_body_http1(conn, data)
+    else
+      _ -> Mint.HTTP.stream_request_body(conn, request_ref, data)
+    end
+  end
+
+  defp stream_request_body_http1(conn, data) do
+    transport = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
+
+    case transport.send(Mint.HTTP1.get_socket(conn), data) do
+      :ok -> {:ok, conn}
+      {:error, reason} -> {:error, conn, %Mint.TransportError{reason: reason}}
+    end
   end
 
   @doc """
   Encodes a frame into a binary
 
-  The resulting binary may be sent with `Mint.HTTP.stream_request_body/3`.
+  The resulting binary may be sent with `stream_request_body/3`.
 
   This function will invoke the `c:Mint.WebSocket.Extension.encode/2` callback
   for any accepted extensions.
@@ -349,7 +514,7 @@ defmodule Mint.WebSocket do
 
   ```elixir
   {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-  {:ok, conn} = Mint.HTTP.stream_request_body(conn, ref, data)
+  {:ok, conn} = Mint.WebSocket.stream_request_body(conn, websocket_ref, data)
   ```
   """
   @spec encode(t(), shorthand_frame() | frame()) :: {:ok, t(), binary()} | {:error, t(), any()}
@@ -374,36 +539,6 @@ defmodule Mint.WebSocket do
   @spec decode(t(), data :: binary()) ::
           {:ok, t(), [frame() | {:error, term()}]} | {:error, t(), any()}
   defdelegate decode(websocket, data), to: Frame
-
-  # we re-open the request in the conn for HTTP1 connections because a :done
-  # will complete the request
-  defp re_open_request(%Mint.HTTP1{} = conn, request_ref) do
-    request = new_request(request_ref, nil, :stream, :identity)
-    %{conn | request: %{request | state: :body}, streaming_request: request}
-  end
-
-  defp new_request(ref, method, body, encoding) do
-    state =
-      if body == :stream do
-        {:stream_request, encoding}
-      else
-        :status
-      end
-
-    %{
-      ref: ref,
-      state: state,
-      method: method,
-      version: nil,
-      status: nil,
-      headers_buffer: [],
-      data_buffer: [],
-      content_length: nil,
-      connection: [],
-      transfer_encoding: [],
-      body: nil
-    }
-  end
 
   defp get_extensions(opts) do
     opts
