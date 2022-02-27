@@ -11,7 +11,8 @@ defmodule TestServer do
         {:_,
          [
            {'/', WebsocketHandler, []},
-           {'/http_get', HttpHandler, []}
+           {'/http_get', HttpHandler, []},
+           {'/forbidden', ForbiddenHandler, []}
          ]}
       ])
 

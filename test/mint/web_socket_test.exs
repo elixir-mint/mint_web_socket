@@ -1,7 +1,7 @@
 defmodule Mint.WebSocketTest do
   use ExUnit.Case, async: true
 
-  alias Mint.{HTTP1, HTTP2, WebSocket}
+  alias Mint.{HTTP1, HTTP2, WebSocket, WebSocket.UpgradeFailureError}
 
   setup_all do
     # a cowboy test server used by the HTTP/2 tests
@@ -93,6 +93,33 @@ defmodule Mint.WebSocketTest do
     end
   end
 
+  describe "given a passive HTTP/1 connection to the local cowboy server" do
+    setup do
+      {:ok, conn} = HTTP1.connect(:http, "localhost", 7070, mode: :passive)
+      [conn: conn]
+    end
+
+    test "a response code other than 101 gives a UpgradeFailureError", %{conn: conn} do
+      {:ok, conn, ref} = WebSocket.upgrade(:ws, conn, "/forbidden", [])
+
+      {:ok, conn,
+       [
+         {:status, ^ref, status},
+         {:headers, ^ref, resp_headers},
+         {:data, ^ref, data},
+         {:done, ^ref}
+       ]} = WebSocket.recv(conn, 0, 5_000)
+
+      assert status == 403
+      assert data == "Forbidden."
+
+      assert {:error, _conn, %UpgradeFailureError{} = reason} =
+               WebSocket.new(conn, ref, status, resp_headers, mode: :passive)
+
+      assert UpgradeFailureError.message(reason) =~ "status code 403"
+    end
+  end
+
   describe "given an HTTP/2 WebSocket connection to an echo server" do
     setup do
       {:ok, conn} = HTTP2.connect(:http, "localhost", 7070)
@@ -144,6 +171,7 @@ defmodule Mint.WebSocketTest do
       {:ok, _conn} = HTTP2.close(conn)
     end
 
+    @tag :http2
     test "we can multiplex WebSocket and HTTP traffic", c do
       websocket_ref = c.ref
 
@@ -172,6 +200,29 @@ defmodule Mint.WebSocketTest do
       assert {:ok, _websocket, [{:text, "hello world"}]} = WebSocket.decode(websocket, data)
 
       {:ok, _conn} = HTTP2.close(conn)
+    end
+
+    @tag :http2
+    test "a response code outside the 200..299 range gives a UpgradeFailureError", %{conn: conn} do
+      {:ok, conn, ref} = WebSocket.upgrade(:ws, conn, "/forbidden", [])
+
+      assert_receive message
+
+      {:ok, conn,
+       [
+         {:status, ^ref, status},
+         {:headers, ^ref, resp_headers},
+         {:data, ^ref, data},
+         {:done, ^ref}
+       ]} = WebSocket.stream(conn, message)
+
+      assert status == 403
+      assert data == "Forbidden."
+
+      assert {:error, _conn, %UpgradeFailureError{} = reason} =
+               WebSocket.new(conn, ref, status, resp_headers, mode: :passive)
+
+      assert UpgradeFailureError.message(reason) =~ "status code 403"
     end
   end
 
