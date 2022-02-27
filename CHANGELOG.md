@@ -12,7 +12,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 
 - Failure to upgrade now gives a `Mint.WebSocket.UpgradeFailureError`
   as the error when a server returns a status code other than 101 for
-  HTTP/1 or a status code in the range 200..299 range for HTTP/2.
+  HTTP/1 or a status code outside the range 200..299 range for HTTP/2.
 
 ## 0.2.0 - 2022-02-17
 
