@@ -6,7 +6,7 @@
 [![hex.pm license](https://img.shields.io/hexpm/l/mint_web_socket.svg)](https://github.com/NFIBrokerage/mint_web_socket/blob/main/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/NFIBrokerage/mint_web_socket.svg)](https://github.com/NFIBrokerage/mint_web_socket/commits/main)
 
-(Unofficial) HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
+HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
 ## Usage
 

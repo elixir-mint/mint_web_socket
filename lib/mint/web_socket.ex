@@ -1,6 +1,6 @@
 defmodule Mint.WebSocket do
   @moduledoc """
-  (Unofficial) WebSocket support for the Mint functional HTTP client
+  HTTP/1 and HTTP/2 WebSocket support for the Mint functional HTTP client
 
   Like Mint, `Mint.WebSocket` provides a functional, process-less interface
   for operating a WebSocket connection. Prospective Mint.WebSocket users

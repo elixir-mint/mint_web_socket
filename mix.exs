@@ -74,7 +74,7 @@ defmodule MintWebSocket.MixProject do
   end
 
   defp description do
-    "(Unofficial) WebSocket support for Mint"
+    "HTTP/1 and HTTP/2 WebSocket support for Mint"
   end
 
   defp docs do
