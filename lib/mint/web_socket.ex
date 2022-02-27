@@ -111,7 +111,7 @@ defmodule Mint.WebSocket do
   """
 
   alias __MODULE__.{Utils, Extension, Frame}
-  alias Mint.WebSocketError
+  alias Mint.{WebSocketError, WebSocket.UpgradeFailureError}
   alias Mint.{HTTP1, HTTP2}
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
@@ -129,7 +129,7 @@ defmodule Mint.WebSocket do
             private: %{},
             buffer: <<>>
 
-  @type error :: Mint.Types.error() | WebSocketError.t()
+  @type error :: Mint.Types.error() | WebSocketError.t() | UpgradeFailureError.t()
 
   @typedoc """
   Shorthand notations for control frames
@@ -330,8 +330,9 @@ defmodule Mint.WebSocket do
     do_new(protocol(conn), conn, status, response_headers)
   end
 
-  defp do_new(:http1, conn, status, _response_headers) when status != 101 do
-    {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
+  defp do_new(:http1, conn, status, headers) when status != 101 do
+    error = %UpgradeFailureError{status_code: status, headers: headers}
+    {:error, conn, error}
   end
 
   defp do_new(:http1, conn, _status, response_headers) do
@@ -352,8 +353,9 @@ defmodule Mint.WebSocket do
     end
   end
 
-  defp do_new(:http2, conn, _status, _response_headers) do
-    {:error, conn, %WebSocketError{reason: :connection_not_upgraded}}
+  defp do_new(:http2, conn, status, headers) do
+    error = %UpgradeFailureError{status_code: status, headers: headers}
+    {:error, conn, error}
   end
 
   @doc """

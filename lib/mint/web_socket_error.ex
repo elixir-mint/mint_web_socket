@@ -9,7 +9,6 @@ defmodule Mint.WebSocketError do
   reason_type =
     quote do
       :extended_connect_disabled
-      | :connection_not_upgraded
       | :payload_too_large
       | {:extension_not_negotiated, Mint.WebSocket.Extension.t()}
     end
@@ -25,10 +24,6 @@ defmodule Mint.WebSocketError do
 
   defp format_reason(:extended_connect_disabled) do
     "extended CONNECT method not enabled"
-  end
-
-  defp format_reason(:connection_not_upgraded) do
-    "connection not upgraded by remote"
   end
 
   defp format_reason(:payload_too_large) do

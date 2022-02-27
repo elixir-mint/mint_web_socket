@@ -6,6 +6,14 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.3.0 - 2022-02-27
+
+### Changed
+
+- Failure to upgrade now gives a `Mint.WebSocket.UpgradeFailureError`
+  as the error when a server returns a status code other than 101 for
+  HTTP/1 or a status code in the range 200..299 range for HTTP/2.
+
 ## 0.2.0 - 2022-02-17
 
 This release is a breaking change from the 0.1.0 series. This update removes
