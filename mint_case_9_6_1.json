@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 64 octets.",
    "droppedByMe": true,
-   "duration": 507,
+   "duration": 336,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=283&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: aZJ570AP3ZtqVm3zdIs2oA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: RKXsTPoh16rXU54AYYRIb0Q+9Kc=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=283&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 1G3kSt9cDSbAjFZhN365+Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: A1CglyoZqE4IJrVjDBTL4UkwxWk=\r\n\r\n",
    "id": "9.6.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,12 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "11048": 1,
-      "21720": 1,
       "32768": 1,
+      "32782": 1,
       "65536": 15
    },
-   "started": "2022-02-28T15:40:34.290Z",
+   "started": "2022-02-28T15:54:38.236Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -108,7 +106,7 @@
          "RO",
          [
             8,
-            "8882fea78272fd4f"
+            "8882985b5ad99bb3"
          ]
       ],
       [
@@ -121,7 +119,7 @@
          true,
          0,
          true,
-         "fea78272"
+         "985b5ad9"
       ]
    ]
 }

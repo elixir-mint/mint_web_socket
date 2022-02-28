@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send frame with reserved control <b>Opcode = 15</b> and non-empty payload, then send Ping.",
    "droppedByMe": true,
-   "duration": 4,
+   "duration": 3,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since reserved opcode frame is used. A Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=44&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 6tHQ0XkOXCE8A1vGOjGPjQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eeauzEbGfEcaG+GDO57fU1WoEWI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=44&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: NaDzaLoOzVhClQRmGOoMig==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: BnIGIS2ZdNT+jgDvhKmr47ELc90=\r\n\r\n",
    "id": "4.2.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2022-02-28T15:40:33.384Z",
+   "started": "2022-02-28T15:54:36.477Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -396,7 +396,7 @@
          "RO",
          [
             19,
-            "818dc1582412893d487eae740465ae2a4876e0"
+            "818d2bd27bad63b717c144fe5bda44a017c90a"
          ]
       ],
       [
@@ -409,13 +409,13 @@
          true,
          0,
          true,
-         "c1582412"
+         "2bd27bad"
       ],
       [
          "RO",
          [
             8,
-            "8882373d00aa34d7"
+            "8882ab784e2ba892"
          ]
       ],
       [
@@ -428,7 +428,7 @@
          true,
          0,
          true,
-         "373d00aa"
+         "ab784e2b"
       ],
       [
          "TF",

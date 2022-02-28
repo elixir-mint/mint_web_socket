@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 16k.",
    "droppedByMe": true,
-   "duration": 191,
+   "duration": 182,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: KkJTN+dRgefs3cJ1is/1Ew==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: AkR02b3zl+RGXZgUkDBR5+oOyLQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 19f9N7Mpwymn7XLBcNR8DQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 9byVksRZIs3bTlp6xvH1J0X+ZkU=\r\n\r\n",
    "id": "9.4.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,14 +40,11 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22096": 1,
+      "22110": 1,
       "28960": 1,
-      "30408": 1,
-      "36966": 1,
-      "63712": 1,
-      "65536": 61
+      "65536": 63
    },
-   "started": "2022-02-28T15:40:41.819Z",
+   "started": "2022-02-28T15:54:36.490Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 256,
@@ -111,7 +108,7 @@
          "RO",
          [
             8,
-            "88822357c85620bf"
+            "888237be968a3456"
          ]
       ],
       [
@@ -124,7 +121,7 @@
          true,
          0,
          true,
-         "2357c856"
+         "37be968a"
       ]
    ]
 }
