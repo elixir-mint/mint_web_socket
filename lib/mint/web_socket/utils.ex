@@ -63,9 +63,7 @@ defmodule Mint.WebSocket.Utils do
   def maybe_concat(a, b), do: a <> b
 
   defp extension_string(extensions) when is_list(extensions) do
-    extensions
-    |> Enum.map(&extension_string/1)
-    |> Enum.join(", ")
+    Enum.map_join(extensions, ", ", &extension_string/1)
   end
 
   defp extension_string(%Extension{name: name, params: []}), do: name

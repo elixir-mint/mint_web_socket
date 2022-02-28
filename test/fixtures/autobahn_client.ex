@@ -184,8 +184,7 @@ defmodule AutobahnClient do
       {:data, ^ref, _data} -> true
       _ -> false
     end)
-    |> Enum.map(fn {:data, ^ref, data} -> data end)
-    |> Enum.join(<<>>)
+    |> Enum.map_join(<<>>, fn {:data, ^ref, data} -> data end)
   end
 
   defp stop_if_done(messages, ref) do
