@@ -73,19 +73,26 @@ jobs:
     - name: Add seedling favicon to autobahn report
       run: ./autobahn/favicon.sh ./autobahn/reports/index.html
 
-    - name: Publish autobahn report to DO Spaces
+    - name: Checkout gh-pages branch to ./gh-pages
       if: github.ref == 'refs/heads/main'
-      uses: docker://schoenwaldnils/s3-sync-action:0.5.1
+      uses: actions/checkout@v2
       with:
-        args: --acl public-read --follow-symlinks
-      env:
-        AWS_S3_BUCKET: mint-websocket
-        AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET_ACCESS_KEY }}
-        AWS_S3_ENDPOINT: https://nyc3.digitaloceanspaces.com
-        AWS_REGION: nyc3
-        SOURCE_DIR: ./autobahn/reports/
-        DEST_DIR: autobahn
+        ref: gh-pages
+        path: ./gh-pages
+
+    - name: Move autobahn report results
+      if: github.ref == 'refs/heads/main'
+      run: mv ./autobahn/reports/* ./gh-pages/
+
+    - name: Commit autobahn report to gh-pages branch
+      if: github.ref == 'refs/heads/main'
+      run: |
+        cd ./gh-pages
+        git config --local user.email "$(git log --format='%ae' HEAD^!)"
+        git config --local user.name "$(git log --format='%an' HEAD^!)"
+        git add *.{html,json}
+        git commit -m "publish Autobahn|Testsuite report" || true
+        git push
 
   publish-hex-package:
     name: Publish Hex Package ⬆️☁️
