@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send frame with reserved control <b>Opcode = 14</b> and non-empty payload, then send Ping.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 9,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since reserved opcode frame is used. A Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=43&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: cvoU26i+vDHk6WWB9zysJg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: EDKNAlsoyRhp1OkBDnaOCusobEI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=43&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: h1kHCajIwjZwOZlY0/LNpA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: lDWePg5W7l4SBmUe1BSwec+RTAg=\r\n\r\n",
    "id": "4.2.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -52,10 +52,11 @@
       "8": 1
    },
    "rxOctetStats": {
-      "27": 1,
+      "8": 1,
+      "19": 1,
       "203": 1
    },
-   "started": "2022-02-28T15:54:20.322Z",
+   "started": "2022-02-28T16:54:26.360Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -163,8 +164,8 @@
       [
          "RO",
          [
-            27,
-            "818df5a789f5bdc2e5999a8ba9829ad5e591d48882cde119c8ce0b"
+            19,
+            "818d176762745f020e18784b420378150e1036"
          ]
       ],
       [
@@ -177,7 +178,14 @@
          true,
          0,
          true,
-         "f5a789f5"
+         "17676274"
+      ],
+      [
+         "RO",
+         [
+            8,
+            "8882501d2a4653f7"
+         ]
       ],
       [
          "RF",
@@ -189,7 +197,7 @@
          true,
          0,
          true,
-         "cde119c8"
+         "501d2a46"
       ],
       [
          "TF",

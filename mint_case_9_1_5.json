@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 8 * 2**20 (8M).",
    "droppedByMe": true,
-   "duration": 515,
+   "duration": 618,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: XxOZN7qR3dObZcCrERFq7A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ewsUPNBm7R/k9olNjSXyQSx3AYo=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4tenL9tZBuPsHrla2oRe7g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 80lyh7msig8bGwWyOAdL6AlTA8Q=\r\n\r\n",
    "id": "9.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,15 +40,12 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "912": 1,
-      "7240": 1,
       "11048": 1,
-      "14480": 1,
-      "31856": 1,
-      "32768": 2,
-      "65536": 126
+      "21720": 1,
+      "32768": 1,
+      "65536": 127
    },
-   "started": "2022-02-28T15:54:08.680Z",
+   "started": "2022-02-28T16:53:36.301Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -110,7 +107,7 @@
          "RO",
          [
             8,
-            "888208b9f8050b51"
+            "88828c208f6c8fc8"
          ]
       ],
       [
@@ -123,7 +120,7 @@
          true,
          0,
          true,
-         "08b9f805"
+         "8c208f6c"
       ]
    ]
 }

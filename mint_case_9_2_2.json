@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 256 * 2**10 (256k).",
    "droppedByMe": true,
-   "duration": 13,
+   "duration": 20,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=254&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: jkwATjqH0i2t2o8tgogXHQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 57Uf7ER8iUeschwM64XiuITXOrc=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=254&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: RfHjssX98zgLXMW7o15S9g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ye0SJxdSi5p+YLD4WN7/2ttd3/g=\r\n\r\n",
    "id": "9.2.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,14 +40,12 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "18288": 1,
-      "32768": 1,
-      "40168": 1,
-      "40238": 1,
-      "50680": 1,
-      "65536": 1
+      "24846": 1,
+      "28424": 1,
+      "63336": 1,
+      "65536": 2
    },
-   "started": "2022-02-28T15:54:49.470Z",
+   "started": "2022-02-28T16:54:31.411Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -109,7 +107,7 @@
          "RO",
          [
             8,
-            "8882a6ba496ea552"
+            "888258d35b905b3b"
          ]
       ],
       [
@@ -122,7 +120,7 @@
          true,
          0,
          true,
-         "a6ba496e"
+         "58d35b90"
       ]
    ]
 }
