@@ -10,6 +10,6 @@ Mint.WebSocket is pretty comparable performance and conformance-wise to
 [`ninenines/gun`](https://github.com/ninenines/gun).
 
 See the comparison Autobahn|Testsuite report
-[here](https://mint-websocket.nyc3.digitaloceanspaces.com/compare/gun/index.html).
+[here](https://nfibrokerage.github.io/mint_web_socket/compare/gun/index.html).
 
 The gun implementation is included in the `./gun` subdirectory.

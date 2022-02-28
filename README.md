@@ -68,8 +68,7 @@ and uses [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
 to check conformance with every run of tests/CI. The auto-generated report
 produced by the Autobahn|Testsuite is uploaded on each push to main.
 
-See the report here:
-https://mint-websocket.nyc3.digitaloceanspaces.com/autobahn/index.html
+See the report here: https://nfibrokerage.github.io/mint_web_socket/
 
 ## A Quick Note About HTTP/2
 
