@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 16k.",
    "droppedByMe": true,
-   "duration": 268,
+   "duration": 244,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: kFVc3EmEaHx3V43R23TcYg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: glPnexZ6oZVJa13xnC3JQxlQhcA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: h9BsXDjr0od5rYnJkOBwSg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: pIP1dCYRFaTQWwTfPJ0Of3wKhrk=\r\n\r\n",
    "id": "9.4.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,12 +38,11 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
-      "21720": 1,
-      "43830": 1,
-      "65536": 63
+      "65536": 64
    },
-   "started": "2022-02-28T16:53:32.896Z",
+   "started": "2022-03-23T17:34:55.627Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 256,
@@ -107,7 +106,7 @@
          "RO",
          [
             8,
-            "88824d67b3644e8f"
+            "88826bc3a5d3682b"
          ]
       ],
       [
@@ -120,7 +119,7 @@
          true,
          0,
          true,
-         "4d67b364"
+         "6bc3a5d3"
       ]
    ]
 }

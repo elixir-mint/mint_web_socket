@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send frame with reserved control <b>Opcode = 13</b>, then send Ping.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 3,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since reserved opcode frame is used. A Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=42&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xXJocnbKVxUZ6IPIe8OCdw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: AUY+80XBjKTcFaCwse2/cI6eoRI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=42&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: vprsUFFS5XWRV+nS/G/LxQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: tVH5sGtfcj0BdY9lSsnYa9OmAT0=\r\n\r\n",
    "id": "4.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2022-02-28T16:53:42.802Z",
+   "started": "2022-03-23T17:34:17.076Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -165,7 +165,7 @@
          "RO",
          [
             19,
-            "818dcb06d3a98363bfc5a42af3dea474bfcdea"
+            "818d94df503cdcba3c50fbf3704bfbad3c58b5"
          ]
       ],
       [
@@ -178,13 +178,13 @@
          true,
          0,
          true,
-         "cb06d3a9"
+         "94df503c"
       ],
       [
          "RO",
          [
             8,
-            "888245674ea7468d"
+            "8882e819a968ebf3"
          ]
       ],
       [
@@ -197,7 +197,7 @@
          true,
          0,
          true,
-         "45674ea7"
+         "e819a968"
       ],
       [
          "TF",

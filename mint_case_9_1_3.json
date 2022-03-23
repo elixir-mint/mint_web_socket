@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 73,
+   "duration": 84,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 2R/RAG0J+hCoPQ4pOMK8OQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: cUiPOaGXNl/GpLMFLk12vcpWRUk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ukT9aewYsuh/2dkF4l+Q0g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: NO944GJxRMpjzsirJzVjzlIWL94=\r\n\r\n",
    "id": "9.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,13 +40,11 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22096": 1,
+      "22110": 1,
       "28960": 1,
-      "30798": 1,
-      "34752": 1,
-      "65536": 14
+      "65536": 15
    },
-   "started": "2022-02-28T16:54:30.319Z",
+   "started": "2022-03-23T17:34:56.496Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -108,7 +106,7 @@
          "RO",
          [
             8,
-            "8882d07707b0d39f"
+            "88829fb39d759c5b"
          ]
       ],
       [
@@ -121,7 +119,7 @@
          true,
          0,
          true,
-         "d07707b0"
+         "9fb39d75"
       ]
    ]
 }

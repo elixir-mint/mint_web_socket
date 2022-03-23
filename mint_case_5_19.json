@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "A fragmented text message is sent in multiple frames. After\n   sending the first 2 frames of the text message, a Ping is sent. Then we wait 1s,\n   then we send 2 more text fragments, another Ping and then the final text fragment.\n   Everything is legal.",
    "droppedByMe": true,
-   "duration": 1004,
+   "duration": 1005,
    "expectation": "The peer immediately answers the first Ping before\n   it has received the last text message fragment. The peer pong's back the Ping's\n   payload exactly, and echo's the payload of the fragmented message back to us.",
    "expected": {
       "OK": [
@@ -35,8 +35,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=63&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: V6C/U3+vLAcnZhOchkPxEw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yMoFkys2XwzN7Oa7D1VohTBrF1M=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=63&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: pESjy+xAURKsZcVcGaaV0w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: f6DLZkQYtQphRU070791W1igMk4=\r\n\r\n",
    "id": "5.19",
    "isServer": true,
    "localCloseCode": 1000,
@@ -69,11 +69,11 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "15": 2,
-      "51": 1,
+      "15": 1,
+      "66": 1,
       "203": 1
    },
-   "started": "2022-02-28T16:54:22.380Z",
+   "started": "2022-03-23T17:34:40.652Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4,
@@ -182,7 +182,7 @@
          "RO",
          [
             15,
-            "8a896b92944c1bfdfa2b06f7b47d4a"
+            "8a8973191bdb037675bc1e7c3bea52"
          ]
       ],
       [
@@ -195,7 +195,7 @@
          true,
          0,
          true,
-         "6b92944c"
+         "73191bdb"
       ],
       [
          "CTE",
@@ -296,8 +296,8 @@
       [
          "RO",
          [
-            15,
-            "8a89c012efbab07d81ddad77cf88e1"
+            66,
+            "8a89a589a8d2d5e6c6b5c8ec88e08481ad77ef4d97119d2cf01a8a23e346893ff6108228f903dd2be5168820f2199b7ef1058e2afa128139a3119d2cf01a8a23 ..."
          ]
       ],
       [
@@ -310,14 +310,7 @@
          true,
          0,
          true,
-         "c012efba"
-      ],
-      [
-         "RO",
-         [
-            51,
-            "81ade368f480851a95e78e0d9af4d20e86e1840591ee975a92f2820f99e58d1cc7e6910993ed860680b4851a95e78e0d9af4d6"
-         ]
+         "a589a8d2"
       ],
       [
          "RF",
@@ -329,7 +322,7 @@
          true,
          0,
          true,
-         "e368f480"
+         "77ef4d97"
       ],
       [
          "TF",
@@ -357,7 +350,7 @@
          "RO",
          [
             8,
-            "88824dfff9b34e17"
+            "88827f3aba007cd2"
          ]
       ],
       [
@@ -370,7 +363,7 @@
          true,
          0,
          true,
-         "4dfff9b3"
+         "7f3aba00"
       ]
    ]
 }
