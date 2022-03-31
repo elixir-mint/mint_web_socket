@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 1000 compressed messages each of payload size 256, auto-fragment to 0 octets. Use default permessage-deflate offer.",
    "droppedByMe": true,
-   "duration": 656,
+   "duration": 462,
    "expectation": "Receive echo'ed messages (with payload as sent). Timeout case after 120 secs.",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=322&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 52SZzViFff3Thf38qQ383g==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: koqmtXh0Ly3gQS7CWUFEpsVclXs=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
+   "httpRequest": "GET /runCase?case=322&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: HDp4CfwDNEysygcaM6pfwA==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: AX1UGYCGy7N6sprmnbLB1HI5hzQ=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
    "id": "12.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -96,7 +96,7 @@
       "268": 6,
       "270": 44
    },
-   "started": "2022-03-23T17:35:03.973Z",
+   "started": "2022-03-31T17:25:18.895Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.96554296875,
       "incomingOctetsAppLevel": 256000,
@@ -238,7 +238,7 @@
          "RO",
          [
             8,
-            "88828f80cdc18c68"
+            "8882248bf5852763"
          ]
       ],
       [
@@ -251,7 +251,7 @@
          true,
          0,
          true,
-         "8f80cdc1"
+         "248bf585"
       ]
    ]
 }

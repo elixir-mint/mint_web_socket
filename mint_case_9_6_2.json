@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 128 octets.",
    "droppedByMe": true,
-   "duration": 465,
+   "duration": 194,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: FBUtnU9bZMoU+f/svwQUqA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: d8JYRowAbMPfyTUXz0cZkLeFYrU=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: fBbajJzLbEnXO8Hg080kwg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Odcq8OvtqPcFDNZff70jsFMxJjI=\r\n\r\n",
    "id": "9.6.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,11 +38,14 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "65536": 16
+      "1072": 1,
+      "14480": 1,
+      "21038": 1,
+      "28960": 1,
+      "65536": 15
    },
-   "started": "2022-03-23T17:34:44.562Z",
+   "started": "2022-03-31T17:24:45.056Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -105,7 +108,7 @@
          "RO",
          [
             8,
-            "88827a5a253779b2"
+            "8882f1d52ce9f23d"
          ]
       ],
       [
@@ -118,7 +121,7 @@
          true,
          0,
          true,
-         "7a5a2537"
+         "f1d52ce9"
       ]
    ]
 }

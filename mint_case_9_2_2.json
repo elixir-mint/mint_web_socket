@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 256 * 2**10 (256k).",
    "droppedByMe": true,
-   "duration": 23,
+   "duration": 17,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=254&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: L9etFLK585dhEnbigS00Uw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: tkqsdjDGbejXAcow/4hmRC6vH9E=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=254&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: gstOTs9876HOL0xkMCcarw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: NV/xOG3bb3BTcYDAPODTFAvC9/g=\r\n\r\n",
    "id": "9.2.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,14 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22110": 1,
+      "22096": 1,
       "28960": 1,
-      "65536": 3
+      "30408": 1,
+      "35518": 1,
+      "65160": 1,
+      "65536": 1
    },
-   "started": "2022-03-23T17:34:03.945Z",
+   "started": "2022-03-31T17:24:34.141Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -106,7 +109,7 @@
          "RO",
          [
             8,
-            "8882208e91972366"
+            "8882a8d93d3cab31"
          ]
       ],
       [
@@ -119,7 +122,7 @@
          true,
          0,
          true,
-         "208e9197"
+         "a8d93d3c"
       ]
    ]
 }
