@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1k.",
    "droppedByMe": true,
-   "duration": 259,
+   "duration": 317,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: wQwD7Mm78N4DmhhlhheKIQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: +5N7+X2n5cvo7+FJcUE8eYMrtqI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: w9k+ExL2tT1n/cLdPp72sw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yAxRddoA98veHz/CGhwhO9LhbBE=\r\n\r\n",
    "id": "9.3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,12 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "30304": 1,
-      "35232": 1,
+      "11048": 1,
+      "21720": 1,
+      "32768": 1,
       "65536": 63
    },
-   "started": "2022-03-31T17:24:58.129Z",
+   "started": "2022-04-12T21:08:45.642Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4096,
@@ -108,7 +109,7 @@
          "RO",
          [
             8,
-            "888288ba6f768b52"
+            "8882858d8aba8665"
          ]
       ],
       [
@@ -121,7 +122,7 @@
          true,
          0,
          true,
-         "88ba6f76"
+         "858d8aba"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1M.",
    "droppedByMe": true,
-   "duration": 202,
+   "duration": 270,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=266&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: +vTVwYPJNm/AP5nujv1r0A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 2jDRMJ6HkXwvvonAo4oOmwjKAUw=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=266&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4rxUirduT5/N2rXTiTmtXQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: JCGM6y4v6uKuLTN5CFyc9/JpSb0=\r\n\r\n",
    "id": "9.3.8",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,15 +38,11 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
-      "14480": 1,
-      "28960": 1,
-      "49608": 1,
-      "49998": 1,
-      "53576": 1,
-      "65536": 61
+      "65536": 64
    },
-   "started": "2022-03-31T17:25:14.955Z",
+   "started": "2022-04-12T21:08:54.004Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4,
@@ -110,7 +106,7 @@
          "RO",
          [
             8,
-            "8882deeedeacdd06"
+            "888289641d388a8c"
          ]
       ],
       [
@@ -123,7 +119,7 @@
          true,
          0,
          true,
-         "deeedeac"
+         "89641d38"
       ]
    ]
 }

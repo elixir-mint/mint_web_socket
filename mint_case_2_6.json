@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send ping with binary payload of 125 octets, send in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 26,
+   "duration": 32,
    "expectation": "Pong with payload echo'ed is sent in reply to Ping. Implementations must be TCP clean. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -26,8 +26,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=22&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: /XpSaZQyAznKyrFis5WeJA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Sx5JNvEFJ85xKZf0Y70w8ziz0XQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=22&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: DIV1PSlf9ZRdx25xnwKQAA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 7YhBsjrGIDUeBy+QYcbkeMU8hbg=\r\n\r\n",
    "id": "2.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,7 +53,7 @@
       "131": 1,
       "203": 1
    },
-   "started": "2022-03-31T17:24:30.544Z",
+   "started": "2022-04-12T21:08:09.564Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -1123,7 +1123,7 @@
          "RO",
          [
             131,
-            "8afdaa73d829548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d26d7548d ..."
+            "8afd332731abcdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9cf55cdd9 ..."
          ]
       ],
       [
@@ -1136,7 +1136,7 @@
          true,
          0,
          true,
-         "aa73d829"
+         "332731ab"
       ],
       [
          "TF",
@@ -1164,7 +1164,7 @@
          "RO",
          [
             8,
-            "88823685fa5e356d"
+            "88827c73e5987f9b"
          ]
       ],
       [
@@ -1177,7 +1177,7 @@
          true,
          0,
          true,
-         "3685fa5e"
+         "7c73e598"
       ]
    ]
 }
