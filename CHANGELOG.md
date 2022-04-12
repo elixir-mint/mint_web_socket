@@ -6,6 +6,17 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0 - 2022-04-12
+
+v1.0.0 is released!
+
+We've been using `Mint.WebSocket` in production for the better part of a year
+without trouble.
+
+v1.0.0 is code-wise the same as v0.3.0: it represents a stability milestone.
+`Mint.WebSocket` will now follow semantic versioning, so any breaking changes
+will result in a v2.0.0.
+
 ## 0.3.0 - 2022-02-27
 
 ### Changed
