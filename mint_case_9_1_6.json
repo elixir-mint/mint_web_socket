@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 16 * 2**20 (16M).",
    "droppedByMe": true,
-   "duration": 1057,
+   "duration": 956,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=252&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: fb/35qG9p3SBWfsAqkfRpg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ImJgOJc04o8kEnUkURfMw3jlxFM=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=252&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: W63rXbHIhp1dW01bJBIfrg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: sktc3YMMc2sOxwCAQ8zW0iQ1ZMw=\r\n\r\n",
    "id": "9.1.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,11 +38,15 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "65536": 256
+      "390": 1,
+      "11048": 1,
+      "21720": 1,
+      "32768": 1,
+      "65160": 1,
+      "65536": 254
    },
-   "started": "2022-04-28T19:23:54.953Z",
+   "started": "2022-04-28T20:00:53.584Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -104,7 +108,7 @@
          "RO",
          [
             8,
-            "888257321c5254da"
+            "8882f394ac98f07c"
          ]
       ],
       [
@@ -117,7 +121,7 @@
          true,
          0,
          true,
-         "57321c52"
+         "f394ac98"
       ]
    ]
 }

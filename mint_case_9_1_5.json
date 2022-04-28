@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 8 * 2**20 (8M).",
    "droppedByMe": true,
-   "duration": 603,
+   "duration": 469,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 7qxgoj6uHUp+QFxyTDz0sA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: QViz3kC9akBtXA75f0ujq8m1Ri4=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4ggWH2Tgzcrm2JiSBnCz7Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: s5doDksEVXDjyUB/NTHG83WNKS8=\r\n\r\n",
    "id": "9.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,15 +38,14 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
       "11048": 1,
-      "19214": 1,
       "21720": 1,
       "32768": 1,
-      "46336": 1,
-      "65536": 126
+      "65536": 127
    },
-   "started": "2022-04-28T19:24:26.583Z",
+   "started": "2022-04-28T20:01:16.602Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -108,7 +107,7 @@
          "RO",
          [
             8,
-            "8882d249c4c3d1a1"
+            "88826fa878f96c40"
          ]
       ],
       [
@@ -121,7 +120,7 @@
          true,
          0,
          true,
-         "d249c4c3"
+         "6fa878f9"
       ]
    ]
 }

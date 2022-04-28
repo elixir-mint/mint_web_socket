@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send close with invalid close code 2999",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 1,
    "expectation": "Clean close with protocol error code or drop TCP",
    "expected": {
       "OK": []
@@ -21,8 +21,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=244&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: KN+i/NPjiOg6z+9Kb8L5zQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: aUmIom/EhXvz22L0p7NP7gWK7mo=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=244&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: o08nDqfFrvPMjhvL7453ng==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: i5mmMugMGsiGfO3YBpbSjBKLz9o=\r\n\r\n",
    "id": "7.9.9",
    "isServer": true,
    "localCloseCode": 2999,
@@ -41,7 +41,7 @@
       "8": 1,
       "204": 1
    },
-   "started": "2022-04-28T19:24:10.312Z",
+   "started": "2022-04-28T20:00:48.859Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1
@@ -101,7 +101,7 @@
          "RO",
          [
             8,
-            "8882ae1f397cadf5"
+            "8882a7b68a44a45c"
          ]
       ],
       [
@@ -114,7 +114,7 @@
          true,
          0,
          true,
-         "ae1f397c"
+         "a7b68a44"
       ]
    ]
 }

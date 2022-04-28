@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send a text message with payload which is valid UTF-8 in one fragment.<br><br>Payload: 0xceba",
    "droppedByMe": true,
-   "duration": 3,
+   "duration": 2,
    "expectation": "The message is echo'ed back to us.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=84&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: puQM9aEoNcb5ntpU4jhloA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Qqpyvs9D96ARWTz0xrG/1SAcpJg=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=84&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: rUJhwSG9aFlvlA5O0/kB9Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: COW18X4t7Q7R0OiUlItr5ozEnsM=\r\n\r\n",
    "id": "6.6.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -54,7 +54,7 @@
       "8": 2,
       "203": 1
    },
-   "started": "2022-04-28T19:23:48.765Z",
+   "started": "2022-04-28T20:00:31.729Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -115,7 +115,7 @@
          "RO",
          [
             8,
-            "818281cd88374f77"
+            "818234e43018fa5e"
          ]
       ],
       [
@@ -128,7 +128,7 @@
          true,
          0,
          true,
-         "81cd8837"
+         "34e43018"
       ],
       [
          "TF",
@@ -156,7 +156,7 @@
          "RO",
          [
             8,
-            "8882a491a4c2a779"
+            "8882b3990c52b071"
          ]
       ],
       [
@@ -169,7 +169,7 @@
          true,
          0,
          true,
-         "a491a4c2"
+         "b3990c52"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send unfragmented Text Message after Continuation Frame with FIN = false, where there is nothing to continue, sent in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 5,
+   "duration": 4,
    "expectation": "The connection is failed immediately, since there is no message to continue.",
    "expected": {
       "OK": []
@@ -21,8 +21,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=58&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Oj0bpbYsNsii3pTxnWP6Qg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: K3Vqua+SlcWiSmL8olm0eueOV4M=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=58&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: en5GVBaviitlEYDcF0kR1w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: HaJMBCOrQAbeAx2PxSv+5NEf1qg=\r\n\r\n",
    "id": "5.14",
    "isServer": true,
    "localCloseCode": 1000,
@@ -41,7 +41,7 @@
       "8": 1,
       "203": 1
    },
-   "started": "2022-04-28T19:24:20.148Z",
+   "started": "2022-04-28T20:00:56.651Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1,
@@ -438,7 +438,7 @@
          "RO",
          [
             8,
-            "888279bc1fd87a56"
+            "888282ab60608141"
          ]
       ],
       [
@@ -451,7 +451,7 @@
          true,
          0,
          true,
-         "79bc1fd8"
+         "82ab6060"
       ],
       [
          "TF",

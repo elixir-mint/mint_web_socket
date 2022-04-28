@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 64,
+   "duration": 57,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: fmbAv0//Q9XoDZ/GHQ0xew==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qfW0q634rqmFNnYuMgU/Ivd3I2E=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Q06gq2bAlI1S6DJ9wkwZNw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: DL5Umo7ocaePykJpsmvl0mzEdzw=\r\n\r\n",
    "id": "9.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,14 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
       "14480": 1,
       "22096": 1,
-      "28960": 1,
-      "65536": 15
+      "28960": 2,
+      "36590": 1,
+      "65536": 14
    },
-   "started": "2022-04-28T19:23:40.556Z",
+   "started": "2022-04-28T20:00:41.843Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +107,7 @@
          "RO",
          [
             8,
-            "88825329f63e50c1"
+            "8882f17daf03f295"
          ]
       ],
       [
@@ -120,7 +120,7 @@
          true,
          0,
          true,
-         "5329f63e"
+         "f17daf03"
       ]
    ]
 }
