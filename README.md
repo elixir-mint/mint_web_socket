@@ -1,10 +1,10 @@
 # Mint.WebSocket
 
-![CI](https://github.com/NFIBrokerage/mint_web_socket/workflows/CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/NFIBrokerage/mint_web_socket/badge.svg)](https://coveralls.io/github/NFIBrokerage/mint_web_socket)
-[![hex.pm version](https://img.shields.io/hexpm/v/mint_web_socket.svg)](https://hex.pm/packages/mint_web_socket)
-[![hex.pm license](https://img.shields.io/hexpm/l/mint_web_socket.svg)](https://github.com/NFIBrokerage/mint_web_socket/blob/main/LICENSE)
-[![Last Updated](https://img.shields.io/github/last-commit/NFIBrokerage/mint_web_socket.svg)](https://github.com/NFIBrokerage/mint_web_socket/commits/main)
+![CI][ci-badge]
+[![Coverage Status][coverage-badge]][coverage]
+[![hex.pm version][hex-version-badge]][hex-package]
+[![hex.pm license][hex-licence-badge]][licence]
+[![Last Updated][last-updated-badge]][commits]
 
 HTTP/1 and HTTP/2 WebSocket support for Mint 🌱
 
@@ -36,47 +36,40 @@ hello_world_echo_message = receive(do: (message -> message))
 {:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
 ```
 
-Check out some [examples](./examples) and the online
-[documentation](https://hexdocs.pm/mint_web_socket/Mint.WebSocket.html).
+Check out some [examples](./examples) and the online [documentation][hex-docs].
 
 ## Functional WebSockets
 
-Mint.WebSocket (like Mint) takes a _functional_ approach to HTTP and
-WebSockets. Existing WebSocket implementations like
-[`:gun`](https://github.com/ninenines/gun) /
-[`:websocket_client`](https://github.com/jeremyong/websocket_client) /
-[`Socket`](https://github.com/meh/elixir-socket) /
-[`WebSockex`](https://github.com/Azolo/websockex) work by spawning and
+Mint.WebSocket (like Mint) takes a _functional_ approach.
+Other WebSocket implementations like
+[`:gun`][gun] / [`:websocket_client`][websocket-client] /
+[`Socket`][socket] / [`WebSockex`][websockex] work by spawning and
 passing messages among processes. This is a very convenient interface in
-Elixir and Erlang, but it does not allow the author much control over
+Erlang and Elixir, but it does not allow the author much control over
 the WebSocket connection.
 
 Instead `Mint.WebSocket` is process-less: the entire HTTP and WebSocket
 states are kept in immutable data structures. When you implement a WebSocket
 client with `Mint.WebSocket`, runtime behavior and process architecture
-are up to you: you decide how to handle things like reconnection or retry
-and how to deal with failures.
+are up to you: you decide how to handle things like reconnection and failure
+handling.
 
-For a practical introduction, check out Mint's
-[usage documentation](https://github.com/elixir-mint/mint#usage).
+For a practical introduction, check out Mint's [usage documentation][mint-usage].
 
 ## Spec conformance
 
-This library aims to follow
-[RFC6455](https://datatracker.ietf.org/doc/html/rfc6455) and
-[RFC8441](https://datatracker.ietf.org/doc/html/rfc8441) as closely as possible
-and uses [Autobahn|Testsuite](https://github.com/crossbario/autobahn-testsuite)
-to check conformance with every run of tests/CI. The auto-generated report
-produced by the Autobahn|Testsuite is uploaded on each push to main.
+This library aims to follow [RFC6455][rfc6455] and [RFC8441][rfc8441] as
+closely as possible and uses the [Autobahn|Testsuite][autobahn] to check
+conformance with every run of tests/CI. The auto-generated report produced
+by the Autobahn|Testsuite is uploaded on each push to main.
 
 See the report here: https://nfibrokerage.github.io/mint_web_socket/
 
 ## HTTP/2 Support
 
-HTTP/2 WebSockets are not a built-in feature of HTTP/2: RFC8441 is an extension
-to the HTTP/2 protocol and server libraries are not obligated to implement it.
-In the current landscape, very few server libraries support the RFC8441's
-extended CONNECT method which bootstraps WebSockets.
+HTTP/2 WebSockets are not a built-in feature of HTTP/2. In the current
+landscape, very few server libraries support the RFC8441's extended CONNECT
+method which bootstraps WebSockets.
 
 If `Mint.WebSocket.upgrade/4` returns
 
@@ -91,7 +84,7 @@ enabled.
 
 Contributions are very welcome!
 
-If you're Interested in developing `Mint.WebSocket`, you'll need docker-compose
+If you're interested in developing `Mint.WebSocket`, you'll need docker-compose
 to run the fuzzing test suite. The `docker-compose.yml` sets up an Elixir
 container, a simple websocket echo server, and the Autobahn|Testsuite fuzzing
 server.
@@ -103,3 +96,25 @@ server.
 (app)$ mix test
 (app)$ iex -S mix
 ```
+
+[ci-badge]: https://github.com/NFIBrokerage/mint_web_socket/workflows/CI/badge.svg
+[coverage]: https://coveralls.io/github/NFIBrokerage/mint_web_socket
+[coverage-badge]: https://coveralls.io/repos/github/NFIBrokerage/mint_web_socket/badge.svg
+[hex-version-badge]: https://img.shields.io/hexpm/v/mint_web_socket.svg
+[hex-licence-badge]: https://img.shields.io/hexpm/l/mint_web_socket.svg
+[hex-package]: https://hex.pm/packages/mint_web_socket
+[licence]: https://github.com/NFIBrokerage/mint_web_socket/blob/main/LICENSE
+[last-updated-badge]: https://img.shields.io/github/last-commit/NFIBrokerage/mint_web_socket.svg
+[commits]: https://github.com/NFIBrokerage/mint_web_socket/commits/main
+
+[hex-docs]: https://hexdocs.pm/mint_web_socket/Mint.WebSocket.html
+
+[gun]: https://github.com/ninenines/gun
+[websocket-client]: https://github.com/jeremyong/websocket_client
+[socket]: https://github.com/meh/elixir-socket
+[websockex]: https://github.com/Azolo/websockex
+[mint-usage]: https://github.com/elixir-mint/mint#usage
+
+[rfc6455]: https://datatracker.ietf.org/doc/html/rfc6455
+[rfc8441]: https://datatracker.ietf.org/doc/html/rfc8441
+[autobahn]: https://github.com/crossbario/autobahn-testsuite
