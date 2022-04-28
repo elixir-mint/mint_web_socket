@@ -22,7 +22,8 @@ defmodule Mint.WebSocket.AutobahnTest do
   @test_tags [
     {~r"^9\.", :performance},
     {~r"^1(2|3)\.\d\.(1|2|3|4)$", compression: :basic},
-    {~r"^1(2|3)\.", compression: :stress}
+    {~r"^1(2|3)\.", compression: :stress},
+    {~r"^7\.1\.6$", flaky: true}
   ]
 
   setup_all do
