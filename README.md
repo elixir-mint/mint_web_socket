@@ -36,13 +36,13 @@ hello_world_echo_message = receive(do: (message -> message))
 {:ok, websocket, [{:text, "hello world"}]} = Mint.WebSocket.decode(websocket, data)
 ```
 
-## What is Mint?
+Check out some [examples](./examples) and the online
+[documentation](https://hexdocs.pm/mint_web_socket/Mint.WebSocket.html).
 
-Mint is a _functional_ HTTP/1 and HTTP/2 client library written in Elixir.
+## Functional WebSockets
 
-Why does it matter that it's functional? Isn't Elixir functional?
-
-Existing WebSocket implementations like
+Mint.WebSocket (like Mint) takes a _functional_ approach to HTTP and
+WebSockets. Existing WebSocket implementations like
 [`:gun`](https://github.com/ninenines/gun) /
 [`:websocket_client`](https://github.com/jeremyong/websocket_client) /
 [`Socket`](https://github.com/meh/elixir-socket) /
@@ -52,12 +52,13 @@ Elixir and Erlang, but it does not allow the author much control over
 the WebSocket connection.
 
 Instead `Mint.WebSocket` is process-less: the entire HTTP and WebSocket
-states are kept in immutable data structures. This enables authors of
-WebSocket clients a more fine-grained control over the connections:
-`Mint.WebSocket` does not prescribe a process archicture.
+states are kept in immutable data structures. When you implement a WebSocket
+client with `Mint.WebSocket`, runtime behavior and process architecture
+are up to you: you decide how to handle things like reconnection or retry
+and how to deal with failures.
 
-For more information, check out
-[Mint#Usage](https://github.com/elixir-mint/mint#usage).
+For a practical introduction, check out Mint's
+[usage documentation](https://github.com/elixir-mint/mint#usage).
 
 ## Spec conformance
 
@@ -70,11 +71,11 @@ produced by the Autobahn|Testsuite is uploaded on each push to main.
 
 See the report here: https://nfibrokerage.github.io/mint_web_socket/
 
-## A Quick Note About HTTP/2
+## HTTP/2 Support
 
-HTTP/2 WebSockets are not a built-in feature of HTTP/2. RFC8441 is an extension
+HTTP/2 WebSockets are not a built-in feature of HTTP/2: RFC8441 is an extension
 to the HTTP/2 protocol and server libraries are not obligated to implement it.
-In the current landscape, very few server libraries support the HTTP/2
+In the current landscape, very few server libraries support the RFC8441's
 extended CONNECT method which bootstraps WebSockets.
 
 If `Mint.WebSocket.upgrade/4` returns
@@ -88,9 +89,12 @@ enabled.
 
 ## Development workflow
 
-Interested in developing `Mint.WebSocket`? The `docker-compose.yml` sets up
-an Elixir container, a simple websocket echo server, and the Autobahn|Testsuite
-fuzzing server.
+Contributions are very welcome!
+
+If you're Interested in developing `Mint.WebSocket`, you'll need docker-compose
+to run the fuzzing test suite. The `docker-compose.yml` sets up an Elixir
+container, a simple websocket echo server, and the Autobahn|Testsuite fuzzing
+server.
 
 ```
 (host)$ docker-compose up -d
