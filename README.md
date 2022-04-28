@@ -1,6 +1,6 @@
 # Mint.WebSocket
 
-![CI][ci-badge]
+[![CI][ci-badge]][actions]
 [![Coverage Status][coverage-badge]][coverage]
 [![hex.pm version][hex-version-badge]][hex-package]
 [![hex.pm license][hex-licence-badge]][licence]
@@ -98,6 +98,7 @@ server.
 ```
 
 [ci-badge]: https://github.com/NFIBrokerage/mint_web_socket/workflows/CI/badge.svg
+[actions]: https://github.com/NFIBrokerage/mint_web_socket/actions/workflows/ci.yml
 [coverage]: https://coveralls.io/github/NFIBrokerage/mint_web_socket
 [coverage-badge]: https://coveralls.io/repos/github/NFIBrokerage/mint_web_socket/badge.svg
 [hex-version-badge]: https://img.shields.io/hexpm/v/mint_web_socket.svg
