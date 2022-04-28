@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (8M). Sent out in fragments of 4M.",
    "droppedByMe": true,
-   "duration": 270,
+   "duration": 268,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=267&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: iL1n/wqbRlHnp7eVoIs95A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hlCkq+38V5rlXCXf+nkiHCwOYNg=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=267&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: RotszJOGMVzAu8mnca4A7g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 4xU5PpgvW2T6k/D3zcCn9KMQqMs=\r\n\r\n",
    "id": "9.3.9",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,9 +40,14 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "65536": 64
+      "376": 1,
+      "11048": 1,
+      "21720": 1,
+      "32768": 1,
+      "65160": 1,
+      "65536": 62
    },
-   "started": "2022-04-28T15:18:33.278Z",
+   "started": "2022-04-28T19:24:12.253Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -104,7 +109,7 @@
          "RO",
          [
             8,
-            "88821e2207911dca"
+            "8882db043b9fd8ec"
          ]
       ],
       [
@@ -117,7 +122,7 @@
          true,
          0,
          true,
-         "1e220791"
+         "db043b9f"
       ]
    ]
 }

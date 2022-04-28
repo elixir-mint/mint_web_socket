@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 8Ak9vWLgEa2ZSkraQm14vg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: w1S89ssnAj1TI2BUHZZKHdJtxNA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: TUBjcQRah/S1D+3HhvubTA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: CB2kPUFxB+1Xb1APRZauCNPHRFE=\r\n\r\n",
    "id": "5.15",
    "isServer": true,
    "localCloseCode": 1000,
@@ -52,10 +52,11 @@
       "8": 1
    },
    "rxOctetStats": {
-      "32": 1,
+      "8": 1,
+      "24": 1,
       "203": 1
    },
-   "started": "2022-04-28T15:18:37.667Z",
+   "started": "2022-04-28T19:24:01.869Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 2,
@@ -183,8 +184,8 @@
       [
          "RO",
          [
-            32,
-            "819261bf336707cd52000cda5d1350d9410606d25609158d8882dbfb6851d811"
+            24,
+            "819287535091e12131f6ea363ee5b63522f0e03e35fff361"
          ]
       ],
       [
@@ -197,7 +198,14 @@
          true,
          0,
          true,
-         "61bf3367"
+         "87535091"
+      ],
+      [
+         "RO",
+         [
+            8,
+            "888210ae43b21344"
+         ]
       ],
       [
          "RF",
@@ -209,7 +217,7 @@
          true,
          0,
          true,
-         "dbfb6851"
+         "10ae43b2"
       ],
       [
          "TF",

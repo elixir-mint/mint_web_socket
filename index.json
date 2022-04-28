@@ -3,21 +3,21 @@
       "1.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 4,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_1.json"
       },
       "1.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 7,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_2.json"
       },
       "1.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_3.json"
       },
@@ -38,42 +38,42 @@
       "1.1.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 10,
+         "duration": 8,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_6.json"
       },
       "1.1.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 8,
+         "duration": 9,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_7.json"
       },
       "1.1.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 13,
+         "duration": 14,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_1_8.json"
       },
       "1.2.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_1.json"
       },
       "1.2.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_2.json"
       },
       "1.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_3.json"
       },
@@ -94,364 +94,364 @@
       "1.2.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 10,
+         "duration": 8,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_6.json"
       },
       "1.2.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 11,
+         "duration": 10,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_7.json"
       },
       "1.2.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 27,
+         "duration": 16,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_1_2_8.json"
       },
       "10.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 11,
+         "duration": 10,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_10_1_1.json"
       },
       "12.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 579,
+         "duration": 572,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_1_1.json"
       },
       "12.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 772,
+         "duration": 600,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_1_2.json"
       },
       "12.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 631,
+         "duration": 653,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_1_3.json"
       },
       "12.1.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 735,
+         "duration": 770,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_1_4.json"
       },
       "12.2.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 500,
+         "duration": 531,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_2_1.json"
       },
       "12.2.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 580,
+         "duration": 620,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_2_2.json"
       },
       "12.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 699,
+         "duration": 697,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_2_3.json"
       },
       "12.2.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 995,
+         "duration": 950,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_2_4.json"
       },
       "12.3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 457,
+         "duration": 483,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_3_1.json"
       },
       "12.3.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 727,
+         "duration": 520,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_3_2.json"
       },
       "12.3.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 617,
+         "duration": 705,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_3_3.json"
       },
       "12.3.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 934,
+         "duration": 1001,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_3_4.json"
       },
       "12.4.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 891,
+         "duration": 965,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_4_1.json"
       },
       "12.4.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 962,
+         "duration": 904,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_4_2.json"
       },
       "12.4.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 942,
+         "duration": 923,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_4_3.json"
       },
       "12.4.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1058,
+         "duration": 1083,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_4_4.json"
       },
       "12.5.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 528,
+         "duration": 521,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_5_1.json"
       },
       "12.5.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 606,
+         "duration": 615,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_5_2.json"
       },
       "12.5.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 656,
+         "duration": 818,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_5_3.json"
       },
       "12.5.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 832,
+         "duration": 855,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_12_5_4.json"
       },
       "13.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 635,
+         "duration": 603,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_1_1.json"
       },
       "13.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 621,
+         "duration": 653,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_1_2.json"
       },
       "13.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 627,
+         "duration": 635,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_1_3.json"
       },
       "13.1.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 755,
+         "duration": 714,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_1_4.json"
       },
       "13.2.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1244,
+         "duration": 581,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_2_1.json"
       },
       "13.2.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 648,
+         "duration": 827,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_2_2.json"
       },
       "13.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 669,
+         "duration": 661,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_2_3.json"
       },
       "13.2.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 745,
+         "duration": 747,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_2_4.json"
       },
       "13.3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 579,
+         "duration": 571,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_3_1.json"
       },
       "13.3.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 609,
+         "duration": 619,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_3_2.json"
       },
       "13.3.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 655,
+         "duration": 647,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_3_3.json"
       },
       "13.3.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 766,
+         "duration": 784,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_3_4.json"
       },
       "13.4.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 588,
+         "duration": 553,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_4_1.json"
       },
       "13.4.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 609,
+         "duration": 653,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_4_2.json"
       },
       "13.4.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 642,
+         "duration": 626,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_4_3.json"
       },
       "13.4.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 732,
+         "duration": 758,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_4_4.json"
       },
       "13.5.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 594,
+         "duration": 639,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_5_1.json"
       },
       "13.5.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 646,
+         "duration": 1155,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_5_2.json"
       },
       "13.5.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 714,
+         "duration": 639,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_5_3.json"
       },
       "13.5.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 736,
+         "duration": 757,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_5_4.json"
       },
       "13.6.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 616,
+         "duration": 741,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_6_1.json"
       },
       "13.6.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 629,
+         "duration": 693,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_6_2.json"
       },
       "13.6.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 657,
+         "duration": 665,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_6_3.json"
       },
       "13.6.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 731,
+         "duration": 735,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_6_4.json"
       },
       "13.7.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 597,
+         "duration": 615,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_7_1.json"
       },
       "13.7.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 629,
+         "duration": 634,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_7_2.json"
       },
       "13.7.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 694,
+         "duration": 699,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_7_3.json"
       },
       "13.7.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 746,
+         "duration": 780,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_13_7_4.json"
       },
@@ -465,14 +465,14 @@
       "2.10": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 16,
+         "duration": 39,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_10.json"
       },
       "2.11": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 28,
+         "duration": 17,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_11.json"
       },
@@ -486,35 +486,35 @@
       "2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_3.json"
       },
       "2.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_4.json"
       },
       "2.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 6,
+         "duration": 5,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_2_5.json"
       },
       "2.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 13,
+         "duration": 28,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_6.json"
       },
       "2.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_7.json"
       },
@@ -528,14 +528,14 @@
       "2.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_2_9.json"
       },
       "3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_3_1.json"
       },
@@ -556,7 +556,7 @@
       "3.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 5,
+         "duration": 11,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_3_4.json"
       },
@@ -570,35 +570,35 @@
       "3.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 3,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_3_6.json"
       },
       "3.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 4,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_3_7.json"
       },
       "4.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_4_1_1.json"
       },
       "4.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_4_1_2.json"
       },
       "4.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_4_1_3.json"
       },
@@ -633,7 +633,7 @@
       "4.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 9,
+         "duration": 3,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_4_2_3.json"
       },
@@ -647,7 +647,7 @@
       "4.2.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 5,
+         "duration": 12,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_4_2_5.json"
       },
@@ -668,7 +668,7 @@
       "5.11": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 5,
+         "duration": 3,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_5_11.json"
       },
@@ -689,7 +689,7 @@
       "5.14": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 5,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_5_14.json"
       },
@@ -710,21 +710,21 @@
       "5.17": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_5_17.json"
       },
       "5.18": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_5_18.json"
       },
       "5.19": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1004,
+         "duration": 1007,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_5_19.json"
       },
@@ -752,14 +752,14 @@
       "5.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 8,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_5_4.json"
       },
       "5.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 5,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_5_5.json"
       },
@@ -773,42 +773,42 @@
       "5.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_5_7.json"
       },
       "5.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 7,
+         "duration": 6,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_5_8.json"
       },
       "5.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_5_9.json"
       },
       "6.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_1_1.json"
       },
       "6.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_1_2.json"
       },
       "6.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 10,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_1_3.json"
       },
@@ -822,21 +822,21 @@
       "6.10.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_10_2.json"
       },
       "6.10.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_10_3.json"
       },
       "6.11.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 5,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_11_1.json"
       },
@@ -850,7 +850,7 @@
       "6.11.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_11_3.json"
       },
@@ -864,14 +864,14 @@
       "6.11.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_11_5.json"
       },
       "6.12.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_12_1.json"
       },
@@ -885,14 +885,14 @@
       "6.12.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_12_3.json"
       },
       "6.12.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_12_4.json"
       },
@@ -913,7 +913,7 @@
       "6.12.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_12_7.json"
       },
@@ -927,7 +927,7 @@
       "6.13.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_13_1.json"
       },
@@ -948,21 +948,21 @@
       "6.13.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_13_4.json"
       },
       "6.13.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_13_5.json"
       },
       "6.14.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 4,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_1.json"
       },
@@ -976,35 +976,35 @@
       "6.14.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_2.json"
       },
       "6.14.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_3.json"
       },
       "6.14.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_4.json"
       },
       "6.14.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_5.json"
       },
       "6.14.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_6.json"
       },
@@ -1018,7 +1018,7 @@
       "6.14.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_14_8.json"
       },
@@ -1032,7 +1032,7 @@
       "6.15.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 4,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_15_1.json"
       },
@@ -1046,21 +1046,21 @@
       "6.16.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_16_2.json"
       },
       "6.16.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_16_3.json"
       },
       "6.17.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_17_1.json"
       },
@@ -1074,7 +1074,7 @@
       "6.17.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_17_3.json"
       },
@@ -1088,14 +1088,14 @@
       "6.17.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_17_5.json"
       },
       "6.18.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_18_1.json"
       },
@@ -1123,14 +1123,14 @@
       "6.18.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_18_5.json"
       },
       "6.19.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_19_1.json"
       },
@@ -1151,21 +1151,21 @@
       "6.19.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_19_4.json"
       },
       "6.19.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_19_5.json"
       },
       "6.2.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 6,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_2_1.json"
       },
@@ -1179,28 +1179,28 @@
       "6.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 5,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_2_3.json"
       },
       "6.2.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 4,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_2_4.json"
       },
       "6.20.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_20_1.json"
       },
       "6.20.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_20_2.json"
       },
@@ -1214,14 +1214,14 @@
       "6.20.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_20_4.json"
       },
       "6.20.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_20_5.json"
       },
@@ -1235,7 +1235,7 @@
       "6.20.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_20_7.json"
       },
@@ -1256,7 +1256,7 @@
       "6.21.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 8,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_21_3.json"
       },
@@ -1270,7 +1270,7 @@
       "6.21.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_21_5.json"
       },
@@ -1291,35 +1291,35 @@
       "6.21.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_21_8.json"
       },
       "6.22.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_1.json"
       },
       "6.22.10": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 8,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_10.json"
       },
       "6.22.11": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_11.json"
       },
       "6.22.12": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_12.json"
       },
@@ -1361,14 +1361,14 @@
       "6.22.18": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_18.json"
       },
       "6.22.19": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_19.json"
       },
@@ -1382,7 +1382,7 @@
       "6.22.20": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 7,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_20.json"
       },
@@ -1403,21 +1403,21 @@
       "6.22.23": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 17,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_23.json"
       },
       "6.22.24": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_24.json"
       },
       "6.22.25": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_25.json"
       },
@@ -1438,21 +1438,21 @@
       "6.22.28": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_28.json"
       },
       "6.22.29": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 5,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_29.json"
       },
       "6.22.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_3.json"
       },
@@ -1480,7 +1480,7 @@
       "6.22.33": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_33.json"
       },
@@ -1508,14 +1508,14 @@
       "6.22.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 5,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_6.json"
       },
       "6.22.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_22_7.json"
       },
@@ -1536,7 +1536,7 @@
       "6.23.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 9,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_1.json"
       },
@@ -1550,63 +1550,63 @@
       "6.23.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 10,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_3.json"
       },
       "6.23.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_4.json"
       },
       "6.23.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_5.json"
       },
       "6.23.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_6.json"
       },
       "6.23.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_23_7.json"
       },
       "6.3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_3_1.json"
       },
       "6.3.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_3_2.json"
       },
       "6.4.1": {
          "behavior": "NON-STRICT",
          "behaviorClose": "OK",
-         "duration": 2003,
+         "duration": 2005,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_4_1.json"
       },
       "6.4.2": {
          "behavior": "NON-STRICT",
          "behaviorClose": "OK",
-         "duration": 2003,
+         "duration": 2004,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_4_2.json"
       },
@@ -1620,7 +1620,7 @@
       "6.4.4": {
          "behavior": "NON-STRICT",
          "behaviorClose": "OK",
-         "duration": 2003,
+         "duration": 2004,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_4_4.json"
       },
@@ -1641,14 +1641,14 @@
       "6.5.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_5_3.json"
       },
       "6.5.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 13,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_5_4.json"
       },
@@ -1676,14 +1676,14 @@
       "6.6.11": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_6_11.json"
       },
       "6.6.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_6_2.json"
       },
@@ -1697,14 +1697,14 @@
       "6.6.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1007,
          "reportfile": "mint_case_6_6_4.json"
       },
       "6.6.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 7,
+         "duration": 12,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_6_5.json"
       },
@@ -1732,14 +1732,14 @@
       "6.6.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_6_9.json"
       },
       "6.7.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_7_1.json"
       },
@@ -1753,7 +1753,7 @@
       "6.7.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_7_3.json"
       },
@@ -1781,28 +1781,28 @@
       "6.9.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 11,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_9_1.json"
       },
       "6.9.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_9_2.json"
       },
       "6.9.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_9_3.json"
       },
       "6.9.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_6_9_4.json"
       },
@@ -1816,35 +1816,35 @@
       "7.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_1_2.json"
       },
       "7.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_1_3.json"
       },
       "7.1.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_1_4.json"
       },
       "7.1.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_1_5.json"
       },
       "7.13.1": {
          "behavior": "INFORMATIONAL",
          "behaviorClose": "INFORMATIONAL",
-         "duration": 2,
+         "duration": 13,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_13_1.json"
       },
@@ -1858,7 +1858,7 @@
       "7.3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_3_1.json"
       },
@@ -1872,14 +1872,14 @@
       "7.3.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_3_3.json"
       },
       "7.3.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_3_4.json"
       },
@@ -1893,21 +1893,21 @@
       "7.3.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_3_6.json"
       },
       "7.5.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 6,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_5_1.json"
       },
       "7.7.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 8,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_1.json"
       },
@@ -1921,7 +1921,7 @@
       "7.7.11": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 5,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_11.json"
       },
@@ -1935,7 +1935,7 @@
       "7.7.13": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 14,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_13.json"
       },
@@ -1949,28 +1949,28 @@
       "7.7.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_3.json"
       },
       "7.7.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_4.json"
       },
       "7.7.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_5.json"
       },
       "7.7.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 3,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_6.json"
       },
@@ -1984,14 +1984,14 @@
       "7.7.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_8.json"
       },
       "7.7.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1,
+         "duration": 2,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_7_7_9.json"
       },
@@ -2012,28 +2012,28 @@
       "7.9.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_9_3.json"
       },
       "7.9.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 3,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_9_4.json"
       },
       "7.9.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 4,
+         "duration": 2,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_9_5.json"
       },
       "7.9.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 2,
+         "duration": 1,
          "remoteCloseCode": 1002,
          "reportfile": "mint_case_7_9_6.json"
       },
@@ -2061,42 +2061,42 @@
       "9.1.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 6,
+         "duration": 9,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_1.json"
       },
       "9.1.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 20,
+         "duration": 19,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_2.json"
       },
       "9.1.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 79,
+         "duration": 64,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_3.json"
       },
       "9.1.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 281,
+         "duration": 292,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_4.json"
       },
       "9.1.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 559,
+         "duration": 603,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_5.json"
       },
       "9.1.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1145,
+         "duration": 1057,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_1_6.json"
       },
@@ -2110,329 +2110,329 @@
       "9.2.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 19,
+         "duration": 17,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_2_2.json"
       },
       "9.2.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 68,
+         "duration": 64,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_2_3.json"
       },
       "9.2.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 267,
+         "duration": 254,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_2_4.json"
       },
       "9.2.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 484,
+         "duration": 561,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_2_5.json"
       },
       "9.2.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 1049,
+         "duration": 1067,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_2_6.json"
       },
       "9.3.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 598,
+         "duration": 564,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_1.json"
       },
       "9.3.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 340,
+         "duration": 346,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_2.json"
       },
       "9.3.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 336,
+         "duration": 302,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_3.json"
       },
       "9.3.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 280,
+         "duration": 294,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_4.json"
       },
       "9.3.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 282,
+         "duration": 278,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_5.json"
       },
       "9.3.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 290,
+         "duration": 286,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_6.json"
       },
       "9.3.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 269,
+         "duration": 270,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_7.json"
       },
       "9.3.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 265,
+         "duration": 275,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_8.json"
       },
       "9.3.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 270,
+         "duration": 268,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_3_9.json"
       },
       "9.4.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 560,
+         "duration": 563,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_1.json"
       },
       "9.4.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 358,
+         "duration": 357,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_2.json"
       },
       "9.4.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 245,
+         "duration": 342,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_3.json"
       },
       "9.4.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 244,
+         "duration": 259,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_4.json"
       },
       "9.4.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 239,
+         "duration": 246,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_5.json"
       },
       "9.4.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 227,
+         "duration": 238,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_6.json"
       },
       "9.4.7": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 226,
+         "duration": 236,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_7.json"
       },
       "9.4.8": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 270,
+         "duration": 222,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_8.json"
       },
       "9.4.9": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 242,
+         "duration": 265,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_4_9.json"
       },
       "9.5.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 400,
+         "duration": 444,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_1.json"
       },
       "9.5.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 296,
+         "duration": 360,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_2.json"
       },
       "9.5.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 251,
+         "duration": 188,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_3.json"
       },
       "9.5.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 190,
+         "duration": 156,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_4.json"
       },
       "9.5.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 131,
+         "duration": 142,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_5.json"
       },
       "9.5.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 116,
+         "duration": 114,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_5_6.json"
       },
       "9.6.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 414,
+         "duration": 454,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_1.json"
       },
       "9.6.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 391,
+         "duration": 264,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_2.json"
       },
       "9.6.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 430,
+         "duration": 183,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_3.json"
       },
       "9.6.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 214,
+         "duration": 164,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_4.json"
       },
       "9.6.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 92,
+         "duration": 278,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_5.json"
       },
       "9.6.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 167,
+         "duration": 117,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_6_6.json"
       },
       "9.7.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 409,
+         "duration": 396,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_1.json"
       },
       "9.7.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 431,
+         "duration": 354,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_2.json"
       },
       "9.7.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 415,
+         "duration": 464,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_3.json"
       },
       "9.7.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 399,
+         "duration": 481,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_4.json"
       },
       "9.7.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 504,
+         "duration": 503,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_5.json"
       },
       "9.7.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 953,
+         "duration": 792,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_7_6.json"
       },
       "9.8.1": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 487,
+         "duration": 449,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_1.json"
       },
       "9.8.2": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 429,
+         "duration": 430,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_2.json"
       },
       "9.8.3": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 485,
+         "duration": 514,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_3.json"
       },
       "9.8.4": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 487,
+         "duration": 443,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_4.json"
       },
       "9.8.5": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 613,
+         "duration": 545,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_5.json"
       },
       "9.8.6": {
          "behavior": "OK",
          "behaviorClose": "OK",
-         "duration": 805,
+         "duration": 891,
          "remoteCloseCode": 1000,
          "reportfile": "mint_case_9_8_6.json"
       }

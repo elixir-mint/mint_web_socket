@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 16k.",
    "droppedByMe": true,
-   "duration": 239,
+   "duration": 246,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: DgEJT34D2idj3LxIPNAhmA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: KQjLJYXnH8cEjYOqVZEfpxlelrs=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: q8JG2DYxQJhG2vy9XHV87w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hP75+Xd9VBWcErMhCIMPATvpk6k=\r\n\r\n",
    "id": "9.4.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,13 +38,13 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "30304": 1,
-      "35232": 1,
-      "65536": 63
+      "31856": 1,
+      "35518": 1,
+      "63712": 1,
+      "65536": 62
    },
-   "started": "2022-04-28T15:18:43.872Z",
+   "started": "2022-04-28T19:24:04.959Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 256,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "8882bedff1c0bd37"
+            "888225c871002620"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "bedff1c0"
+         "25c87100"
       ]
    ]
 }

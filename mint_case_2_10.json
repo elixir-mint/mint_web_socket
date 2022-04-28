@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 10 Pings with payload.",
    "droppedByMe": true,
-   "duration": 16,
+   "duration": 39,
    "expectation": "Pongs for our Pings with all the payloads. Note: This is not required by the Spec .. but we check for this behaviour anyway. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -62,8 +62,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=26&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 9/M5cIKBj3+IgXlm7lo0Ww==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yf6JWajVM14vopcfXgL6qsEIsJ0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=26&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: /633EPglppcaRY61ldq0pw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 7fChepVi4Ggt7ZSliOX0nJEFc3A=\r\n\r\n",
    "id": "2.10",
    "isServer": true,
    "localCloseCode": 1000,
@@ -122,11 +122,11 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "15": 1,
-      "135": 1,
+      "30": 1,
+      "120": 1,
       "203": 1
    },
-   "started": "2022-04-28T15:19:17.299Z",
+   "started": "2022-04-28T19:23:47.088Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -385,8 +385,8 @@
       [
          "RO",
          [
-            15,
-            "8a890fcb48357faa315960aa2c183f"
+            30,
+            "8a8930c64e9140a737fd5fa72abc008a898b791023fb18694fe418740eba"
          ]
       ],
       [
@@ -399,14 +399,7 @@
          true,
          0,
          true,
-         "0fcb4835"
-      ],
-      [
-         "RO",
-         [
-            135,
-            "8a8932ba538442db2ae85ddb37a9038a89cd2f6deabd4e1486a24e09c7ff8a895ab68e122ad7f77e35d7ea3f698a8966ffed2c169e9440099e8901528a890533 ..."
-         ]
+         "30c64e91"
       ],
       [
          "RF",
@@ -418,7 +411,14 @@
          true,
          0,
          true,
-         "32ba5384"
+         "8b791023"
+      ],
+      [
+         "RO",
+         [
+            120,
+            "8a89333400cd435579a15c5564e0018a894575073935147e552a146314768a890443a1f87422d8946b22c5d5308a89291c96c6597defaa467df2eb1c8a898015 ..."
+         ]
       ],
       [
          "RF",
@@ -430,7 +430,7 @@
          true,
          0,
          true,
-         "cd2f6dea"
+         "333400cd"
       ],
       [
          "RF",
@@ -442,7 +442,7 @@
          true,
          0,
          true,
-         "5ab68e12"
+         "45750739"
       ],
       [
          "RF",
@@ -454,7 +454,7 @@
          true,
          0,
          true,
-         "66ffed2c"
+         "0443a1f8"
       ],
       [
          "RF",
@@ -466,7 +466,7 @@
          true,
          0,
          true,
-         "05335e29"
+         "291c96c6"
       ],
       [
          "RF",
@@ -478,7 +478,7 @@
          true,
          0,
          true,
-         "ce2add7b"
+         "8015cda2"
       ],
       [
          "RF",
@@ -490,7 +490,7 @@
          true,
          0,
          true,
-         "48c55eb5"
+         "a338c4cf"
       ],
       [
          "RF",
@@ -502,7 +502,7 @@
          true,
          0,
          true,
-         "a0643091"
+         "f21e170e"
       ],
       [
          "RF",
@@ -514,7 +514,7 @@
          true,
          0,
          true,
-         "6fdf739d"
+         "9ffc5d55"
       ],
       [
          "TF",
@@ -542,7 +542,7 @@
          "RO",
          [
             8,
-            "8882cf727455cc9a"
+            "88825b9afa295872"
          ]
       ],
       [
@@ -555,7 +555,7 @@
          true,
          0,
          true,
-         "cf727455"
+         "5b9afa29"
       ]
    ]
 }
