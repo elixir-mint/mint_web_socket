@@ -45,14 +45,13 @@ Other WebSocket implementations like
 [`:gun`][gun] / [`:websocket_client`][websocket-client] /
 [`Socket`][socket] / [`WebSockex`][websockex] work by spawning and
 passing messages among processes. This is a very convenient interface in
-Erlang and Elixir, but it does not allow the author much control over
+Erlang and Elixir but it does not allow the author much control over
 the WebSocket connection.
 
 Instead `Mint.WebSocket` is process-less: the entire HTTP and WebSocket
 states are kept in immutable data structures. When you implement a WebSocket
 client with `Mint.WebSocket`, runtime behavior and process architecture
-are up to you: you decide how to handle things like reconnection and failure
-handling.
+are up to you: you decide how to handle things like reconnection and failures.
 
 For a practical introduction, check out Mint's [usage documentation][mint-usage].
 
