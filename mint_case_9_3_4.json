@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 4k.",
    "droppedByMe": true,
-   "duration": 349,
+   "duration": 280,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=262&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: XwDgi2bQwHnn3CButGZ5Og==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: iDC73wP06njHhYED0a29w9BEUtM=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=262&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: e3QbW5gtWIrwm0Bvd6pjqg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Lv50MJpTaD/616NtkRXBlIhc8eQ=\r\n\r\n",
    "id": "9.3.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,11 +38,12 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "65536": 64
+      "30304": 1,
+      "35246": 1,
+      "65536": 63
    },
-   "started": "2022-04-12T21:08:06.506Z",
+   "started": "2022-04-28T15:19:07.342Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1024,
@@ -106,7 +107,7 @@
          "RO",
          [
             8,
-            "8882bc35ef64bfdd"
+            "888286a26b23854a"
          ]
       ],
       [
@@ -119,7 +120,7 @@
          true,
          0,
          true,
-         "bc35ef64"
+         "86a26b23"
       ]
    ]
 }

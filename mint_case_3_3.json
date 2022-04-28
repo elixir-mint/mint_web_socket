@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send again with <b>RSV = 3</b>, then send Ping. Octets are sent in frame-wise chops. Octets are sent in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 3,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since RSV must be 0, when no extension defining RSV meaning has been negotiated. The Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=30&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: KL16ACP+hvUSMS6ditXE1g==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: LeBONfNmZOLZTSwI9F0dM4mnLWc=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=30&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: EX8BHmQ/qYgkM5pAA3FRVg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ZwypJKoouxNO3o/+fSGObjoVVuQ=\r\n\r\n",
    "id": "3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -52,11 +52,10 @@
       "8": 1
    },
    "rxOctetStats": {
-      "8": 1,
-      "19": 1,
+      "27": 1,
       "203": 1
    },
-   "started": "2022-04-12T21:09:07.843Z",
+   "started": "2022-04-28T15:18:39.500Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 2,
@@ -163,8 +162,8 @@
       [
          "RO",
          [
-            19,
-            "818df9c4b679b1a1da1596e8960e96b6da1dd8"
+            27,
+            "818de5fd3bb4ad9857d88ad11bc38a8f57d0c48882063b707405d1"
          ]
       ],
       [
@@ -177,14 +176,7 @@
          true,
          0,
          true,
-         "f9c4b679"
-      ],
-      [
-         "RO",
-         [
-            8,
-            "88829c8c58fc9f66"
-         ]
+         "e5fd3bb4"
       ],
       [
          "RF",
@@ -196,7 +188,7 @@
          true,
          0,
          true,
-         "9c8c58fc"
+         "063b7074"
       ],
       [
          "TF",
