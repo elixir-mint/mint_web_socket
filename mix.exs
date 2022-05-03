@@ -2,17 +2,11 @@ defmodule MintWebSocket.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/elixir-mint/mint_web_socket"
-  @version_file Path.join(__DIR__, ".version")
-  @external_resource @version_file
-  @version (case Regex.run(~r/^v([\d\.\w-]+)/, File.read!(@version_file), capture: :all_but_first) do
-              [version] -> version
-              nil -> "0.0.0"
-            end)
 
   def project do
     [
       app: :mint_web_socket,
-      version: @version,
+      version: "1.0.0",
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
       erlc_paths: erlc_paths(Mix.env()),
