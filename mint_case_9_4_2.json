@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 307,
+   "duration": 295,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 5eD3E96c28Wz58J62WfB8A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eFp73JSMIGLcQ/FNkVVcXgYPIW8=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: qaK2K6Vxs6tHRiBlrS1GyA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: N5gojQ11rtHnvaKyngOfG++y5Ik=\r\n\r\n",
    "id": "9.4.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,13 +40,9 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "2624": 1,
-      "21720": 1,
-      "43816": 1,
-      "62912": 1,
-      "65536": 62
+      "65536": 64
    },
-   "started": "2022-04-28T21:12:26.447Z",
+   "started": "2022-05-03T13:39:14.633Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -110,7 +106,7 @@
          "RO",
          [
             8,
-            "88825645599955ad"
+            "888202c03ac30128"
          ]
       ],
       [
@@ -123,7 +119,7 @@
          true,
          0,
          true,
-         "56455999"
+         "02c03ac3"
       ]
    ]
 }

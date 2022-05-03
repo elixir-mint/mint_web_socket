@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Same as Case 5.19, but send all frames with SYNC = True.\n   Note, this does not change the octets sent in any way, only how the stream\n   is chopped up on the wire.",
    "droppedByMe": true,
-   "duration": 1006,
+   "duration": 1004,
    "expectation": "Same as Case 5.19. Implementations must be agnostic to how\n   octet stream is chopped up on wire (must be TCP clean).",
    "expected": {
       "OK": [
@@ -35,8 +35,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=64&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: EetCQog/FdTl516G/NHgYA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: jqSQLnhHL4WFh83c74atAkebieM=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=64&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: GrZeL/pORVu10AHw4YG9WQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 0gRp7F4AeHM2CkL+eAS68vJfiOM=\r\n\r\n",
    "id": "5.20",
    "isServer": true,
    "localCloseCode": 1000,
@@ -73,7 +73,7 @@
       "51": 1,
       "203": 1
    },
-   "started": "2022-04-28T21:12:05.870Z",
+   "started": "2022-05-03T13:39:47.213Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4,
@@ -182,7 +182,7 @@
          "RO",
          [
             15,
-            "8a898b564074fb392e13e6336045aa"
+            "8a89639521d113fa4fb60ef001e042"
          ]
       ],
       [
@@ -195,7 +195,7 @@
          true,
          0,
          true,
-         "8b564074"
+         "639521d1"
       ],
       [
          "CTE",
@@ -297,7 +297,7 @@
          "RO",
          [
             15,
-            "8a89a9931c3fd9fc7258c4f63c0d88"
+            "8a89ac25c22cdc4aac4bc140e21e8d"
          ]
       ],
       [
@@ -310,13 +310,13 @@
          true,
          0,
          true,
-         "a9931c3f"
+         "ac25c22c"
       ],
       [
          "RO",
          [
             51,
-            "81ad1cf6dc6d7a84bd0a7193b2192d90ae0c7b9bb90368c4ba1f7d91b1087282ef0b6e97bb007998a8597a84bd0a7193b21929"
+            "81ad275ac7c44128a6a34a3fa9b0163cb5a54037a2aa5368a1b6463daaa1492ef4a2553ba0a94234b3f04128a6a34a3fa9b012"
          ]
       ],
       [
@@ -329,7 +329,7 @@
          true,
          0,
          true,
-         "1cf6dc6d"
+         "275ac7c4"
       ],
       [
          "TF",
@@ -357,7 +357,7 @@
          "RO",
          [
             8,
-            "8882c7714d31c499"
+            "8882276cfca32484"
          ]
       ],
       [
@@ -370,7 +370,7 @@
          true,
          0,
          true,
-         "c7714d31"
+         "276cfca3"
       ]
    ]
 }

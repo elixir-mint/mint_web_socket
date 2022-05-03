@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 2048 octets.",
    "droppedByMe": true,
-   "duration": 72,
+   "duration": 94,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=288&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 6XyhjrqnIEk28Hgs6jC9gw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: C4Y9IXeWCjj+0w2RUebxUW8bmkI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=288&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: /GGlaozyDNtJCMW7ol9Aug==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: tLdwPx41zIaWqOnJxQS5bz1kIYo=\r\n\r\n",
    "id": "9.6.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,15 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22110": 1,
+      "22096": 1,
       "28960": 1,
-      "65536": 15
+      "33158": 1,
+      "40384": 1,
+      "57920": 1,
+      "65160": 1,
+      "65536": 12
    },
-   "started": "2022-04-28T21:12:50.157Z",
+   "started": "2022-05-03T13:39:53.546Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +111,7 @@
          "RO",
          [
             8,
-            "88826de126706e09"
+            "8882e451750ae7b9"
          ]
       ],
       [
@@ -120,7 +124,7 @@
          true,
          0,
          true,
-         "6de12670"
+         "e451750a"
       ]
    ]
 }

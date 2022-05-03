@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 128 octets.",
    "droppedByMe": true,
-   "duration": 217,
+   "duration": 240,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=278&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: nX9tyQ8CMAi64Y/0CkYKPA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 8U1/DljilX2hfe54X56tfjbgbfk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=278&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: mwEIkzqivEjXXJjXxvuZ0A==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: tk5D2/tGSX/5pz2IxdTL65qNC6k=\r\n\r\n",
    "id": "9.5.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,13 +38,11 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
-      "14480": 1,
-      "22110": 1,
-      "28960": 1,
-      "65536": 15
+      "65536": 16
    },
-   "started": "2022-04-28T21:12:21.323Z",
+   "started": "2022-05-03T13:39:29.132Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +105,7 @@
          "RO",
          [
             8,
-            "8882f77b58ccf493"
+            "88828c6bb9918f83"
          ]
       ],
       [
@@ -120,7 +118,7 @@
          true,
          0,
          true,
-         "f77b58cc"
+         "8c6bb991"
       ]
    ]
 }

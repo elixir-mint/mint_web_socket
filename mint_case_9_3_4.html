@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.3.4</b></span> : Pass - <span style="font-size: 0.9em;"><b>283</b> ms @ 2022-04-28T21:12:18.833Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.3.4</b></span> : Pass - <span style="font-size: 0.9em;"><b>308</b> ms @ 2022-05-03T13:39:11.404Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 4k.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Receive echo'ed text message (with payload as sent).</p>
 
@@ -220,13 +220,13 @@ user-agent: mint/1.4.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: xzE5RTN4RtywTWq+USmvbw==</pre>
+sec-websocket-key: EwF7ZYTcoFUBhJV6qomVZw==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: oJYV/H+DvhPlJxxda4U4fbzMTfo=</pre>
+Sec-WebSocket-Accept: +hT9zXonZH+vVV9gDxjgLL/7g7U=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -290,8 +290,8 @@ Sec-WebSocket-Accept: oJYV/H+DvhPlJxxda4U4fbzMTfo=</pre>
          <pre class="wirelog_tx_frame">003 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
          <pre class="wirelog_tx_octets">004 TX OCTETS: 880203e8</pre>
-         <pre class="wirelog_rx_octets">005 RX OCTETS: 88822825422e2bcd</pre>
-         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3238323534323265</pre>
+         <pre class="wirelog_rx_octets">005 RX OCTETS: 8882dc1c230fdff4</pre>
+         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6463316332333066</pre>
          <pre class="wirelog_rx_frame">               0x03e8</pre>
          <pre class="wirelog_tcp_closed_by_me">007 TCP DROPPED BY ME</pre>
       </div>

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 128 octets.",
    "droppedByMe": true,
-   "duration": 243,
+   "duration": 339,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: MDC04haYTFw9t5mtRdhzzw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: LC8BrEhq6vA0r+VWkbRgWwtGMiY=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: gRc2hmJftTZnQyeu7d8EUA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: s4QZMk3sFMq6A5VtWPsFNo57CCw=\r\n\r\n",
    "id": "9.6.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,9 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "30304": 1,
-      "35232": 1,
-      "65536": 15
+      "65536": 16
    },
-   "started": "2022-04-28T21:12:33.338Z",
+   "started": "2022-05-03T13:39:08.737Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +105,7 @@
          "RO",
          [
             8,
-            "8882b7b63933b45e"
+            "88821533029c16db"
          ]
       ],
       [
@@ -120,7 +118,7 @@
          true,
          0,
          true,
-         "b7b63933"
+         "1533029c"
       ]
    ]
 }
