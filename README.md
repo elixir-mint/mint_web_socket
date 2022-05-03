@@ -62,7 +62,7 @@ closely as possible and uses the [Autobahn|Testsuite][autobahn] to check
 conformance with every run of tests/CI. The auto-generated report produced
 by the Autobahn|Testsuite is uploaded on each push to main.
 
-See the report here: https://nfibrokerage.github.io/mint_web_socket/
+See the report here: https://elixir-mint.github.io/mint_web_socket/
 
 ## HTTP/2 Support
 
@@ -96,16 +96,16 @@ server.
 (app)$ iex -S mix
 ```
 
-[ci-badge]: https://github.com/NFIBrokerage/mint_web_socket/workflows/CI/badge.svg
-[actions]: https://github.com/NFIBrokerage/mint_web_socket/actions/workflows/ci.yml
-[coverage]: https://coveralls.io/github/NFIBrokerage/mint_web_socket
-[coverage-badge]: https://coveralls.io/repos/github/NFIBrokerage/mint_web_socket/badge.svg
+[ci-badge]: https://github.com/elixir-mint/mint_web_socket/workflows/CI/badge.svg
+[actions]: https://github.com/elixir-mint/mint_web_socket/actions/workflows/ci.yml
+[coverage]: https://coveralls.io/github/elixir-mint/mint_web_socket
+[coverage-badge]: https://coveralls.io/repos/github/elixir-mint/mint_web_socket/badge.svg
 [hex-version-badge]: https://img.shields.io/hexpm/v/mint_web_socket.svg
 [hex-licence-badge]: https://img.shields.io/hexpm/l/mint_web_socket.svg
 [hex-package]: https://hex.pm/packages/mint_web_socket
-[licence]: https://github.com/NFIBrokerage/mint_web_socket/blob/main/LICENSE
-[last-updated-badge]: https://img.shields.io/github/last-commit/NFIBrokerage/mint_web_socket.svg
-[commits]: https://github.com/NFIBrokerage/mint_web_socket/commits/main
+[licence]: https://github.com/elixir-mint/mint_web_socket/blob/main/LICENSE
+[last-updated-badge]: https://img.shields.io/github/last-commit/elixir-mint/mint_web_socket.svg
+[commits]: https://github.com/elixir-mint/mint_web_socket/commits/main
 
 [hex-docs]: https://hexdocs.pm/mint_web_socket/Mint.WebSocket.html
 

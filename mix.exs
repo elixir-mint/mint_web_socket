@@ -1,7 +1,7 @@
 defmodule MintWebSocket.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/NFIBrokerage/mint_web_socket"
+  @source_url "https://github.com/elixir-mint/mint_web_socket"
   @version_file Path.join(__DIR__, ".version")
   @external_resource @version_file
   @version (case Regex.run(~r/^v([\d\.\w-]+)/, File.read!(@version_file), capture: :all_but_first) do
