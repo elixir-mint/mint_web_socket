@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256k.",
    "droppedByMe": true,
-   "duration": 255,
+   "duration": 243,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=265&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: inFi3HubcXMGF++MKzg6/g==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: dG6WPv9G2TduQXPifuwBYPPCt44=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=265&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: j8wX+0p9FKHtC8bCLwKcfw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yHgcLxRY5ZX1SF75P4a46YHX8Js=\r\n\r\n",
    "id": "9.3.7",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,11 +38,12 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "65536": 64
+      "30304": 1,
+      "35246": 1,
+      "65536": 63
    },
-   "started": "2022-05-03T13:39:38.473Z",
+   "started": "2022-09-18T16:49:30.504Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16,
@@ -106,7 +107,7 @@
          "RO",
          [
             8,
-            "8882f39bff0ff073"
+            "8882eab07b5ce958"
          ]
       ],
       [
@@ -119,7 +120,7 @@
          true,
          0,
          true,
-         "f39bff0f"
+         "eab07b5c"
       ]
    ]
 }
