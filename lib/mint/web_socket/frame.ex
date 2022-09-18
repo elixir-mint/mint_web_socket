@@ -259,7 +259,7 @@ defmodule Mint.WebSocket.Frame do
        ),
        do: {:ok, payload_length, rest}
 
-  defp decode_payload_length(<<127::integer-size(7)>>), do: :buffer
+  defp decode_payload_length(<<127::integer-size(7), _rest::bitstring>>), do: :buffer
 
   defp decode_payload_length(
          <<126::integer-size(7), payload_length::unsigned-integer-size(8)-unit(2),
@@ -267,7 +267,7 @@ defmodule Mint.WebSocket.Frame do
        ),
        do: {:ok, payload_length, rest}
 
-  defp decode_payload_length(<<126::integer-size(7)>>), do: :buffer
+  defp decode_payload_length(<<126::integer-size(7), _rest::bitstring>>), do: :buffer
 
   defp decode_payload_length(<<payload_length::integer-size(7), rest::bitstring>>)
        when payload_length in 0..125,
