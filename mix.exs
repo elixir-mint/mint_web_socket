@@ -58,7 +58,7 @@ defmodule MintWebSocket.MixProject do
   defp package do
     [
       name: "mint_web_socket",
-      files: ~w(lib .formatter.exs mix.exs README.md .version),
+      files: ~w(lib .formatter.exs mix.exs README.md),
       licenses: ["Apache-2.0"],
       links: %{
         "GitHub" => @source_url,
