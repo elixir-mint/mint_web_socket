@@ -45,7 +45,8 @@ defmodule MintWebSocket.MixProject do
       {:gun, "== 2.0.0-rc.2", only: [:test]},
       {:credo, "~> 1.0", only: [:test], runtime: false},
       {:excoveralls, "~> 0.14", only: [:test]},
-      {:bless, "~> 1.0", only: [:test]}
+      {:bless, "~> 1.0", only: [:test]},
+      {:dialyxir, "~> 1.2", only: [:dev], runtime: false}
     ]
   end
 
