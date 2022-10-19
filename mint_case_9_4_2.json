@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 280,
+   "duration": 260,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: pg7YtX7hwyu5vN75wSfclQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: M7gonxCDpRzky/jYiewU539ehKQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: gz1y0LSbUne1Rqu+uvyolg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Sol2shWN0ARFpowqgA+bZFwsm0o=\r\n\r\n",
    "id": "9.4.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,13 +39,14 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "18856": 1,
-      "21720": 1,
-      "43816": 1,
-      "46694": 1,
-      "65536": 62
+      "376": 5,
+      "390": 1,
+      "3808": 1,
+      "61728": 1,
+      "65160": 6,
+      "65536": 57
    },
-   "started": "2022-09-18T16:50:02.403Z",
+   "started": "2022-10-19T16:16:18.710Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -109,7 +110,7 @@
          "RO",
          [
             8,
-            "88827c83961a7f6b"
+            "888236f13dfc3519"
          ]
       ],
       [
@@ -122,7 +123,7 @@
          true,
          0,
          true,
-         "7c83961a"
+         "36f13dfc"
       ]
    ]
 }

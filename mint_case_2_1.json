@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send ping without payload.",
    "droppedByMe": true,
-   "duration": 9,
+   "duration": 2,
    "expectation": "Pong (with empty payload) is sent in reply to Ping. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -26,8 +26,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=17&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Fvy0gO/NNlBdVgi+boOusw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 4VZXK9aAVV+QHjk3cQp46ZqtE3U=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=17&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 5UEgkGYfmU79/Eygu6PQrw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Ud6D3sGXVQsOWwPW5JQv2OTqyr4=\r\n\r\n",
    "id": "2.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,7 +53,7 @@
       "8": 1,
       "203": 1
    },
-   "started": "2022-09-18T16:49:54.770Z",
+   "started": "2022-10-19T16:16:05.084Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -115,7 +115,7 @@
          "RO",
          [
             6,
-            "8a808dba9b6f"
+            "8a80f3b2b749"
          ]
       ],
       [
@@ -128,7 +128,7 @@
          true,
          0,
          true,
-         "8dba9b6f"
+         "f3b2b749"
       ],
       [
          "TF",
@@ -156,7 +156,7 @@
          "RO",
          [
             8,
-            "8882d40831dad7e0"
+            "888255f2a26f561a"
          ]
       ],
       [
@@ -169,7 +169,7 @@
          true,
          0,
          true,
-         "d40831da"
+         "55f2a26f"
       ]
    ]
 }

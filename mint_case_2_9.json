@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send unsolicited pong with payload. Send ping with payload. Verify pong for ping is received.",
    "droppedByMe": true,
-   "duration": 7,
+   "duration": 2,
    "expectation": "Nothing in reply to own Pong, but Pong with payload echo'ed in reply to Ping. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -26,8 +26,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=25&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 56GW2NnMXG0z8mmEqNkVjQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: B8RK3lkmJamRUFdnzYtf4VzhBog=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=25&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: U4PUZJokcAP2mfjmyb/uxQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 9w/j+QtQCZiK8U/CaauvC20VXig=\r\n\r\n",
    "id": "2.9",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,7 +53,7 @@
       "18": 1,
       "203": 1
    },
-   "started": "2022-09-18T16:49:33.186Z",
+   "started": "2022-10-19T16:15:57.758Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -139,7 +139,7 @@
          "RO",
          [
             18,
-            "8a8c42c2c87332aba61462b2a90a2eada917"
+            "8a8c2aeb4dec5a82238b0a9b2c9546842c88"
          ]
       ],
       [
@@ -152,7 +152,7 @@
          true,
          0,
          true,
-         "42c2c873"
+         "2aeb4dec"
       ],
       [
          "TF",
@@ -180,7 +180,7 @@
          "RO",
          [
             8,
-            "88824608b76d45e0"
+            "888202ff2eb80117"
          ]
       ],
       [
@@ -193,7 +193,7 @@
          true,
          0,
          true,
-         "4608b76d"
+         "02ff2eb8"
       ]
    ]
 }

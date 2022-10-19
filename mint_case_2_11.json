@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 10 Pings with payload. Send out octets in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 34,
+   "duration": 19,
    "expectation": "Pongs for our Pings with all the payloads. Note: This is not required by the Spec .. but we check for this behaviour anyway. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -62,8 +62,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=27&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: g8LvFVjvMa3iswtuoPBGGg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: L2V0ZSjRy7FpepISLqL7iaTHGuM=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=27&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: onnt5JJRLglEf8UANFeLCA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hcMmrOgKdY8T9MB8QP1o7vxZQRg=\r\n\r\n",
    "id": "2.11",
    "isServer": true,
    "localCloseCode": 1000,
@@ -125,7 +125,7 @@
       "15": 10,
       "203": 1
    },
-   "started": "2022-09-18T16:49:27.329Z",
+   "started": "2022-10-19T16:16:25.512Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -398,25 +398,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a898d51da21fd30a34de230be0cbd"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-0"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "8d51da21"
-      ],
-      [
          "TO",
          [
             1,
@@ -439,6 +420,25 @@
             "61"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a896873222418125b480712460958"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-0"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "68732224"
       ],
       [
          "TO",
@@ -521,10 +521,18 @@
          true
       ],
       [
+         "TO",
+         [
+            1,
+            "61"
+         ],
+         true
+      ],
+      [
          "RO",
          [
             15,
-            "8a89af9232acdff34bc0c0f356819e"
+            "8a897e7222c30e135baf111346ee4f"
          ]
       ],
       [
@@ -537,15 +545,7 @@
          true,
          0,
          true,
-         "af9232ac"
-      ],
-      [
-         "TO",
-         [
-            1,
-            "61"
-         ],
-         true
+         "7e7222c3"
       ],
       [
          "TO",
@@ -620,25 +620,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a89b02288f1c043f19ddf43ecdc82"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-2"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "b02288f1"
-      ],
-      [
          "TO",
          [
             1,
@@ -653,6 +634,25 @@
             "61"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a894de74c943d8635f8228628b97f"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-2"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "4de74c94"
       ],
       [
          "TO",
@@ -735,25 +735,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a89bdd316a7cdb26fcbd2b2728a8e"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-3"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "bdd316a7"
-      ],
-      [
          "TO",
          [
             1,
@@ -768,6 +749,25 @@
             "79"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a8952272d372246545b3d46491a61"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-3"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "52272d37"
       ],
       [
          "TO",
@@ -842,25 +842,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a8973f9144903986d251c98706447"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-4"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "73f91449"
-      ],
-      [
          "TO",
          [
             1,
@@ -883,6 +864,25 @@
             "6c"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a8943794dbb331834d72c18299677"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-4"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "43794dbb"
       ],
       [
          "TO",
@@ -949,10 +949,18 @@
          true
       ],
       [
+         "TO",
+         [
+            1,
+            "61"
+         ],
+         true
+      ],
+      [
          "RO",
          [
             15,
-            "8a894e49e5b23e289cde2128819f7b"
+            "8a898562a5caf503dca6ea03c1e7b0"
          ]
       ],
       [
@@ -965,15 +973,7 @@
          true,
          0,
          true,
-         "4e49e5b2"
-      ],
-      [
-         "TO",
-         [
-            1,
-            "61"
-         ],
-         true
+         "8562a5ca"
       ],
       [
          "TO",
@@ -1056,10 +1056,18 @@
          true
       ],
       [
+         "TO",
+         [
+            1,
+            "61"
+         ],
+         true
+      ],
+      [
          "RO",
          [
             15,
-            "8a8981b34efef1d23792eed22ad3b7"
+            "8a890f76bf1e7f17c6726017db3339"
          ]
       ],
       [
@@ -1072,15 +1080,7 @@
          true,
          0,
          true,
-         "81b34efe"
-      ],
-      [
-         "TO",
-         [
-            1,
-            "61"
-         ],
-         true
+         "0f76bf1e"
       ],
       [
          "TO",
@@ -1163,25 +1163,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a8929901c1559f1657946f178381e"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-7"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "29901c15"
-      ],
-      [
          "TO",
          [
             1,
@@ -1196,6 +1177,25 @@
             "79"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a8955cdd80e25aca1623aacbc2362"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-7"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "55cdd80e"
       ],
       [
          "TO",
@@ -1262,25 +1262,6 @@
          true
       ],
       [
-         "RO",
-         [
-            15,
-            "8a8931566e174137177b5e370a3a09"
-         ]
-      ],
-      [
-         "RF",
-         [
-            9,
-            "payload-8"
-         ],
-         10,
-         true,
-         0,
-         true,
-         "31566e17"
-      ],
-      [
          "TO",
          [
             1,
@@ -1295,6 +1276,25 @@
             "61"
          ],
          true
+      ],
+      [
+         "RO",
+         [
+            15,
+            "8a89b4bfe98fc4de90e3dbde8da28c"
+         ]
+      ],
+      [
+         "RF",
+         [
+            9,
+            "payload-8"
+         ],
+         10,
+         true,
+         0,
+         true,
+         "b4bfe98f"
       ],
       [
          "TO",
@@ -1356,7 +1356,7 @@
          "RO",
          [
             15,
-            "8a895041c0272020b94b3f20a40a69"
+            "8a89a6127b0cd6730260c9731f219f"
          ]
       ],
       [
@@ -1369,7 +1369,7 @@
          true,
          0,
          true,
-         "5041c027"
+         "a6127b0c"
       ],
       [
          "TF",
@@ -1397,7 +1397,7 @@
          "RO",
          [
             8,
-            "8882a9790874aa91"
+            "88828ee3b7578d0b"
          ]
       ],
       [
@@ -1410,7 +1410,7 @@
          true,
          0,
          true,
-         "a9790874"
+         "8ee3b757"
       ]
    ]
 }
