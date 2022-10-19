@@ -7,7 +7,7 @@ defmodule MintWebSocket.MixProject do
     [
       app: :mint_web_socket,
       version: "1.0.1",
-      elixir: "~> 1.8",
+      elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env()),
       erlc_paths: erlc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -17,9 +17,7 @@ defmodule MintWebSocket.MixProject do
         coveralls: :test,
         "coveralls.html": :test,
         "coveralls.github": :test,
-        docs: :dev,
-        bless: :test,
-        credo: :test
+        docs: :dev
       ],
       package: package(),
       description: description(),
@@ -43,9 +41,7 @@ defmodule MintWebSocket.MixProject do
       {:jason, ">= 0.0.0", only: [:dev, :test]},
       {:cowboy, "~> 2.9", only: [:test]},
       {:gun, "== 2.0.0-rc.2", only: [:test]},
-      {:credo, "~> 1.0", only: [:test], runtime: false},
-      {:excoveralls, "~> 0.14", only: [:test]},
-      {:bless, "~> 1.0", only: [:test]}
+      {:excoveralls, "~> 0.14", only: [:test]}
     ]
   end
 

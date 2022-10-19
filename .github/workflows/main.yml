@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    name: Test (Elixir ${{ matrix.elixir }}, OTP ${{ matrix.erlang }})
+    # We need Ubuntu 18.04 for older OTP versions.
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - erlang: "25.1"
+            elixir: "1.14"
+            lint: true
+            coverage: true
+            report: true
+          - erlang: "24.3"
+            elixir: "1.12"
+          - erlang: "23.3.1"
+            elixir: "1.11.4"
+          - erlang: "21.3"
+            elixir: "1.6.6"
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MIX_ENV: test
+      ECHO_HOST: localhost
+      FUZZINGSERVER_HOST: localhost
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install OTP and Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: ${{matrix.erlang}}
+          elixir-version: ${{matrix.elixir}}
+
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-otp${{ matrix.erlang }}-elixir${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+
+      - name: Install and compile dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: |
+          mix deps.get --only test
+          mix deps.compile
+
+      - name: Start docker
+        run: docker-compose up --detach echo fuzzingserver
+
+      - name: Check for unused dependencies
+        run: mix deps.get && mix deps.unlock --check-unused
+        if: ${{ matrix.lint && steps.cache-deps.outputs.cache-hit != 'true' }}
+
+      - name: Compile with --warnings-as-errors
+        run: mix compile --warnings-as-errors
+        if: ${{ matrix.lint }}
+
+      - name: Run tests with coverage
+        run: mix coveralls.github
+        if: ${{ matrix.coverage }}
+
+      - name: Run tests
+        run: mix test --trace
+        if: ${{ !matrix.coverage }}
+
+      - name: Check mix format
+        run: mix format --check-formatted
+        if: ${{ matrix.lint }}
+
+      - name: Add seedling favicon to autobahn report
+        if: github.ref == 'refs/heads/main' && matrix.report
+        run: ./autobahn/favicon.sh ./autobahn/reports/index.html
+
+      - name: Checkout gh-pages branch to ./gh-pages
+        if: github.ref == 'refs/heads/main' && matrix.report
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: ./gh-pages
+
+      - name: Move autobahn report results
+        if: github.ref == 'refs/heads/main' && matrix.report
+        run: mv ./autobahn/reports/* ./gh-pages/
+
+      - name: Commit autobahn report to gh-pages branch
+        if: github.ref == 'refs/heads/main' && matrix.report
+        run: |
+          cd ./gh-pages
+          git config --local user.email "$(git log --format='%ae' HEAD^!)"
+          git config --local user.name "$(git log --format='%an' HEAD^!)"
+          git add *.{html,json}
+          git commit -m "publish Autobahn|Testsuite report" || true
+          git push
