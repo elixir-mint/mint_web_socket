@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 272,
+   "duration": 302,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=260&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xu6ETnwpHbS8nQI/Qq/sEA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: lX1YMHSrMvfNNeHRllIF0zI1Q3s=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=260&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: jtd667umEEVxGeivcVnKSA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ukWEmHb8ocbQSroUm+mgpRyVcIE=\r\n\r\n",
    "id": "9.3.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,12 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "30304": 1,
-      "35232": 1,
+      "11048": 1,
+      "21720": 1,
+      "32768": 1,
       "65536": 63
    },
-   "started": "2022-10-22T15:11:21.482Z",
+   "started": "2022-10-22T15:31:24.524Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -108,7 +109,7 @@
          "RO",
          [
             8,
-            "8882594c1ee25aa4"
+            "88822a5906a029b1"
          ]
       ],
       [
@@ -121,7 +122,7 @@
          true,
          0,
          true,
-         "594c1ee2"
+         "2a5906a0"
       ]
    ]
 }

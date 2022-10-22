@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 8 * 2**20 (8M).",
    "droppedByMe": true,
-   "duration": 422,
+   "duration": 455,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: TT2bYfIm4MDV9UMhWAiiUw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 9ZxhghcisID6nTjTAStwCf9E4NE=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: t6xeHDxN+Wo3rlZfQrtknQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: KuWc5UqkfFKSaxP/oJKNHR5wA6M=\r\n\r\n",
    "id": "9.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,13 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
-      "2464": 1,
       "30304": 1,
       "35232": 1,
-      "63086": 1,
-      "65536": 126
+      "65536": 127
    },
-   "started": "2022-10-22T15:11:07.026Z",
+   "started": "2022-10-22T15:31:02.196Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +106,7 @@
          "RO",
          [
             8,
-            "8882ab01227fa8e9"
+            "8882ed16a8edeefe"
          ]
       ],
       [
@@ -120,7 +119,7 @@
          true,
          0,
          true,
-         "ab01227f"
+         "ed16a8ed"
       ]
    ]
 }

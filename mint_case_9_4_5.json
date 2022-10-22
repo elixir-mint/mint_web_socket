@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 16k.",
    "droppedByMe": true,
-   "duration": 176,
+   "duration": 202,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: PLPCIWeT6LB3heI5e+G5wA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: elcCNp0pADdEmFCj2uBQZf5cL8Q=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=272&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: q/LN1Vf1/5vJBayxWrCkcQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: cxz78SsOWNMRNaa36WOrxN01kCc=\r\n\r\n",
    "id": "9.4.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,14 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "1072": 1,
-      "10136": 1,
-      "10902": 1,
       "14480": 1,
+      "22110": 1,
       "28960": 1,
       "65536": 63
    },
-   "started": "2022-10-22T15:11:18.686Z",
+   "started": "2022-10-22T15:31:25.323Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 256,
@@ -110,7 +108,7 @@
          "RO",
          [
             8,
-            "888268a032826b48"
+            "8882c8475cfacbaf"
          ]
       ],
       [
@@ -123,7 +121,7 @@
          true,
          0,
          true,
-         "68a03282"
+         "c8475cfa"
       ]
    ]
 }

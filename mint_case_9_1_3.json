@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 50,
+   "duration": 66,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 7EP4hai7IZib/gamb2utLg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: k221IYjTWJxe9cl7NFbJ+JQY+g4=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: BipJ7m8it97aqMOr+ei4BA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Cjc2pXfDXA5DZJUtjI/9dkLvCCg=\r\n\r\n",
    "id": "9.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,15 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
       "1072": 1,
       "14480": 1,
-      "21038": 1,
+      "21024": 1,
       "28960": 1,
       "65536": 15
    },
-   "started": "2022-10-22T15:11:25.760Z",
+   "started": "2022-10-22T15:30:30.574Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "888240b7c613435f"
+            "8882556036475688"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "40b7c613"
+         "55603647"
       ]
    ]
 }

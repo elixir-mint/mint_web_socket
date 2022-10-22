@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256k.",
    "droppedByMe": true,
-   "duration": 173,
+   "duration": 190,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=274&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: CYPiVQS6bUNUwRL8tQLGUg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 6/J5Sq+JYstbl+ZA8jgzX2/wHUA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=274&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: giWd8WqooSlN3R20kaf5oQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ukpotdDx/w6evAtCjseQHsN+wtc=\r\n\r\n",
    "id": "9.4.7",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,22 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
+      "376": 2,
+      "390": 1,
+      "912": 1,
+      "3808": 2,
+      "7240": 1,
+      "11048": 1,
       "14480": 1,
-      "22096": 1,
-      "28960": 1,
-      "65536": 63
+      "28960": 2,
+      "31856": 1,
+      "32232": 1,
+      "33304": 1,
+      "65160": 3,
+      "65536": 58
    },
-   "started": "2022-10-22T15:11:19.704Z",
+   "started": "2022-10-22T15:30:58.585Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16,
@@ -109,7 +117,7 @@
          "RO",
          [
             8,
-            "88825dafa4035e47"
+            "8882ceb58faccd5d"
          ]
       ],
       [
@@ -122,7 +130,7 @@
          true,
          0,
          true,
-         "5dafa403"
+         "ceb58fac"
       ]
    ]
 }
