@@ -88,12 +88,19 @@ to run the fuzzing test suite. The `docker-compose.yml` sets up an Elixir
 container, a simple websocket echo server, and the Autobahn|Testsuite fuzzing
 server.
 
+In host:
+
+```sh
+docker-compose up -d
+docker-compose exec app bash
 ```
-(host)$ docker-compose up -d
-(host)$ docker-compose exec app bash
-(app)$ mix deps.get
-(app)$ mix test
-(app)$ iex -S mix
+
+In app:
+
+```sh
+mix deps.get
+mix test
+iex -S mix
 ```
 
 [ci-badge]: https://github.com/elixir-mint/mint_web_socket/workflows/CI/badge.svg
