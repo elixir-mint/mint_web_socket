@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 256 octets.",
    "droppedByMe": true,
-   "duration": 138,
+   "duration": 113,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=279&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: p5WQZp40nUYAMrzU8lj7lg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: y7PTOhvRrEjPo864+2r6X4eKzHI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=279&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: MAHNFw1EgpH1gOstYNrP8g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: +4ZlMGfDQ9rl1oQe3Us2LhX7RDk=\r\n\r\n",
    "id": "9.5.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,13 +38,14 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
       "14480": 1,
-      "22110": 1,
+      "22096": 1,
       "28960": 1,
       "65536": 15
    },
-   "started": "2022-10-19T16:16:21.421Z",
+   "started": "2022-10-22T15:11:14.401Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "888279bb26b87a53"
+            "8882d5a7aa8cd64f"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "79bb26b8"
+         "d5a7aa8c"
       ]
    ]
 }

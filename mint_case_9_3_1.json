@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 64.",
    "droppedByMe": true,
-   "duration": 444,
+   "duration": 494,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=259&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: cFhoHegoCmT9xTuRgeT4ZA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: wQOdUkGMR4J5HQ7yJPbmiBhPClg=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=259&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: lMPnvdo1LRs5AqvHS0DlkA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eRzdCVodnWDHcVjJ4GrUu/589wA=\r\n\r\n",
    "id": "9.3.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,9 +40,12 @@
       "8": 1,
       "14": 1,
       "204": 1,
-      "65536": 64
+      "11048": 1,
+      "21720": 1,
+      "32768": 1,
+      "65536": 63
    },
-   "started": "2022-10-19T16:15:50.713Z",
+   "started": "2022-10-22T15:11:25.238Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 65536,
@@ -106,7 +109,7 @@
          "RO",
          [
             8,
-            "88827765f958748d"
+            "8882eec2d3ebed2a"
          ]
       ],
       [
@@ -119,7 +122,7 @@
          true,
          0,
          true,
-         "7765f958"
+         "eec2d3eb"
       ]
    ]
 }

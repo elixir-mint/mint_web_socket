@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: uy55E5Snepg+vmYqfOvPPA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: XbyzHfqYnPXULTRKm6t28MaDFFA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: IXIDXWpuMVZ8QFXOtE4Gbw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: t5FtPQRlO6UlO42po21xZjpV/ZQ=\r\n\r\n",
    "id": "1.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "134": 1,
       "203": 1
    },
-   "started": "2022-10-19T16:15:58.766Z",
+   "started": "2022-10-22T15:11:24.257Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             134,
-            "82fe007ec4ac1de33a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d3a52e31d ..."
+            "82fe007eeb1c5a2315e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd15e2a4dd ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "c4ac1de3"
+         "eb1c5a23"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "8882df53c713dcbb"
+            "888289f8f2e08a10"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "df53c713"
+         "89f8f2e0"
       ]
    ]
 }

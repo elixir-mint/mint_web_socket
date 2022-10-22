@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send a message followed by a close frame",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "Echoed message followed by clean close with normal code.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=210&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4ASUELJ6NYbuXFRTHAdeAg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: gQQjweGzRqEkXtdM7neKLPRaVzk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=210&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: RJIT8PMQkjSELUfl/jKWWw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: R7J1pbth4m2x32rCUm1GLpcsWzU=\r\n\r\n",
    "id": "7.1.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "18": 1,
       "204": 1
    },
-   "started": "2022-10-19T16:16:10.722Z",
+   "started": "2022-10-22T15:10:43.464Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             18,
-            "818c88add483c0c8b8efe78d83ecfac1b0a2"
+            "818ce9bdb824a1d8d448869def4b9bd1dc05"
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "88add483"
+         "e9bdb824"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "8882c916aa40cafe"
+            "8882826f01ab8187"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "c916aa40"
+         "826f01ab"
       ]
    ]
 }
