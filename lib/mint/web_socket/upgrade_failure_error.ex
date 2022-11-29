@@ -3,6 +3,10 @@ defmodule Mint.WebSocket.UpgradeFailureError do
   An error representing a failure to upgrade protocols from HTTP to WebSocket
   """
 
+  @type t() :: %__MODULE__{
+          status_code: pos_integer,
+          headers: [Mint.Types.headers()]
+        }
   defexception [:status_code, :headers]
 
   def message(%__MODULE__{} = error) do
