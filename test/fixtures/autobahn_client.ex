@@ -10,7 +10,7 @@ defmodule AutobahnClient do
   defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false, buffer: <<>>]
 
   defguardp is_close_frame(frame)
-            when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
+            when is_tuple(frame) and elem(frame, 0) == :close
 
   def get_case_count do
     %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> decode_buffer()
