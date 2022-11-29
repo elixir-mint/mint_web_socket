@@ -21,6 +21,34 @@ defmodule Mint.WebSocket.Frame do
   defrecord :ping, shared
   defrecord :pong, shared
 
+  @type continuation_frame() ::
+          record(:continuation, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+  @type text_frame() ::
+          record(:text, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+  @type binary_frame() ::
+          record(:binary, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+  @type close_frame() ::
+          record(:close,
+            reserved: binary(),
+            mask: binary,
+            data: binary,
+            fin?: boolean,
+            code: binary(),
+            reason: binary()
+          )
+  @type ping_frame() ::
+          record(:ping, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+  @type pong_frame() ::
+          record(:pong, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+
+  @type frame_record() ::
+          continuation_frame()
+          | text_frame()
+          | binary_frame()
+          | close_frame()
+          | ping_frame()
+          | pong_frame()
+
   defguard is_control(frame)
            when is_tuple(frame) and
                   (elem(frame, 0) == :close or elem(frame, 0) == :ping or elem(frame, 0) == :pong)
@@ -60,6 +88,9 @@ defmodule Mint.WebSocket.Frame do
 
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
+  @spec encode(Mint.WebSocket.t(), Mint.WebSocket.frame()) ::
+          {:ok, Mint.WebSocket.t(), bitstring()}
+          | {:error, Mint.WebSocket.t(), WebSocketError.t()}
   def encode(websocket, frame) when is_friendly_frame(frame) do
     {frame, extensions} =
       frame
@@ -74,7 +105,7 @@ defmodule Mint.WebSocket.Frame do
     :throw, {:mint, reason} -> {:error, websocket, reason}
   end
 
-  @spec encode_to_binary(tuple()) :: binary()
+  @spec encode_to_binary(frame_record()) :: bitstring()
   defp encode_to_binary(frame) do
     payload = payload(frame)
     mask = mask(frame)
@@ -340,7 +371,6 @@ defmodule Mint.WebSocket.Frame do
   # translate from user-friendly tuple into record defined in this module
   # (and the reverse)
   @spec translate(Mint.WebSocket.frame() | Mint.WebSocket.shorthand_frame()) :: tuple()
-  @spec translate(tuple) :: Mint.WebSocket.frame()
   for opcode <- Map.keys(@opcodes) do
     def translate(unquote(opcode)(reserved: <<reserved::bitstring>>))
         when reserved != <<0::size(3)>> do
