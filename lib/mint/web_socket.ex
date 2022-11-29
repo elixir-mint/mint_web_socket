@@ -112,7 +112,6 @@ defmodule Mint.WebSocket do
 
   alias __MODULE__.{Utils, Extension, Frame}
   alias Mint.{WebSocketError, WebSocket.UpgradeFailureError}
-  alias Mint.{HTTP1, HTTP2}
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
   @typedoc """
@@ -270,8 +269,9 @@ defmodule Mint.WebSocket do
     Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
 
+  @dialyzer {:no_opaque, do_upgrade: 6}
   defp do_upgrade(scheme, :http2, conn, path, headers, opts) do
-    if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
+    if Mint.HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
       extensions = get_extensions(opts)
       conn = put_private(conn, :extensions, extensions)
 
