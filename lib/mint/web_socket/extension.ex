@@ -180,7 +180,7 @@ defmodule Mint.WebSocket.Extension do
   end
 
   @doc false
-  @spec decode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
+  @spec decode(tuple(), [t()]) :: {tuple(), [t()]} | {{:error, term()}, [t()]}
   def decode(frame, extensions) do
     decode_all_extensions(frame, extensions, [])
   end
