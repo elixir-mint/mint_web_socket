@@ -19,6 +19,10 @@ defmodule MintWebSocket.MixProject do
         "coveralls.github": :test,
         docs: :dev
       ],
+      dialyzer: [
+        plt_local_path: "priv/plts",
+        plt_add_apps: [:mix]
+      ],
       package: package(),
       description: description(),
       source_url: @source_url,
