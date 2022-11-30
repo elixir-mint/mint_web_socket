@@ -18,6 +18,7 @@ jobs:
             lint: true
             coverage: true
             report: true
+            dialyzer: true
           - erlang: "24.3"
             elixir: "1.12"
           - erlang: "23.3.1"
@@ -64,6 +65,26 @@ jobs:
       - name: Compile with --warnings-as-errors
         run: mix compile --warnings-as-errors
         if: ${{ matrix.lint }}
+
+      - name: Restore cached PLTs
+        uses: actions/cache@v3
+        id: plt_cache
+        with:
+          key: |
+            ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.erlang }}-plt
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.erlang }}-plt
+          path: |
+            priv/plts
+
+      # Create PLTs if no cached PLTs were found
+      - name: Create PLTs
+        if: steps.plt_cache.outputs.cache-hit != 'true'
+        run: MIX_ENV=test mix dialyzer --plt
+
+      - name: Run dialyzer
+        run: MIX_ENV=test mix dialyzer
+        if: ${{ matrix.dialyzer }}
 
       - name: Run tests with coverage
         run: mix coveralls.github
