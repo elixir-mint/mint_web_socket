@@ -22,14 +22,14 @@ defmodule Mint.WebSocket.Frame do
   defrecord :pong, shared
 
   @type continuation_frame() ::
-          record(:continuation, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+          record(:continuation, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
   @type text_frame() ::
-          record(:text, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+          record(:text, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
   @type binary_frame() ::
-          record(:binary, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+          record(:binary, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
   @type close_frame() ::
           record(:close,
-            reserved: binary(),
+            reserved: <<_::3>>,
             mask: binary,
             data: binary,
             fin?: boolean,
@@ -37,9 +37,9 @@ defmodule Mint.WebSocket.Frame do
             reason: binary()
           )
   @type ping_frame() ::
-          record(:ping, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+          record(:ping, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
   @type pong_frame() ::
-          record(:pong, reserved: binary(), mask: binary, data: binary, fin?: boolean)
+          record(:pong, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
 
   @type frame_record() ::
           continuation_frame()
