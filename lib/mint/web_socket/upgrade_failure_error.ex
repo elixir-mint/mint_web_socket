@@ -4,7 +4,7 @@ defmodule Mint.WebSocket.UpgradeFailureError do
   """
 
   @type t() :: %__MODULE__{
-          status_code: pos_integer,
+          status_code: Mint.Types.status(),
           headers: [Mint.Types.headers()]
         }
   defexception [:status_code, :headers]
