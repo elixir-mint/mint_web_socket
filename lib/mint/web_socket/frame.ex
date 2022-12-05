@@ -21,25 +21,30 @@ defmodule Mint.WebSocket.Frame do
   defrecord :ping, shared
   defrecord :pong, shared
 
-  @type continuation_frame() ::
-          record(:continuation, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
+  @typep continuation_frame() ::
+           record(:continuation,
+             reserved: <<_::3>>,
+             mask: binary(),
+             data: binary(),
+             fin?: boolean()
+           )
   @type text_frame() ::
-          record(:text, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
+          record(:text, reserved: <<_::3>>, mask: binary(), data: binary(), fin?: boolean())
   @type binary_frame() ::
-          record(:binary, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
+          record(:binary, reserved: <<_::3>>, mask: binary(), data: binary(), fin?: boolean())
   @type close_frame() ::
           record(:close,
             reserved: <<_::3>>,
-            mask: binary,
-            data: binary,
-            fin?: boolean,
+            mask: binary(),
+            data: binary(),
+            fin?: boolean(),
             code: binary(),
             reason: binary()
           )
   @type ping_frame() ::
-          record(:ping, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
+          record(:ping, reserved: <<_::3>>, mask: binary(), data: binary(), fin?: boolean())
   @type pong_frame() ::
-          record(:pong, reserved: <<_::3>>, mask: binary, data: binary, fin?: boolean)
+          record(:pong, reserved: <<_::3>>, mask: binary(), data: binary(), fin?: boolean())
 
   @type frame_record() ::
           continuation_frame()
