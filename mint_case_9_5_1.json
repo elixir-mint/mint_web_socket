@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 64 octets.",
    "droppedByMe": true,
-   "duration": 454,
+   "duration": 465,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=277&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: hPwRRAHriB2JfeGxUxYMRg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: j2iTDifMw5J2Xy9zlIS4qVxyUPk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=277&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 7PUBxIIJYUi57NSxIy7GOw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: SZJC0/Uu1nTJJ3sP3EJDyBdIWhA=\r\n\r\n",
    "id": "9.5.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,11 +38,12 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "65536": 16
+      "30304": 1,
+      "35246": 1,
+      "65536": 15
    },
-   "started": "2022-10-22T15:31:24.836Z",
+   "started": "2022-12-09T01:48:23.277Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -105,7 +106,7 @@
          "RO",
          [
             8,
-            "888203a2e6df004a"
+            "88820ac546b0092d"
          ]
       ],
       [
@@ -118,7 +119,7 @@
          true,
          0,
          true,
-         "03a2e6df"
+         "0ac546b0"
       ]
    ]
 }

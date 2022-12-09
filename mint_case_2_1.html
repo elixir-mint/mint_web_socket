@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 2.1</b></span> : Pass - <span style="font-size: 0.9em;"><b>2</b> ms @ 2022-10-22T15:30:48.381Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 2.1</b></span> : Pass - <span style="font-size: 0.9em;"><b>3</b> ms @ 2022-12-09T01:48:17.689Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send ping without payload.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Pong (with empty payload) is sent in reply to Ping. Clean close with normal code.</p>
 
@@ -220,13 +220,13 @@ user-agent: mint/1.4.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: kjuzMP5tQnxEqOqWzaNrEw==</pre>
+sec-websocket-key: QqlDFlqHoWA1XsEBk9mNwQ==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: boACzGchBM/14LckdTkW1S5TY4Q=</pre>
+Sec-WebSocket-Accept: clXjkSoSv0Si62IEhoXKjat2LP8=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -286,13 +286,13 @@ Sec-WebSocket-Accept: boACzGchBM/14LckdTkW1S5TY4Q=</pre>
          <pre class="wirelog_tx_frame">002 TX FRAME : OPCODE=9, FIN=True, RSV=0, PAYLOAD-LEN=0, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_octets">003 TX OCTETS: 8900</pre>
          <pre class="wirelog_kill_after">004 CLOSE CONNECTION AFTER 1.000000 sec</pre>
-         <pre class="wirelog_rx_octets">005 RX OCTETS: 8a8073e7a1bd</pre>
-         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=10, FIN=True, RSV=0, PAYLOAD-LEN=0, MASKED=True, MASK=3733653761316264</pre>
+         <pre class="wirelog_rx_octets">005 RX OCTETS: 8a805a0d67a4</pre>
+         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=10, FIN=True, RSV=0, PAYLOAD-LEN=0, MASKED=True, MASK=3561306436376134</pre>
          <pre class="wirelog_tx_frame">007 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
          <pre class="wirelog_tx_octets">008 TX OCTETS: 880203e8</pre>
-         <pre class="wirelog_rx_octets">009 RX OCTETS: 88823201fc7c31e9</pre>
-         <pre class="wirelog_rx_frame">010 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3332303166633763</pre>
+         <pre class="wirelog_rx_octets">009 RX OCTETS: 8882046a0e3b0782</pre>
+         <pre class="wirelog_rx_frame">010 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3034366130653362</pre>
          <pre class="wirelog_rx_frame">               0x03e8</pre>
          <pre class="wirelog_tcp_closed_by_me">011 TCP DROPPED BY ME</pre>
       </div>
