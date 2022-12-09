@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 65,
+   "duration": 50,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 5xZXInSiUPKVJw2igdbVQQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: pty8Uc+Kmr9DrYX68KarPH1ACkg=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: c1dMZEv4EgQrwcpgNYg8rA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qF4mfamI/m5ERKor60zFemYBlDo=\r\n\r\n",
    "id": "9.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,14 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
+      "7630": 1,
       "14480": 1,
-      "22110": 1,
+      "22096": 1,
       "28960": 1,
-      "65536": 15
+      "57920": 1,
+      "65536": 14
    },
-   "started": "2022-12-09T01:49:07.706Z",
+   "started": "2022-12-09T15:11:02.412Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -106,7 +108,7 @@
          "RO",
          [
             8,
-            "8882de01d129dde9"
+            "8882cf083b4ccce0"
          ]
       ],
       [
@@ -119,7 +121,7 @@
          true,
          0,
          true,
-         "de01d129"
+         "cf083b4c"
       ]
    ]
 }

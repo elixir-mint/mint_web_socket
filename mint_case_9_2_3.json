@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 57,
+   "duration": 45,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: m2+vmx4m9pZjzNDhIS/8jQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hhbImlYmLe+Aj/NZ/ubkewE/6FY=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: wlzhIU2JvjgtBmv2p9npXw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: pABoMZGzvzBNohEfQMbm2btY850=\r\n\r\n",
    "id": "9.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,13 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
       "14480": 1,
-      "22096": 1,
+      "22110": 1,
       "28960": 1,
       "65536": 15
    },
-   "started": "2022-12-09T01:49:14.211Z",
+   "started": "2022-12-09T15:10:53.953Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +106,7 @@
          "RO",
          [
             8,
-            "88823fd565c13c3d"
+            "88826ff434a06c1c"
          ]
       ],
       [
@@ -120,7 +119,7 @@
          true,
          0,
          true,
-         "3fd565c1"
+         "6ff434a0"
       ]
    ]
 }

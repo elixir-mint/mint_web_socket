@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text Message fragmented into 2 fragments, then Continuation Frame with FIN = false where there is nothing to continue, then unfragmented Text Message, all sent in one chop.",
    "droppedByMe": true,
-   "duration": 3,
+   "duration": 2,
    "expectation": "The connection is failed immediately, since there is no message to continue.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 1Jk2JfkcrHH+2xG2O+OABw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: aZPcDKhD1Eu/egJMur4WBi40ywY=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 2O4yQsl7yhDYRQ7mn35MjQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Izrk97IrBLhxzH2HpL7LneNNZG0=\r\n\r\n",
    "id": "5.15",
    "isServer": true,
    "localCloseCode": 1000,
@@ -52,10 +52,11 @@
       "8": 1
    },
    "rxOctetStats": {
-      "32": 1,
+      "8": 1,
+      "24": 1,
       "203": 1
    },
-   "started": "2022-12-09T01:48:25.450Z",
+   "started": "2022-12-09T15:10:28.763Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 2,
@@ -183,8 +184,8 @@
       [
          "RO",
          [
-            32,
-            "819205c15d3a63b33c5d68a4334e34a72f5b62ac385471f388828eb655418d5c"
+            24,
+            "8192ee5e2d29882c4c4e833b435ddf385f48893348479a6c"
          ]
       ],
       [
@@ -197,7 +198,14 @@
          true,
          0,
          true,
-         "05c15d3a"
+         "ee5e2d29"
+      ],
+      [
+         "RO",
+         [
+            8,
+            "888200bde4200357"
+         ]
       ],
       [
          "RF",
@@ -209,7 +217,7 @@
          true,
          0,
          true,
-         "8eb65541"
+         "00bde420"
       ],
       [
          "TF",
