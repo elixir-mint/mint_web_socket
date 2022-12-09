@@ -156,7 +156,7 @@ defmodule Mint.WebSocket.Extension do
   defstruct [:name, :module, :state, opts: [], params: []]
 
   @doc false
-  @spec encode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
+  @spec encode(tuple(), [t()]) :: {tuple(), [t()]} | no_return()
   def encode(frame, extensions) do
     encode_all_extensions(frame, extensions, [])
   end
@@ -180,7 +180,7 @@ defmodule Mint.WebSocket.Extension do
   end
 
   @doc false
-  @spec decode(tuple(), [t()]) :: {:ok, tuple(), [t()]} | {:error, term()}
+  @spec decode(tuple(), [t()]) :: {tuple(), [t()]} | {{:error, term()}, [t()]}
   def decode(frame, extensions) do
     decode_all_extensions(frame, extensions, [])
   end

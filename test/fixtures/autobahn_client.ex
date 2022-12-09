@@ -10,7 +10,7 @@ defmodule AutobahnClient do
   defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false, buffer: <<>>]
 
   defguardp is_close_frame(frame)
-            when frame == :close or (is_tuple(frame) and elem(frame, 0) == :close)
+            when is_tuple(frame) and elem(frame, 0) == :close
 
   def get_case_count do
     %{messages: [{:text, count} | _]} = connect("/getCaseCount") |> decode_buffer()
@@ -149,18 +149,24 @@ defmodule AutobahnClient do
   def send(state, frame) do
     Logger.debug("Sending #{inspect(frame, printable_limit: 30)}")
 
-    with {:ok, %Mint.WebSocket{} = websocket, data} <-
-           Mint.WebSocket.encode(state.websocket, frame),
-         {:ok, conn} <- Mint.WebSocket.stream_request_body(state.conn, state.ref, data) do
-      Logger.debug("Sent.")
-      %__MODULE__{state | conn: conn, websocket: websocket, sent_close?: is_close_frame(frame)}
-    else
-      {:error, %Mint.WebSocket{} = websocket, reason} ->
+    case Mint.WebSocket.encode(state.websocket, frame) do
+      {:ok, websocket, data} ->
+        do_send(put_in(state.websocket, websocket), frame, data)
+
+      {:error, websocket, reason} ->
         Logger.debug(
           "Could not send frame #{inspect(frame, printable_limit: 30)} because #{inspect(reason)}, sending close..."
         )
 
         send(put_in(state.websocket, websocket), {:close, 1002, ""})
+    end
+  end
+
+  defp do_send(state, frame, data) do
+    case Mint.WebSocket.stream_request_body(state.conn, state.ref, data) do
+      {:ok, conn} ->
+        Logger.debug("Sent.")
+        %__MODULE__{state | conn: conn, sent_close?: is_close_frame(frame)}
 
       {:error, conn, %Mint.TransportError{reason: :closed}} ->
         Logger.debug(

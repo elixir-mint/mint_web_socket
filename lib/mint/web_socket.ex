@@ -112,7 +112,6 @@ defmodule Mint.WebSocket do
 
   alias __MODULE__.{Utils, Extension, Frame}
   alias Mint.{WebSocketError, WebSocket.UpgradeFailureError}
-  alias Mint.{HTTP1, HTTP2}
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
   @typedoc """
@@ -267,11 +266,12 @@ defmodule Mint.WebSocket do
 
     headers = Utils.headers({:http1, nonce}, extensions) ++ headers
 
-    Mint.HTTP1.request(conn, "GET", path, headers, nil)
+    Mint.HTTP.request(conn, "GET", path, headers, nil)
   end
 
+  @dialyzer {:no_opaque, do_upgrade: 6}
   defp do_upgrade(scheme, :http2, conn, path, headers, opts) do
-    if HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
+    if Mint.HTTP2.get_server_setting(conn, :enable_connect_protocol) == true do
       extensions = get_extensions(opts)
       conn = put_private(conn, :extensions, extensions)
 
@@ -395,7 +395,7 @@ defmodule Mint.WebSocket do
   # we take manual control of the :gen_tcp and :ssl messages in HTTP/1 because
   # we have taken over the transport
   defp stream_http1(conn, request_ref, message) do
-    socket = HTTP1.get_socket(conn)
+    socket = Mint.HTTP.get_socket(conn)
     tag = if get_private(conn, :scheme) == :ws, do: :tcp, else: :ssl
 
     case message do
@@ -403,7 +403,7 @@ defmodule Mint.WebSocket do
         reset_mode(conn, [{:data, request_ref, data}])
 
       _ ->
-        HTTP1.stream(conn, message)
+        Mint.HTTP.stream(conn, message)
     end
   end
 
@@ -411,7 +411,7 @@ defmodule Mint.WebSocket do
     module = if get_private(conn, :scheme) == :ws, do: :inet, else: :ssl
 
     with :active <- get_private(conn, :mode),
-         {:error, reason} <- module.setopts(HTTP1.get_socket(conn), active: :once) do
+         {:error, reason} <- module.setopts(Mint.HTTP.get_socket(conn), active: :once) do
       {:error, conn, %Mint.TransportError{reason: reason}, responses}
     else
       _ -> {:ok, conn, responses}
@@ -448,7 +448,7 @@ defmodule Mint.WebSocket do
 
   defp recv_http1(conn, request_ref, byte_count, timeout) do
     module = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
-    socket = HTTP1.get_socket(conn)
+    socket = Mint.HTTP.get_socket(conn)
 
     case module.recv(socket, byte_count, timeout) do
       {:ok, data} ->
@@ -498,7 +498,7 @@ defmodule Mint.WebSocket do
   defp stream_request_body_http1(conn, data) do
     transport = if get_private(conn, :scheme) == :ws, do: :gen_tcp, else: :ssl
 
-    case transport.send(Mint.HTTP1.get_socket(conn), data) do
+    case transport.send(Mint.HTTP.get_socket(conn), data) do
       :ok -> {:ok, conn}
       {:error, reason} -> {:error, conn, %Mint.TransportError{reason: reason}}
     end

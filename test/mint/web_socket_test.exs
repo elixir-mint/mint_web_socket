@@ -4,8 +4,7 @@ defmodule Mint.WebSocketTest do
   alias Mint.{HTTP1, HTTP2, WebSocket, WebSocket.UpgradeFailureError}
 
   setup_all do
-    # a cowboy test server used by the HTTP/2 tests
-    start_supervised!(TestServer)
+    TestServer.start()
     :ok
   end
 

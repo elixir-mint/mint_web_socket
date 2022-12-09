@@ -3,9 +3,7 @@ defmodule TestServer do
   A supervisor for the WebsocketHandler
   """
 
-  use Supervisor
-
-  def start_link(_opts) do
+  def start() do
     dispatch =
       :cowboy_router.compile([
         {:_,
@@ -21,9 +19,5 @@ defmodule TestServer do
         env: %{dispatch: dispatch},
         enable_connect_protocol: true
       })
-
-    Supervisor.start_link([], strategy: :one_for_one)
   end
-
-  def init(_opts), do: {:ok, nil}
 end
