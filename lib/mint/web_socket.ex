@@ -309,7 +309,7 @@ defmodule Mint.WebSocket do
     Mint.WebSocket.stream(conn, http_reply)
 
   {:ok, conn, websocket} =
-    Mint.WebSocket.new(:ws, conn, ref, status, resp_headers)
+    Mint.WebSocket.new(conn, ref, status, resp_headers)
   ```
   """
   @spec new(
