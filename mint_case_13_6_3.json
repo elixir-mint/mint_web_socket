@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 1000 compressed messages each of payload size 256, auto-fragment to 0 octets. Use permessage-deflate client offers (requestNoContextTakeover, requestMaxWindowBits): [(True, 15)]",
    "droppedByMe": true,
-   "duration": 517,
+   "duration": 875,
    "expectation": "Receive echo'ed messages (with payload as sent). Timeout case after 120 secs.",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=484&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Wn7P+ae/Roi8pOMjCOieaA==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: UxGa8XvLB4O8JxxbMhRy/9NcORg=\r\nSec-WebSocket-Extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits=15\r\n\r\n",
+   "httpRequest": "GET /runCase?case=484&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: T15uVK+1m/W6k6gXz6xASg==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: EDydB6NuALKx6SdVzjCMjjIgQ9M=\r\nSec-WebSocket-Extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits=15\r\n\r\n",
    "id": "13.6.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -74,7 +74,7 @@
       "162": 3,
       "302": 1
    },
-   "started": "2022-12-09T15:10:46.492Z",
+   "started": "2022-12-11T18:24:09.568Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.5206015625,
       "incomingOctetsAppLevel": 256000,
@@ -190,7 +190,7 @@
          "RO",
          [
             8,
-            "88820b2c81a308c4"
+            "8882cbd1ed71c839"
          ]
       ],
       [
@@ -203,7 +203,7 @@
          true,
          0,
          true,
-         "0b2c81a3"
+         "cbd1ed71"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 256 octets.",
    "droppedByMe": true,
-   "duration": 156,
+   "duration": 105,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=279&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Pd14qJrWFU9ZiSob4uYX+w==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: BmNQcr8QUHzrtGgv04aXX/sol2w=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=279&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: mOiPLcojWGrkDP5J3mR0bw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: oozu1QJTLZ1AUTGqPTRVAiMAiEI=\r\n\r\n",
    "id": "9.5.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
+      "1072": 1,
       "14480": 1,
-      "22110": 1,
+      "21038": 1,
       "28960": 1,
       "65536": 15
    },
-   "started": "2022-12-09T15:10:31.432Z",
+   "started": "2022-12-11T18:24:47.514Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "8882ad7740b1ae9f"
+            "8882655f6da766b7"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "ad7740b1"
+         "655f6da7"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 1024 octets.",
    "droppedByMe": true,
-   "duration": 101,
+   "duration": 56,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=287&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: bCovtNjLtzv/eHRUrPqOYw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ewenaEwu2rO29f4deVEv+PjG1MQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=287&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: sLNpKtfxu12c89ScvIrgcg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: mp/9sN4YTDnXe3tOULZn8AazmKY=\r\n\r\n",
    "id": "9.6.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,16 +39,18 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
+      "385": 1,
       "14480": 1,
       "22096": 1,
       "28960": 1,
-      "33158": 1,
+      "32662": 1,
       "40384": 1,
       "57920": 1,
-      "65160": 1,
-      "65536": 12
+      "65324": 1,
+      "65483": 1,
+      "65536": 11
    },
-   "started": "2022-12-09T15:10:40.594Z",
+   "started": "2022-12-11T18:24:41.708Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -111,7 +113,7 @@
          "RO",
          [
             8,
-            "8882959aa9619672"
+            "8882cdc0bc3dce28"
          ]
       ],
       [
@@ -124,7 +126,7 @@
          true,
          0,
          true,
-         "959aa961"
+         "cdc0bc3d"
       ]
    ]
 }

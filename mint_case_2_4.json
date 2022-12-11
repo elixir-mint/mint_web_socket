@@ -26,8 +26,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=20&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: tuzVMDHjBPMq6jUZSwqaOw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 71w8cCOZs3hdDyrRTC7HXxL6Nbo=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=20&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: HYT4tZZFUxtLVB0c4rQbGQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uoZQXoi/ckYNEIAAck2fcxwpI5g=\r\n\r\n",
    "id": "2.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,7 +53,7 @@
       "131": 1,
       "203": 1
    },
-   "started": "2022-12-09T15:10:19.200Z",
+   "started": "2022-12-11T18:24:17.400Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -115,7 +115,7 @@
          "RO",
          [
             131,
-            "8afddaba8fc924447137244471372444713724447137244471372444713724447137244471372444713724447137244471372444713724447137244471372444 ..."
+            "8afdf0adf6460e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e5308b80e53 ..."
          ]
       ],
       [
@@ -128,7 +128,7 @@
          true,
          0,
          true,
-         "daba8fc9"
+         "f0adf646"
       ],
       [
          "TF",
@@ -156,7 +156,7 @@
          "RO",
          [
             8,
-            "8882ab7da705a895"
+            "888222fd6c592115"
          ]
       ],
       [
@@ -169,7 +169,7 @@
          true,
          0,
          true,
-         "ab7da705"
+         "22fd6c59"
       ]
    ]
 }

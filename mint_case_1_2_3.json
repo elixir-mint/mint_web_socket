@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: SUzSbjZN8QaXmOlV3ti9NA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eSW9G4fKUApRaMqh95IFgc8E5D8=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: P1aTYITA8da30xvk7TXZ9A==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qIV3iqmI49EW235zQyJkKnJmfb8=\r\n\r\n",
    "id": "1.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "134": 1,
       "203": 1
    },
-   "started": "2022-12-09T15:10:57.008Z",
+   "started": "2022-12-11T18:24:23.032Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             134,
-            "82fe007ebb5c284645a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b845a2d6b8 ..."
+            "82fe007e345d5847caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9caa3a6b9 ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "bb5c2846"
+         "345d5847"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "888297a894089440"
+            "888226980c892570"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "97a89408"
+         "26980c89"
       ]
    ]
 }
