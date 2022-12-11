@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1k.",
    "droppedByMe": true,
-   "duration": 170,
+   "duration": 186,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=270&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: eMGat84xv6V/hk4cj0i0Xg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ODq4N81fYKgVznmaxtq5TdeFpfE=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=270&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ltqxscg4Azcny9RCRL57MA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 0M5cEhv5KVK9zUcOr05Z9yoOnxA=\r\n\r\n",
    "id": "9.4.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,14 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "1072": 1,
-      "10136": 1,
-      "10902": 1,
       "14480": 1,
       "28960": 1,
-      "65536": 63
+      "30448": 1,
+      "57198": 1,
+      "65536": 62
    },
-   "started": "2022-12-11T18:24:51.052Z",
+   "started": "2022-12-11T22:10:23.574Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4096,
@@ -110,7 +109,7 @@
          "RO",
          [
             8,
-            "88824f78b8a54c90"
+            "8882570c498854e4"
          ]
       ],
       [
@@ -123,7 +122,7 @@
          true,
          0,
          true,
-         "4f78b8a5"
+         "570c4988"
       ]
    ]
 }

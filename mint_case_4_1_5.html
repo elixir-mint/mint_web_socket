@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 4.1.5</b></span> : Pass - <span style="font-size: 0.9em;"><b>5</b> ms @ 2022-12-11T18:24:27.400Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 4.1.5</b></span> : Pass - <span style="font-size: 0.9em;"><b>3</b> ms @ 2022-12-11T22:10:21.357Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send small text message, then send frame with reserved non-control <b>Opcode = 7</b> and non-empty payload, then send Ping.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Echo for first message is received, but then connection is failed immediately, since reserved opcode frame is used. A Pong is not received.</p>
 
@@ -220,13 +220,13 @@ user-agent: mint/1.4.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: 5uJI/KGc571UBhNyMWoBKw==</pre>
+sec-websocket-key: BfLvHkCiaT5jy3Cya5stTQ==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: X6xQpEdyH89AVUgVmvkaNIfvUro=</pre>
+Sec-WebSocket-Accept: h6TpwRS4TOMOJGVvwnG9NzaJsa0=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -319,15 +319,15 @@ Sec-WebSocket-Accept: X6xQpEdyH89AVUgVmvkaNIfvUro=</pre>
          <pre class="wirelog_tx_octets_sync">031 TX OCTETS: 6f</pre>
          <pre class="wirelog_tx_octets_sync">032 TX OCTETS: 72</pre>
          <pre class="wirelog_tx_octets_sync">033 TX OCTETS: 6c</pre>
-         <pre class="wirelog_rx_octets">034 RX OCTETS: 818d157c2bec5d1947807a500b9b7a0e478834</pre>
-         <pre class="wirelog_rx_frame">035 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=13, MASKED=True, MASK=3135376332626563</pre>
+         <pre class="wirelog_tx_octets_sync">034 TX OCTETS: 64</pre>
+         <pre class="wirelog_tx_octets_sync">035 TX OCTETS: 21</pre>
+         <pre class="wirelog_tx_octets_sync">036 TX OCTETS: 89</pre>
+         <pre class="wirelog_rx_octets">037 RX OCTETS: 818dd27194d69a14f8babd5db4a1bd03f8b2f3</pre>
+         <pre class="wirelog_rx_frame">038 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=13, MASKED=True, MASK=6432373139346436</pre>
          <pre class="wirelog_rx_frame">               Hello, world!</pre>
-         <pre class="wirelog_tx_octets_sync">036 TX OCTETS: 64</pre>
-         <pre class="wirelog_tx_octets_sync">037 TX OCTETS: 21</pre>
-         <pre class="wirelog_tx_octets_sync">038 TX OCTETS: 89</pre>
          <pre class="wirelog_tx_octets_sync">039 TX OCTETS: 00</pre>
-         <pre class="wirelog_rx_octets">040 RX OCTETS: 88822d51cf1e2ebb</pre>
-         <pre class="wirelog_rx_frame">041 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3264353163663165</pre>
+         <pre class="wirelog_rx_octets">040 RX OCTETS: 8882e485a270e76f</pre>
+         <pre class="wirelog_rx_frame">041 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6534383561323730</pre>
          <pre class="wirelog_rx_frame">               0x03ea</pre>
          <pre class="wirelog_tx_frame">042 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>

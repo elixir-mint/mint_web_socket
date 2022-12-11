@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 16 * 2**20 (16M).",
    "droppedByMe": true,
-   "duration": 837,
+   "duration": 936,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=252&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: TxulNeZTK8PB3IWGqjSgHQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: nLFBbliUtE2Kh/8mCSu+ZVBWvhU=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=252&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: T7inl/Fpq4L2O9ZhHik55g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 55ONjDhWbwY+PuV3CRRDh10ciMw=\r\n\r\n",
    "id": "9.1.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,14 +38,12 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
-      "11048": 1,
       "21720": 1,
-      "32768": 1,
+      "43830": 1,
       "65536": 255
    },
-   "started": "2022-12-11T18:24:10.447Z",
+   "started": "2022-12-11T22:09:41.495Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +105,7 @@
          "RO",
          [
             8,
-            "8882c8e832afcb00"
+            "8882d6da6f5bd532"
          ]
       ],
       [
@@ -120,7 +118,7 @@
          true,
          0,
          true,
-         "c8e832af"
+         "d6da6f5b"
       ]
    ]
 }
