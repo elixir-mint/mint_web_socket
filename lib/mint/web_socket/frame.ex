@@ -93,7 +93,7 @@ defmodule Mint.WebSocket.Frame do
 
   def new_mask, do: :crypto.strong_rand_bytes(4)
 
-  @spec encode(Mint.WebSocket.t(), Mint.WebSocket.frame()) ::
+  @spec encode(Mint.WebSocket.t(), Mint.WebSocket.shorthand_frame() | Mint.WebSocket.frame()) ::
           {:ok, Mint.WebSocket.t(), bitstring()}
           | {:error, Mint.WebSocket.t(), WebSocketError.t()}
   def encode(websocket, frame) when is_friendly_frame(frame) do
