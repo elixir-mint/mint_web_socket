@@ -14,6 +14,9 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   * `:zlib_memory_level` - (default: `8`) how much memory to allow for use
     during compression. See the `:zlib.deflateInit/6` documentation on the
     `MemLevel` argument.
+  * `:zlib_controlling_process` - (default: `nil`) pass in a specific controlling
+    pid as a list, to prevent `:not_on_controlling_process` errors. See the
+    `:zlib.set_controlling_process/2` documentation `Z` and `Pid` arguments.
   """
 
   require Mint.WebSocket.Frame, as: Frame
@@ -54,6 +57,12 @@ defmodule Mint.WebSocket.PerMessageDeflate do
         Keyword.get(opts, :zlib_memory_level, 8),
         :default
       )
+
+    if Keyword.has_key?(opts, :zlib_controlling_process) do
+      pid_string = Keyword.get(opts, :zlib_controlling_process)
+      :ok = :zlib.set_controlling_process(inflate_zstream, :erlang.list_to_pid(pid_string))
+      :ok = :zlib.set_controlling_process(deflate_zstream, :erlang.list_to_pid(pid_string))
+    end
 
     state = %__MODULE__{
       inflate: inflate_zstream,
