@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 240,
+   "duration": 324,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: a1VLiHbSjunyPXuuVIAocA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: VKzTsncGhqFTOgp0QD2LMLYsOVA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 3CMbIXzuhaUYyUGJ6k80WQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: pV8vNizzJxClFnEakI1sgOtE9rk=\r\n\r\n",
    "id": "9.4.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,20 +39,19 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "376": 17,
-      "390": 1,
+      "270": 1,
+      "323": 7,
+      "376": 4,
       "912": 2,
-      "3808": 2,
-      "7240": 1,
-      "11048": 1,
-      "14480": 1,
-      "28960": 2,
+      "1238": 1,
       "31856": 2,
-      "32768": 1,
-      "65160": 18,
-      "65536": 43
+      "32768": 4,
+      "65001": 1,
+      "65160": 12,
+      "65324": 1,
+      "65536": 47
    },
-   "started": "2023-04-16T19:01:43.325Z",
+   "started": "2023-04-16T21:22:36.878Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -116,7 +115,7 @@
          "RO",
          [
             8,
-            "88824d6656034e8e"
+            "8882d495910ed77d"
          ]
       ],
       [
@@ -129,7 +128,7 @@
          true,
          0,
          true,
-         "4d665603"
+         "d495910e"
       ]
    ]
 }

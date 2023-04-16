@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 64 octets.",
    "droppedByMe": true,
-   "duration": 268,
+   "duration": 331,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=283&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: FORZKu1e45m8Lxzr5EwV4Q==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: g4dt+VsqKt5/25obVEP/dcPDL3E=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=283&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 9GYUynUy8QSqeZcIqcborw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 2Si7C7OzH5UdN9akePnrP0WL2Fg=\r\n\r\n",
    "id": "9.6.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,15 +38,13 @@
    },
    "rxOctetStats": {
       "8": 1,
-      "14": 1,
       "204": 1,
       "14480": 1,
-      "24456": 1,
+      "22646": 1,
       "28424": 1,
-      "63712": 1,
-      "65536": 14
+      "65536": 15
    },
-   "started": "2023-04-16T19:01:34.973Z",
+   "started": "2023-04-16T21:23:01.909Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -109,7 +107,7 @@
          "RO",
          [
             8,
-            "8882e34eed75e0a6"
+            "888255a066ba5648"
          ]
       ],
       [
@@ -122,7 +120,7 @@
          true,
          0,
          true,
-         "e34eed75"
+         "55a066ba"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 46,
+   "duration": 53,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: UVEdg61lx5eA94kE0MH70A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 5p4gSKtic/5fuIJxL/Bqojcijx0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ock+uw0hyTvrYnOo7FhYEA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uYvry1Wg/4TLImJyVwNWWiRYSx8=\r\n\r\n",
    "id": "9.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,13 +40,11 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22096": 1,
-      "25382": 1,
+      "22110": 1,
       "28960": 1,
-      "40168": 1,
-      "65536": 14
+      "65536": 15
    },
-   "started": "2023-04-16T19:01:50.451Z",
+   "started": "2023-04-16T21:23:18.472Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -108,7 +106,7 @@
          "RO",
          [
             8,
-            "88826cf0851a6f18"
+            "8882b4fe986bb716"
          ]
       ],
       [
@@ -121,7 +119,7 @@
          true,
          0,
          true,
-         "6cf0851a"
+         "b4fe986b"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1k.",
    "droppedByMe": true,
-   "duration": 181,
+   "duration": 237,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=270&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 1salwBW6gJ8gjcPMU3Mo/A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: k8EIaKzsU/Zitzs4JEIGdpopGG4=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=270&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 7TQj0AUx0HFMcEl0UeC/qg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: xD3DbC9QVjfqoYsiVTHE5wvZu9s=\r\n\r\n",
    "id": "9.4.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,13 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "1072": 1,
       "14480": 1,
-      "21038": 1,
+      "22110": 1,
       "28960": 1,
       "65536": 63
    },
-   "started": "2023-04-16T19:01:20.075Z",
+   "started": "2023-04-16T21:22:52.633Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4096,
@@ -109,7 +108,7 @@
          "RO",
          [
             8,
-            "88824ba7fabe484f"
+            "8882992730aa9acf"
          ]
       ],
       [
@@ -122,7 +121,7 @@
          true,
          0,
          true,
-         "4ba7fabe"
+         "992730aa"
       ]
    ]
 }

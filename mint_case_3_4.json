@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=31&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Sxu0SfIR9++udIhXliYnJw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uSuLQeJRxA/F5Llv+uIlNE5hjfI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=31&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: M04g6Nf8IUJMT1eJiQTgjQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: SOMZRtgHS6cG956Oz8IqzyoFkLY=\r\n\r\n",
    "id": "3.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2023-04-16T19:01:54.203Z",
+   "started": "2023-04-16T21:23:09.986Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 2,
@@ -280,18 +280,10 @@
          true
       ],
       [
-         "TO",
-         [
-            1,
-            "65"
-         ],
-         true
-      ],
-      [
          "RO",
          [
             19,
-            "818dbc237a63f446160fd30f5a14d35116079d"
+            "818dfe74493ab61125569158694d9106255edf"
          ]
       ],
       [
@@ -304,7 +296,15 @@
          true,
          0,
          true,
-         "bc237a63"
+         "fe74493a"
+      ],
+      [
+         "TO",
+         [
+            1,
+            "65"
+         ],
+         true
       ],
       [
          "TO",
@@ -414,7 +414,7 @@
          "RO",
          [
             8,
-            "88820cc95e1b0f23"
+            "88823d497c6b3ea3"
          ]
       ],
       [
@@ -427,7 +427,7 @@
          true,
          0,
          true,
-         "0cc95e1b"
+         "3d497c6b"
       ],
       [
          "TF",
