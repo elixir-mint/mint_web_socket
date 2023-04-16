@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=15&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: qtJCimXqaHz58x5PXIK1zA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: pWm3KtwGuX3Moh8LGFPNHNFtMrQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=15&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: POaKT05grrc+i5Uv0i73bw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 6+SCRMEhOiS9NeLujh2dyetPP70=\r\n\r\n",
    "id": "1.2.7",
    "isServer": true,
    "localCloseCode": 1000,
@@ -54,10 +54,10 @@
       "8": 1,
       "203": 1,
       "14480": 1,
-      "22110": 1,
-      "28960": 1
+      "22646": 1,
+      "28424": 1
    },
-   "started": "2022-12-11T22:09:56.291Z",
+   "started": "2023-04-16T19:01:40.100Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -119,21 +119,21 @@
          "RO",
          [
             14480,
-            "82ff000000000001000039d1a47fc72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f ..."
+            "82ff0000000000010000b2a3591b4c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5d ..."
          ]
       ],
       [
          "RO",
          [
-            28960,
-            "5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f ..."
+            28424,
+            "a7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5d ..."
          ]
       ],
       [
          "RO",
          [
-            22110,
-            "5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f5a81c72f ..."
+            22646,
+            "a7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5da7e54c5d ..."
          ]
       ],
       [
@@ -146,7 +146,7 @@
          true,
          0,
          true,
-         "39d1a47f"
+         "b2a3591b"
       ],
       [
          "TF",
@@ -174,7 +174,7 @@
          "RO",
          [
             8,
-            "8882479d01124475"
+            "88828d8ba9b88e63"
          ]
       ],
       [
@@ -187,7 +187,7 @@
          true,
          0,
          true,
-         "479d0112"
+         "8d8ba9b8"
       ]
    ]
 }

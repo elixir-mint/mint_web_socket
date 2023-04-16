@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=14&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: SHWp5GZdrD4h0ezMP/SEoQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: e8a+YKeLwClNQNyicCDG5TVhUuI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=14&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: IR5S4OHpXm2HntYMhvm2Rw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: D3hk+tgHaI2JKRZ3hY8zxVFOSUA=\r\n\r\n",
    "id": "1.2.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -57,7 +57,7 @@
       "22103": 1,
       "28960": 1
    },
-   "started": "2022-12-11T22:10:24.155Z",
+   "started": "2023-04-16T19:01:40.077Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -119,21 +119,21 @@
          "RO",
          [
             14480,
-            "82feffff55bfe34bab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5 ..."
+            "82feffff9244ccc16cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f ..."
          ]
       ],
       [
          "RO",
          [
             28960,
-            "ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5 ..."
+            "6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f ..."
          ]
       ],
       [
          "RO",
          [
             22103,
-            "ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5ab411db5 ..."
+            "6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f6cba323f ..."
          ]
       ],
       [
@@ -146,7 +146,7 @@
          true,
          0,
          true,
-         "55bfe34b"
+         "9244ccc1"
       ],
       [
          "TF",
@@ -174,7 +174,7 @@
          "RO",
          [
             8,
-            "8882325a43f731b2"
+            "8882ee82efffed6a"
          ]
       ],
       [
@@ -187,7 +187,7 @@
          true,
          0,
          true,
-         "325a43f7"
+         "ee82efff"
       ]
    ]
 }

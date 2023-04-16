@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send again with <b>RSV = 2</b>, then send Ping.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 1,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since RSV must be 0, when no extension defining RSV meaning has been negotiated. The Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=29&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: CfAhJ0gCMGz94a6hw12XFQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: j/ry24/h7SndYVUfaNHo+tw1LSY=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=29&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: vSdeEsNH5+ZCQefO2A4Kog==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: W0tE/zfUvRed1dIcsF3W0KbV8HI=\r\n\r\n",
    "id": "3.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2022-12-11T22:09:57.827Z",
+   "started": "2023-04-16T19:01:43.307Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 2,
@@ -164,7 +164,7 @@
          "RO",
          [
             19,
-            "818d58f37bd7109617bb37df5ba0378117b379"
+            "818d079511394ff07d5568b9314e68e77d5d26"
          ]
       ],
       [
@@ -177,13 +177,13 @@
          true,
          0,
          true,
-         "58f37bd7"
+         "07951139"
       ],
       [
          "RO",
          [
             8,
-            "8882649bf5bf6771"
+            "8882d396e992d07c"
          ]
       ],
       [
@@ -196,7 +196,7 @@
          true,
          0,
          true,
-         "649bf5bf"
+         "d396e992"
       ],
       [
          "TF",

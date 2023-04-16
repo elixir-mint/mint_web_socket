@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small binary message with <b>RSV = 5</b>.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 1,
    "expectation": "The connection is failed immediately, since RSV must be 0.",
    "expected": {
       "OK": []
@@ -21,8 +21,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=32&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ggzJEh3pjDuEihB9EEp5zQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: g2+UN6qmLzRIOP2mNoF2iEiJT2A=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=32&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: GSXk+ycXcoRkx1eEOGorGQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: wvYc/41m1Hm47qvNVTyrIdFMCO4=\r\n\r\n",
    "id": "3.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -41,7 +41,7 @@
       "8": 1,
       "203": 1
    },
-   "started": "2022-12-11T22:09:46.831Z",
+   "started": "2023-04-16T19:01:22.731Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -103,7 +103,7 @@
          "RO",
          [
             8,
-            "88826f189ccc6cf2"
+            "8882ae12eb4badf8"
          ]
       ],
       [
@@ -116,7 +116,7 @@
          true,
          0,
          true,
-         "6f189ccc"
+         "ae12eb4b"
       ],
       [
          "TF",
