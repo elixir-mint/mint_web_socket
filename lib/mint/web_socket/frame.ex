@@ -431,7 +431,7 @@ defmodule Mint.WebSocket.Frame do
     {:close, code, reason}
   end
 
-  def translate({:continuation, _, _, _, _}) do
+  def translate(continuation()) do
     {:error, :unexpected_continuation}
   end
 
