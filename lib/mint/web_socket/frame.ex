@@ -431,6 +431,10 @@ defmodule Mint.WebSocket.Frame do
     {:close, code, reason}
   end
 
+  def translate(continuation()) do
+    {:error, :unexpected_continuation}
+  end
+
   @doc """
   Emits frames for any finalized fragments and stores any unfinalized fragments
   in the `:fragment` key in the websocket data structure

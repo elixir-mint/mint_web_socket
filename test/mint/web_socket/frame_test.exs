@@ -9,4 +9,9 @@ defmodule Mint.WebSocket.FrameTest do
 
     assert ping(fin?: true) |> is_fin()
   end
+
+  test "incomplete frames should return error" do
+    assert {:error, :unexpected_continuation} =
+             translate({:continuation, <<0x0::size(3)>>, nil, "hello", true})
+  end
 end
