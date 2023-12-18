@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send again with <b>RSV = 3</b>, then send Ping. Octets are sent in frame-wise chops. Octets are sent in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 1,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since RSV must be 0, when no extension defining RSV meaning has been negotiated. The Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=30&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 1h56SaamP/FjeQqAmGiZkw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: /gsT/RrGL+1YitDi0bi+JL+d36k=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=30&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ncFk3LSo3nKQo4EQnNaBVQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 35mezdbZGH7SLyVrmJox0QWkfWs=\r\n\r\n",
    "id": "3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2023-04-16T21:23:02.497Z",
+   "started": "2023-12-18T22:05:14.029Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 2,
@@ -164,7 +164,7 @@
          "RO",
          [
             19,
-            "818d44d3154e0cb679222bff35392ba1792a65"
+            "818d2d168bc96573e7a5423aabbe4264e7ad0c"
          ]
       ],
       [
@@ -177,13 +177,13 @@
          true,
          0,
          true,
-         "44d3154e"
+         "2d168bc9"
       ],
       [
          "RO",
          [
             8,
-            "888267f93ea76413"
+            "8882f0c8f69bf322"
          ]
       ],
       [
@@ -196,7 +196,7 @@
          true,
          0,
          true,
-         "67f93ea7"
+         "f0c8f69b"
       ],
       [
          "TF",

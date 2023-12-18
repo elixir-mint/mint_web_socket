@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 8 * 2**20 (16M).",
    "droppedByMe": true,
-   "duration": 436,
+   "duration": 273,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=257&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: OR5YZu2QvfK2KadmmYOHPw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: EBn6Tm5fo9bMV6kfRw02txDgMiE=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=257&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: rHTUVqIw4Iwz3o0K7qms8w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: imNOTidnpHBe7a1+59GEvHDw8D4=\r\n\r\n",
    "id": "9.2.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,11 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "30304": 1,
-      "35246": 1,
+      "14480": 1,
+      "22110": 1,
+      "28960": 1,
       "65536": 127
    },
-   "started": "2023-04-16T21:22:37.240Z",
+   "started": "2023-12-18T22:05:31.115Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -105,7 +106,7 @@
          "RO",
          [
             8,
-            "8882af210d48acc9"
+            "8882dfef0a17dc07"
          ]
       ],
       [
@@ -118,7 +119,7 @@
          true,
          0,
          true,
-         "af210d48"
+         "dfef0a17"
       ]
    ]
 }

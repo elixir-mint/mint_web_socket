@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text Message fragmented into 2 fragments, octets are sent in octet-wise chops.",
    "droppedByMe": true,
-   "duration": 2,
+   "duration": 5,
    "expectation": "Message is processed and echo'ed back to us.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=49&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: XLsZTxe7uVXSEbe1Ed1d+A==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: SrA+dtryPsvP909uiyXwHaPlcxk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=49&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4+UUUtMIzuseT68eKwFKig==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: bYdXs1QTCcAWu0zYerb12ImNRIg=\r\n\r\n",
    "id": "5.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "24": 1,
       "203": 1
    },
-   "started": "2023-04-16T21:22:55.330Z",
+   "started": "2023-12-18T22:04:55.261Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1,
@@ -300,7 +300,7 @@
          "RO",
          [
             24,
-            "819280a6c9c6e6d4a8a1edc3a7b2b1c0bba7e7cbaca8f494"
+            "81922944151b4f36747c44217b6f1822677a4e2970755d76"
          ]
       ],
       [
@@ -313,7 +313,7 @@
          true,
          0,
          true,
-         "80a6c9c6"
+         "2944151b"
       ],
       [
          "TF",
@@ -341,7 +341,7 @@
          "RO",
          [
             8,
-            "8882b373f742b09b"
+            "88820581647a0669"
          ]
       ],
       [
@@ -354,7 +354,7 @@
          true,
          0,
          true,
-         "b373f742"
+         "0581647a"
       ]
    ]
 }

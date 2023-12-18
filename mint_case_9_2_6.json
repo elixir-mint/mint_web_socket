@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 16 * 2**20 (16M).",
    "droppedByMe": true,
-   "duration": 856,
+   "duration": 590,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=258&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Th2lyXnPQkGxyVT+sViDEw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: i1GRhSZvQhNd6Y/eqxobzP7adp0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=258&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: oMAIFpnBsS8J8dTEzrAo1Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qGdiiusJIG7KAC7MPzPpd9qyqVA=\r\n\r\n",
    "id": "9.2.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,17 +39,11 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "376": 2,
-      "390": 1,
-      "6168": 1,
-      "11048": 1,
       "21720": 1,
-      "32768": 1,
-      "59368": 1,
-      "65160": 3,
-      "65536": 251
+      "43830": 1,
+      "65536": 255
    },
-   "started": "2023-04-16T21:22:48.188Z",
+   "started": "2023-12-18T22:05:21.937Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -111,7 +105,7 @@
          "RO",
          [
             8,
-            "888206d53502053d"
+            "8882066124690589"
          ]
       ],
       [
@@ -124,7 +118,7 @@
          true,
          0,
          true,
-         "06d53502"
+         "06612469"
       ]
    ]
 }

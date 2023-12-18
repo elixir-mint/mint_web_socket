@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 6e942VY939rr/vGvAzd/qA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: +cViGKSUa8OoETkk7yhlKojFvUI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=11&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: A3YqTLIh70QUTMrGcY+dUQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: r4VQ0KRmZtK0VATQKsQuZW0pppM=\r\n\r\n",
    "id": "1.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "134": 1,
       "203": 1
    },
-   "started": "2023-04-16T21:23:18.434Z",
+   "started": "2023-12-18T22:05:03.630Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             134,
-            "82fe007e94e9d1a86a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f566a172f56 ..."
+            "82fe007edf82131e217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0217cede0 ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "94e9d1a8"
+         "df82131e"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "88824f22aa6a4cca"
+            "88825b2c5e0958c4"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "4f22aa6a"
+         "5b2c5e09"
       ]
    ]
 }

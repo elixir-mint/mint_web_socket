@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 128 octets.",
    "droppedByMe": true,
-   "duration": 217,
+   "duration": 209,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=278&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: HgW3+z4vSwhbcqCGR5KxCw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 0wMoRXtoR34Aicpa50LWfHIAsgE=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=278&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: poJTgpFd5IHmjCROHRuKYg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: H2bRwvXUbESXDkouaaVKHPobplc=\r\n\r\n",
    "id": "9.5.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,11 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22646": 1,
-      "28424": 1,
+      "22110": 1,
+      "28960": 1,
       "65536": 15
    },
-   "started": "2023-04-16T21:23:02.271Z",
+   "started": "2023-12-18T22:05:11.218Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +107,7 @@
          "RO",
          [
             8,
-            "8882144cf6ba17a4"
+            "8882b1251157b2cd"
          ]
       ],
       [
@@ -120,7 +120,7 @@
          true,
          0,
          true,
-         "144cf6ba"
+         "b1251157"
       ]
    ]
 }
