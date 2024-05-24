@@ -183,7 +183,7 @@ defmodule Mint.WebSocket.Frame do
   # n=4 is the happy path
   # n=3..1 catches cases where the remaining byte_size/1 of the payload is shorter
   # than the mask
-  for n <- 4..1 do
+  for n <- 4..1//-1 do
     def apply_mask(
           <<part_key::integer-size(8)-unit(unquote(n)), payload_rest::binary>>,
           <<mask_key::integer-size(8)-unit(unquote(n)), _::binary>> = mask,
