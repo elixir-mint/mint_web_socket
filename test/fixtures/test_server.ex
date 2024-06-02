@@ -8,9 +8,9 @@ defmodule TestServer do
       :cowboy_router.compile([
         {:_,
          [
-           {'/', WebsocketHandler, []},
-           {'/http_get', HttpHandler, []},
-           {'/forbidden', ForbiddenHandler, []}
+           {~c"/", WebsocketHandler, []},
+           {~c"/http_get", HttpHandler, []},
+           {~c"/forbidden", ForbiddenHandler, []}
          ]}
       ])
 
