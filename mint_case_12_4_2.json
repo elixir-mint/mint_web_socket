@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=357&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: lOezI042nvmanrGiPS31Pg==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Du1OmuMQAW8G7l5FJ7+mKxsJ5Mw=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
+   "httpRequest": "GET /runCase?case=357&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 31OukvTcovENk7XhWPXfkw==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: bg7UEsUijH4AUOKtdsw7meXNf2o=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
    "id": "12.4.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -90,7 +90,7 @@
       "63": 1,
       "250": 1
    },
-   "started": "2023-12-18T22:05:25.624Z",
+   "started": "2024-06-02T15:40:49.707Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.14678125,
       "incomingOctetsAppLevel": 64000,
@@ -226,7 +226,7 @@
          "RO",
          [
             8,
-            "888266b3bedf655b"
+            "88821bf9a8ad1811"
          ]
       ],
       [
@@ -239,7 +239,7 @@
          true,
          0,
          true,
-         "66b3bedf"
+         "1bf9a8ad"
       ]
    ]
 }

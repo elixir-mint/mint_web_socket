@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text Message fragmented into 2 fragments, then Continuation Frame with FIN = false where there is nothing to continue, then unfragmented Text Message, all sent in one chop.",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "The connection is failed immediately, since there is no message to continue.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: pBgMEihpzCH1ohZ334Hj3w==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 1FEleNa8DXjtuvCIl4xS0yX6Sus=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=59&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: GO9Ojph+JYuNbcyBzyC+Vg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: c7YYtEdqrKlb2kqgj5hf0IqP5zI=\r\n\r\n",
    "id": "5.15",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "24": 1,
       "203": 1
    },
-   "started": "2023-12-18T22:05:04.866Z",
+   "started": "2024-06-02T15:40:28.154Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 2,
@@ -185,7 +185,7 @@
          "RO",
          [
             24,
-            "819233f91e50558b7f375e9c7024029f6c3154947b3e47cb"
+            "81929e00d33bf872b25cf365bd4faf66a15af96db655ea32"
          ]
       ],
       [
@@ -198,13 +198,13 @@
          true,
          0,
          true,
-         "33f91e50"
+         "9e00d33b"
       ],
       [
          "RO",
          [
             8,
-            "8882c918fc62caf2"
+            "88825888d12d5b62"
          ]
       ],
       [
@@ -217,7 +217,7 @@
          true,
          0,
          true,
-         "c918fc62"
+         "5888d12d"
       ],
       [
          "TF",
