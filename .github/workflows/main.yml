@@ -37,8 +37,8 @@ jobs:
       - name: Install OTP and Elixir
         uses: erlef/setup-beam@v1
         with:
-          otp-version: ${{matrix.erlang}}
-          elixir-version: ${{matrix.elixir}}
+          otp-version: ${{ matrix.erlang }}
+          elixir-version: ${{ matrix.elixir }}
 
       - name: Cache dependencies
         id: cache-deps
@@ -60,15 +60,16 @@ jobs:
 
       - name: Check for unused dependencies
         run: mix deps.get && mix deps.unlock --check-unused
-        if: ${{ matrix.lint && steps.cache-deps.outputs.cache-hit != 'true' }}
+        if: matrix.lint && steps.cache-deps.outputs.cache-hit != 'true'
 
       - name: Compile with --warnings-as-errors
         run: mix compile --warnings-as-errors
-        if: ${{ matrix.lint }}
+        if: matrix.lint
 
       - name: Restore cached PLTs
         uses: actions/cache@v4
         id: plt_cache
+        if: ${{ matrix.dialyzer }}
         with:
           key: |
             ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.erlang }}-plt
@@ -79,24 +80,24 @@ jobs:
 
       # Create PLTs if no cached PLTs were found
       - name: Create PLTs
-        if: steps.plt_cache.outputs.cache-hit != 'true'
+        if: matrix.dialyzer && steps.plt_cache.outputs.cache-hit != 'true'
         run: MIX_ENV=test mix dialyzer --plt
 
       - name: Run dialyzer
         run: MIX_ENV=test mix dialyzer
-        if: ${{ matrix.dialyzer }}
+        if: matrix.dialyzer
 
       - name: Run tests with coverage
         run: mix coveralls.github
-        if: ${{ matrix.coverage }}
+        if: matrix.coverage
 
       - name: Run tests
         run: mix test --trace
-        if: ${{ !matrix.coverage }}
+        if: '!matrix.coverage'
 
       - name: Check mix format
         run: mix format --check-formatted
-        if: ${{ matrix.lint }}
+        if: matrix.lint
 
       - name: Add seedling favicon to autobahn report
         if: github.ref == 'refs/heads/main' && matrix.report
