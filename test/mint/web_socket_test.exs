@@ -119,9 +119,28 @@ defmodule Mint.WebSocketTest do
     end
   end
 
+  @doc !"""
+       In Mint 1.5.0+, Mint handles the SETTINGS frame from the server asynchronously
+       and returns default values for server settings until it is received. So we must
+       wait for the server to send the SETTINGS frame enabling the connect protocol.
+       """
+  defp wait_for_connect_protocol(conn) do
+    if HTTP2.get_server_setting(conn, :enable_connect_protocol) do
+      conn
+    else
+      receive do
+        message ->
+          {:ok, conn, []} = HTTP2.stream(conn, message)
+          wait_for_connect_protocol(conn)
+      end
+    end
+  end
+
   describe "given an HTTP/2 WebSocket connection to an echo server" do
     setup do
       {:ok, conn} = HTTP2.connect(:http, "localhost", 7070)
+
+      conn = wait_for_connect_protocol(conn)
 
       {:ok, conn, ref} =
         WebSocket.upgrade(:ws, conn, "/", [], extensions: [WebSocket.PerMessageDeflate])
