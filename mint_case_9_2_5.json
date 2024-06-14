@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 8 * 2**20 (16M).",
    "droppedByMe": true,
-   "duration": 192,
+   "duration": 174,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=257&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: RW8v8r15iItbb0o2I6WsWA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: S/nVKYbyqqtzInUli54GVf5/H6U=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=257&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: sHRK1vQbJCgyaxxx2FGiCg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Dchg/0GjuREO6l40ZMCuLnmF+R0=\r\n\r\n",
    "id": "9.2.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,11 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "14480": 1,
-      "51070": 1,
-      "65536": 127
+      "28960": 1,
+      "37470": 1,
+      "64656": 1,
+      "65536": 126
    },
-   "started": "2024-06-14T16:57:29.413Z",
+   "started": "2024-06-14T19:48:19.633Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -105,7 +106,7 @@
          "RO",
          [
             8,
-            "8882c2d4131fc13c"
+            "88820929261f0ac1"
          ]
       ],
       [
@@ -118,7 +119,7 @@
          true,
          0,
          true,
-         "c2d4131f"
+         "0929261f"
       ]
    ]
 }

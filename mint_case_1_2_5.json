@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=13&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: cVJ7+WBF482A6p8KlQMZ4w==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 6W0AQPrZDXwaskYQjRvDzb6wJsE=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=13&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 2rECJs3FQR8k7kDQn5HVVA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: HEserFE2JatcrPyMx7KAKr5/p10=\r\n\r\n",
    "id": "1.2.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "136": 1,
       "203": 1
    },
-   "started": "2024-06-14T16:57:14.144Z",
+   "started": "2024-06-14T19:48:29.385Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             136,
-            "82fe00803a6b4118c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6c495bfe6 ..."
+            "82fe008001ea38b2ff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64cff14c64c ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "3a6b4118"
+         "01ea38b2"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "888297927d9f947a"
+            "8882ea05eae0e9ed"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "97927d9f"
+         "ea05eae0"
       ]
    ]
 }

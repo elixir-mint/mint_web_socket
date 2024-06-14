@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 93,
+   "duration": 151,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: +r+qaiorGJTXkYr0mANcGg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eb7TYlDnm2wHbW69vpFnjJ1Gnts=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=269&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: rItxSLLZ+19aY0Pz9muh+w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ugmuPlAcCCjUlAKFAEMfgE39SiM=\r\n\r\n",
    "id": "9.4.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -38,13 +38,11 @@
    },
    "rxOctetStats": {
       "8": 1,
+      "14": 1,
       "204": 1,
-      "14480": 1,
-      "22110": 1,
-      "28960": 1,
-      "65536": 63
+      "65536": 64
    },
-   "started": "2024-06-14T16:57:50.827Z",
+   "started": "2024-06-14T19:48:11.383Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -108,7 +106,7 @@
          "RO",
          [
             8,
-            "8882d137664cd2df"
+            "8882a7bf4053a457"
          ]
       ],
       [
@@ -121,7 +119,7 @@
          true,
          0,
          true,
-         "d137664c"
+         "a7bf4053"
       ]
    ]
 }
