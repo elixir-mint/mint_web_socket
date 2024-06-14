@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send a valid UTF-8 text message in two fragments, fragmented on UTF-8 code point boundary.<br><br>MESSAGE FRAGMENT 1:<br>Hello-\u00b5@\u00df\u00f6\u00e4<br>48656c6c6f2dc2b540c39fc3b6c3a4<br><br>MESSAGE FRAGMENT 2:<br>\u00fc\u00e0\u00e1-UTF-8!!<br>c3bcc3a0c3a12d5554462d382121",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "The message is echo'ed back to us.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=69&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Pws99vYjK7FDtOdypUd8aA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: U7MsK8Z0hvldl6kWVlr5xa5YIOc=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=69&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: E1k+ETmIhErYjauIE/VxsQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: JbNRkD9da1X8mTsNfyi/+S8JZKU=\r\n\r\n",
    "id": "6.2.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "35": 1,
       "203": 1
    },
-   "started": "2024-06-02T15:40:43.235Z",
+   "started": "2024-06-14T16:57:37.371Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1,
@@ -141,7 +141,7 @@
          "RO",
          [
             35,
-            "819d414bc9ef092ea5832e660b5a0188562cf7886d2cfd88692ce0669cbb0766f1ce60"
+            "819d53a6ddb61bc3b1da3c8b1f0313654275e5657975ef657d75f28b88e2158be59772"
          ]
       ],
       [
@@ -154,7 +154,7 @@
          true,
          0,
          true,
-         "414bc9ef"
+         "53a6ddb6"
       ],
       [
          "TF",
@@ -182,7 +182,7 @@
          "RO",
          [
             8,
-            "8882058a2b130662"
+            "88827562da6b768a"
          ]
       ],
       [
@@ -195,7 +195,7 @@
          true,
          0,
          true,
-         "058a2b13"
+         "7562da6b"
       ]
    ]
 }

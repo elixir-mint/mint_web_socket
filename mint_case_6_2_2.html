@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 6.2.2</b></span> : Pass - <span style="font-size: 0.9em;"><b>1</b> ms @ 2024-06-02T15:40:43.235Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 6.2.2</b></span> : Pass - <span style="font-size: 0.9em;"><b>2</b> ms @ 2024-06-14T16:57:37.371Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send a valid UTF-8 text message in two fragments, fragmented on UTF-8 code point boundary.<br><br>MESSAGE FRAGMENT 1:<br>Hello-µ@ßöä<br>48656c6c6f2dc2b540c39fc3b6c3a4<br><br>MESSAGE FRAGMENT 2:<br>üàá-UTF-8!!<br>c3bcc3a0c3a12d5554462d382121</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>The message is echo'ed back to us.</p>
 
@@ -216,17 +216,17 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <h2>Opening Handshake</h2>
       <pre class="http_dump">GET /runCase?case=69&agent=Mint HTTP/1.1
 host: localhost:9001
-user-agent: mint/1.4.1
+user-agent: mint/1.6.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: Pws99vYjK7FDtOdypUd8aA==</pre>
+sec-websocket-key: E1k+ETmIhErYjauIE/VxsQ==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: U7MsK8Z0hvldl6kWVlr5xa5YIOc=</pre>
+Sec-WebSocket-Accept: JbNRkD9da1X8mTsNfyi/+S8JZKU=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -292,14 +292,14 @@ Sec-WebSocket-Accept: U7MsK8Z0hvldl6kWVlr5xa5YIOc=</pre>
          <pre class="wirelog_tx_frame">               üàá-UTF-8!!</pre>
          <pre class="wirelog_tx_octets">005 TX OCTETS: 800ec3bcc3a0c3a12d5554462d382121</pre>
          <pre class="wirelog_kill_after">006 CLOSE CONNECTION AFTER 1.000000 sec</pre>
-         <pre class="wirelog_rx_octets">007 RX OCTETS: 819d414bc9ef092ea5832e660b5a0188562cf7886d2cfd88692ce0669cbb0766f1ce60</pre>
-         <pre class="wirelog_rx_frame">008 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=29, MASKED=True, MASK=3431346263396566</pre>
+         <pre class="wirelog_rx_octets">007 RX OCTETS: 819d53a6ddb61bc3b1da3c8b1f0313654275e5657975ef657d75f28b88e2158be59772</pre>
+         <pre class="wirelog_rx_frame">008 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=29, MASKED=True, MASK=3533613664646236</pre>
          <pre class="wirelog_rx_frame">               Hello-µ@ßöäüàá-UTF-8!!</pre>
          <pre class="wirelog_tx_frame">009 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
          <pre class="wirelog_tx_octets">010 TX OCTETS: 880203e8</pre>
-         <pre class="wirelog_rx_octets">011 RX OCTETS: 8882058a2b130662</pre>
-         <pre class="wirelog_rx_frame">012 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3035386132623133</pre>
+         <pre class="wirelog_rx_octets">011 RX OCTETS: 88827562da6b768a</pre>
+         <pre class="wirelog_rx_frame">012 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3735363264613662</pre>
          <pre class="wirelog_rx_frame">               0x03e8</pre>
          <pre class="wirelog_tcp_closed_by_me">013 TCP DROPPED BY ME</pre>
       </div>

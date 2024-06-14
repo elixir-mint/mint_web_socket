@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.3.6</b></span> : Pass - <span style="font-size: 0.9em;"><b>202</b> ms @ 2024-06-02T15:40:42.567Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.3.6</b></span> : Pass - <span style="font-size: 0.9em;"><b>115</b> ms @ 2024-06-14T16:57:20.690Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 64k.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Receive echo'ed text message (with payload as sent).</p>
 
@@ -216,17 +216,17 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <h2>Opening Handshake</h2>
       <pre class="http_dump">GET /runCase?case=264&agent=Mint HTTP/1.1
 host: localhost:9001
-user-agent: mint/1.4.1
+user-agent: mint/1.6.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: k6AEUsZt7Y4UcnAS/Af6pQ==</pre>
+sec-websocket-key: 0eSZ7erQ7q/ADxODxI9Pdw==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: x4xLWxl80u124QSVLRiwsQN+CkQ=</pre>
+Sec-WebSocket-Accept: DX9xQJ9KI/qpY6S8znSTPHlzbgk=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -292,8 +292,8 @@ Sec-WebSocket-Accept: x4xLWxl80u124QSVLRiwsQN+CkQ=</pre>
          <pre class="wirelog_tx_frame">003 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
          <pre class="wirelog_tx_octets">004 TX OCTETS: 880203e8</pre>
-         <pre class="wirelog_rx_octets">005 RX OCTETS: 8882bfe010f0bc08</pre>
-         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6266653031306630</pre>
+         <pre class="wirelog_rx_octets">005 RX OCTETS: 88828ac7261f892f</pre>
+         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3861633732363166</pre>
          <pre class="wirelog_rx_frame">               0x03e8</pre>
          <pre class="wirelog_tcp_closed_by_me">007 TCP DROPPED BY ME</pre>
       </div>

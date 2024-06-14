@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=12&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: u5IxT1d58nym1qZHRHIWPA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: SgIPwpx+nZ9Pnw7P7MkcRGd9/5A=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=12&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: JJDjI5cmD5GjLWvNKkNeIA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: eoQ7x5Koft2mNy9jaPLq2ihjZro=\r\n\r\n",
    "id": "1.2.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "135": 1,
       "203": 1
    },
-   "started": "2024-06-02T15:40:41.035Z",
+   "started": "2024-06-14T16:57:19.319Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             135,
-            "82fe007f7bd1a253852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad852f5cad ..."
+            "82fe007f694d010797b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff997b3fff9 ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "7bd1a253"
+         "694d0107"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "8882c977e137ca9f"
+            "88826af7d4c2691f"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "c977e137"
+         "6af7d4c2"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send small text message, then send frame with reserved non-control <b>Opcode = 7</b> and non-empty payload, then send Ping.",
    "droppedByMe": true,
-   "duration": 4,
+   "duration": 5,
    "expectation": "Echo for first message is received, but then connection is failed immediately, since reserved opcode frame is used. A Pong is not received.",
    "expected": {
       "NON-STRICT": [],
@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=39&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 5PWepG7P1TR6IazhEinuJg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hAcB52JwaXSg7n7AnowIRQ7rOP0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=39&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: bWvKVLVB/uVNNFg+7ttj5g==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: jhrQffhg8Y+2eATVyzF1uUP7Cc4=\r\n\r\n",
    "id": "4.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2024-06-02T15:40:36.653Z",
+   "started": "2024-06-14T16:57:30.132Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -284,7 +284,7 @@
          "RO",
          [
             19,
-            "818d49814b2701e4274b26ad6b5026f3274368"
+            "818d69c2c6d221a7aabe06eee6a506b0aab648"
          ]
       ],
       [
@@ -297,7 +297,7 @@
          true,
          0,
          true,
-         "49814b27"
+         "69c2c6d2"
       ],
       [
          "TO",
@@ -415,7 +415,7 @@
          "RO",
          [
             8,
-            "8882c84cfcbdcba6"
+            "8882aeb4b0fcad5e"
          ]
       ],
       [
@@ -428,7 +428,7 @@
          true,
          0,
          true,
-         "c84cfcbd"
+         "aeb4b0fc"
       ],
       [
          "TF",

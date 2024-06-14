@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 1000 compressed messages each of payload size 256, auto-fragment to 0 octets. Use permessage-deflate client offers (requestNoContextTakeover, requestMaxWindowBits): [(False, 0)]",
    "droppedByMe": true,
-   "duration": 537,
+   "duration": 411,
    "expectation": "Receive echo'ed messages (with payload as sent). Timeout case after 120 secs.",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=394&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Pk+CkaHMtVJa0Nr4SmOWMA==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qAdG4wTPxKESu3KVJ+tOF7wyUuw=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
+   "httpRequest": "GET /runCase?case=394&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: wzMONfYmFVvibVWo6ZlHJw==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 3KZsAqqte0cUxUmVj7esRkesllA=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
    "id": "13.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -67,7 +67,7 @@
       "151": 1,
       "302": 1
    },
-   "started": "2024-06-02T15:40:31.551Z",
+   "started": "2024-06-14T16:57:36.079Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.06225,
       "incomingOctetsAppLevel": 256000,
@@ -183,7 +183,7 @@
          "RO",
          [
             8,
-            "888270fdb1087315"
+            "888208f62f7a0b1e"
          ]
       ],
       [
@@ -196,7 +196,7 @@
          true,
          0,
          true,
-         "70fdb108"
+         "08f62f7a"
       ]
    ]
 }

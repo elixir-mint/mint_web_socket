@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="http://autobahn.ws/testsuite" title="Autobahn WebSocket Testsuite"><img src="http://autobahn.ws/static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="http://autobahn.ws"           title="Autobahn WebSocket">          <img src="http://autobahn.ws/static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 3.4</b></span> : Pass - <span style="font-size: 0.9em;"><b>4</b> ms @ 2024-06-02T15:40:54.273Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 3.4</b></span> : Pass - <span style="font-size: 0.9em;"><b>4</b> ms @ 2024-06-14T16:57:44.403Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send small text message, then send again with <b>RSV = 4</b>, then send Ping. Octets are sent in octet-wise chops.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Echo for first message is received, but then connection is failed immediately, since RSV must be 0, when no extension defining RSV meaning has been negotiated. The Pong is not received.</p>
 
@@ -216,17 +216,17 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <h2>Opening Handshake</h2>
       <pre class="http_dump">GET /runCase?case=31&agent=Mint HTTP/1.1
 host: localhost:9001
-user-agent: mint/1.4.1
+user-agent: mint/1.6.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: hkxCFbwXOZgMvc3/8Obptg==</pre>
+sec-websocket-key: sdy0Lmb/FbzZ23x/wUHrZw==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/0.8.2-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: kZMIulSHwu0nP3RkWImIVPXlT18=</pre>
+Sec-WebSocket-Accept: bqUICq1eASSUHun5XsSi/ELDYEA=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -308,10 +308,10 @@ Sec-WebSocket-Accept: kZMIulSHwu0nP3RkWImIVPXlT18=</pre>
          <pre class="wirelog_tx_octets_sync">021 TX OCTETS: c1</pre>
          <pre class="wirelog_tx_octets_sync">022 TX OCTETS: 0d</pre>
          <pre class="wirelog_tx_octets_sync">023 TX OCTETS: 48</pre>
-         <pre class="wirelog_tx_octets_sync">024 TX OCTETS: 65</pre>
-         <pre class="wirelog_rx_octets">025 RX OCTETS: 818d9bfbc137d39ead5bf4d7e140f489ad53ba</pre>
-         <pre class="wirelog_rx_frame">026 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=13, MASKED=True, MASK=3962666263313337</pre>
+         <pre class="wirelog_rx_octets">024 RX OCTETS: 818dc9c78a0981a2e665a6ebaa7ea6b5e66de8</pre>
+         <pre class="wirelog_rx_frame">025 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=13, MASKED=True, MASK=6339633738613039</pre>
          <pre class="wirelog_rx_frame">               Hello, world!</pre>
+         <pre class="wirelog_tx_octets_sync">026 TX OCTETS: 65</pre>
          <pre class="wirelog_tx_octets_sync">027 TX OCTETS: 6c</pre>
          <pre class="wirelog_tx_octets_sync">028 TX OCTETS: 6c</pre>
          <pre class="wirelog_tx_octets_sync">029 TX OCTETS: 6f</pre>
@@ -325,8 +325,8 @@ Sec-WebSocket-Accept: kZMIulSHwu0nP3RkWImIVPXlT18=</pre>
          <pre class="wirelog_tx_octets_sync">037 TX OCTETS: 21</pre>
          <pre class="wirelog_tx_octets_sync">038 TX OCTETS: 89</pre>
          <pre class="wirelog_tx_octets_sync">039 TX OCTETS: 00</pre>
-         <pre class="wirelog_rx_octets">040 RX OCTETS: 8882068a1ba50560</pre>
-         <pre class="wirelog_rx_frame">041 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3036386131626135</pre>
+         <pre class="wirelog_rx_octets">040 RX OCTETS: 888212205ac611ca</pre>
+         <pre class="wirelog_rx_frame">041 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3132323035616336</pre>
          <pre class="wirelog_rx_frame">               0x03ea</pre>
          <pre class="wirelog_tx_frame">042 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>

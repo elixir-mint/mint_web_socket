@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=5&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: S2jege7y4RS/WQ8hsmmREA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: MgTWOYvhBYKwX5jIDuL4e3GfaCA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=5&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: uLBiGHcu9v2di9eXZVFDfg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ItVMxDdoRTo1lSVGED+MyYicppg=\r\n\r\n",
    "id": "1.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "136": 1,
       "202": 1
    },
-   "started": "2024-06-02T15:40:38.542Z",
+   "started": "2024-06-14T16:57:45.427Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             136,
-            "81fe00809cee7ce1b6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cbb6c456cb ..."
+            "81fe00804236b796681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc681c9dbc ..."
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "9cee7ce1"
+         "4236b796"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "88829ecd32fd9d25"
+            "8882a2d7523aa13f"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "9ecd32fd"
+         "a2d7523a"
       ]
    ]
 }

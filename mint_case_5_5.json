@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=49&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.4.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: nXpR4XxuPNCGPuqyKFLsUw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ExQgvnW7PPCFC/JjaspBUQo20MM=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=49&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: X0F/NE1qy9VtqVKy8abDZw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: IroVuKbg1p6j2jyt1fbhVW/FKHc=\r\n\r\n",
    "id": "5.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "24": 1,
       "203": 1
    },
-   "started": "2024-06-02T15:41:07.075Z",
+   "started": "2024-06-14T16:57:37.895Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1,
@@ -300,7 +300,7 @@
          "RO",
          [
             24,
-            "8192af828800c9f0e967c2e7e6749ee4fa61c8efed6edbb0"
+            "8192b25a0eebd4286f8cdf3f609f833c7c8ad5376b85c668"
          ]
       ],
       [
@@ -313,7 +313,7 @@
          true,
          0,
          true,
-         "af828800"
+         "b25a0eeb"
       ],
       [
          "TF",
@@ -341,7 +341,7 @@
          "RO",
          [
             8,
-            "888293ebed8a9003"
+            "8882f896386efb7e"
          ]
       ],
       [
@@ -354,7 +354,7 @@
          true,
          0,
          true,
-         "93ebed8a"
+         "f896386e"
       ]
    ]
 }
