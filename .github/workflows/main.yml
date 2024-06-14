@@ -7,23 +7,24 @@ on:
 jobs:
   test:
     name: Test (Elixir ${{ matrix.elixir }}, OTP ${{ matrix.erlang }})
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - erlang: "25.1"
-            elixir: "1.14"
+          - erlang: "27.0"
+            elixir: "1.17"
+            runner: ubuntu-latest
             lint: true
             coverage: true
             report: true
             dialyzer: true
-          - erlang: "24.3"
-            elixir: "1.12"
+          - erlang: "25.3"
+            elixir: "1.14"
+            runner: ubuntu-latest
           - erlang: "23.3.1"
             elixir: "1.11.4"
-          - erlang: "21.3"
-            elixir: "1.10"
+            runner: ubuntu-20.04
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MIX_ENV: test
@@ -31,7 +32,7 @@ jobs:
       FUZZINGSERVER_HOST: localhost
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install OTP and Elixir
         uses: erlef/setup-beam@v1
@@ -41,7 +42,7 @@ jobs:
 
       - name: Cache dependencies
         id: cache-deps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             deps
@@ -66,7 +67,7 @@ jobs:
         if: ${{ matrix.lint }}
 
       - name: Restore cached PLTs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: plt_cache
         with:
           key: |
@@ -103,7 +104,7 @@ jobs:
 
       - name: Checkout gh-pages branch to ./gh-pages
         if: github.ref == 'refs/heads/main' && matrix.report
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: ./gh-pages
