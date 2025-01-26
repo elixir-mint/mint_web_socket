@@ -86,7 +86,7 @@ the connection is an established HTTP/1 WebSocket.
 
 ### Changed
 
-- Changed function signature of `Mint.Websocket.upgrade/5` to accept the
+- Changed function signature of `Mint.WebSocket.upgrade/5` to accept the
   WebSocket's scheme (`:ws` or `:wss`) as the first argument
 - Added an optional `opts` argument to `Mint.WebSocket.new/5` to control
   active vs. passive mode on the socket
