@@ -115,7 +115,14 @@ defmodule Mint.WebSocket do
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
   @typedoc """
-  An immutable data structure representing a WebSocket connection
+  An immutable data structure representing WebSocket state.
+
+  You will usually want to keep these around:
+
+    * The Mint connection
+    * The request reference for the WebSocket upgrade request
+    * This WebSocket data structure
+
   """
   @opaque t :: %__MODULE__{
             extensions: [Extension.t()],
@@ -131,11 +138,11 @@ defmodule Mint.WebSocket do
   @type error :: Mint.Types.error() | WebSocketError.t() | UpgradeFailureError.t()
 
   @typedoc """
-  Shorthand notations for control frames
+  Shorthand notations for control frames.
 
-  * `:ping` - shorthand for `{:ping, ""}`
-  * `:pong` - shorthand for `{:pong, ""}`
-  * `:close` - shorthand for `{:close, nil, nil}`
+    * `:ping` - shorthand for `{:ping, ""}`
+    * `:pong` - shorthand for `{:pong, ""}`
+    * `:close` - shorthand for `{:close, nil, nil}`
 
   These may be passed to `encode/2`. Frames decoded with `decode/2` are always
   in `t:frame/0` format.
@@ -143,20 +150,20 @@ defmodule Mint.WebSocket do
   @type shorthand_frame :: :ping | :pong | :close
 
   @typedoc """
-  A WebSocket frame
+  A WebSocket frame.
 
-  * `{:binary, binary}` - a frame containing binary data. Binary frames
-    can be used to send arbitrary binary data such as a PDF.
-  * `{:text, text}` - a frame containing string data. Text frames must be
-    valid utf8. Elixir has wonderful support for utf8: `String.valid?/1`
-    can detect valid and invalid utf8.
-  * `{:ping, binary}` - a control frame which the server should respond to
-    with a pong. The binary data must be echoed in the pong response.
-  * `{:pong, binary}` - a control frame which forms a reply to a ping frame.
-    Pings and pongs may be used to check the a connection is alive or to
-    estimate latency.
-  * `{:close, code, reason}` - a control frame used to request that a connection
-    be closed or to acknowledgee a close frame send by the server.
+    * `{:binary, binary}` - a frame containing binary data. Binary frames
+      can be used to send arbitrary binary data such as a PDF.
+    * `{:text, text}` - a frame containing string data. Text frames must be
+      valid utf8. Elixir has wonderful support for utf8: `String.valid?/1`
+      can detect valid and invalid utf8.
+    * `{:ping, binary}` - a control frame which the server should respond to
+      with a pong. The binary data must be echoed in the pong response.
+    * `{:pong, binary}` - a control frame which forms a reply to a ping frame.
+      Pings and pongs may be used to check the a connection is alive or to
+      estimate latency.
+    * `{:close, code, reason}` - a control frame used to request that a connection
+      be closed or to acknowledgee a close frame send by the server.
 
   These may be passed to `encode/2` or returned from `decode/2`.
 
@@ -164,22 +171,19 @@ defmodule Mint.WebSocket do
 
   In order to close a WebSocket connection gracefully, either the client or
   server sends a close frame. Then the other endpoint responds with a
-  close with code `1_000` and then closes the TCP connection. This can be
-  accomplished in Mint.WebSocket like so:
+  close with code `1_000` and then closes the TCP/TLS connection. This can be
+  accomplished in `Mint.WebSocket` like so:
 
-  ```elixir
-  {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
-  {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, :close)
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, ref, data)
 
-  close_response = receive(do: (message -> message))
-  {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, close_response)
-  {:ok, websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
+      close_response = receive(do: (message -> message))
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.stream(conn, close_response)
+      {:ok, websocket, [{:close, 1_000, ""}]} = Mint.WebSocket.decode(websocket, data)
 
-  Mint.HTTP.close(conn)
-  ```
+      Mint.HTTP.close(conn)
 
-  [rfc6455
-  section 7.4.1](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1)
+  [RFC6455 § 7.4.1](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1)
   documents codes which may be used in the `code` element.
   """
   @type frame ::
@@ -206,8 +210,8 @@ defmodule Mint.WebSocket do
 
   ## Options
 
-  * `:extensions` - a list of extensions to negotiate. See the extensions
-    section below.
+    * `:extensions` - a list of extensions to negotiate. See the extensions
+      section below.
 
   ## Extensions
 
@@ -220,27 +224,33 @@ defmodule Mint.WebSocket do
   Extensions may be passed as a list of `Mint.WebSocket.Extension` structs
   or with the following shorthand notations:
 
-  * `module` - shorthand for `{module, []}`
-  * `{module, params}` - shorthand for `{module, params, []}`
-  * `{module, params, opts}` - a shorthand which is expanded to a
-    `Mint.WebSocket.Extension` struct
+    * `module` - shorthand for `{module, []}`
+    * `{module, params}` - shorthand for `{module, params, []}`
+    * `{module, params, opts}` - a shorthand which is expanded to a
+      `Mint.WebSocket.Extension` struct
 
   ## Examples
 
-  ```elixir
-  {:ok, conn} = Mint.HTTP.connect(:http, "localhost", 9_000)
-  {:ok, conn, ref} =
-    Mint.WebSocket.upgrade(:ws, conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
-  # or provide params:
-  {:ok, conn, ref} =
-    Mint.WebSocket.upgrade(
-      :ws,
-      conn,
-      "/",
-      [],
-      extensions: [{Mint.WebSocket.PerMessageDeflate, [:client_max_window_bits]]}]
-    )
-  ```
+  First, establish the Mint connection:
+
+      {:ok, conn} = Mint.HTTP.connect(:http, "localhost", 9_000)
+
+  Then, send the upgrade request (with an extension in this example):
+
+      {:ok, conn, ref} =
+        Mint.WebSocket.upgrade(:ws, conn, "/", [], extensions: [Mint.WebSocket.PerMessageDeflate])
+
+  Here's an example of providing extension parameters:
+
+      {:ok, conn, ref} =
+        Mint.WebSocket.upgrade(
+          :ws,
+          conn,
+          "/",
+          [],
+          extensions: [{Mint.WebSocket.PerMessageDeflate, [:client_max_window_bits]]}]
+        )
+
   """
   @spec upgrade(
           scheme :: :ws | :wss,
@@ -291,30 +301,36 @@ defmodule Mint.WebSocket do
 
   @doc """
   Creates a new WebSocket data structure given the server's reply to the
-  upgrade request
+  upgrade request.
+
+  `request_ref` should be the reference of the request made with `upgrade/5`.
+  `status` and `response_headers` should be the status code and headers
+  of the server's response to the upgrade request—see the example below.
+
+  The returned [WebSocket data structure](`t:t/0`) is used to encode and decode frames.
 
   This function will setup any extensions accepted by the server using
   the `c:Mint.WebSocket.Extension.init/2` callback.
 
   ## Options
 
-  * `:mode` - (default: `:active`) either `:active` or `:passive`. This
-    corresponds to the same option in `Mint.HTTP.connect/4`.
+    * `:mode` - (default: `:active`) either `:active` or `:passive`. This
+      corresponds to the same option in `Mint.HTTP.connect/4`.
 
   ## Examples
 
-  ```elixir
-  http_reply = receive(do: (message -> message))
-  {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, headers}, {:done, ^ref}]} =
-    Mint.WebSocket.stream(conn, http_reply)
+      http_reply = receive(do: (message -> message))
 
-  {:ok, conn, websocket} =
-    Mint.WebSocket.new(conn, ref, status, resp_headers)
-  ```
+      {:ok, conn, [{:status, ^ref, status}, {:headers, ^ref, headers}, {:done, ^ref}]} =
+        Mint.WebSocket.stream(conn, http_reply)
+
+      {:ok, conn, websocket} =
+        Mint.WebSocket.new(conn, ref, status, headers)
+
   """
   @spec new(
           Mint.HTTP.t(),
-          reference(),
+          Mint.Types.request_ref(),
           Mint.Types.status(),
           Mint.Types.headers()
         ) ::
@@ -360,23 +376,26 @@ defmodule Mint.WebSocket do
 
   @doc """
   A wrapper around `Mint.HTTP.stream/2` for streaming HTTP and WebSocket
-  messages
+  messages.
 
-  This function does not decode WebSocket frames. Instead, once a WebSocket
+  **This function does not decode WebSocket frames**. Instead, once a WebSocket
   connection has been established, decode any `{:data, request_ref, data}`
   frames with `decode/2`.
 
-  This function is a drop-in replacement for `Mint.HTTP.stream/2` which
+  This function is a drop-in replacement for `Mint.HTTP.stream/2`, which
   enables streaming WebSocket data after the bootstrapping HTTP/1 connection
   has concluded. It decodes both WebSocket and regular HTTP messages.
 
   ## Examples
 
       message = receive(do: (message -> message))
+
       {:ok, conn, [{:data, ^websocket_ref, data}]} =
         Mint.WebSocket.stream(conn, message)
+
       {:ok, websocket, [{:text, "hello world!"}]} =
         Mint.WebSocket.decode(websocket, data)
+
   """
   @spec stream(Mint.HTTP.t(), term()) ::
           {:ok, Mint.HTTP.t(), [Mint.Types.response()]}
@@ -419,7 +438,7 @@ defmodule Mint.WebSocket do
   end
 
   @doc """
-  Receives data from the socket
+  Receives data from the socket.
 
   This function is used instead of `stream/2` when the connection is
   in `:passive` mode. You must pass the `mode: :passive` option to
@@ -431,8 +450,10 @@ defmodule Mint.WebSocket do
   ## Examples
 
       {:ok, conn, [{:data, ^ref, data}]} = Mint.WebSocket.recv(conn, 0, 5_000)
+
       {:ok, websocket, [{:text, "hello world!"}]} =
         Mint.WebSocket.decode(websocket, data)
+
   """
   @spec recv(Mint.HTTP.t(), non_neg_integer(), timeout()) ::
           {:ok, Mint.HTTP.t(), [Mint.Types.response()]}
@@ -460,11 +481,16 @@ defmodule Mint.WebSocket do
   end
 
   @doc """
-  Streams chunks of data on the connection
+  Streams chunks of data on the connection.
 
   `stream_request_body/3` should be used to send encoded data on an
   established WebSocket connection that has already been upgraded with
   `upgrade/5`.
+
+  > #### Encoding {: .warning}
+  >
+  > This function doesn't perform any encoding. You should use `encode/2`
+  > to encode frames before sending them with `stream_request_body/3`.
 
   This function is a wrapper around `Mint.HTTP.stream_request_body/3`. It
   delegates to that function unless the `request_ref` belongs to an HTTP/1
@@ -479,6 +505,7 @@ defmodule Mint.WebSocket do
 
       {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world!"})
       {:ok, conn} = Mint.WebSocket.stream_request_body(conn, websocket_ref, data)
+
   """
   @spec stream_request_body(
           Mint.HTTP.t(),
@@ -505,7 +532,7 @@ defmodule Mint.WebSocket do
   end
 
   @doc """
-  Encodes a frame into a binary
+  Encodes a frame into a binary.
 
   The resulting binary may be sent with `stream_request_body/3`.
 
@@ -514,29 +541,27 @@ defmodule Mint.WebSocket do
 
   ## Examples
 
-  ```elixir
-  {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
-  {:ok, conn} = Mint.WebSocket.stream_request_body(conn, websocket_ref, data)
-  ```
+      {:ok, websocket, data} = Mint.WebSocket.encode(websocket, {:text, "hello world"})
+      {:ok, conn} = Mint.WebSocket.stream_request_body(conn, websocket_ref, data)
+
   """
   @spec encode(t(), shorthand_frame() | frame()) :: {:ok, t(), binary()} | {:error, t(), any()}
   defdelegate encode(websocket, frame), to: Frame
 
   @doc """
-  Decodes a binary into a list of frames
+  Decodes a binary into a list of frames.
 
-  The binary may received from the connection with `Mint.HTTP.stream/2`.
+  The binary may received from the connection with `stream/2`.
 
   This function will invoke the `c:Mint.WebSocket.Extension.decode/2` callback
   for any accepted extensions.
 
   ## Examples
 
-  ```elixir
-  message = receive(do: (message -> message))
-  {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, message)
-  {:ok, websocket, frames} = Mint.WebSocket.decode(websocket, data)
-  ```
+      message = receive(do: (message -> message))
+      {:ok, conn, [{:data, ^ref, data}]} = Mint.HTTP.stream(conn, message)
+      {:ok, websocket, frames} = Mint.WebSocket.decode(websocket, data)
+
   """
   @spec decode(t(), data :: binary()) ::
           {:ok, t(), [frame() | {:error, term()}]} | {:error, t(), any()}

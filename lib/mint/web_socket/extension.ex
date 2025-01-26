@@ -11,8 +11,7 @@ defmodule Mint.WebSocket.Extension do
   reference when writing future extensions, but future extensions should be
   written as separate libraries which extend `Mint.WebSocket` instead of
   built-in. Also note that extensions must operate on the internal
-  representations of frames using the records defined in `Mint.WebSocket.Frame`,
-  which are not documented.
+  representations of frames using the records defined in an internal module.
   """
 
   alias Mint.WebSocketError
