@@ -6,6 +6,13 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.5 - 2025-11-05
+
+### Fixed
+
+- Fixed a type warning on Elixir 1.19+ about struct updating in the
+  `Extension` module.
+
 ## 1.0.4 - 2024-06-14
 
 ### Fixed
