@@ -81,10 +81,10 @@ defmodule AutobahnClient do
     }
   end
 
-  def recv(%{ref: ref} = state) do
+  def recv(%__MODULE__{ref: ref} = state) do
     {:ok, conn, messages} = Mint.WebSocket.stream(state.conn, receive(do: (message -> message)))
 
-    %__MODULE__{
+    %{
       state
       | conn: conn,
         buffer: join_data_frames(messages, ref),
@@ -92,13 +92,13 @@ defmodule AutobahnClient do
     }
   end
 
-  def decode_buffer(state) do
+  def decode_buffer(%__MODULE__{} = state) do
     {:ok, websocket, messages} = Mint.WebSocket.decode(state.websocket, state.buffer)
 
-    %__MODULE__{state | messages: messages, buffer: <<>>, websocket: websocket}
+    %{state | messages: messages, buffer: <<>>, websocket: websocket}
   end
 
-  def loop(state) do
+  def loop(%__MODULE__{} = state) do
     case state |> decode_buffer |> handle_messages do
       %{next: :cont} = state ->
         loop(recv(state))
@@ -108,7 +108,7 @@ defmodule AutobahnClient do
     end
   end
 
-  def handle_messages(state) do
+  def handle_messages(%__MODULE__{} = state) do
     Enum.reduce(state.messages, state, fn message, state ->
       Logger.debug("Handling #{inspect(message, printable_limit: 30)}")
       handle_message(message, state)
@@ -116,18 +116,18 @@ defmodule AutobahnClient do
     |> Map.put(:messages, [])
   end
 
-  defp handle_message({:close, _code, _reason}, state) do
+  defp handle_message({:close, _code, _reason}, %__MODULE__{} = state) do
     close(state, 1000, "")
   end
 
-  defp handle_message({:ping, data}, state) do
+  defp handle_message({:ping, data}, %__MODULE__{} = state) do
     send(state, {:pong, data})
   end
 
   # no-op on unsolicited pongs
-  defp handle_message({:pong, _body}, state), do: state
+  defp handle_message({:pong, _body}, %__MODULE__{} = state), do: state
 
-  defp handle_message({:error, reason}, state) do
+  defp handle_message({:error, reason}, %__MODULE__{} = state) do
     Logger.debug("Closing the connection because of a protocol error: #{inspect(reason)}")
 
     code =
@@ -139,7 +139,7 @@ defmodule AutobahnClient do
     close(state, code, "")
   end
 
-  defp handle_message(frame, state), do: send(state, frame)
+  defp handle_message(frame, %__MODULE__{} = state), do: send(state, frame)
 
   def send(%__MODULE__{sent_close?: true} = state, frame) when is_close_frame(frame) do
     Logger.debug("Ignoring send of close")
@@ -162,11 +162,11 @@ defmodule AutobahnClient do
     end
   end
 
-  defp do_send(state, frame, data) do
+  defp do_send(%__MODULE__{} = state, frame, data) do
     case Mint.WebSocket.stream_request_body(state.conn, state.ref, data) do
       {:ok, conn} ->
         Logger.debug("Sent.")
-        %__MODULE__{state | conn: conn, sent_close?: is_close_frame(frame)}
+        %{state | conn: conn, sent_close?: is_close_frame(frame)}
 
       {:error, conn, %Mint.TransportError{reason: :closed}} ->
         Logger.debug(
@@ -174,14 +174,14 @@ defmodule AutobahnClient do
         )
 
         {:ok, conn} = Mint.HTTP.close(conn)
-        %__MODULE__{state | conn: conn, next: :stop}
+        %{state | conn: conn, next: :stop}
     end
   end
 
-  defp close(state, code, reason) do
+  defp close(%__MODULE__{} = state, code, reason) do
     state = send(state, {:close, code, reason})
     {:ok, conn} = Mint.HTTP.close(state.conn)
-    %__MODULE__{state | conn: conn, next: :stop}
+    %{state | conn: conn, next: :stop}
   end
 
   defp join_data_frames(messages, ref) do
