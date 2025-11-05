@@ -203,6 +203,8 @@ defmodule Mint.WebSocket.Extension do
   end
 
   @doc false
+  @spec accept_extensions([t()], Mint.Types.headers()) ::
+          {:ok, [t()]} | {:error, Mint.WebSocket.error()}
   def accept_extensions(client_extensions, response_headers) do
     server_extensions = parse_accepted_extensions(response_headers)
     client_extension_mapping = Enum.into(client_extensions, %{}, &{&1.name, &1})
@@ -210,27 +212,36 @@ defmodule Mint.WebSocket.Extension do
     accept_extensions(server_extensions, [], client_extension_mapping)
   end
 
+  @spec accept_extensions([t()], [t()], %{String.t() => t()}) ::
+          {:ok, [t()]} | {:error, Mint.WebSocket.error()}
   defp accept_extensions(server_extension, acc, client_extension_mapping)
 
   defp accept_extensions([], acc, _), do: {:ok, :lists.reverse(acc)}
 
-  defp accept_extensions([server_extension | server_extensions], acc, client_extension_mapping) do
-    with {:ok, client_extension} <-
-           Map.fetch(client_extension_mapping, server_extension.name),
-         extension = %__MODULE__{client_extension | params: server_extension.params},
-         all_extensions = acc ++ [extension | server_extensions],
-         {:ok, extension} <- client_extension.module.init(extension, all_extensions) do
-      accept_extensions(
-        server_extensions,
-        acc ++ [extension],
-        client_extension_mapping
-      )
-    else
-      :error ->
-        {:error, %WebSocketError{reason: {:extension_not_negotiated, server_extension}}}
+  defp accept_extensions(
+         [%__MODULE__{name: name, params: params} = server_extension | server_extensions],
+         acc,
+         client_extension_mapping
+       ) do
+    case client_extension_mapping do
+      %{^name => %__MODULE__{} = client_extension} ->
+        extension = %{client_extension | params: params}
+        all_extensions = acc ++ [extension | server_extensions]
 
-      init_error ->
-        init_error
+        case client_extension.module.init(extension, all_extensions) do
+          {:ok, extension} ->
+            accept_extensions(
+              server_extensions,
+              acc ++ [extension],
+              client_extension_mapping
+            )
+
+          error ->
+            error
+        end
+
+      _not_found ->
+        {:error, %WebSocketError{reason: {:extension_not_negotiated, server_extension}}}
     end
   end
 
@@ -251,6 +262,7 @@ defmodule Mint.WebSocket.Extension do
   # is exactly equivalent to
   #
   #       Sec-WebSocket-Extensions: foo, bar; baz=2
+  @spec parse_accepted_extensions(Mint.Types.headers()) :: [t()]
   defp parse_accepted_extensions(response_headers) do
     response_headers
     |> Enum.flat_map(fn
