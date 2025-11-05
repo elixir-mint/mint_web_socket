@@ -48,8 +48,8 @@ defmodule MintWebSocket.MixProject do
       {:ex_doc, "~> 0.24", only: [:dev], runtime: false},
       {:castore, ">= 0.0.0", only: [:dev]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},
-      {:cowboy, "~> 2.9", only: [:test]},
-      {:gun, "== 2.0.0-rc.2", only: [:test]},
+      {:cowboy, "~> 2.14", only: [:test]},
+      {:gun, "~> 2.2", only: [:test]},
       {:excoveralls, "~> 0.14", only: [:test]},
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
