@@ -54,8 +54,8 @@ jobs:
           mix deps.get --only test
           mix deps.compile
 
-      - name: Start docker
-        run: docker-compose up --detach echo fuzzingserver
+      - name: Start docker-compose
+        run: docker compose up --detach echo fuzzingserver
 
       - name: Check for unused dependencies
         run: mix deps.get && mix deps.unlock --check-unused
