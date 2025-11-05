@@ -13,12 +13,6 @@ defmodule MintWebSocket.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.html": :test,
-        "coveralls.github": :test,
-        docs: :dev
-      ],
       dialyzer: [
         plt_local_path: "priv/plts",
         plt_add_apps: [:mix]
@@ -34,6 +28,17 @@ defmodule MintWebSocket.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.github": :test,
+        docs: :dev
+      ]
     ]
   end
 
