@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send 1000 compressed messages each of payload size 256, auto-fragment to 0 octets. Use default permessage-deflate offer.",
    "droppedByMe": true,
-   "duration": 421,
+   "duration": 499,
    "expectation": "Receive echo'ed messages (with payload as sent). Timeout case after 120 secs.",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=340&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.6.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Cf86IhbYs3SWxmmT8neHMQ==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/0.8.2-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 7jeUjOQlTEzsNj2QImSV6ouI3C4=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
+   "httpRequest": "GET /runCase?case=340&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: jbC2b9CoS4/hIfSbmohOkw==\r\nsec-websocket-extensions: permessage-deflate\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: dJj7uZeTW/Rh8VHB3l2wwKZridA=\r\nSec-WebSocket-Extensions: permessage-deflate\r\n\r\n",
    "id": "12.3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -130,7 +130,7 @@
       "210": 1,
       "250": 1
    },
-   "started": "2024-06-14T19:48:25.071Z",
+   "started": "2025-11-05T15:05:13.788Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.47875,
       "incomingOctetsAppLevel": 256000,
@@ -147,7 +147,7 @@
       "outgoingWebSocketMessages": 1000,
       "outgoingWebSocketOverhead": 0.02360928815646622,
       "preopenIncomingOctetsWireLevel": 250,
-      "preopenOutgoingOctetsWireLevel": 252
+      "preopenOutgoingOctetsWireLevel": 254
    },
    "txFrameStats": {
       "2": 1000,
@@ -242,7 +242,7 @@
       "192": 1,
       "196": 1,
       "206": 1,
-      "252": 1
+      "254": 1
    },
    "wasClean": true,
    "wasCloseHandshakeTimeout": false,
@@ -260,8 +260,8 @@
       [
          "TO",
          [
-            252,
-            "485454502f312e312031303120537769746368696e672050726f746f636f6c730d0a5365727665723a204175746f6261686e5465737453756974652f302e382e ..."
+            254,
+            "485454502f312e312031303120537769746368696e672050726f746f636f6c730d0a5365727665723a204175746f6261686e5465737453756974652f32352e31 ..."
          ],
          false
       ],
@@ -303,7 +303,7 @@
          "RO",
          [
             8,
-            "88829a2a5a2f99c2"
+            "888211fdc30d1215"
          ]
       ],
       [
@@ -316,7 +316,7 @@
          true,
          0,
          true,
-         "9a2a5a2f"
+         "11fdc30d"
       ]
    ]
 }
