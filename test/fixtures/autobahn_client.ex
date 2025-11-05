@@ -7,6 +7,18 @@ defmodule AutobahnClient do
   import Kernel, except: [send: 2]
   require Logger
 
+  # Dialyzer incorrectly infers that `Mint.WebSocket.new/4` in
+  # `connect/1,2` will always return `{error, conn, reason}`.
+  @dialyzer {:nowarn_function,
+             connect: 1,
+             connect: 2,
+             get_case_count: 0,
+             get_case_info: 1,
+             get_case_status: 1,
+             run_case: 1,
+             run_case: 2,
+             update_reports: 0}
+
   defstruct [:conn, :websocket, :ref, messages: [], next: :cont, sent_close?: false, buffer: <<>>]
 
   defguardp is_close_frame(frame)
