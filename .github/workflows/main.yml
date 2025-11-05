@@ -7,24 +7,23 @@ on:
 jobs:
   test:
     name: Test (Elixir ${{ matrix.elixir }}, OTP ${{ matrix.erlang }})
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - erlang: "27.0"
-            elixir: "1.17"
-            runner: ubuntu-latest
+          - erlang: "28.1"
+            elixir: "1.19"
             lint: true
             coverage: true
             report: true
             dialyzer: true
-          - erlang: "25.3"
+          # One version down.
+          - erlang: "27.2"
+            elixir: "1.18"
+          # Oldest version. We technically support OTP 23 but hard to test in CI
+          - erlang: "24.3"
             elixir: "1.14"
-            runner: ubuntu-latest
-          - erlang: "23.3.1"
-            elixir: "1.11.4"
-            runner: ubuntu-20.04
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MIX_ENV: test
