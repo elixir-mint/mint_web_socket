@@ -104,7 +104,7 @@ iex -S mix
 ```
 
 [ci-badge]: https://github.com/elixir-mint/mint_web_socket/workflows/CI/badge.svg
-[actions]: https://github.com/elixir-mint/mint_web_socket/actions/workflows/ci.yml
+[actions]: https://github.com/elixir-mint/mint_web_socket/actions/workflows/main.yml
 [coverage]: https://coveralls.io/github/elixir-mint/mint_web_socket
 [coverage-badge]: https://coveralls.io/repos/github/elixir-mint/mint_web_socket/badge.svg
 [hex-version-badge]: https://img.shields.io/hexpm/v/mint_web_socket.svg
