@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="https://autobahn-testsuite.readthedocs.io/" title="Autobahn WebSocket Testsuite"><img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="https://autobahn-testsuite.readthedocs.io/"           title="Autobahn WebSocket">          <img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.4.9</b></span> : Pass - <span style="font-size: 0.9em;"><b>78</b> ms @ 2025-11-05T15:05:15.798Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 9.4.9</b></span> : Pass - <span style="font-size: 0.9em;"><b>83</b> ms @ 2025-12-05T16:35:09.460Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 4M.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Receive echo'ed binary message (with payload as sent).</p>
 
@@ -220,13 +220,13 @@ user-agent: mint/1.7.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: LtnrW5PTOhpg8UWydpLU3w==</pre>
+sec-websocket-key: HE3RNyO2ujUooIySsN1RIQ==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/25.10.1-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: njBMVCnt+94i6lchySqzTg533nI=</pre>
+Sec-WebSocket-Accept: EnrWmYPf7Adx5o8bz2nY583FKYo=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -252,10 +252,10 @@ Sec-WebSocket-Accept: njBMVCnt+94i6lchySqzTg533nI=</pre>
          <tr class="stats_row"><td>8</td><td>1</td><td>8</td></tr>
          <tr class="stats_row"><td>204</td><td>1</td><td>204</td></tr>
          <tr class="stats_row"><td>14480</td><td>1</td><td>14480</td></tr>
-         <tr class="stats_row"><td>22110</td><td>1</td><td>22110</td></tr>
-         <tr class="stats_row"><td>28960</td><td>1</td><td>28960</td></tr>
-         <tr class="stats_row"><td>65536</td><td>63</td><td>4128768</td></tr>
-         <tr class="stats_total"><td>Total</td><td>68</td><td>4194530</td></tr>
+         <tr class="stats_row"><td>56848</td><td>1</td><td>56848</td></tr>
+         <tr class="stats_row"><td>59758</td><td>1</td><td>59758</td></tr>
+         <tr class="stats_row"><td>65536</td><td>62</td><td>4063232</td></tr>
+         <tr class="stats_total"><td>Total</td><td>67</td><td>4194530</td></tr>
       </table>
       <h3>Octets Transmitted by Chop Size</h3>
       <table>
@@ -290,8 +290,8 @@ Sec-WebSocket-Accept: njBMVCnt+94i6lchySqzTg533nI=</pre>
          <pre class="wirelog_tx_frame">003 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
          <pre class="wirelog_tx_octets">004 TX OCTETS: 880203e8</pre>
-         <pre class="wirelog_rx_octets">005 RX OCTETS: 8882640d305867e5</pre>
-         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3634306433303538</pre>
+         <pre class="wirelog_rx_octets">005 RX OCTETS: 8882c43d2f47c7d5</pre>
+         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6334336432663437</pre>
          <pre class="wirelog_rx_frame">               0x03e8</pre>
          <pre class="wirelog_tcp_closed_by_me">007 TCP DROPPED BY ME</pre>
       </div>

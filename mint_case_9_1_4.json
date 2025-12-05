@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 4 * 2**20 (4M).",
    "droppedByMe": true,
-   "duration": 121,
+   "duration": 111,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=250&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: c7FJLhsFFpdHoP/j+GCuJQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: JPpX/X2CwF2Uh8ibKfcbC3/0JZs=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=250&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: CU9yTlvTL14Fcl8tP07VVA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: MsqyZlNCedwa3H3UbdKUBSsCCT8=\r\n\r\n",
    "id": "9.1.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,11 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "29726": 1,
-      "43440": 1,
-      "57920": 1,
-      "65536": 62
+      "28960": 1,
+      "36590": 1,
+      "65536": 63
    },
-   "started": "2025-11-05T15:05:10.763Z",
+   "started": "2025-12-05T16:34:58.610Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -106,7 +105,7 @@
          "RO",
          [
             8,
-            "88824320b42c40c8"
+            "88822d37e0ab2edf"
          ]
       ],
       [
@@ -119,7 +118,7 @@
          true,
          0,
          true,
-         "4320b42c"
+         "2d37e0ab"
       ]
    ]
 }

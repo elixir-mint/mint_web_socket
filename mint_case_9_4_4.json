@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented binary message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 4k.",
    "droppedByMe": true,
-   "duration": 71,
+   "duration": 73,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=271&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: bxDoI98i1PyK/+vw7A+IhQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: OjGY4YPitY3AQo/HFmlMlbeNT0A=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=271&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: wZY8R6y/wmm/STE5PW8+OQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: izD86WGIS/eWtFHryO3pCDWvtrA=\r\n\r\n",
    "id": "9.4.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "1838": 1,
-      "24616": 1,
-      "39096": 1,
+      "390": 1,
+      "28960": 1,
+      "36200": 1,
       "65536": 63
    },
-   "started": "2025-11-05T15:05:54.031Z",
+   "started": "2025-12-05T16:34:48.602Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 1024,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "8882604b633d63a3"
+            "88824c809d084f68"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "604b633d"
+         "4c809d08"
       ]
    ]
 }

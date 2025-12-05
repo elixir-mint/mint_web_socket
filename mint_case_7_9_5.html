@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="https://autobahn-testsuite.readthedocs.io/" title="Autobahn WebSocket Testsuite"><img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="https://autobahn-testsuite.readthedocs.io/"           title="Autobahn WebSocket">          <img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 7.9.5</b></span> : Pass - <span style="font-size: 0.9em;"><b>1</b> ms @ 2025-11-05T15:05:46.194Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 7.9.5</b></span> : Pass - <span style="font-size: 0.9em;"><b>1</b> ms @ 2025-12-05T16:35:13.671Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send close with invalid close code 1006</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>Clean close with protocol error code or drop TCP</p>
 
@@ -220,13 +220,13 @@ user-agent: mint/1.7.1
 upgrade: websocket
 connection: upgrade
 sec-websocket-version: 13
-sec-websocket-key: HeTNmOMt5N06Ci76P19I9w==</pre>
+sec-websocket-key: DuRobKYZ5jc3xrsMduQExA==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/25.10.1-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: FaPJh1804RbH11nWS8NFAfePx+Y=</pre>
+Sec-WebSocket-Accept: cmtX5FxvyJpUZsoNOes7KkjpH+M=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -283,8 +283,8 @@ Sec-WebSocket-Accept: FaPJh1804RbH11nWS8NFAfePx+Y=</pre>
          <pre class="wirelog_tx_frame">               0x03ee</pre>
          <pre class="wirelog_tx_octets">003 TX OCTETS: 880203ee</pre>
          <pre class="wirelog_kill_after">004 FAIL CONNECTION AFTER 1.000000 sec</pre>
-         <pre class="wirelog_rx_octets">005 RX OCTETS: 88829228d83791c2</pre>
-         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=3932323864383337</pre>
+         <pre class="wirelog_rx_octets">005 RX OCTETS: 8882a77036d3a49a</pre>
+         <pre class="wirelog_rx_frame">006 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6137373033366433</pre>
          <pre class="wirelog_rx_frame">               0x03ea</pre>
          <pre class="wirelog_tcp_closed_by_me">007 TCP DROPPED BY ME</pre>
       </div>

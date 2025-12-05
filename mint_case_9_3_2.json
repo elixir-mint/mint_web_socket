@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 256.",
    "droppedByMe": true,
-   "duration": 109,
+   "duration": 106,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=260&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: klINcAHI2IcpAxvTacpbEg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yhbBreT+6OafZHar4uoH/kv80xI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=260&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 090RR3r3fjFCdW5FnN11Lg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uUEyl+qMW2Hix0cLa1bLJU3bOqw=\r\n\r\n",
    "id": "9.3.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "29726": 1,
-      "43440": 1,
-      "57920": 1,
-      "65536": 62
+      "390": 1,
+      "28960": 1,
+      "36200": 1,
+      "65536": 63
    },
-   "started": "2025-11-05T15:05:43.465Z",
+   "started": "2025-12-05T16:34:51.531Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 16384,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "8882f2e3dd90f10b"
+            "88825a0c3d7b59e4"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "f2e3dd90"
+         "5a0c3d7b"
       ]
    ]
 }

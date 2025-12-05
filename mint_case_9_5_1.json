@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 64 octets.",
    "droppedByMe": true,
-   "duration": 331,
+   "duration": 460,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=277&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: MYq2yj0EXqOq7kWjhZJ1dw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: YmnNaNmO/wqVOncmAN+x3cjS04s=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=277&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: /EOqW9aKf8IZ707+G1OAVQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: vKF0T4R3YA5bwwe1QOVu7EigUOA=\r\n\r\n",
    "id": "9.5.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "36590": 1,
-      "43440": 1,
-      "51056": 1,
+      "14480": 1,
+      "26976": 1,
+      "32782": 1,
+      "56848": 1,
       "65536": 14
    },
-   "started": "2025-11-05T15:05:44.106Z",
+   "started": "2025-12-05T16:34:48.782Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "8882516010725288"
+            "8882ab4942caa8a1"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "51601072"
+         "ab4942ca"
       ]
    ]
 }

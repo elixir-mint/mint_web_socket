@@ -35,8 +35,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=63&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: z7l4t9prZUWxU9qT5eRK/Q==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: xbIbHycVSn+Q9a0P2qL0QOsl9Ww=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=63&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xTKWoo+O7cvIvfckoL6vGQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: /OIbIQBmFG1qlmp/e+FgCQ0fTqo=\r\n\r\n",
    "id": "5.19",
    "isServer": true,
    "localCloseCode": 1000,
@@ -73,7 +73,7 @@
       "51": 1,
       "203": 1
    },
-   "started": "2025-11-05T15:05:28.344Z",
+   "started": "2025-12-05T16:34:53.067Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4,
@@ -182,7 +182,7 @@
          "RO",
          [
             15,
-            "8a890a02ffd67a6d91b16767dfe72b"
+            "8a8959efe5cf29808ba8348ac5fe78"
          ]
       ],
       [
@@ -195,7 +195,7 @@
          true,
          0,
          true,
-         "0a02ffd6"
+         "59efe5cf"
       ],
       [
          "CTE",
@@ -297,7 +297,7 @@
          "RO",
          [
             15,
-            "8a8911574d16613823717c326d2430"
+            "8a899c03e162ec6c8f05f166c150bd"
          ]
       ],
       [
@@ -310,13 +310,13 @@
          true,
          0,
          true,
-         "11574d16"
+         "9c03e162"
       ],
       [
          "RO",
          [
             51,
-            "81adfaa93c269cdb5d4197cc5252cbcf4e479dc459488e9b5a549bce514394dd0f4088c85b4b9fc748129cdb5d4197cc5252cf"
+            "81ad05de3f5063ac5e3768bb512434b84d3162b35a3e71ec592264b952356baa0c3677bf583d60b04b6463ac5e3768bb512430"
          ]
       ],
       [
@@ -329,7 +329,7 @@
          true,
          0,
          true,
-         "faa93c26"
+         "05de3f50"
       ],
       [
          "TF",
@@ -357,7 +357,7 @@
          "RO",
          [
             8,
-            "8882dfc002abdc28"
+            "8882d2980319d170"
          ]
       ],
       [
@@ -370,7 +370,7 @@
          true,
          0,
          true,
-         "dfc002ab"
+         "d2980319"
       ]
    ]
 }
