@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=466&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Rm+5NSuxYjNS4cK8zfg34Q==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 12X3QARBwmCyzkFEu4vFnNnOONE=\r\nSec-WebSocket-Extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits=9\r\n\r\n",
+   "httpRequest": "GET /runCase?case=466&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: NEOTK62BKl2xP1Mf90QvHA==\r\nsec-websocket-extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: NT3rXhth5fIjrybMQK1fNqUuc20=\r\nSec-WebSocket-Extensions: permessage-deflate; client_no_context_takeover; client_max_window_bits=9\r\n\r\n",
    "id": "13.5.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -74,7 +74,7 @@
       "162": 3,
       "302": 1
    },
-   "started": "2025-12-05T16:34:33.193Z",
+   "started": "2026-01-19T17:25:31.102Z",
    "trafficStats": {
       "incomingCompressionRatio": 0.5206015625,
       "incomingOctetsAppLevel": 256000,
@@ -190,7 +190,7 @@
          "RO",
          [
             8,
-            "88823de3e7fe3e0b"
+            "8882b28d29edb165"
          ]
       ],
       [
@@ -203,7 +203,7 @@
          true,
          0,
          true,
-         "3de3e7fe"
+         "b28d29ed"
       ]
    ]
 }

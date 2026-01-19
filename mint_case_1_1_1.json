@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message with payload 0.",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "Receive echo'ed text message (with empty payload). Clean close with normal code.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=1&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: sEhorbLW34e5g9WZlt/VSA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: vOKxdn0ei9FolCY7oPLN+pjMgus=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=1&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: gHbTVqSGU4F9IItJoQ94cQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: g6oCJFtPywYWHbo04EYXmNewO94=\r\n\r\n",
    "id": "1.1.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "8": 1,
       "202": 1
    },
-   "started": "2025-12-05T16:34:47.724Z",
+   "started": "2026-01-19T17:25:33.872Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             6,
-            "8180862e66fa"
+            "81802b357703"
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "862e66fa"
+         "2b357703"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "8882d1387ec4d2d0"
+            "8882d361de6fd089"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "d1387ec4"
+         "d361de6f"
       ]
    ]
 }

@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=6&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: VoXyURE4Bk+ZRcakJvV4Vw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: m6U47aLw1OCGrOEgT54eOY6mTRQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=6&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: bvuwo8GOo+8NYvxBTll90w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: zZvuRDBc9+ZmeFYwOAXY6CznSBY=\r\n\r\n",
    "id": "1.1.6",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,10 +53,11 @@
    "rxOctetStats": {
       "8": 1,
       "202": 1,
-      "7240": 1,
-      "58303": 1
+      "14480": 1,
+      "22103": 1,
+      "28960": 1
    },
-   "started": "2025-12-05T16:34:51.516Z",
+   "started": "2026-01-19T17:25:48.504Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,15 +118,22 @@
       [
          "RO",
          [
-            7240,
-            "81feffffa7ead6b28dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc98 ..."
+            14480,
+            "81feffff3ac11a5210eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb3078 ..."
          ]
       ],
       [
          "RO",
          [
-            58303,
-            "8dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc988dc0fc98 ..."
+            28960,
+            "10eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb3078 ..."
+         ]
+      ],
+      [
+         "RO",
+         [
+            22103,
+            "10eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb307810eb3078 ..."
          ]
       ],
       [
@@ -138,7 +146,7 @@
          true,
          0,
          true,
-         "a7ead6b2"
+         "3ac11a52"
       ],
       [
          "TF",
@@ -166,7 +174,7 @@
          "RO",
          [
             8,
-            "88824acde1114925"
+            "888244724fb4479a"
          ]
       ],
       [
@@ -179,7 +187,7 @@
          true,
          0,
          true,
-         "4acde111"
+         "44724fb4"
       ]
    ]
 }

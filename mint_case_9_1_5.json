@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 8 * 2**20 (8M).",
    "droppedByMe": true,
-   "duration": 207,
+   "duration": 152,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ntW2YHE/43wKelho87HroA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 7jlsMzNzB4FDZmsYprEXJ5qMm7c=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xGaVm8mAY2ZmMVKdi3DV1Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Po8lyEVxCLBhDb/fDCzCue/EISk=\r\n\r\n",
    "id": "9.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,11 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "28960": 1,
-      "36590": 1,
-      "65536": 127
+      "14480": 1,
+      "56848": 1,
+      "59758": 1,
+      "65536": 126
    },
-   "started": "2025-12-05T16:34:32.932Z",
+   "started": "2026-01-19T17:25:52.188Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -105,7 +106,7 @@
          "RO",
          [
             8,
-            "888204dc25fe0734"
+            "8882123a425711d2"
          ]
       ],
       [
@@ -118,7 +119,7 @@
          true,
          0,
          true,
-         "04dc25fe"
+         "123a4257"
       ]
    ]
 }

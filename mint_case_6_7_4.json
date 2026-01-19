@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send a text message with payload which is valid UTF-8 in one fragment.<br><br>Payload: 0xf0908080",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "The message is echo'ed back to us.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=97&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: nFj598HPBzXr+yuIgM5oJw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: GU0Njk4P2rpU4+UpklKpqARrVjc=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=97&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: qvYoajqjzS4COtvgnkZVkw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 27aLA2tQxK/WLmq2lqiTdGK2R2A=\r\n\r\n",
    "id": "6.7.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "10": 1,
       "203": 1
    },
-   "started": "2025-12-05T16:35:06.317Z",
+   "started": "2026-01-19T17:25:17.214Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             10,
-            "81842138ebffd1a86b7f"
+            "8184b2e9a923427929a3"
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "2138ebff"
+         "b2e9a923"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "888242714c784199"
+            "8882e53a17dee6d2"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "42714c78"
+         "e53a17de"
       ]
    ]
 }

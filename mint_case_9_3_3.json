@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1k.",
    "droppedByMe": true,
-   "duration": 95,
+   "duration": 114,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4G046nBAIb07BgdpQ2USRA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: extBAn73KbbIUr9p3w5dqDF1jK0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: BxOFGPf1uDDH4uXC0chVtA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: xkN+uHaVGN5Sg1FQsrIUbMvEThY=\r\n\r\n",
    "id": "9.3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "29726": 1,
-      "43440": 1,
-      "57920": 1,
+      "28960": 1,
+      "42368": 1,
+      "59758": 1,
       "65536": 62
    },
-   "started": "2025-12-05T16:35:12.910Z",
+   "started": "2026-01-19T17:25:51.739Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4096,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "88821005029713ed"
+            "888237121a9634fa"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "10050297"
+         "37121a96"
       ]
    ]
 }

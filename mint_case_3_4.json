@@ -28,8 +28,8 @@
       "requireClean": false
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=31&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Bz3UBOZZLJNmhLRHTItuiw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: KfTxq2itWRT/09NuOXZirmy7xls=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=31&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 2Y3ZFnWjQ3E/dh21mgVYMA==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yXEBNSKcg4y2GLEup6+RkkzBhD4=\r\n\r\n",
    "id": "3.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "19": 1,
       "203": 1
    },
-   "started": "2025-12-05T16:35:01.884Z",
+   "started": "2026-01-19T17:25:17.194Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 2,
@@ -288,10 +288,26 @@
          true
       ],
       [
+         "TO",
+         [
+            1,
+            "6c"
+         ],
+         true
+      ],
+      [
+         "TO",
+         [
+            1,
+            "6c"
+         ],
+         true
+      ],
+      [
          "RO",
          [
             19,
-            "818d3fe00d047785616850cc2d73509261601e"
+            "818d57d520621fb04c0e38f9001538a74c0676"
          ]
       ],
       [
@@ -304,23 +320,7 @@
          true,
          0,
          true,
-         "3fe00d04"
-      ],
-      [
-         "TO",
-         [
-            1,
-            "6c"
-         ],
-         true
-      ],
-      [
-         "TO",
-         [
-            1,
-            "6c"
-         ],
-         true
+         "57d52062"
       ],
       [
          "TO",
@@ -414,7 +414,7 @@
          "RO",
          [
             8,
-            "8882f55546c3f6bf"
+            "88822a12c4d429f8"
          ]
       ],
       [
@@ -427,7 +427,7 @@
          true,
          0,
          true,
-         "f55546c3"
+         "2a12c4d4"
       ],
       [
          "TF",

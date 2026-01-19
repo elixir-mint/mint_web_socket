@@ -35,8 +35,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=64&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 8aJPur7LSrxfOfjKt7nlZw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: JI5kF8MXk3SBCP8zFQA5lNiof/c=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=64&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xm16HxNhY9X+pVHg9X2eVQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uhJGX35K8BsykPQ/x76+NlRgduM=\r\n\r\n",
    "id": "5.20",
    "isServer": true,
    "localCloseCode": 1000,
@@ -73,7 +73,7 @@
       "51": 1,
       "203": 1
    },
-   "started": "2025-12-05T16:35:05.200Z",
+   "started": "2026-01-19T17:25:49.969Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4,
@@ -182,7 +182,7 @@
          "RO",
          [
             15,
-            "8a89b728e60cc747886bda4dc63d96"
+            "8a899906a4abe969caccf463849ab8"
          ]
       ],
       [
@@ -195,7 +195,7 @@
          true,
          0,
          true,
-         "b728e60c"
+         "9906a4ab"
       ],
       [
          "CTE",
@@ -297,7 +297,7 @@
          "RO",
          [
             15,
-            "8a89857252f5f51d3c92e81772c7a4"
+            "8a89668833df16e75db80bed13ed47"
          ]
       ],
       [
@@ -310,13 +310,13 @@
          true,
          0,
          true,
-         "857252f5"
+         "668833df"
       ],
       [
          "RO",
          [
             51,
-            "81adeb67666b8d15070c8602081fda01140a8c0a03059f5500198a000b0e8513550d990601068e09125f8d15070c8602081fde"
+            "81adbb0d026edd7f6309d6686c1a8a6b700fdc606700cf3f641cda6a6f0bd5793108c96c6503de63765add7f6309d6686c1a8e"
          ]
       ],
       [
@@ -329,7 +329,7 @@
          true,
          0,
          true,
-         "eb67666b"
+         "bb0d026e"
       ],
       [
          "TF",
@@ -357,7 +357,7 @@
          "RO",
          [
             8,
-            "8882511e9f7552f6"
+            "88820b41dff808a9"
          ]
       ],
       [
@@ -370,7 +370,7 @@
          true,
          0,
          true,
-         "511e9f75"
+         "0b41dff8"
       ]
    ]
 }

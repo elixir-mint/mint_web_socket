@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send ping with small binary (non UTF-8) payload.",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "Pong with payload echo'ed is sent in reply to Ping. Clean close with normal code.",
    "expected": {
       "OK": [
@@ -26,8 +26,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=19&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: a5zVZ3gPC+iwiEf1oy1QmQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 2DyCuwW2YBcII/oyS3b7olrWIwI=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=19&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: nxQiVLXWo01EKvLuArYPUg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: FdHnX2rNhJ9GW9Z/tZZImK5sGE8=\r\n\r\n",
    "id": "2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -53,7 +53,7 @@
       "14": 1,
       "203": 1
    },
-   "started": "2025-12-05T16:34:30.753Z",
+   "started": "2026-01-19T17:25:15.469Z",
    "trafficStats": null,
    "txFrameStats": {
       "8": 1,
@@ -115,7 +115,7 @@
          "RO",
          [
             14,
-            "8a88fc3a2a48fcc5d4b500c12ab7"
+            "8a88cbc37af1cb3c840c37387a0e"
          ]
       ],
       [
@@ -128,7 +128,7 @@
          true,
          0,
          true,
-         "fc3a2a48"
+         "cbc37af1"
       ],
       [
          "TF",
@@ -156,7 +156,7 @@
          "RO",
          [
             8,
-            "88827a859c5f796d"
+            "8882e37771c4e09f"
          ]
       ],
       [
@@ -169,7 +169,7 @@
          true,
          0,
          true,
-         "7a859c5f"
+         "e37771c4"
       ]
    ]
 }

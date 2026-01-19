@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 128 octets.",
    "droppedByMe": true,
-   "duration": 262,
+   "duration": 264,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: nAJga1DI/XJ/yGlT+qBjQg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: CpdFjcIcdnHxVv9DmuNJlf7vNKU=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=284&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: aSVnt2Vyt6I79Ox8Z+Q/kg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: jgpuqQpHMFYAmrgZFIou7hOZH9g=\r\n\r\n",
    "id": "9.6.2",
    "isServer": true,
    "localCloseCode": 1000,
@@ -40,11 +40,12 @@
       "8": 1,
       "204": 1,
       "14480": 1,
-      "22110": 1,
-      "28960": 1,
-      "65536": 15
+      "26976": 1,
+      "32782": 1,
+      "56848": 1,
+      "65536": 14
    },
-   "started": "2025-12-05T16:34:47.454Z",
+   "started": "2026-01-19T17:25:15.201Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "8882d25e7bc9d1b6"
+            "8882b42f2a7bb7c7"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "d25e7bc9"
+         "b42f2a7b"
       ]
    ]
 }
