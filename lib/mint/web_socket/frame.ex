@@ -265,7 +265,7 @@ defmodule Mint.WebSocket.Frame do
   defp decode_payload_and_mask(payload, masked?) do
     with {:ok, payload_length, rest} <- decode_payload_length(payload),
          {:ok, mask, rest} <- decode_mask(rest, masked?),
-         <<payload::binary-size(payload_length), more::bitstring>> <- rest do
+         <<payload::binary-size(^payload_length), more::bitstring>> <- rest do
       {:ok, payload, mask, more}
     else
       partial when is_binary(partial) -> :buffer
@@ -287,8 +287,9 @@ defmodule Mint.WebSocket.Frame do
   end
 
   defp decode_opcode(opcode) do
-    with :error <- Map.fetch(@reverse_opcodes, opcode) do
-      {:error, {:unsupported_opcode, opcode}}
+    case @reverse_opcodes do
+      %{^opcode => kind} -> {:ok, kind}
+      _ -> {:error, {:unsupported_opcode, opcode}}
     end
   end
 

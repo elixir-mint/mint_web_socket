@@ -7,7 +7,7 @@ defmodule MintWebSocket.MixProject do
     [
       app: :mint_web_socket,
       version: "1.0.5",
-      elixir: "~> 1.6",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       erlc_paths: erlc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,

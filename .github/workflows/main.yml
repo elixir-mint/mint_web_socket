@@ -12,18 +12,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - erlang: "28.1"
-            elixir: "1.19"
+          - erlang: "28.3"
+            elixir: "1.20.0-rc.1"
             lint: true
             coverage: true
             report: true
             dialyzer: true
           # One version down.
           - erlang: "27.2"
-            elixir: "1.18"
+            elixir: "1.19"
           # Oldest version. We technically support OTP 23 but hard to test in CI
           - erlang: "24.3"
-            elixir: "1.14"
+            elixir: "1.15"
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MIX_ENV: test

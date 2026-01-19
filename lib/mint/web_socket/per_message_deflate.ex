@@ -147,7 +147,7 @@ defmodule Mint.WebSocket.PerMessageDeflate do
     data_size = byte_size(deflated) - 4
 
     case deflated do
-      <<deflated::binary-size(data_size), 0x00, 0x00, 0xFF, 0xFF>> -> deflated
+      <<deflated::binary-size(^data_size), 0x00, 0x00, 0xFF, 0xFF>> -> deflated
       deflated -> deflated
     end
   end
