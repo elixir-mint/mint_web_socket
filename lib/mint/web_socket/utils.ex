@@ -9,21 +9,23 @@ defmodule Mint.WebSocket.Utils do
     :crypto.strong_rand_bytes(16) |> Base.encode64()
   end
 
+  # header names are written in their conventional casing: Mint lowercases them
+  # unless the connection was opened with `case_sensitive_headers: true`
   def headers({:http1, nonce}, extensions) when is_binary(nonce) do
     [
-      {"upgrade", "websocket"},
-      {"connection", "upgrade"},
-      {"sec-websocket-version", "13"},
-      {"sec-websocket-key", nonce},
-      {"sec-websocket-extensions", extension_string(extensions)}
+      {"Upgrade", "websocket"},
+      {"Connection", "upgrade"},
+      {"Sec-WebSocket-Version", "13"},
+      {"Sec-WebSocket-Key", nonce},
+      {"Sec-WebSocket-Extensions", extension_string(extensions)}
     ]
     |> Enum.reject(fn {_k, v} -> v == "" end)
   end
 
   def headers(:http2, extensions) do
     [
-      {"sec-websocket-version", "13"},
-      {"sec-websocket-extensions", extension_string(extensions)}
+      {"Sec-WebSocket-Version", "13"},
+      {"Sec-WebSocket-Extensions", extension_string(extensions)}
     ]
     |> Enum.reject(fn {_k, v} -> v == "" end)
   end

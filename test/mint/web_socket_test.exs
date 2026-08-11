@@ -119,6 +119,44 @@ defmodule Mint.WebSocketTest do
     end
   end
 
+  describe "given an HTTP/1 connection to a socket which captures the request" do
+    setup do
+      {:ok, listen_socket} = :gen_tcp.listen(0, [:binary, active: false, reuseaddr: true])
+      on_exit(fn -> :gen_tcp.close(listen_socket) end)
+      {:ok, port} = :inet.port(listen_socket)
+
+      [listen_socket: listen_socket, port: port]
+    end
+
+    test "the upgrade headers are lowercased by default", c do
+      {:ok, conn} = HTTP1.connect(:http, "localhost", c.port)
+      {:ok, _conn, _ref} = WebSocket.upgrade(:ws, conn, "/", [])
+
+      request = capture_request(c.listen_socket)
+      assert request =~ "upgrade: websocket"
+      assert request =~ "sec-websocket-key: "
+    end
+
+    test "the upgrade headers keep their casing with case_sensitive_headers: true", c do
+      {:ok, conn} = HTTP1.connect(:http, "localhost", c.port, case_sensitive_headers: true)
+      {:ok, _conn, _ref} = WebSocket.upgrade(:ws, conn, "/", [])
+
+      request = capture_request(c.listen_socket)
+      assert request =~ "Upgrade: websocket"
+      assert request =~ "Connection: upgrade"
+      assert request =~ "Sec-WebSocket-Version: 13"
+      assert request =~ "Sec-WebSocket-Key: "
+    end
+  end
+
+  defp capture_request(listen_socket) do
+    {:ok, socket} = :gen_tcp.accept(listen_socket, 5_000)
+    {:ok, request} = :gen_tcp.recv(socket, 0, 5_000)
+    :gen_tcp.close(socket)
+
+    request
+  end
+
   @doc !"""
        In Mint 1.5.0+, Mint handles the SETTINGS frame from the server asynchronously
        and returns default values for server settings until it is received. So we must
