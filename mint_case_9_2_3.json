@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 23,
+   "duration": 22,
    "expectation": "Receive echo'ed binary message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: +OspJ13RctodN9ujniIqpQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: dq47n9dOT4uJfMH2wcLgN8ufE9E=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=255&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: Hv+u/1RPWRb38tWBapUGrw==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: rMvEY2/FY39S3NdRxD1yIFBbgKk=\r\n\r\n",
    "id": "9.2.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "14480": 1,
+      "32846": 1,
+      "43440": 1,
       "56848": 1,
-      "59758": 1,
-      "65536": 14
+      "63488": 1,
+      "65536": 13
    },
-   "started": "2026-08-12T15:46:17.056Z",
+   "started": "2026-08-12T15:47:48.409Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -106,7 +107,7 @@
          "RO",
          [
             8,
-            "88825cbd4e265f55"
+            "88828d8915dc8e61"
          ]
       ],
       [
@@ -119,7 +120,7 @@
          true,
          0,
          true,
-         "5cbd4e26"
+         "8d8915dc"
       ]
    ]
 }

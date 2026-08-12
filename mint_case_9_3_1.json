@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 64.",
    "droppedByMe": true,
-   "duration": 167,
+   "duration": 163,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=259&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: dR2IIKWx5KwMrxV/XzOryw==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: HJ3T0Awjos9PBO90z703hJpVSK8=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=259&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: VZpaguWy/GA2M3vjqGXt8w==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: yhGVJ5QHDKb+dwQKtJertMcwPaQ=\r\n\r\n",
    "id": "9.3.1",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "14480": 1,
-      "54734": 1,
-      "61872": 1,
+      "28502": 1,
+      "43440": 1,
+      "59144": 1,
       "65536": 62
    },
-   "started": "2026-08-12T15:46:06.034Z",
+   "started": "2026-08-12T15:48:08.660Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 65536,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "88824f0932ba4ce1"
+            "88829a51461f99b9"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "4f0932ba"
+         "9a51461f"
       ]
    ]
 }
