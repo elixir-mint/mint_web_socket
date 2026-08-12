@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 8 * 2**20 (8M).",
    "droppedByMe": true,
-   "duration": 152,
+   "duration": 197,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: xGaVm8mAY2ZmMVKdi3DV1Q==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: Po8lyEVxCLBhDb/fDCzCue/EISk=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=251&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 8wXv2NQejfEdENm2CleUoQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: X9SrwKG7wtNmB2NqYn3EeYUPoWU=\r\n\r\n",
    "id": "9.1.5",
    "isServer": true,
    "localCloseCode": 1000,
@@ -44,7 +44,7 @@
       "59758": 1,
       "65536": 126
    },
-   "started": "2026-01-19T17:25:52.188Z",
+   "started": "2026-08-12T15:46:05.585Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -106,7 +106,7 @@
          "RO",
          [
             8,
-            "8882123a425711d2"
+            "88826594edb1667c"
          ]
       ],
       [
@@ -119,7 +119,7 @@
          true,
          0,
          true,
-         "123a4257"
+         "6594edb1"
       ]
    ]
 }

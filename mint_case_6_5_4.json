@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send a text message with payload which is valid UTF-8 in one fragment.<br><br>Payload: 0x68656c6c6ff0a4ada2776f726c64",
    "droppedByMe": true,
-   "duration": 1,
+   "duration": 2,
    "expectation": "The message is echo'ed back to us.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=81&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: mbZ+3F5/pLlRCgezwiJJbg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: 2dvRkKDYu/Pzx9h7jnSnN9Y4yP0=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=81&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: /vHsSQyP2U2zG0I1aa2uRg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: XEr7Adh/0haa1Zc9RovN+xkImq4=\r\n\r\n",
    "id": "6.5.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -55,7 +55,7 @@
       "20": 1,
       "203": 1
    },
-   "started": "2026-01-19T17:25:49.389Z",
+   "started": "2026-08-12T15:46:21.915Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -117,7 +117,7 @@
          "RO",
          [
             20,
-            "818e61fcc5c20999a9ae0e0c616fc38baab00d98"
+            "818ef97c5ce991193085968cf8445b0b339b9518"
          ]
       ],
       [
@@ -130,7 +130,7 @@
          true,
          0,
          true,
-         "61fcc5c2"
+         "f97c5ce9"
       ],
       [
          "TF",
@@ -158,7 +158,7 @@
          "RO",
          [
             8,
-            "88826c169f3e6ffe"
+            "88825fcb5b7b5c23"
          ]
       ],
       [
@@ -171,7 +171,7 @@
          true,
          0,
          true,
-         "6c169f3e"
+         "5fcb5b7b"
       ]
    ]
 }

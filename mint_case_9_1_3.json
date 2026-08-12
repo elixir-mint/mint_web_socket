@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 25,
+   "duration": 23,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: hohCRzWhuCQL8d4GEG1cow==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: iykM28B/bxGpyQt+unZ0w1gzo4E=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 68kgcPHyeJqf/2jS6mzs0Q==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: hMEG9OuG/9iNdGBVuzAr9qIllFc=\r\n\r\n",
    "id": "9.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "1838": 1,
-      "14480": 1,
-      "49232": 1,
-      "65536": 15
+      "28960": 1,
+      "42368": 1,
+      "60942": 1,
+      "64352": 1,
+      "65536": 13
    },
-   "started": "2026-01-19T17:25:08.273Z",
+   "started": "2026-08-12T15:46:19.451Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -106,7 +107,7 @@
          "RO",
          [
             8,
-            "8882f5809060f668"
+            "88823598d2b13670"
          ]
       ],
       [
@@ -119,7 +120,7 @@
          true,
          0,
          true,
-         "f5809060"
+         "3598d2b1"
       ]
    ]
 }

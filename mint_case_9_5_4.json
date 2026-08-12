@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 512 octets.",
    "droppedByMe": true,
-   "duration": 62,
+   "duration": 118,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=280&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 5sXlahHlmxAONDNvUlldpQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: WZmbLJQxWW+NWaw6vzv7Q2hnZYY=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=280&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: RnlnGQdZCtQaacVMNLJDGQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: qVCOCrpPXkpCaHmb3ouvCorsbTE=\r\n\r\n",
    "id": "9.5.4",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,13 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "14480": 1,
-      "56848": 1,
-      "59758": 1,
-      "65536": 14
+      "28960": 1,
+      "42368": 1,
+      "59918": 1,
+      "65376": 1,
+      "65536": 13
    },
-   "started": "2026-01-19T17:25:18.989Z",
+   "started": "2026-08-12T15:46:13.626Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -107,7 +108,7 @@
          "RO",
          [
             8,
-            "8882443eeeb047d6"
+            "88824fdcd7114c34"
          ]
       ],
       [
@@ -120,7 +121,7 @@
          true,
          0,
          true,
-         "443eeeb0"
+         "4fdcd711"
       ]
    ]
 }
