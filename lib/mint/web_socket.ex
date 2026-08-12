@@ -208,6 +208,11 @@ defmodule Mint.WebSocket do
   connections established by passing `:http` to `Mint.HTTP.connect/4` and
   `:wss` corresponding to `:https`.
 
+  The WebSocket handshake headers are subject to the `:case_sensitive_headers`
+  option of `Mint.HTTP.connect/4`: they are lowercased by default and sent in
+  their conventional casing (`Sec-WebSocket-Key` and friends) when that option
+  is enabled.
+
   ## Options
 
     * `:extensions` - a list of extensions to negotiate. See the extensions
