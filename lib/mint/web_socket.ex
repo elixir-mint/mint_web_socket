@@ -129,7 +129,7 @@ defmodule Mint.WebSocket do
             fragment: tuple(),
             private: map(),
             buffer: binary(),
-            max_message_size: non_neg_integer() | :infinity
+            max_message_size: pos_integer() | :infinity
           }
   defstruct extensions: [],
             fragment: nil,
@@ -329,8 +329,8 @@ defmodule Mint.WebSocket do
     * `:max_message_size` - (default: `#{@default_max_message_size}`) the
       maximum size in bytes of an incoming message, after decompression.
       `decode/2` returns a `Mint.WebSocketError` with reason
-      `:message_too_large` for bigger messages. Use `:infinity` to disable
-      the limit.
+      `:message_too_large` for bigger messages. Must be at least 125 (the
+      maximum control frame payload) or `:infinity` to disable the limit.
 
   ## Examples
 
@@ -353,6 +353,13 @@ defmodule Mint.WebSocket do
   def new(conn, request_ref, status, response_headers, opts \\ []) do
     websockets = [request_ref | get_private(conn, :websockets) || []]
     max_message_size = Keyword.get(opts, :max_message_size, @default_max_message_size)
+
+    unless max_message_size == :infinity or
+             (is_integer(max_message_size) and max_message_size >= 125) do
+      raise ArgumentError,
+            "expected :max_message_size to be :infinity or an integer >= 125, " <>
+              "got: #{inspect(max_message_size)}"
+    end
 
     # extensions which buffer or inflate data (e.g. permessage-deflate) read the limit from their opts
     extensions =

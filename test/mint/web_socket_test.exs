@@ -67,10 +67,21 @@ defmodule Mint.WebSocketTest do
         WebSocket.stream(conn, http_get_message)
 
       {:ok, conn, websocket} =
-        WebSocket.new(conn, ref, status, resp_headers, max_message_size: 100)
+        WebSocket.new(conn, ref, status, resp_headers, max_message_size: 200)
 
       on_exit(fn -> HTTP1.close(conn) end)
-      [websocket: websocket]
+      [conn: conn, ref: ref, status: status, resp_headers: resp_headers, websocket: websocket]
+    end
+
+    test "a limit below the maximum control frame payload is rejected", c do
+      for size <- [124, 0, "big"] do
+        assert_raise ArgumentError, fn ->
+          WebSocket.new(c.conn, c.ref, c.status, c.resp_headers, max_message_size: size)
+        end
+      end
+
+      assert {:ok, _conn, _websocket} =
+               WebSocket.new(c.conn, c.ref, c.status, c.resp_headers, max_message_size: 125)
     end
 
     test "a frame declaring a length over the limit is rejected from its header",
@@ -83,9 +94,9 @@ defmodule Mint.WebSocketTest do
     end
 
     test "a fragmented message over the limit is rejected", %{websocket: websocket} do
-      # 60 bytes each: first text frame (FIN = 0), then the final continuation (FIN = 1)
-      first = <<0::1, 0::3, 1::4, 0::1, 60::7>> <> :binary.copy("a", 60)
-      last = <<1::1, 0::3, 0::4, 0::1, 60::7>> <> :binary.copy("a", 60)
+      # 120 bytes each: first text frame (FIN = 0), then the final continuation (FIN = 1)
+      first = <<0::1, 0::3, 1::4, 0::1, 120::7>> <> :binary.copy("a", 120)
+      last = <<1::1, 0::3, 0::4, 0::1, 120::7>> <> :binary.copy("a", 120)
 
       assert {:ok, websocket, []} = WebSocket.decode(websocket, first)
 
@@ -94,12 +105,12 @@ defmodule Mint.WebSocketTest do
     end
 
     test "a fragmented message of exactly the limit is delivered", %{websocket: websocket} do
-      first = <<0::1, 0::3, 1::4, 0::1, 60::7>> <> :binary.copy("a", 60)
-      last = <<1::1, 0::3, 0::4, 0::1, 40::7>> <> :binary.copy("a", 40)
+      first = <<0::1, 0::3, 1::4, 0::1, 120::7>> <> :binary.copy("a", 120)
+      last = <<1::1, 0::3, 0::4, 0::1, 80::7>> <> :binary.copy("a", 80)
 
       assert {:ok, websocket, []} = WebSocket.decode(websocket, first)
       assert {:ok, _websocket, [{:text, message}]} = WebSocket.decode(websocket, last)
-      assert byte_size(message) == 100
+      assert byte_size(message) == 200
     end
   end
 
@@ -116,7 +127,7 @@ defmodule Mint.WebSocketTest do
         WebSocket.stream(conn, http_get_message)
 
       {:ok, conn, websocket} =
-        WebSocket.new(conn, ref, status, resp_headers, max_message_size: 100)
+        WebSocket.new(conn, ref, status, resp_headers, max_message_size: 200)
 
       on_exit(fn -> HTTP1.close(conn) end)
       [conn: conn, ref: ref, websocket: websocket]
@@ -130,14 +141,14 @@ defmodule Mint.WebSocketTest do
       assert_receive echo_message
       {:ok, _conn, [{:data, _ref, data}]} = WebSocket.stream(conn, echo_message)
 
-      assert byte_size(data) < 100
+      assert byte_size(data) < 200
 
       assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
                WebSocket.decode(websocket, data)
     end
 
     test "a compressed message inflating exactly to the limit is delivered", c do
-      message = :binary.copy("a", 100)
+      message = :binary.copy("a", 200)
       {:ok, websocket, data} = WebSocket.encode(c.websocket, {:text, message})
       {:ok, conn} = WebSocket.stream_request_body(c.conn, c.ref, data)
 
