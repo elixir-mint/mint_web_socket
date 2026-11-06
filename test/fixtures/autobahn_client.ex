@@ -82,7 +82,9 @@ defmodule AutobahnClient do
         [{:done, ^ref}] -> <<>>
       end
 
-    {:ok, conn, websocket} = Mint.WebSocket.new(conn, ref, status, resp_headers)
+    # the performance cases send messages up to 16 MiB
+    {:ok, conn, websocket} =
+      Mint.WebSocket.new(conn, ref, status, resp_headers, max_message_size: :infinity)
 
     %__MODULE__{
       next: :cont,

@@ -10,6 +10,7 @@ defmodule Mint.WebSocketError do
     quote do
       :extended_connect_disabled
       | :payload_too_large
+      | :message_too_large
       | {:extension_not_negotiated, Mint.WebSocket.Extension.t()}
     end
 
@@ -28,6 +29,10 @@ defmodule Mint.WebSocketError do
 
   defp format_reason(:payload_too_large) do
     "frame payload cannot exceed 9,223,372,036,854,775,807 bytes"
+  end
+
+  defp format_reason(:message_too_large) do
+    "message exceeds the :max_message_size option"
   end
 
   defp format_reason({:extension_not_negotiated, extension}) do

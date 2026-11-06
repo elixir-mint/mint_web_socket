@@ -242,7 +242,7 @@ defmodule Mint.WebSocket.Frame do
          websocket,
          acc
        ) do
-    case decode_payload_and_mask(payload_and_mask, masked == 0b1) do
+    case decode_payload_and_mask(payload_and_mask, masked == 0b1, websocket.max_message_size) do
       {:ok, payload, mask, rest} ->
         frame = decode_full_frame_binary(opcode, fin, reserved, mask, payload)
 
@@ -262,8 +262,9 @@ defmodule Mint.WebSocket.Frame do
     {:buffer, partial, :lists.reverse(acc)}
   end
 
-  defp decode_payload_and_mask(payload, masked?) do
+  defp decode_payload_and_mask(payload, masked?, max_message_size) do
     with {:ok, payload_length, rest} <- decode_payload_length(payload),
+         :ok <- check_message_size(payload_length, max_message_size),
          {:ok, mask, rest} <- decode_mask(rest, masked?),
          <<payload::binary-size(^payload_length), more::bitstring>> <- rest do
       {:ok, payload, mask, more}
@@ -273,6 +274,12 @@ defmodule Mint.WebSocket.Frame do
       {:error, reason} -> {:error, reason}
     end
   end
+
+  @doc false
+  def check_message_size(size, max) when is_integer(max) and size > max,
+    do: throw({:mint, %WebSocketError{reason: :message_too_large}})
+
+  def check_message_size(_size, _max), do: :ok
 
   defp decode_full_frame_binary(opcode, fin, reserved, mask, payload) do
     with {:ok, opcode} <- decode_opcode(opcode) do
@@ -459,14 +466,14 @@ defmodule Mint.WebSocket.Frame do
   end
 
   def resolve_fragments(websocket, [frame | rest], acc) when is_fin(frame) do
-    frame = combine(websocket.fragment, frame)
+    frame = combine(websocket.fragment, frame, websocket.max_message_size)
 
     put_in(websocket.fragment, nil)
     |> resolve_fragments(rest, [frame | acc])
   end
 
   def resolve_fragments(websocket, [frame | rest], acc) do
-    case combine(websocket.fragment, frame) do
+    case combine(websocket.fragment, frame, websocket.max_message_size) do
       {:error, reason} ->
         put_in(websocket.fragment, nil)
         |> resolve_fragments(rest, [{:error, reason} | acc])
@@ -477,18 +484,23 @@ defmodule Mint.WebSocket.Frame do
     end
   end
 
-  defp combine(nil, continuation(fin?: true)), do: {:error, :insular_continuation}
+  defp combine(nil, continuation(fin?: true), _max_message_size),
+    do: {:error, :insular_continuation}
 
-  defp combine(nil, frame), do: frame
+  defp combine(nil, frame, _max_message_size), do: frame
 
   for type <- [:continuation, :text, :binary] do
     defp combine(
            unquote(type)(data: frame_data) = frame,
-           continuation(data: continuation_data, fin?: fin?)
+           continuation(data: continuation_data, fin?: fin?),
+           max_message_size
          ) do
+      :ok =
+        check_message_size(byte_size(frame_data) + byte_size(continuation_data), max_message_size)
+
       unquote(type)(frame, data: Utils.maybe_concat(frame_data, continuation_data), fin?: fin?)
     end
   end
 
-  defp combine(a, b), do: {:error, {:cannot_combine_frames, a, b}}
+  defp combine(a, b, _max_message_size), do: {:error, {:cannot_combine_frames, a, b}}
 end
