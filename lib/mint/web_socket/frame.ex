@@ -215,8 +215,11 @@ defmodule Mint.WebSocket.Frame do
 
         frame, {websocket, acc} ->
           {frame, extensions} = Extension.decode(frame, websocket.extensions)
+          frame = translate(frame)
+          # extensions can expand the payload, so the final size is checked too
+          check_data_size(frame, websocket.max_message_size)
 
-          {put_in(websocket.extensions, extensions), [translate(frame) | acc]}
+          {put_in(websocket.extensions, extensions), [frame | acc]}
       end)
 
     {:ok, websocket, :lists.reverse(frames)}
@@ -280,6 +283,11 @@ defmodule Mint.WebSocket.Frame do
     do: throw({:mint, %WebSocketError{reason: :message_too_large}})
 
   def check_message_size(_size, _max), do: :ok
+
+  defp check_data_size({type, data}, max) when type in [:text, :binary],
+    do: check_message_size(byte_size(data), max)
+
+  defp check_data_size(_frame, _max), do: :ok
 
   defp decode_full_frame_binary(opcode, fin, reserved, mask, payload) do
     with {:ok, opcode} <- decode_opcode(opcode) do

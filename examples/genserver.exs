@@ -119,7 +119,8 @@ defmodule Ws do
         |> handle_responses(rest)
 
       {:error, websocket, reason} ->
-        put_in(state.websocket, websocket)
+        # extension state may hold data from the failed message, so close
+        %{state | websocket: websocket, closing?: true}
         |> reply({:error, reason})
     end
   end

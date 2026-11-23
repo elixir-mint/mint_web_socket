@@ -110,7 +110,7 @@ defmodule Mint.WebSocket do
   "permessage-deflate" extension.
   """
 
-  alias __MODULE__.{Utils, Extension, Frame}
+  alias __MODULE__.{Utils, Extension, Frame, PerMessageDeflate}
   alias Mint.{WebSocketError, WebSocket.UpgradeFailureError}
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
@@ -327,10 +327,15 @@ defmodule Mint.WebSocket do
       corresponds to the same option in `Mint.HTTP.connect/4`.
 
     * `:max_message_size` - (default: `#{@default_max_message_size}`) the
-      maximum size in bytes of an incoming message, after decompression.
-      `decode/2` returns a `Mint.WebSocketError` with reason
-      `:message_too_large` for bigger messages. Must be at least 125 (the
-      maximum control frame payload) or `:infinity` to disable the limit.
+      maximum size in bytes of an incoming message. The limit applies both to
+      the size on the wire and to the size after extensions (such as
+      permessage-deflate) run, so a small incompressible message whose
+      compressed form is larger than the limit is rejected too. `decode/2`
+      returns a `Mint.WebSocketError` with reason `:message_too_large` for
+      bigger messages: the connection should then be closed, because
+      extension state (e.g. the inflater) may still hold data from the
+      rejected message. Must be at least 125 (the maximum control frame
+      payload) or `:infinity` to disable the limit.
 
   ## Examples
 
@@ -361,10 +366,14 @@ defmodule Mint.WebSocket do
               "got: #{inspect(max_message_size)}"
     end
 
-    # extensions which buffer or inflate data (e.g. permessage-deflate) read the limit from their opts
+    # permessage-deflate reads the limit from its opts to stop inflating early
     extensions =
       for extension <- get_private(conn, :extensions) do
-        %{extension | opts: Keyword.put(extension.opts, :max_message_size, max_message_size)}
+        if extension.module == PerMessageDeflate do
+          %{extension | opts: Keyword.put(extension.opts, :max_message_size, max_message_size)}
+        else
+          extension
+        end
       end
 
     conn =

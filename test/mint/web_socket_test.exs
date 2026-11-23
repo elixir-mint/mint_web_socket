@@ -3,6 +3,16 @@ defmodule Mint.WebSocketTest do
 
   alias Mint.{HTTP1, HTTP2, WebSocket, WebSocket.UpgradeFailureError}
 
+  defmodule DoublingExtension do
+    # test extension that doubles every text payload
+    require Mint.WebSocket.Frame, as: Frame
+
+    def decode(frame, state) do
+      data = Frame.text(frame, :data)
+      {:ok, Frame.text(frame, data: data <> data), state}
+    end
+  end
+
   setup_all do
     TestServer.start()
     :ok
@@ -91,6 +101,23 @@ defmodule Mint.WebSocketTest do
 
       assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
                WebSocket.decode(websocket, header <> "abc")
+    end
+
+    test "a message expanded by an extension over the limit is rejected",
+         %{websocket: websocket} do
+      extension = %WebSocket.Extension{module: DoublingExtension}
+      websocket = %{websocket | extensions: [extension]}
+
+      # 100 bytes doubled to 200: exactly the limit
+      frame = <<1::1, 0::3, 1::4, 0::1, 100::7>> <> :binary.copy("a", 100)
+      assert {:ok, _websocket, [{:text, message}]} = WebSocket.decode(websocket, frame)
+      assert byte_size(message) == 200
+
+      # 101 bytes doubled to 202
+      frame = <<1::1, 0::3, 1::4, 0::1, 101::7>> <> :binary.copy("a", 101)
+
+      assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
+               WebSocket.decode(websocket, frame)
     end
 
     test "a fragmented message over the limit is rejected", %{websocket: websocket} do
