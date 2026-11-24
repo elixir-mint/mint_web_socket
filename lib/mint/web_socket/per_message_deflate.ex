@@ -24,10 +24,11 @@ defmodule Mint.WebSocket.PerMessageDeflate do
           inflate: :zlib.zstream(),
           deflate: :zlib.zstream(),
           inflate_takeover?: boolean(),
-          deflate_takeover?: boolean()
+          deflate_takeover?: boolean(),
+          max_message_size: non_neg_integer() | :infinity
         }
 
-  defstruct [:inflate, :deflate, :inflate_takeover?, :deflate_takeover?]
+  defstruct [:inflate, :deflate, :inflate_takeover?, :deflate_takeover?, :max_message_size]
 
   @behaviour Extension
 
@@ -59,7 +60,8 @@ defmodule Mint.WebSocket.PerMessageDeflate do
       inflate: inflate_zstream,
       deflate: deflate_zstream,
       inflate_takeover?: get_takeover(params, "server_no_context_takeover", true),
-      deflate_takeover?: get_takeover(params, "client_no_context_takeover", true)
+      deflate_takeover?: get_takeover(params, "client_no_context_takeover", true),
+      max_message_size: Keyword.get(opts, :max_message_size, :infinity)
     }
 
     {:ok, put_in(this_extension.state, state)}
@@ -84,10 +86,7 @@ defmodule Mint.WebSocket.PerMessageDeflate do
       # Append 4 octets of 0x00 0x00 0xff 0xff to the tail end of the
       # payload of the message
 
-      data =
-        state.inflate
-        |> :zlib.inflate(<<data::binary, 0x00, 0x00, 0xFF, 0xFF>>)
-        |> IO.iodata_to_binary()
+      data = inflate(state, <<data::binary, 0x00, 0x00, 0xFF, 0xFF>>)
 
       if state.inflate_takeover? == false do
         :zlib.inflateReset(state.inflate)
@@ -104,6 +103,19 @@ defmodule Mint.WebSocket.PerMessageDeflate do
   end
 
   def decode(frame, state), do: {:ok, frame, state}
+
+  # Known limitation: the limit is checked after each chunk returned by
+  # :zlib.safeInflate/2, so up to one chunk (16 KB on OTP 27) may be inflated past it.
+  defp inflate(state, data, acc \\ [], size \\ 0) do
+    {status, output} = :zlib.safeInflate(state.inflate, data)
+    size = size + IO.iodata_length(output)
+    :ok = Frame.check_message_size(size, state.max_message_size)
+
+    case status do
+      :continue -> inflate(state, [], [acc | output], size)
+      :finished -> IO.iodata_to_binary([acc | output])
+    end
+  end
 
   @doc false
   @impl Extension

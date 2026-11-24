@@ -110,7 +110,7 @@ defmodule Mint.WebSocket do
   "permessage-deflate" extension.
   """
 
-  alias __MODULE__.{Utils, Extension, Frame}
+  alias __MODULE__.{Utils, Extension, Frame, PerMessageDeflate}
   alias Mint.{WebSocketError, WebSocket.UpgradeFailureError}
   import Mint.HTTP, only: [get_private: 2, put_private: 3, protocol: 1]
 
@@ -128,12 +128,16 @@ defmodule Mint.WebSocket do
             extensions: [Extension.t()],
             fragment: tuple(),
             private: map(),
-            buffer: binary()
+            buffer: binary(),
+            max_message_size: pos_integer() | :infinity
           }
   defstruct extensions: [],
             fragment: nil,
             private: %{},
-            buffer: <<>>
+            buffer: <<>>,
+            max_message_size: :infinity
+
+  @default_max_message_size 8_000_000
 
   @type error :: Mint.Types.error() | WebSocketError.t() | UpgradeFailureError.t()
 
@@ -322,6 +326,17 @@ defmodule Mint.WebSocket do
     * `:mode` - (default: `:active`) either `:active` or `:passive`. This
       corresponds to the same option in `Mint.HTTP.connect/4`.
 
+    * `:max_message_size` - (default: `#{@default_max_message_size}`) the
+      maximum size in bytes of an incoming message. The limit applies both to
+      the size on the wire and to the size after extensions (such as
+      permessage-deflate) run, so a small incompressible message whose
+      compressed form is larger than the limit is rejected too. `decode/2`
+      returns a `Mint.WebSocketError` with reason `:message_too_large` for
+      bigger messages: the connection should then be closed, because
+      extension state (e.g. the inflater) may still hold data from the
+      rejected message. Must be at least 125 (the maximum control frame
+      payload) or `:infinity` to disable the limit.
+
   ## Examples
 
       http_reply = receive(do: (message -> message))
@@ -342,13 +357,34 @@ defmodule Mint.WebSocket do
           {:ok, Mint.HTTP.t(), t()} | {:error, Mint.HTTP.t(), error()}
   def new(conn, request_ref, status, response_headers, opts \\ []) do
     websockets = [request_ref | get_private(conn, :websockets) || []]
+    max_message_size = Keyword.get(opts, :max_message_size, @default_max_message_size)
+
+    unless max_message_size == :infinity or
+             (is_integer(max_message_size) and max_message_size >= 125) do
+      raise ArgumentError,
+            "expected :max_message_size to be :infinity or an integer >= 125, " <>
+              "got: #{inspect(max_message_size)}"
+    end
+
+    # permessage-deflate reads the limit from its opts to stop inflating early
+    extensions =
+      for extension <- get_private(conn, :extensions) do
+        if extension.module == PerMessageDeflate do
+          %{extension | opts: Keyword.put(extension.opts, :max_message_size, max_message_size)}
+        else
+          extension
+        end
+      end
 
     conn =
       conn
       |> put_private(:websockets, websockets)
       |> put_private(:mode, Keyword.get(opts, :mode, :active))
+      |> put_private(:extensions, extensions)
 
-    do_new(protocol(conn), conn, status, response_headers)
+    with {:ok, conn, websocket} <- do_new(protocol(conn), conn, status, response_headers) do
+      {:ok, conn, %{websocket | max_message_size: max_message_size}}
+    end
   end
 
   defp do_new(:http1, conn, status, headers) when status != 101 do
