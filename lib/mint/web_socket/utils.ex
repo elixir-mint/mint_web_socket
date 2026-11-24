@@ -14,7 +14,7 @@ defmodule Mint.WebSocket.Utils do
   def headers({:http1, nonce}, extensions) when is_binary(nonce) do
     [
       {"Upgrade", "websocket"},
-      {"Connection", "upgrade"},
+      {"Connection", "Upgrade"},
       {"Sec-WebSocket-Version", "13"},
       {"Sec-WebSocket-Key", nonce},
       {"Sec-WebSocket-Extensions", extension_string(extensions)}

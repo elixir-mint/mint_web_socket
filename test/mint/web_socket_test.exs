@@ -264,6 +264,7 @@ defmodule Mint.WebSocketTest do
 
       request = capture_request(c.listen_socket)
       assert request =~ "upgrade: websocket"
+      assert request =~ "connection: Upgrade"
       assert request =~ "sec-websocket-key: "
     end
 
@@ -273,7 +274,7 @@ defmodule Mint.WebSocketTest do
 
       request = capture_request(c.listen_socket)
       assert request =~ "Upgrade: websocket"
-      assert request =~ "Connection: upgrade"
+      assert request =~ "Connection: Upgrade"
       assert request =~ "Sec-WebSocket-Version: 13"
       assert request =~ "Sec-WebSocket-Key: "
     end
