@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 65536. Sent out data in chops of 997 octets.",
    "droppedByMe": true,
-   "duration": 11,
+   "duration": 7,
    "expectation": "Receive echo'ed binary message (with payload as sent). Clean close with normal code.",
    "expected": {
       "OK": [
@@ -27,8 +27,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=16&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: ALryZB5azgQslXx38WlkUA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: C6NWUY+XjEFe8o3O1q36hs4UOUA=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=16&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: BtwCAQ2+2/CnRWuOambsmQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: NPRjxxHMgbYdXH2NkwI08ZPm8rU=\r\n\r\n",
    "id": "1.2.8",
    "isServer": true,
    "localCloseCode": 1000,
@@ -56,7 +56,7 @@
       "28960": 1,
       "36590": 1
    },
-   "started": "2026-08-12T15:47:53.560Z",
+   "started": "2026-11-24T11:06:42.447Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -639,14 +639,14 @@
          "RO",
          [
             28960,
-            "82ff000000000001000055a5f05eab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b ..."
+            "82ff00000000000100001671d698e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f ..."
          ]
       ],
       [
          "RO",
          [
             36590,
-            "0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b0ea0ab5b ..."
+            "2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f2866e88f ..."
          ]
       ],
       [
@@ -659,7 +659,7 @@
          true,
          0,
          true,
-         "55a5f05e"
+         "1671d698"
       ],
       [
          "TF",
@@ -687,7 +687,7 @@
          "RO",
          [
             8,
-            "88820cc5ae290f2d"
+            "8882c6afaabcc547"
          ]
       ],
       [
@@ -700,7 +700,7 @@
          true,
          0,
          true,
-         "0cc5ae29"
+         "c6afaabc"
       ]
    ]
 }

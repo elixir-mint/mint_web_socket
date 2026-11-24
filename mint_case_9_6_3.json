@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send binary message message with payload of length 1 * 2**20 (1M). Sent out data in chops of 256 octets.",
    "droppedByMe": true,
-   "duration": 148,
+   "duration": 98,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=285&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: TxMt8LIh6EZKdBcagC2/zA==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: rn/ZHwngaDXc5MNtVe+Flfozk9A=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=285&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: hKwT1p9Lg/bVq5RMuqJZGQ==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: uNtn7XkR+Fdryyk0wk+eJkI7ulA=\r\n\r\n",
    "id": "9.6.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "29726": 1,
+      "36590": 1,
       "43440": 1,
-      "57920": 1,
+      "51056": 1,
       "65536": 14
    },
-   "started": "2026-08-12T15:47:27.180Z",
+   "started": "2026-11-24T11:06:25.792Z",
    "trafficStats": null,
    "txFrameStats": {
       "2": 1,
@@ -107,7 +107,7 @@
          "RO",
          [
             8,
-            "88824164e823428c"
+            "8882eb2914e2e8c1"
          ]
       ],
       [
@@ -120,7 +120,7 @@
          true,
          0,
          true,
-         "4164e823"
+         "eb2914e2"
       ]
    ]
 }
