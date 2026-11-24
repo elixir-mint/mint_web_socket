@@ -120,6 +120,24 @@ defmodule Mint.WebSocketTest do
                WebSocket.decode(websocket, frame)
     end
 
+    test "the size limit takes precedence over invalid UTF-8 after an extension",
+         %{websocket: websocket} do
+      extension = %WebSocket.Extension{module: DoublingExtension}
+      websocket = %{websocket | extensions: [extension]}
+      invalid = :binary.copy(<<255>>, 100)
+      doubled = invalid <> invalid
+
+      at_limit = <<1::1, 0::3, 1::4, 0::1, 100::7>> <> invalid
+
+      assert {:ok, _websocket, [{:error, {:invalid_utf8, ^doubled}}]} =
+               WebSocket.decode(websocket, at_limit)
+
+      over_limit = <<1::1, 0::3, 1::4, 0::1, 101::7>> <> invalid <> <<255>>
+
+      assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
+               WebSocket.decode(websocket, over_limit)
+    end
+
     test "a fragmented message over the limit is rejected", %{websocket: websocket} do
       # 120 bytes each: first text frame (FIN = 0), then the final continuation (FIN = 1)
       first = <<0::1, 0::3, 1::4, 0::1, 120::7>> <> :binary.copy("a", 120)
@@ -131,12 +149,31 @@ defmodule Mint.WebSocketTest do
                WebSocket.decode(websocket, last)
     end
 
+    test "a continuation over the message limit is rejected from its header",
+         %{websocket: websocket} do
+      first = <<0::1, 0::3, 1::4, 0::1, 120::7>> <> :binary.copy("a", 120)
+      header = <<1::1, 0::3, 0::4, 0::1, 126::7, 126::16>>
+
+      assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
+               WebSocket.decode(websocket, first <> header)
+
+      <<prefix::binary-size(3), suffix::binary>> = header
+      assert {:ok, websocket, []} = WebSocket.decode(websocket, first <> prefix)
+
+      assert {:error, _websocket, %Mint.WebSocketError{reason: :message_too_large}} =
+               WebSocket.decode(websocket, suffix)
+    end
+
     test "a fragmented message of exactly the limit is delivered", %{websocket: websocket} do
       first = <<0::1, 0::3, 1::4, 0::1, 120::7>> <> :binary.copy("a", 120)
-      last = <<1::1, 0::3, 0::4, 0::1, 80::7>> <> :binary.copy("a", 80)
+      header = <<1::1, 0::3, 0::4, 0::1, 80::7>>
 
       assert {:ok, websocket, []} = WebSocket.decode(websocket, first)
-      assert {:ok, _websocket, [{:text, message}]} = WebSocket.decode(websocket, last)
+      assert {:ok, websocket, []} = WebSocket.decode(websocket, header)
+
+      assert {:ok, _websocket, [{:text, message}]} =
+               WebSocket.decode(websocket, :binary.copy("a", 80))
+
       assert byte_size(message) == 200
     end
   end
