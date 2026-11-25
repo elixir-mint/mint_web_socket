@@ -215,11 +215,9 @@ defmodule Mint.WebSocket.Frame do
 
         frame, {websocket, acc} ->
           {frame, extensions} = Extension.decode(frame, websocket.extensions)
-          frame = translate(frame)
-          # extensions can expand the payload, so the final size is checked too
-          check_data_size(frame, websocket.max_message_size)
+          :ok = check_data_size(frame, websocket.max_message_size)
 
-          {put_in(websocket.extensions, extensions), [frame | acc]}
+          {put_in(websocket.extensions, extensions), [translate(frame) | acc]}
       end)
 
     {:ok, websocket, :lists.reverse(frames)}
@@ -235,9 +233,24 @@ defmodule Mint.WebSocket.Frame do
 
       {:buffer, partial, frames} ->
         {websocket, frames} = resolve_fragments(websocket, frames)
+        :ok = check_partial_continuation_size(partial, websocket)
         {put_in(websocket.buffer, partial), frames}
     end
   end
+
+  for type <- @non_control_opcodes do
+    defp check_partial_continuation_size(
+           <<_fin_and_reserved::4, 0::4, _masked::1, length_bits::bitstring>>,
+           %{fragment: unquote(type)(data: data), max_message_size: max}
+         ) do
+      case decode_payload_length(length_bits) do
+        {:ok, payload_length, _rest} -> check_message_size(byte_size(data) + payload_length, max)
+        :buffer -> :ok
+      end
+    end
+  end
+
+  defp check_partial_continuation_size(_partial, _websocket), do: :ok
 
   defp decode_raw(
          <<fin::size(1), reserved::bitstring-size(3), opcode::bitstring-size(4), masked::size(1),
@@ -284,8 +297,10 @@ defmodule Mint.WebSocket.Frame do
 
   def check_message_size(_size, _max), do: :ok
 
-  defp check_data_size({type, data}, max) when type in [:text, :binary],
-    do: check_message_size(byte_size(data), max)
+  for type <- [:text, :binary] do
+    defp check_data_size(unquote(type)(data: data), max),
+      do: check_message_size(byte_size(data), max)
+  end
 
   defp check_data_size(_frame, _max), do: :ok
 
