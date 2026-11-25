@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send text message message with payload of length 1 * 2**20 (1M).",
    "droppedByMe": true,
-   "duration": 27,
+   "duration": 18,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: Upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: DpjJcedarPv5kxFClCXHUQ==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: UvX6JMqOGfbdbzbAxuqkbRo1w2U=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=249&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: Upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: JMN3cI7xng7SfcTfwT7dhg==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: wvkJY79oGR42DQcewf0kJF/MJ1g=\r\n\r\n",
    "id": "9.1.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "390": 1,
-      "28960": 1,
-      "36200": 1,
-      "65536": 15
+      "14480": 1,
+      "56848": 1,
+      "59758": 1,
+      "65536": 14
    },
-   "started": "2026-11-25T08:29:41.144Z",
+   "started": "2026-11-25T11:40:47.839Z",
    "trafficStats": null,
    "txFrameStats": {
       "1": 1,
@@ -106,7 +106,7 @@
          "RO",
          [
             8,
-            "88824ea83c104d40"
+            "8882b8568f76bbbe"
          ]
       ],
       [
@@ -119,7 +119,7 @@
          true,
          0,
          true,
-         "4ea83c10"
+         "b8568f76"
       ]
    ]
 }

@@ -8,7 +8,7 @@
    "createWirelog": true,
    "description": "Send fragmented text message message with message payload of length 4 * 2**20 (4M). Sent out in fragments of 1k.",
    "droppedByMe": true,
-   "duration": 97,
+   "duration": 105,
    "expectation": "Receive echo'ed text message (with payload as sent).",
    "expected": {},
    "expectedClose": {
@@ -19,8 +19,8 @@
       "requireClean": true
    },
    "failedByMe": false,
-   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: Upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: syvsnv7Rj5bCU8of2TiwPg==\r\n\r\n",
-   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: TU/YsK5v2LAHXlm7lQD4yj/aWCQ=\r\n\r\n",
+   "httpRequest": "GET /runCase?case=261&agent=Mint HTTP/1.1\r\nhost: localhost:9001\r\nuser-agent: mint/1.7.1\r\nupgrade: websocket\r\nconnection: Upgrade\r\nsec-websocket-version: 13\r\nsec-websocket-key: 4EQ4dKGGeIfeK0i+5rf0ag==\r\n\r\n",
+   "httpResponse": "HTTP/1.1 101 Switching Protocols\r\nServer: AutobahnTestSuite/25.10.1-0.10.9\r\nX-Powered-By: AutobahnPython/0.10.9\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: gfLouopkGySMNb12PS+1iVr9AfY=\r\n\r\n",
    "id": "9.3.3",
    "isServer": true,
    "localCloseCode": 1000,
@@ -39,12 +39,12 @@
    "rxOctetStats": {
       "8": 1,
       "204": 1,
-      "390": 1,
-      "28960": 1,
-      "36200": 1,
-      "65536": 63
+      "29726": 1,
+      "43440": 1,
+      "57920": 1,
+      "65536": 62
    },
-   "started": "2026-11-25T08:29:27.364Z",
+   "started": "2026-11-25T11:40:32.236Z",
    "trafficStats": null,
    "txFrameStats": {
       "0": 4096,
@@ -108,7 +108,7 @@
          "RO",
          [
             8,
-            "888267a65a13644e"
+            "8882080084670be8"
          ]
       ],
       [
@@ -121,7 +121,7 @@
          true,
          0,
          true,
-         "67a65a13"
+         "08008467"
       ]
    ]
 }
