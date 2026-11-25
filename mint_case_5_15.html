@@ -202,7 +202,7 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
       <center><a href="https://autobahn-testsuite.readthedocs.io/" title="Autobahn WebSocket Testsuite"><img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report.png"          border="0" width="820" height="46" alt="Autobahn WebSocket Testsuite Report"></img></a></center>
       <center><a href="https://autobahn-testsuite.readthedocs.io/"           title="Autobahn WebSocket">          <img src="https://autobahn-testsuite.readthedocs.io/en/latest/_static/img/ws_protocol_test_report_autobahn.png" border="0" width="300" height="68" alt="Autobahn WebSocket">                 </img></a></center>
       <br/>
-      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 5.15</b></span> : Pass - <span style="font-size: 0.9em;"><b>1</b> ms @ 2026-11-24T11:06:36.975Z</a></p>
+      <p class="case case_ok">Mint - <span style="font-size: 1.3em;"><b>Case 5.15</b></span> : Pass - <span style="font-size: 0.9em;"><b>1</b> ms @ 2026-11-25T08:29:35.541Z</a></p>
       <p class="case_text_block case_desc"><b>Case Description</b><br/><br/>Send text Message fragmented into 2 fragments, then Continuation Frame with FIN = false where there is nothing to continue, then unfragmented Text Message, all sent in one chop.</p>
       <p class="case_text_block case_expect"><b>Case Expectation</b><br/><br/>The connection is failed immediately, since there is no message to continue.</p>
 
@@ -218,15 +218,15 @@ pre.wirelog_tcp_closed_by_peer {color: #fff; margin: 0; background-color: #000; 
 host: localhost:9001
 user-agent: mint/1.7.1
 upgrade: websocket
-connection: upgrade
+connection: Upgrade
 sec-websocket-version: 13
-sec-websocket-key: reR0XT3U2/8mvrYA1r4xtw==</pre>
+sec-websocket-key: 2Zd5DkOvecGx0Mkyl8Mncw==</pre>
       <pre class="http_dump">HTTP/1.1 101 Switching Protocols
 Server: AutobahnTestSuite/25.10.1-0.10.9
 X-Powered-By: AutobahnPython/0.10.9
 Upgrade: WebSocket
 Connection: Upgrade
-Sec-WebSocket-Accept: BAkd3Ohl+QCav/avy3MdEKZ205E=</pre>
+Sec-WebSocket-Accept: tcxnMHm/SZ4aIk5S6QZfqlaZzMY=</pre>
       <br/><hr/>
       <h2>Closing Behavior</h2>
       <table>
@@ -297,11 +297,11 @@ Sec-WebSocket-Accept: BAkd3Ohl+QCav/avy3MdEKZ205E=</pre>
          <pre class="wirelog_tx_frame">               fragment4</pre>
          <pre class="wirelog_tx_octets">009 TX OCTETS: 8109667261676d656e7434</pre>
          <pre class="wirelog_kill_after">010 FAIL CONNECTION AFTER 1.000000 sec</pre>
-         <pre class="wirelog_rx_octets">011 RX OCTETS: 8192bc2b1b27da597a40d14e75538d4d6946db467e49c819</pre>
-         <pre class="wirelog_rx_frame">012 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=18, MASKED=True, MASK=6263326231623237</pre>
+         <pre class="wirelog_rx_octets">011 RX OCTETS: 8192d5a7a7acb3d5c6cbb8c2c9d8e4c1d5cdb2cac2c2a195</pre>
+         <pre class="wirelog_rx_frame">012 RX FRAME : OPCODE=1, FIN=True, RSV=0, PAYLOAD-LEN=18, MASKED=True, MASK=6435613761376163</pre>
          <pre class="wirelog_rx_frame">               fragment1fragment2</pre>
-         <pre class="wirelog_rx_octets">013 RX OCTETS: 8882af387f79acd2</pre>
-         <pre class="wirelog_rx_frame">014 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6166333837663739</pre>
+         <pre class="wirelog_rx_octets">013 RX OCTETS: 8882c6d28bc3c538</pre>
+         <pre class="wirelog_rx_frame">014 RX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASKED=True, MASK=6336643238626333</pre>
          <pre class="wirelog_rx_frame">               0x03ea</pre>
          <pre class="wirelog_tx_frame">015 TX FRAME : OPCODE=8, FIN=True, RSV=0, PAYLOAD-LEN=2, MASK=None, PAYLOAD-REPEAT-LEN=None, CHOPSIZE=None, SYNC=False</pre>
          <pre class="wirelog_tx_frame">               0x03e8</pre>
